@@ -2,7 +2,10 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
+from .results.client import ResultsClient
 from ..core.request_options import RequestOptions
+from ..core.pagination import SyncPager
+from ..types.reactor import Reactor
 from ..types.reactor_paginated_list import ReactorPaginatedList
 from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
@@ -12,7 +15,6 @@ from ..errors.not_found_error import NotFoundError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.application import Application
-from ..types.reactor import Reactor
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
@@ -20,6 +22,8 @@ from ..core.jsonable_encoder import jsonable_encoder
 from ..types.react_response import ReactResponse
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..core.client_wrapper import AsyncClientWrapper
+from .results.client import AsyncResultsClient
+from ..core.pagination import AsyncPager
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -28,6 +32,7 @@ OMIT = typing.cast(typing.Any, ...)
 class ReactorsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+        self.results = ResultsClient(client_wrapper=self._client_wrapper)
 
     def list(
         self,
@@ -38,7 +43,7 @@ class ReactorsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ReactorPaginatedList:
+    ) -> SyncPager[Reactor]:
         """
         Parameters
         ----------
@@ -57,7 +62,7 @@ class ReactorsClient:
 
         Returns
         -------
-        ReactorPaginatedList
+        SyncPager[Reactor]
             Success
 
         Examples
@@ -67,8 +72,14 @@ class ReactorsClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.reactors.list()
+        response = client.reactors.list()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
+        page = page if page is not None else 1
         _response = self._client_wrapper.httpx_client.request(
             "reactors",
             method="GET",
@@ -83,13 +94,24 @@ class ReactorsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     ReactorPaginatedList,
                     parse_obj_as(
                         type_=ReactorPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    id=id,
+                    name=name,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -707,10 +729,117 @@ class ReactorsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def react_async(
+        self,
+        id: str,
+        *,
+        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ReactResponse:
+        """
+        Parameters
+        ----------
+        id : str
+
+        args : typing.Optional[typing.Optional[typing.Any]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ReactResponse
+            Accepted
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+        client.reactors.react_async(
+            id="id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"reactors/{jsonable_encoder(id)}/react-async",
+            method="POST",
+            json={
+                "args": args,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    ReactResponse,
+                    parse_obj_as(
+                        type_=ReactResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
 
 class AsyncReactorsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
+        self.results = AsyncResultsClient(client_wrapper=self._client_wrapper)
 
     async def list(
         self,
@@ -721,7 +850,7 @@ class AsyncReactorsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ReactorPaginatedList:
+    ) -> AsyncPager[Reactor]:
         """
         Parameters
         ----------
@@ -740,7 +869,7 @@ class AsyncReactorsClient:
 
         Returns
         -------
-        ReactorPaginatedList
+        AsyncPager[Reactor]
             Success
 
         Examples
@@ -755,11 +884,17 @@ class AsyncReactorsClient:
 
 
         async def main() -> None:
-            await client.reactors.list()
+            response = await client.reactors.list()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
         """
+        page = page if page is not None else 1
         _response = await self._client_wrapper.httpx_client.request(
             "reactors",
             method="GET",
@@ -774,13 +909,24 @@ class AsyncReactorsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     ReactorPaginatedList,
                     parse_obj_as(
                         type_=ReactorPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    id=id,
+                    name=name,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -1378,6 +1524,120 @@ class AsyncReactorsClient:
             json={
                 "args": args,
                 "callback_url": callback_url,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    ReactResponse,
+                    parse_obj_as(
+                        type_=ReactResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def react_async(
+        self,
+        id: str,
+        *,
+        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ReactResponse:
+        """
+        Parameters
+        ----------
+        id : str
+
+        args : typing.Optional[typing.Optional[typing.Any]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ReactResponse
+            Accepted
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.reactors.react_async(
+                id="id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"reactors/{jsonable_encoder(id)}/react-async",
+            method="POST",
+            json={
+                "args": args,
             },
             request_options=request_options,
             omit=OMIT,

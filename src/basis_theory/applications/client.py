@@ -3,6 +3,8 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..core.pagination import SyncPager
+from ..types.application import Application
 from ..types.application_paginated_list import ApplicationPaginatedList
 from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
@@ -12,13 +14,13 @@ from ..errors.not_found_error import NotFoundError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.access_rule import AccessRule
-from ..types.application import Application
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
 from ..core.jsonable_encoder import jsonable_encoder
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..core.client_wrapper import AsyncClientWrapper
+from ..core.pagination import AsyncPager
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -37,7 +39,7 @@ class ApplicationsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplicationPaginatedList:
+    ) -> SyncPager[Application]:
         """
         Parameters
         ----------
@@ -56,7 +58,7 @@ class ApplicationsClient:
 
         Returns
         -------
-        ApplicationPaginatedList
+        SyncPager[Application]
             Success
 
         Examples
@@ -66,8 +68,14 @@ class ApplicationsClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.applications.list()
+        response = client.applications.list()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
+        page = page if page is not None else 1
         _response = self._client_wrapper.httpx_client.request(
             "applications",
             method="GET",
@@ -82,13 +90,24 @@ class ApplicationsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     ApplicationPaginatedList,
                     parse_obj_as(
                         type_=ApplicationPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    id=id,
+                    type=type,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -659,7 +678,7 @@ class AsyncApplicationsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplicationPaginatedList:
+    ) -> AsyncPager[Application]:
         """
         Parameters
         ----------
@@ -678,7 +697,7 @@ class AsyncApplicationsClient:
 
         Returns
         -------
-        ApplicationPaginatedList
+        AsyncPager[Application]
             Success
 
         Examples
@@ -693,11 +712,17 @@ class AsyncApplicationsClient:
 
 
         async def main() -> None:
-            await client.applications.list()
+            response = await client.applications.list()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
         """
+        page = page if page is not None else 1
         _response = await self._client_wrapper.httpx_client.request(
             "applications",
             method="GET",
@@ -712,13 +737,24 @@ class AsyncApplicationsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     ApplicationPaginatedList,
                     parse_obj_as(
                         type_=ApplicationPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    id=id,
+                    type=type,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(

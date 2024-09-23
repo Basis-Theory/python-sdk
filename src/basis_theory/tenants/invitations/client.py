@@ -4,6 +4,8 @@ import typing
 from ...core.client_wrapper import SyncClientWrapper
 from ...types.tenant_invitation_status import TenantInvitationStatus
 from ...core.request_options import RequestOptions
+from ...core.pagination import SyncPager
+from ...types.tenant_invitation_response import TenantInvitationResponse
 from ...types.tenant_invitation_response_paginated_list import TenantInvitationResponsePaginatedList
 from ...core.pydantic_utilities import parse_obj_as
 from ...errors.unauthorized_error import UnauthorizedError
@@ -11,12 +13,12 @@ from ...types.problem_details import ProblemDetails
 from ...errors.forbidden_error import ForbiddenError
 from json.decoder import JSONDecodeError
 from ...core.api_error import ApiError
-from ...types.tenant_invitation_response import TenantInvitationResponse
 from ...errors.bad_request_error import BadRequestError
 from ...types.validation_problem_details import ValidationProblemDetails
 from ...core.jsonable_encoder import jsonable_encoder
 from ...errors.not_found_error import NotFoundError
 from ...core.client_wrapper import AsyncClientWrapper
+from ...core.pagination import AsyncPager
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -34,7 +36,7 @@ class InvitationsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TenantInvitationResponsePaginatedList:
+    ) -> SyncPager[TenantInvitationResponse]:
         """
         Parameters
         ----------
@@ -51,7 +53,7 @@ class InvitationsClient:
 
         Returns
         -------
-        TenantInvitationResponsePaginatedList
+        SyncPager[TenantInvitationResponse]
             Success
 
         Examples
@@ -61,8 +63,14 @@ class InvitationsClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.tenants.invitations.list()
+        response = client.tenants.invitations.list()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
+        page = page if page is not None else 1
         _response = self._client_wrapper.httpx_client.request(
             "tenants/self/invitations",
             method="GET",
@@ -76,13 +84,23 @@ class InvitationsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TenantInvitationResponsePaginatedList,
                     parse_obj_as(
                         type_=TenantInvitationResponsePaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    status=status,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -366,7 +384,7 @@ class AsyncInvitationsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TenantInvitationResponsePaginatedList:
+    ) -> AsyncPager[TenantInvitationResponse]:
         """
         Parameters
         ----------
@@ -383,7 +401,7 @@ class AsyncInvitationsClient:
 
         Returns
         -------
-        TenantInvitationResponsePaginatedList
+        AsyncPager[TenantInvitationResponse]
             Success
 
         Examples
@@ -398,11 +416,17 @@ class AsyncInvitationsClient:
 
 
         async def main() -> None:
-            await client.tenants.invitations.list()
+            response = await client.tenants.invitations.list()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
         """
+        page = page if page is not None else 1
         _response = await self._client_wrapper.httpx_client.request(
             "tenants/self/invitations",
             method="GET",
@@ -416,13 +440,23 @@ class AsyncInvitationsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TenantInvitationResponsePaginatedList,
                     parse_obj_as(
                         type_=TenantInvitationResponsePaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    status=status,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
