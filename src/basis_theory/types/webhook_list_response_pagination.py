@@ -6,12 +6,9 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class ProxyTransform(UniversalBaseModel):
-    type: typing.Optional[str] = None
-    code: typing.Optional[str] = None
-    matcher: typing.Optional[str] = None
-    expression: typing.Optional[str] = None
-    replacement: typing.Optional[str] = None
+class WebhookListResponsePagination(UniversalBaseModel):
+    page_size: typing.Optional[int] = None
+    next: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

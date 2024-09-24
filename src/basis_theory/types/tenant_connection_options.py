@@ -7,7 +7,6 @@ import pydantic
 
 
 class TenantConnectionOptions(UniversalBaseModel):
-    scopes: typing.Optional[str] = None
     domain_aliases: typing.Optional[typing.List[str]] = None
 
     if IS_PYDANTIC_V2:

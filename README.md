@@ -64,6 +64,24 @@ except ApiError as e:
     print(e.body)
 ```
 
+## Pagination
+
+Paginated requests will return a `SyncPager` or `AsyncPager`, which can be used as generators for the underlying object.
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+response = client.applications.list()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
+```
+
 ## Advanced
 
 ### Retries

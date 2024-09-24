@@ -4,8 +4,10 @@ from ..core.client_wrapper import SyncClientWrapper
 import typing
 import datetime as dt
 from ..core.request_options import RequestOptions
-from ..types.log_paginated_list import LogPaginatedList
+from ..core.pagination import SyncPager
+from ..types.log import Log
 from ..core.datetime_utils import serialize_datetime
+from ..types.log_paginated_list import LogPaginatedList
 from ..core.pydantic_utilities import parse_obj_as
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
@@ -16,6 +18,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.log_entity_type import LogEntityType
 from ..core.client_wrapper import AsyncClientWrapper
+from ..core.pagination import AsyncPager
 
 
 class LogsClient:
@@ -33,7 +36,7 @@ class LogsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> LogPaginatedList:
+    ) -> SyncPager[Log]:
         """
         Parameters
         ----------
@@ -56,7 +59,7 @@ class LogsClient:
 
         Returns
         -------
-        LogPaginatedList
+        SyncPager[Log]
             Success
 
         Examples
@@ -66,8 +69,14 @@ class LogsClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.logs.list()
+        response = client.logs.list()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
+        page = page if page is not None else 1
         _response = self._client_wrapper.httpx_client.request(
             "logs",
             method="GET",
@@ -84,13 +93,26 @@ class LogsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     LogPaginatedList,
                     parse_obj_as(
                         type_=LogPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    entity_type=entity_type,
+                    entity_id=entity_id,
+                    start_date=start_date,
+                    end_date=end_date,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -204,7 +226,7 @@ class AsyncLogsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> LogPaginatedList:
+    ) -> AsyncPager[Log]:
         """
         Parameters
         ----------
@@ -227,7 +249,7 @@ class AsyncLogsClient:
 
         Returns
         -------
-        LogPaginatedList
+        AsyncPager[Log]
             Success
 
         Examples
@@ -242,11 +264,17 @@ class AsyncLogsClient:
 
 
         async def main() -> None:
-            await client.logs.list()
+            response = await client.logs.list()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
         """
+        page = page if page is not None else 1
         _response = await self._client_wrapper.httpx_client.request(
             "logs",
             method="GET",
@@ -263,13 +291,26 @@ class AsyncLogsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     LogPaginatedList,
                     parse_obj_as(
                         type_=LogPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    entity_type=entity_type,
+                    entity_id=entity_id,
+                    start_date=start_date,
+                    end_date=end_date,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
