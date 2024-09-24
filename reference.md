@@ -18,7 +18,12 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.applications.list()
+response = client.applications.list()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
 
 ```
 </dd>
@@ -872,6 +877,865 @@ client.application_templates.get(
 </dl>
 </details>
 
+## Tokens
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">detokenize</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.tokens.detokenize(
+    request={"key": "value"},
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `typing.Optional[typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">tokenize</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.tokens.tokenize(
+    request={"key": "value"},
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `typing.Optional[typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+response = client.tokens.list()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory, Privacy
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.tokens.create(
+    id="string",
+    type="string",
+    data={"key": "value"},
+    privacy=Privacy(
+        classification="string",
+        impact_level="string",
+        restriction_policy="string",
+    ),
+    metadata={"string": {"key": "value"}},
+    search_indexes=["string"],
+    fingerprint_expression="string",
+    mask={"key": "value"},
+    deduplicate_token=True,
+    expires_at="string",
+    containers=["string"],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**data:** `typing.Optional[typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**privacy:** `typing.Optional[Privacy]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search_indexes:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fingerprint_expression:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mask:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deduplicate_token:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expires_at:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**containers:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">search</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+response = client.tokens.search()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**query:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.tokens.get(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.tokens.delete(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.tokens.update(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**data:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**privacy:** `typing.Optional[UpdatePrivacy]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search_indexes:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fingerprint_expression:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mask:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expires_at:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deduplicate_token:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**containers:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">list_v2</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+response = client.tokens.list_v2()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">search_v2</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+response = client.tokens.search_v2()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**query:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Logs
 <details><summary><code>client.logs.<a href="src/basis_theory/logs/client.py">list</a>(...)</code></summary>
 <dl>
@@ -891,7 +1755,12 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.logs.list()
+response = client.logs.list()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
 
 ```
 </dd>
@@ -1095,7 +1964,12 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.proxies.list()
+response = client.proxies.list()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
 
 ```
 </dd>
@@ -1681,7 +2555,12 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.reactorformulas.list()
+response = client.reactorformulas.list()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
 
 ```
 </dd>
@@ -2115,7 +2994,12 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.reactors.list()
+response = client.reactors.list()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
 
 ```
 </dd>
@@ -2650,6 +3534,70 @@ client.reactors.react(
 </dl>
 </details>
 
+<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">react_async</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.reactors.react_async(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**args:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Roles
 <details><summary><code>client.roles.<a href="src/basis_theory/roles/client.py">list</a>()</code></summary>
 <dl>
@@ -3092,10 +4040,24 @@ client.threeds.get_session_by_id(
 </dl>
 </details>
 
-## Tokenize
-<details><summary><code>client.tokenize.<a href="src/basis_theory/tokenize/client.py">tokenize</a>(...)</code></summary>
+## Webhooks
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">ping</a>()</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Simple endpoint that can be utilized to verify the application is running
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -3111,9 +4073,7 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.tokenize.tokenize(
-    request={"key": "value"},
-)
+client.webhooks.ping()
 
 ```
 </dd>
@@ -3125,22 +4085,6 @@ client.tokenize.tokenize(
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**request:** `typing.Optional[typing.Any]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -3157,10 +4101,23 @@ client.tokenize.tokenize(
 </dl>
 </details>
 
-## Tokens
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">get</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the webhook
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -3176,337 +4133,7 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.tokens.list()
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**page:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**start:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**size:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">create</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory, Privacy
-
-client = BasisTheory(
-    api_key="YOUR_API_KEY",
-)
-client.tokens.create(
-    id="string",
-    type="string",
-    data={"key": "value"},
-    privacy=Privacy(
-        classification="string",
-        impact_level="string",
-        restriction_policy="string",
-    ),
-    metadata={"string": {"key": "value"}},
-    search_indexes=["string"],
-    fingerprint_expression="string",
-    mask={"key": "value"},
-    deduplicate_token=True,
-    expires_at="string",
-    containers=["string"],
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**type:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**data:** `typing.Optional[typing.Any]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**privacy:** `typing.Optional[Privacy]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**search_indexes:** `typing.Optional[typing.Sequence[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**fingerprint_expression:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**mask:** `typing.Optional[typing.Optional[typing.Any]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**deduplicate_token:** `typing.Optional[bool]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**expires_at:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**containers:** `typing.Optional[typing.Sequence[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">search</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    api_key="YOUR_API_KEY",
-)
-client.tokens.search()
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**query:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**page:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**start:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**size:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">get</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    api_key="YOUR_API_KEY",
-)
-client.tokens.get(
+client.webhooks.get(
     id="id",
 )
 
@@ -3544,9 +4171,23 @@ client.tokens.get(
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">update</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a new webhook
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -3562,7 +4203,104 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.tokens.delete(
+client.webhooks.update(
+    id="id",
+    name="webhook-update",
+    url="http://www.example.com",
+    events=["token:created"],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `str` — The name of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**url:** `str` — The URL to which the webhook will send events
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**events:** `typing.Sequence[str]` — An array of event types that the webhook will listen for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a new webhook
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.delete(
     id="id",
 )
 
@@ -3600,7 +4338,156 @@ client.tokens.delete(
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">list</a>()</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the configured webhooks
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new webhook
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.create(
+    name="webhook-create",
+    url="http://www.example.com",
+    events=["token:created"],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `str` — The name of the webhook
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**url:** `str` — The URL to which the webhook will send events
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**events:** `typing.Sequence[str]` — An array of event types that the webhook will listen for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reactors Results
+<details><summary><code>client.reactors.results.<a href="src/basis_theory/reactors/results/client.py">get</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3618,8 +4505,9 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.tokens.update(
+client.reactors.results.get(
     id="id",
+    request_id="requestId",
 )
 
 ```
@@ -3644,219 +4532,7 @@ client.tokens.update(
 <dl>
 <dd>
 
-**data:** `typing.Optional[typing.Optional[typing.Any]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**privacy:** `typing.Optional[UpdatePrivacy]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**search_indexes:** `typing.Optional[typing.Sequence[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**fingerprint_expression:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**mask:** `typing.Optional[typing.Optional[typing.Any]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**expires_at:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**deduplicate_token:** `typing.Optional[bool]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**containers:** `typing.Optional[typing.Sequence[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">list_v2</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    api_key="YOUR_API_KEY",
-)
-client.tokens.list_v2()
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**start:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**size:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">search_v2</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    api_key="YOUR_API_KEY",
-)
-client.tokens.search_v2()
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**query:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**start:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**size:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
+**request_id:** `str` 
     
 </dd>
 </dl>
@@ -4015,7 +4691,12 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.tenants.invitations.list()
+response = client.tenants.invitations.list()
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
 
 ```
 </dd>
@@ -4659,6 +5340,128 @@ client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
 client.tenants.self_.delete()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Webhooks Events
+<details><summary><code>client.webhooks.events.<a href="src/basis_theory/webhooks/events/client.py">list</a>()</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return a list of available event types
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.events.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Webhooks SigningKey
+<details><summary><code>client.webhooks.signing_key.<a href="src/basis_theory/webhooks/signing_key/client.py">get</a>()</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the signing key
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.webhooks.signing_key.get()
 
 ```
 </dd>

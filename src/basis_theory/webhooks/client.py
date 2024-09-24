@@ -2,60 +2,86 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
+from .events.client import EventsClient
+from .signing_key.client import SigningKeyClient
 from ..core.request_options import RequestOptions
-from ..core.pagination import SyncPager
-from ..types.reactor_formula import ReactorFormula
-from ..types.reactor_formula_paginated_list import ReactorFormulaPaginatedList
+from json.decoder import JSONDecodeError
+from ..core.api_error import ApiError
+from ..types.webhook_response import WebhookResponse
+from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
-from ..errors.bad_request_error import BadRequestError
-from ..types.validation_problem_details import ValidationProblemDetails
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.problem_details import ProblemDetails
 from ..errors.forbidden_error import ForbiddenError
-from json.decoder import JSONDecodeError
-from ..core.api_error import ApiError
-from ..types.reactor_formula_configuration import ReactorFormulaConfiguration
-from ..types.reactor_formula_request_parameter import ReactorFormulaRequestParameter
-from ..core.serialization import convert_and_respect_annotation_metadata
-from ..core.jsonable_encoder import jsonable_encoder
+from ..errors.bad_request_error import BadRequestError
+from ..types.validation_problem_details import ValidationProblemDetails
 from ..errors.not_found_error import NotFoundError
+from ..errors.conflict_error import ConflictError
+from ..types.webhook_list_response import WebhookListResponse
+from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..core.client_wrapper import AsyncClientWrapper
-from ..core.pagination import AsyncPager
+from .events.client import AsyncEventsClient
+from .signing_key.client import AsyncSigningKeyClient
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class ReactorformulasClient:
+class WebhooksClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+        self.events = EventsClient(client_wrapper=self._client_wrapper)
+        self.signing_key = SigningKeyClient(client_wrapper=self._client_wrapper)
 
-    def list(
-        self,
-        *,
-        name: typing.Optional[str] = None,
-        page: typing.Optional[int] = None,
-        start: typing.Optional[str] = None,
-        size: typing.Optional[int] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[ReactorFormula]:
+    def ping(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Simple endpoint that can be utilized to verify the application is running
+
         Parameters
         ----------
-        name : typing.Optional[str]
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
 
-        page : typing.Optional[int]
+        Returns
+        -------
+        None
 
-        start : typing.Optional[str]
+        Examples
+        --------
+        from basis_theory import BasisTheory
 
-        size : typing.Optional[int]
+        client = BasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+        client.webhooks.ping()
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "ping",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookResponse:
+        """
+        Returns the webhook
+
+        Parameters
+        ----------
+        id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        SyncPager[ReactorFormula]
+        WebhookResponse
             Success
 
         Examples
@@ -65,44 +91,116 @@ class ReactorformulasClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        response = client.reactorformulas.list()
-        for item in response:
-            yield item
-        # alternatively, you can paginate page-by-page
-        for page in response.iter_pages():
-            yield page
+        client.webhooks.get(
+            id="id",
+        )
         """
-        page = page if page is not None else 1
         _response = self._client_wrapper.httpx_client.request(
-            "reactor-formulas",
+            f"webhooks/{jsonable_encoder(id)}",
             method="GET",
-            params={
-                "name": name,
-                "page": page,
-                "start": start,
-                "size": size,
-            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
-                _parsed_response = typing.cast(
-                    ReactorFormulaPaginatedList,
+                return typing.cast(
+                    WebhookResponse,
                     parse_obj_as(
-                        type_=ReactorFormulaPaginatedList,  # type: ignore
+                        type_=WebhookResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
-                _has_next = True
-                _get_next = lambda: self.list(
-                    name=name,
-                    page=page + 1,
-                    start=start,
-                    size=size,
-                    request_options=request_options,
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
                 )
-                _items = _parsed_response.data
-                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def update(
+        self,
+        id: str,
+        *,
+        name: str,
+        url: str,
+        events: typing.Sequence[str],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WebhookResponse:
+        """
+        Update a new webhook
+
+        Parameters
+        ----------
+        id : str
+
+        name : str
+            The name of the webhook
+
+        url : str
+            The URL to which the webhook will send events
+
+        events : typing.Sequence[str]
+            An array of event types that the webhook will listen for
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        WebhookResponse
+            Success
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+        client.webhooks.update(
+            id="id",
+            name="webhook-update",
+            url="http://www.example.com",
+            events=["token:created"],
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"webhooks/{jsonable_encoder(id)}",
+            method="PUT",
+            json={
+                "name": name,
+                "url": url,
+                "events": events,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    WebhookResponse,
+                    parse_obj_as(
+                        type_=WebhookResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -112,6 +210,177 @@ class ReactorformulasClient:
                             object_=_response.json(),
                         ),
                     )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+        """
+        Delete a new webhook
+
+        Parameters
+        ----------
+        id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+        client.webhooks.delete(
+            id="id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"webhooks/{jsonable_encoder(id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookListResponse:
+        """
+        Returns the configured webhooks
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        WebhookListResponse
+            Success
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+        client.webhooks.list()
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "webhooks",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    WebhookListResponse,
+                    parse_obj_as(
+                        type_=WebhookListResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
                 )
             if _response.status_code == 401:
                 raise UnauthorizedError(
@@ -141,45 +410,32 @@ class ReactorformulasClient:
     def create(
         self,
         *,
-        type: str,
         name: str,
-        id: typing.Optional[str] = OMIT,
-        description: typing.Optional[str] = OMIT,
-        icon: typing.Optional[str] = OMIT,
-        code: typing.Optional[str] = OMIT,
-        configuration: typing.Optional[typing.Sequence[ReactorFormulaConfiguration]] = OMIT,
-        request_parameters: typing.Optional[typing.Sequence[ReactorFormulaRequestParameter]] = OMIT,
-        idempotency_key: typing.Optional[str] = None,
+        url: str,
+        events: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ReactorFormula:
+    ) -> WebhookResponse:
         """
+        Create a new webhook
+
         Parameters
         ----------
-        type : str
-
         name : str
+            The name of the webhook
 
-        id : typing.Optional[str]
+        url : str
+            The URL to which the webhook will send events
 
-        description : typing.Optional[str]
-
-        icon : typing.Optional[str]
-
-        code : typing.Optional[str]
-
-        configuration : typing.Optional[typing.Sequence[ReactorFormulaConfiguration]]
-
-        request_parameters : typing.Optional[typing.Sequence[ReactorFormulaRequestParameter]]
-
-        idempotency_key : typing.Optional[str]
+        events : typing.Sequence[str]
+            An array of event types that the webhook will listen for
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        ReactorFormula
-            Created
+        WebhookResponse
+            Success
 
         Examples
         --------
@@ -188,32 +444,19 @@ class ReactorformulasClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.reactorformulas.create(
-            type="type",
-            name="name",
+        client.webhooks.create(
+            name="webhook-create",
+            url="http://www.example.com",
+            events=["token:created"],
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "reactor-formulas",
+            "webhooks",
             method="POST",
             json={
-                "id": id,
-                "type": type,
                 "name": name,
-                "description": description,
-                "icon": icon,
-                "code": code,
-                "configuration": convert_and_respect_annotation_metadata(
-                    object_=configuration, annotation=typing.Sequence[ReactorFormulaConfiguration], direction="write"
-                ),
-                "request_parameters": convert_and_respect_annotation_metadata(
-                    object_=request_parameters,
-                    annotation=typing.Sequence[ReactorFormulaRequestParameter],
-                    direction="write",
-                ),
-            },
-            headers={
-                "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
+                "url": url,
+                "events": events,
             },
             request_options=request_options,
             omit=OMIT,
@@ -221,9 +464,9 @@ class ReactorformulasClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    ReactorFormula,
+                    WebhookResponse,
                     parse_obj_as(
-                        type_=ReactorFormula,  # type: ignore
+                        type_=WebhookResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -257,76 +500,12 @@ class ReactorformulasClient:
                         ),
                     )
                 )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
-    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ReactorFormula:
-        """
-        Parameters
-        ----------
-        id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ReactorFormula
-            Success
-
-        Examples
-        --------
-        from basis_theory import BasisTheory
-
-        client = BasisTheory(
-            api_key="YOUR_API_KEY",
-        )
-        client.reactorformulas.get(
-            id="id",
-        )
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"reactor-formulas/{jsonable_encoder(id)}",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    ReactorFormula,
-                    parse_obj_as(
-                        type_=ReactorFormula,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
                     typing.cast(
                         ProblemDetails,
                         parse_obj_as(
                             type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     )
@@ -336,146 +515,19 @@ class ReactorformulasClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def update(
-        self,
-        id: str,
-        *,
-        type: str,
-        name: str,
-        description: typing.Optional[str] = OMIT,
-        icon: typing.Optional[str] = OMIT,
-        code: typing.Optional[str] = OMIT,
-        configuration: typing.Optional[typing.Sequence[ReactorFormulaConfiguration]] = OMIT,
-        request_parameters: typing.Optional[typing.Sequence[ReactorFormulaRequestParameter]] = OMIT,
-        idempotency_key: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> ReactorFormula:
+
+class AsyncWebhooksClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._client_wrapper = client_wrapper
+        self.events = AsyncEventsClient(client_wrapper=self._client_wrapper)
+        self.signing_key = AsyncSigningKeyClient(client_wrapper=self._client_wrapper)
+
+    async def ping(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        Simple endpoint that can be utilized to verify the application is running
+
         Parameters
         ----------
-        id : str
-
-        type : str
-
-        name : str
-
-        description : typing.Optional[str]
-
-        icon : typing.Optional[str]
-
-        code : typing.Optional[str]
-
-        configuration : typing.Optional[typing.Sequence[ReactorFormulaConfiguration]]
-
-        request_parameters : typing.Optional[typing.Sequence[ReactorFormulaRequestParameter]]
-
-        idempotency_key : typing.Optional[str]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ReactorFormula
-            Success
-
-        Examples
-        --------
-        from basis_theory import BasisTheory
-
-        client = BasisTheory(
-            api_key="YOUR_API_KEY",
-        )
-        client.reactorformulas.update(
-            id="id",
-            type="type",
-            name="name",
-        )
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"reactor-formulas/{jsonable_encoder(id)}",
-            method="PUT",
-            json={
-                "type": type,
-                "name": name,
-                "description": description,
-                "icon": icon,
-                "code": code,
-                "configuration": convert_and_respect_annotation_metadata(
-                    object_=configuration, annotation=typing.Sequence[ReactorFormulaConfiguration], direction="write"
-                ),
-                "request_parameters": convert_and_respect_annotation_metadata(
-                    object_=request_parameters,
-                    annotation=typing.Sequence[ReactorFormulaRequestParameter],
-                    direction="write",
-                ),
-            },
-            headers={
-                "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    ReactorFormula,
-                    parse_obj_as(
-                        type_=ReactorFormula,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    typing.cast(
-                        ValidationProblemDetails,
-                        parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
-    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
-        """
-        Parameters
-        ----------
-        id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -485,89 +537,48 @@ class ReactorformulasClient:
 
         Examples
         --------
-        from basis_theory import BasisTheory
+        import asyncio
 
-        client = BasisTheory(
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.reactorformulas.delete(
-            id="id",
-        )
+
+
+        async def main() -> None:
+            await client.webhooks.ping()
+
+
+        asyncio.run(main())
         """
-        _response = self._client_wrapper.httpx_client.request(
-            f"reactor-formulas/{jsonable_encoder(id)}",
-            method="DELETE",
+        _response = await self._client_wrapper.httpx_client.request(
+            "ping",
+            method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-
-class AsyncReactorformulasClient:
-    def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._client_wrapper = client_wrapper
-
-    async def list(
-        self,
-        *,
-        name: typing.Optional[str] = None,
-        page: typing.Optional[int] = None,
-        start: typing.Optional[str] = None,
-        size: typing.Optional[int] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[ReactorFormula]:
+    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookResponse:
         """
+        Returns the webhook
+
         Parameters
         ----------
-        name : typing.Optional[str]
-
-        page : typing.Optional[int]
-
-        start : typing.Optional[str]
-
-        size : typing.Optional[int]
+        id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncPager[ReactorFormula]
+        WebhookResponse
             Success
 
         Examples
@@ -582,47 +593,127 @@ class AsyncReactorformulasClient:
 
 
         async def main() -> None:
-            response = await client.reactorformulas.list()
-            async for item in response:
-                yield item
-            # alternatively, you can paginate page-by-page
-            async for page in response.iter_pages():
-                yield page
+            await client.webhooks.get(
+                id="id",
+            )
 
 
         asyncio.run(main())
         """
-        page = page if page is not None else 1
         _response = await self._client_wrapper.httpx_client.request(
-            "reactor-formulas",
+            f"webhooks/{jsonable_encoder(id)}",
             method="GET",
-            params={
-                "name": name,
-                "page": page,
-                "start": start,
-                "size": size,
-            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
-                _parsed_response = typing.cast(
-                    ReactorFormulaPaginatedList,
+                return typing.cast(
+                    WebhookResponse,
                     parse_obj_as(
-                        type_=ReactorFormulaPaginatedList,  # type: ignore
+                        type_=WebhookResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
-                _has_next = True
-                _get_next = lambda: self.list(
-                    name=name,
-                    page=page + 1,
-                    start=start,
-                    size=size,
-                    request_options=request_options,
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
                 )
-                _items = _parsed_response.data
-                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def update(
+        self,
+        id: str,
+        *,
+        name: str,
+        url: str,
+        events: typing.Sequence[str],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WebhookResponse:
+        """
+        Update a new webhook
+
+        Parameters
+        ----------
+        id : str
+
+        name : str
+            The name of the webhook
+
+        url : str
+            The URL to which the webhook will send events
+
+        events : typing.Sequence[str]
+            An array of event types that the webhook will listen for
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        WebhookResponse
+            Success
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.webhooks.update(
+                id="id",
+                name="webhook-update",
+                url="http://www.example.com",
+                events=["token:created"],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"webhooks/{jsonable_encoder(id)}",
+            method="PUT",
+            json={
+                "name": name,
+                "url": url,
+                "events": events,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    WebhookResponse,
+                    parse_obj_as(
+                        type_=WebhookResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -632,6 +723,193 @@ class AsyncReactorformulasClient:
                             object_=_response.json(),
                         ),
                     )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+        """
+        Delete a new webhook
+
+        Parameters
+        ----------
+        id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.webhooks.delete(
+                id="id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"webhooks/{jsonable_encoder(id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookListResponse:
+        """
+        Returns the configured webhooks
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        WebhookListResponse
+            Success
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.webhooks.list()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "webhooks",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    WebhookListResponse,
+                    parse_obj_as(
+                        type_=WebhookListResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
                 )
             if _response.status_code == 401:
                 raise UnauthorizedError(
@@ -661,45 +939,32 @@ class AsyncReactorformulasClient:
     async def create(
         self,
         *,
-        type: str,
         name: str,
-        id: typing.Optional[str] = OMIT,
-        description: typing.Optional[str] = OMIT,
-        icon: typing.Optional[str] = OMIT,
-        code: typing.Optional[str] = OMIT,
-        configuration: typing.Optional[typing.Sequence[ReactorFormulaConfiguration]] = OMIT,
-        request_parameters: typing.Optional[typing.Sequence[ReactorFormulaRequestParameter]] = OMIT,
-        idempotency_key: typing.Optional[str] = None,
+        url: str,
+        events: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ReactorFormula:
+    ) -> WebhookResponse:
         """
+        Create a new webhook
+
         Parameters
         ----------
-        type : str
-
         name : str
+            The name of the webhook
 
-        id : typing.Optional[str]
+        url : str
+            The URL to which the webhook will send events
 
-        description : typing.Optional[str]
-
-        icon : typing.Optional[str]
-
-        code : typing.Optional[str]
-
-        configuration : typing.Optional[typing.Sequence[ReactorFormulaConfiguration]]
-
-        request_parameters : typing.Optional[typing.Sequence[ReactorFormulaRequestParameter]]
-
-        idempotency_key : typing.Optional[str]
+        events : typing.Sequence[str]
+            An array of event types that the webhook will listen for
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        ReactorFormula
-            Created
+        WebhookResponse
+            Success
 
         Examples
         --------
@@ -713,35 +978,22 @@ class AsyncReactorformulasClient:
 
 
         async def main() -> None:
-            await client.reactorformulas.create(
-                type="type",
-                name="name",
+            await client.webhooks.create(
+                name="webhook-create",
+                url="http://www.example.com",
+                events=["token:created"],
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "reactor-formulas",
+            "webhooks",
             method="POST",
             json={
-                "id": id,
-                "type": type,
                 "name": name,
-                "description": description,
-                "icon": icon,
-                "code": code,
-                "configuration": convert_and_respect_annotation_metadata(
-                    object_=configuration, annotation=typing.Sequence[ReactorFormulaConfiguration], direction="write"
-                ),
-                "request_parameters": convert_and_respect_annotation_metadata(
-                    object_=request_parameters,
-                    annotation=typing.Sequence[ReactorFormulaRequestParameter],
-                    direction="write",
-                ),
-            },
-            headers={
-                "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
+                "url": url,
+                "events": events,
             },
             request_options=request_options,
             omit=OMIT,
@@ -749,9 +1001,9 @@ class AsyncReactorformulasClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    ReactorFormula,
+                    WebhookResponse,
                     parse_obj_as(
-                        type_=ReactorFormula,  # type: ignore
+                        type_=WebhookResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -785,301 +1037,12 @@ class AsyncReactorformulasClient:
                         ),
                     )
                 )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
-    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ReactorFormula:
-        """
-        Parameters
-        ----------
-        id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ReactorFormula
-            Success
-
-        Examples
-        --------
-        import asyncio
-
-        from basis_theory import AsyncBasisTheory
-
-        client = AsyncBasisTheory(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.reactorformulas.get(
-                id="id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"reactor-formulas/{jsonable_encoder(id)}",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    ReactorFormula,
-                    parse_obj_as(
-                        type_=ReactorFormula,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
                     typing.cast(
                         ProblemDetails,
                         parse_obj_as(
                             type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
-    async def update(
-        self,
-        id: str,
-        *,
-        type: str,
-        name: str,
-        description: typing.Optional[str] = OMIT,
-        icon: typing.Optional[str] = OMIT,
-        code: typing.Optional[str] = OMIT,
-        configuration: typing.Optional[typing.Sequence[ReactorFormulaConfiguration]] = OMIT,
-        request_parameters: typing.Optional[typing.Sequence[ReactorFormulaRequestParameter]] = OMIT,
-        idempotency_key: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> ReactorFormula:
-        """
-        Parameters
-        ----------
-        id : str
-
-        type : str
-
-        name : str
-
-        description : typing.Optional[str]
-
-        icon : typing.Optional[str]
-
-        code : typing.Optional[str]
-
-        configuration : typing.Optional[typing.Sequence[ReactorFormulaConfiguration]]
-
-        request_parameters : typing.Optional[typing.Sequence[ReactorFormulaRequestParameter]]
-
-        idempotency_key : typing.Optional[str]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ReactorFormula
-            Success
-
-        Examples
-        --------
-        import asyncio
-
-        from basis_theory import AsyncBasisTheory
-
-        client = AsyncBasisTheory(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.reactorformulas.update(
-                id="id",
-                type="type",
-                name="name",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"reactor-formulas/{jsonable_encoder(id)}",
-            method="PUT",
-            json={
-                "type": type,
-                "name": name,
-                "description": description,
-                "icon": icon,
-                "code": code,
-                "configuration": convert_and_respect_annotation_metadata(
-                    object_=configuration, annotation=typing.Sequence[ReactorFormulaConfiguration], direction="write"
-                ),
-                "request_parameters": convert_and_respect_annotation_metadata(
-                    object_=request_parameters,
-                    annotation=typing.Sequence[ReactorFormulaRequestParameter],
-                    direction="write",
-                ),
-            },
-            headers={
-                "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    ReactorFormula,
-                    parse_obj_as(
-                        type_=ReactorFormula,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    typing.cast(
-                        ValidationProblemDetails,
-                        parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
-    async def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
-        """
-        Parameters
-        ----------
-        id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
-        Examples
-        --------
-        import asyncio
-
-        from basis_theory import AsyncBasisTheory
-
-        client = AsyncBasisTheory(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.reactorformulas.delete(
-                id="id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"reactor-formulas/{jsonable_encoder(id)}",
-            method="DELETE",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 404:
-                raise NotFoundError(
-                    typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     )

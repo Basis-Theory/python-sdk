@@ -3,6 +3,8 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..core.pagination import SyncPager
+from ..types.proxy import Proxy
 from ..types.proxy_paginated_list import ProxyPaginatedList
 from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
@@ -13,12 +15,12 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.proxy_transform import ProxyTransform
 from ..types.application import Application
-from ..types.proxy import Proxy
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.client_wrapper import AsyncClientWrapper
+from ..core.pagination import AsyncPager
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -37,7 +39,7 @@ class ProxiesClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ProxyPaginatedList:
+    ) -> SyncPager[Proxy]:
         """
         Parameters
         ----------
@@ -56,7 +58,7 @@ class ProxiesClient:
 
         Returns
         -------
-        ProxyPaginatedList
+        SyncPager[Proxy]
             Success
 
         Examples
@@ -66,8 +68,14 @@ class ProxiesClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.proxies.list()
+        response = client.proxies.list()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
+        page = page if page is not None else 1
         _response = self._client_wrapper.httpx_client.request(
             "proxies",
             method="GET",
@@ -82,13 +90,24 @@ class ProxiesClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     ProxyPaginatedList,
                     parse_obj_as(
                         type_=ProxyPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    id=id,
+                    name=name,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -674,7 +693,7 @@ class AsyncProxiesClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ProxyPaginatedList:
+    ) -> AsyncPager[Proxy]:
         """
         Parameters
         ----------
@@ -693,7 +712,7 @@ class AsyncProxiesClient:
 
         Returns
         -------
-        ProxyPaginatedList
+        AsyncPager[Proxy]
             Success
 
         Examples
@@ -708,11 +727,17 @@ class AsyncProxiesClient:
 
 
         async def main() -> None:
-            await client.proxies.list()
+            response = await client.proxies.list()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
         """
+        page = page if page is not None else 1
         _response = await self._client_wrapper.httpx_client.request(
             "proxies",
             method="GET",
@@ -727,13 +752,24 @@ class AsyncProxiesClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     ProxyPaginatedList,
                     parse_obj_as(
                         type_=ProxyPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    id=id,
+                    name=name,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(

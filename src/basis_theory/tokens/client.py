@@ -3,24 +3,26 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.token_paginated_list import TokenPaginatedList
+from ..errors.bad_request_error import BadRequestError
+from ..types.validation_problem_details import ValidationProblemDetails
 from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.problem_details import ProblemDetails
 from ..errors.forbidden_error import ForbiddenError
+from ..errors.conflict_error import ConflictError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.privacy import Privacy
+from ..core.pagination import SyncPager
 from ..types.token import Token
+from ..types.token_paginated_list import TokenPaginatedList
+from ..types.privacy import Privacy
 from ..core.serialization import convert_and_respect_annotation_metadata
-from ..errors.bad_request_error import BadRequestError
-from ..types.validation_problem_details import ValidationProblemDetails
-from ..errors.conflict_error import ConflictError
 from ..core.jsonable_encoder import jsonable_encoder
 from ..errors.not_found_error import NotFoundError
 from ..types.update_privacy import UpdatePrivacy
 from ..types.token_cursor_paginated_list import TokenCursorPaginatedList
 from ..core.client_wrapper import AsyncClientWrapper
+from ..core.pagination import AsyncPager
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -29,6 +31,184 @@ OMIT = typing.cast(typing.Any, ...)
 class TokensClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    def detokenize(
+        self, *, request: typing.Optional[typing.Any] = None, request_options: typing.Optional[RequestOptions] = None
+    ) -> None:
+        """
+        Parameters
+        ----------
+        request : typing.Optional[typing.Any]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+        client.tokens.detokenize(
+            request={"key": "value"},
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "detokenize",
+            method="POST",
+            json=request,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def tokenize(
+        self,
+        *,
+        request: typing.Optional[typing.Any] = None,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request : typing.Optional[typing.Any]
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Success
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+        client.tokens.tokenize(
+            request={"key": "value"},
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "tokenize",
+            method="POST",
+            json=request,
+            headers={
+                "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def list(
         self,
@@ -39,7 +219,7 @@ class TokensClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TokenPaginatedList:
+    ) -> SyncPager[Token]:
         """
         Parameters
         ----------
@@ -58,7 +238,7 @@ class TokensClient:
 
         Returns
         -------
-        TokenPaginatedList
+        SyncPager[Token]
             Success
 
         Examples
@@ -68,8 +248,14 @@ class TokensClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.tokens.list()
+        response = client.tokens.list()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
+        page = page if page is not None else 1
         _response = self._client_wrapper.httpx_client.request(
             "tokens",
             method="GET",
@@ -84,13 +270,24 @@ class TokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TokenPaginatedList,
                     parse_obj_as(
                         type_=TokenPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    id=id,
+                    metadata=metadata,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -280,7 +477,7 @@ class TokensClient:
         size: typing.Optional[int] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TokenPaginatedList:
+    ) -> SyncPager[Token]:
         """
         Parameters
         ----------
@@ -299,7 +496,7 @@ class TokensClient:
 
         Returns
         -------
-        TokenPaginatedList
+        SyncPager[Token]
             Success
 
         Examples
@@ -309,8 +506,14 @@ class TokensClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.tokens.search()
+        response = client.tokens.search()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
+        page = page if page is not None else 1
         _response = self._client_wrapper.httpx_client.request(
             "tokens/search",
             method="POST",
@@ -328,13 +531,24 @@ class TokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TokenPaginatedList,
                     parse_obj_as(
                         type_=TokenPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.search(
+                    query=query,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    idempotency_key=idempotency_key,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -673,7 +887,7 @@ class TokensClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TokenCursorPaginatedList:
+    ) -> SyncPager[Token]:
         """
         Parameters
         ----------
@@ -686,7 +900,7 @@ class TokensClient:
 
         Returns
         -------
-        TokenCursorPaginatedList
+        SyncPager[Token]
             Success
 
         Examples
@@ -696,7 +910,12 @@ class TokensClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.tokens.list_v2()
+        response = client.tokens.list_v2()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
         _response = self._client_wrapper.httpx_client.request(
             "v2/tokens",
@@ -709,13 +928,25 @@ class TokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TokenCursorPaginatedList,
                     parse_obj_as(
                         type_=TokenCursorPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = False
+                _get_next = None
+                if _parsed_response.pagination is not None:
+                    _parsed_next = _parsed_response.pagination.next
+                    _has_next = _parsed_next is not None and _parsed_next != ""
+                    _get_next = lambda: self.list_v2(
+                        start=_parsed_next,
+                        size=size,
+                        request_options=request_options,
+                    )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -749,7 +980,7 @@ class TokensClient:
         size: typing.Optional[int] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TokenCursorPaginatedList:
+    ) -> SyncPager[Token]:
         """
         Parameters
         ----------
@@ -766,7 +997,7 @@ class TokensClient:
 
         Returns
         -------
-        TokenCursorPaginatedList
+        SyncPager[Token]
             Success
 
         Examples
@@ -776,7 +1007,12 @@ class TokensClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.tokens.search_v2()
+        response = client.tokens.search_v2()
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
         _response = self._client_wrapper.httpx_client.request(
             "v2/tokens/search",
@@ -794,13 +1030,27 @@ class TokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TokenCursorPaginatedList,
                     parse_obj_as(
                         type_=TokenCursorPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = False
+                _get_next = None
+                if _parsed_response.pagination is not None:
+                    _parsed_next = _parsed_response.pagination.next
+                    _has_next = _parsed_next is not None and _parsed_next != ""
+                    _get_next = lambda: self.search_v2(
+                        query=query,
+                        start=_parsed_next,
+                        size=size,
+                        idempotency_key=idempotency_key,
+                        request_options=request_options,
+                    )
+                _items = _parsed_response.data
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -841,6 +1091,200 @@ class AsyncTokensClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
+    async def detokenize(
+        self, *, request: typing.Optional[typing.Any] = None, request_options: typing.Optional[RequestOptions] = None
+    ) -> None:
+        """
+        Parameters
+        ----------
+        request : typing.Optional[typing.Any]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.tokens.detokenize(
+                request={"key": "value"},
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "detokenize",
+            method="POST",
+            json=request,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def tokenize(
+        self,
+        *,
+        request: typing.Optional[typing.Any] = None,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request : typing.Optional[typing.Any]
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Success
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.tokens.tokenize(
+                request={"key": "value"},
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "tokenize",
+            method="POST",
+            json=request,
+            headers={
+                "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
     async def list(
         self,
         *,
@@ -850,7 +1294,7 @@ class AsyncTokensClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TokenPaginatedList:
+    ) -> AsyncPager[Token]:
         """
         Parameters
         ----------
@@ -869,7 +1313,7 @@ class AsyncTokensClient:
 
         Returns
         -------
-        TokenPaginatedList
+        AsyncPager[Token]
             Success
 
         Examples
@@ -884,11 +1328,17 @@ class AsyncTokensClient:
 
 
         async def main() -> None:
-            await client.tokens.list()
+            response = await client.tokens.list()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
         """
+        page = page if page is not None else 1
         _response = await self._client_wrapper.httpx_client.request(
             "tokens",
             method="GET",
@@ -903,13 +1353,24 @@ class AsyncTokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TokenPaginatedList,
                     parse_obj_as(
                         type_=TokenPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.list(
+                    id=id,
+                    metadata=metadata,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -1107,7 +1568,7 @@ class AsyncTokensClient:
         size: typing.Optional[int] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TokenPaginatedList:
+    ) -> AsyncPager[Token]:
         """
         Parameters
         ----------
@@ -1126,7 +1587,7 @@ class AsyncTokensClient:
 
         Returns
         -------
-        TokenPaginatedList
+        AsyncPager[Token]
             Success
 
         Examples
@@ -1141,11 +1602,17 @@ class AsyncTokensClient:
 
 
         async def main() -> None:
-            await client.tokens.search()
+            response = await client.tokens.search()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
         """
+        page = page if page is not None else 1
         _response = await self._client_wrapper.httpx_client.request(
             "tokens/search",
             method="POST",
@@ -1163,13 +1630,24 @@ class AsyncTokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TokenPaginatedList,
                     parse_obj_as(
                         type_=TokenPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = True
+                _get_next = lambda: self.search(
+                    query=query,
+                    page=page + 1,
+                    start=start,
+                    size=size,
+                    idempotency_key=idempotency_key,
+                    request_options=request_options,
+                )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -1532,7 +2010,7 @@ class AsyncTokensClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TokenCursorPaginatedList:
+    ) -> AsyncPager[Token]:
         """
         Parameters
         ----------
@@ -1545,7 +2023,7 @@ class AsyncTokensClient:
 
         Returns
         -------
-        TokenCursorPaginatedList
+        AsyncPager[Token]
             Success
 
         Examples
@@ -1560,7 +2038,12 @@ class AsyncTokensClient:
 
 
         async def main() -> None:
-            await client.tokens.list_v2()
+            response = await client.tokens.list_v2()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
@@ -1576,13 +2059,25 @@ class AsyncTokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TokenCursorPaginatedList,
                     parse_obj_as(
                         type_=TokenCursorPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = False
+                _get_next = None
+                if _parsed_response.pagination is not None:
+                    _parsed_next = _parsed_response.pagination.next
+                    _has_next = _parsed_next is not None and _parsed_next != ""
+                    _get_next = lambda: self.list_v2(
+                        start=_parsed_next,
+                        size=size,
+                        request_options=request_options,
+                    )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -1616,7 +2111,7 @@ class AsyncTokensClient:
         size: typing.Optional[int] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TokenCursorPaginatedList:
+    ) -> AsyncPager[Token]:
         """
         Parameters
         ----------
@@ -1633,7 +2128,7 @@ class AsyncTokensClient:
 
         Returns
         -------
-        TokenCursorPaginatedList
+        AsyncPager[Token]
             Success
 
         Examples
@@ -1648,7 +2143,12 @@ class AsyncTokensClient:
 
 
         async def main() -> None:
-            await client.tokens.search_v2()
+            response = await client.tokens.search_v2()
+            async for item in response:
+                yield item
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
@@ -1669,13 +2169,27 @@ class AsyncTokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
+                _parsed_response = typing.cast(
                     TokenCursorPaginatedList,
                     parse_obj_as(
                         type_=TokenCursorPaginatedList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
+                _has_next = False
+                _get_next = None
+                if _parsed_response.pagination is not None:
+                    _parsed_next = _parsed_response.pagination.next
+                    _has_next = _parsed_next is not None and _parsed_next != ""
+                    _get_next = lambda: self.search_v2(
+                        query=query,
+                        start=_parsed_next,
+                        size=size,
+                        idempotency_key=idempotency_key,
+                        request_options=request_options,
+                    )
+                _items = _parsed_response.data
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next)
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
