@@ -1116,7 +1116,7 @@ client.tokens.create(
         impact_level="string",
         restriction_policy="string",
     ),
-    metadata={"string": {"key": "value"}},
+    metadata={},
     search_indexes=["string"],
     fingerprint_expression="string",
     mask={"key": "value"},
