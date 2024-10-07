@@ -46,6 +46,14 @@ def test_should_support_token_lifecycle() -> None:
     except NotFoundError:
         pass
 
+def test_should_support_idempotency_header() -> None:
+    client = new_private_client()
+    idempotency_key = str(uuid.uuid4())
+
+    firstTokenId = create_token('6011000990139424', client, idempotency_key)
+    secondTokenId = create_token('4242424242424242', client, idempotency_key)
+
+    assert firstTokenId == secondTokenId
 
 def react(management_client, reactor_id):
     expected = {
@@ -102,7 +110,7 @@ def get_and_validate_card_number(cardNumber, client, token_id):
     assert token.data['number'] == cardNumber
 
 
-def create_token(cardNumber, client):
+def create_token(cardNumber, client, idempotency_key=None):
     token = client.tokens.create(
         type="card",
         data={
@@ -122,24 +130,7 @@ def create_token(cardNumber, client):
         },
         deduplicate_token=False,
         containers=["/pci/high/"],
-        # type="card",
-        # data={
-        #     "number": cardNumber,
-        #     "expiration_month": 4,
-        #     "expiration_year": 2025,
-        #     "cvc": 123,
-        # },
-        # metadata={
-        #     "customer_id": "3181",
-        # },
-        # searchIndexes=["{{ data.expiration_month }}", "{{ data.number | last4 }}"],
-        # fingerprintExpression="{{ data.number }}",
-        # mask={
-        #     "number": "{{ data.number, reveal_last: 4 }}",
-        #     "cvc": "{{ data.cvc }}",
-        # },
-        # deduplicateToken=False,
-        # containers=["/pci/high/"]
+        idempotency_key=idempotency_key
     )
     token_id = token.id
     assert token_id is not None
