@@ -1,4 +1,5 @@
 import os
+import time
 import uuid
 from unittest.result import failfast
 
@@ -79,6 +80,60 @@ def test_should_paginate_on_list_v2() -> None:
             break
 
     assert count > page_size
+
+def test_should_manage_webhooks_lifecycle() -> None:
+    client = new_management_client()
+
+    url = 'https://echo.basistheory.com/' + str(uuid.uuid4())
+    webhook_id = create_webhook(client, url)
+    get_and_validate_webhook_url(client, webhook_id, url)
+
+    time.sleep(2) # Required to avoid error `The webhook subscription is undergoing another concurrent operation. Please wait a few seconds, then try again.`
+
+    updated_url = 'https://echo.basistheory.com/' + str(uuid.uuid4())
+    update_webhook(client, webhook_id, updated_url)
+    get_and_validate_webhook_url(client, webhook_id, updated_url)
+
+    time.sleep(2)  # Required to avoid error `The webhook subscription is undergoing another concurrent operation. Please wait a few seconds, then try again.`
+
+    client.webhooks.delete(id=webhook_id)
+
+    # Does not currently work due to empty body on 404
+    # Issue eng-7345
+    # ensure_webhook_removed(client, webhook_id)
+
+
+def ensure_webhook_removed(client, webhook_id):
+    try:
+        client.webhooks.get(id=webhook_id)
+        assert False, "Webhook should no longer be retrievable"
+    except NotFoundError:
+        pass
+
+
+def update_webhook(client, webhook_id, updated_url):
+    client.webhooks.update(
+        id=webhook_id,
+        name='(Deletable) python-SDK-' + str(uuid.uuid4()),
+        url=updated_url,
+        events=['token.created', 'token.updated']
+   )
+
+
+def get_and_validate_webhook_url(client, webhook_id, url):
+    webhook = client.webhooks.get(id=webhook_id)
+    assert webhook.url == url
+
+
+def create_webhook(client, url):
+    webhook = client.webhooks.create(
+        name='(Deletable) python-SDK-' + str(uuid.uuid4()),
+        url=url,
+        events=['token.created']
+    )
+    webhook_id = webhook.id
+    return webhook_id
+
 
 def react(management_client, reactor_id):
     expected = {
