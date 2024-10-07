@@ -7,7 +7,7 @@ from .signing_key.client import SigningKeyClient
 from ..core.request_options import RequestOptions
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.webhook_response import WebhookResponse
+from ..types.webhook import Webhook
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
@@ -17,7 +17,7 @@ from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
 from ..errors.not_found_error import NotFoundError
 from ..errors.conflict_error import ConflictError
-from ..types.webhook_list_response import WebhookListResponse
+from ..types.webhook_list import WebhookList
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..core.client_wrapper import AsyncClientWrapper
 from .events.client import AsyncEventsClient
@@ -68,7 +68,7 @@ class WebhooksClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookResponse:
+    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Webhook:
         """
         Returns the webhook
 
@@ -81,7 +81,7 @@ class WebhooksClient:
 
         Returns
         -------
-        WebhookResponse
+        Webhook
             Success
 
         Examples
@@ -103,9 +103,9 @@ class WebhooksClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WebhookResponse,
+                    Webhook,
                     parse_obj_as(
-                        type_=WebhookResponse,  # type: ignore
+                        type_=Webhook,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -142,7 +142,7 @@ class WebhooksClient:
         url: str,
         events: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WebhookResponse:
+    ) -> Webhook:
         """
         Update a new webhook
 
@@ -164,7 +164,7 @@ class WebhooksClient:
 
         Returns
         -------
-        WebhookResponse
+        Webhook
             Success
 
         Examples
@@ -195,9 +195,9 @@ class WebhooksClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WebhookResponse,
+                    Webhook,
                     parse_obj_as(
-                        type_=WebhookResponse,  # type: ignore
+                        type_=Webhook,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -345,7 +345,7 @@ class WebhooksClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookListResponse:
+    def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookList:
         """
         Returns the configured webhooks
 
@@ -356,7 +356,7 @@ class WebhooksClient:
 
         Returns
         -------
-        WebhookListResponse
+        WebhookList
             Success
 
         Examples
@@ -376,9 +376,9 @@ class WebhooksClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WebhookListResponse,
+                    WebhookList,
                     parse_obj_as(
-                        type_=WebhookListResponse,  # type: ignore
+                        type_=WebhookList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -414,7 +414,7 @@ class WebhooksClient:
         url: str,
         events: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WebhookResponse:
+    ) -> Webhook:
         """
         Create a new webhook
 
@@ -434,7 +434,7 @@ class WebhooksClient:
 
         Returns
         -------
-        WebhookResponse
+        Webhook
             Success
 
         Examples
@@ -464,9 +464,9 @@ class WebhooksClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WebhookResponse,
+                    Webhook,
                     parse_obj_as(
-                        type_=WebhookResponse,  # type: ignore
+                        type_=Webhook,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -565,7 +565,7 @@ class AsyncWebhooksClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookResponse:
+    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Webhook:
         """
         Returns the webhook
 
@@ -578,7 +578,7 @@ class AsyncWebhooksClient:
 
         Returns
         -------
-        WebhookResponse
+        Webhook
             Success
 
         Examples
@@ -608,9 +608,9 @@ class AsyncWebhooksClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WebhookResponse,
+                    Webhook,
                     parse_obj_as(
-                        type_=WebhookResponse,  # type: ignore
+                        type_=Webhook,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -647,7 +647,7 @@ class AsyncWebhooksClient:
         url: str,
         events: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WebhookResponse:
+    ) -> Webhook:
         """
         Update a new webhook
 
@@ -669,7 +669,7 @@ class AsyncWebhooksClient:
 
         Returns
         -------
-        WebhookResponse
+        Webhook
             Success
 
         Examples
@@ -708,9 +708,9 @@ class AsyncWebhooksClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WebhookResponse,
+                    Webhook,
                     parse_obj_as(
-                        type_=WebhookResponse,  # type: ignore
+                        type_=Webhook,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -866,7 +866,7 @@ class AsyncWebhooksClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookListResponse:
+    async def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> WebhookList:
         """
         Returns the configured webhooks
 
@@ -877,7 +877,7 @@ class AsyncWebhooksClient:
 
         Returns
         -------
-        WebhookListResponse
+        WebhookList
             Success
 
         Examples
@@ -905,9 +905,9 @@ class AsyncWebhooksClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WebhookListResponse,
+                    WebhookList,
                     parse_obj_as(
-                        type_=WebhookListResponse,  # type: ignore
+                        type_=WebhookList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -943,7 +943,7 @@ class AsyncWebhooksClient:
         url: str,
         events: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WebhookResponse:
+    ) -> Webhook:
         """
         Create a new webhook
 
@@ -963,7 +963,7 @@ class AsyncWebhooksClient:
 
         Returns
         -------
-        WebhookResponse
+        Webhook
             Success
 
         Examples
@@ -1001,9 +1001,9 @@ class AsyncWebhooksClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WebhookResponse,
+                    Webhook,
                     parse_obj_as(
-                        type_=WebhookResponse,  # type: ignore
+                        type_=Webhook,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -80,10 +80,10 @@ from .token_report import TokenReport
 from .update_privacy import UpdatePrivacy
 from .user import User
 from .validation_problem_details import ValidationProblemDetails
-from .webhook_list_response import WebhookListResponse
-from .webhook_list_response_pagination import WebhookListResponsePagination
-from .webhook_response import WebhookResponse
-from .webhook_response_status import WebhookResponseStatus
+from .webhook import Webhook
+from .webhook_list import WebhookList
+from .webhook_list_pagination import WebhookListPagination
+from .webhook_status import WebhookStatus
 
 __all__ = [
     "AccessRule",
@@ -166,8 +166,8 @@ __all__ = [
     "UpdatePrivacy",
     "User",
     "ValidationProblemDetails",
-    "WebhookListResponse",
-    "WebhookListResponsePagination",
-    "WebhookResponse",
-    "WebhookResponseStatus",
+    "Webhook",
+    "WebhookList",
+    "WebhookListPagination",
+    "WebhookStatus",
 ]
