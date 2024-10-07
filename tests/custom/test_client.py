@@ -55,6 +55,31 @@ def test_should_support_idempotency_header() -> None:
 
     assert firstTokenId == secondTokenId
 
+def test_should_paginate_on_list_v1() -> None:
+    client = new_private_client()
+    page_size = 3
+    page_number = 1
+
+    tokens = client.tokens.list(size=page_size, page=page_number)
+
+    for count, token in enumerate(tokens, start=1):
+        if count > page_size:
+            break
+
+    assert count > page_size
+
+def test_should_paginate_on_list_v2() -> None:
+    client = new_private_client()
+    page_size = 3
+
+    tokens = client.tokens.list_v2(size=page_size)
+
+    for count, token in enumerate(tokens, start=1):
+        if count > page_size:
+            break
+
+    assert count > page_size
+
 def react(management_client, reactor_id):
     expected = {
         'key1': 'Key1-' + str(uuid.uuid4()),
