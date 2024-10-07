@@ -1,5 +1,6 @@
 # Specify files that shouldn't be modified by Fern
 
+.github/workflows/ci.yml
 .gitignore
 
 tests/custom/test_client.py
