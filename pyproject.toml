@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "BasisTheoryClient"
+name = "basistheory"
 version = "0.0.1"
-description = ""
+description = "Basis Theory Python SDK"
 readme = "README.md"
 authors = []
 keywords = []
