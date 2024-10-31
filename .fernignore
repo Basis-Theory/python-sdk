@@ -1,6 +1,10 @@
 # Specify files that shouldn't be modified by Fern
 
 .github/workflows/ci.yml
+.github/workflows/release.yml
 .gitignore
+.releaserc.json
+package.json
+yarn.lock
 
 tests/custom/test_client.py
