@@ -4,6 +4,7 @@
 .github/workflows/release.yml
 .gitignore
 .releaserc.json
+CHANGELOG.md
 package.json
 pyproject.toml
 yarn.lock
