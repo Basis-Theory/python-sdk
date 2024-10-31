@@ -1,0 +1,16 @@
+# [0.1.0](https://github.com/Basis-Theory/python-sdk/compare/v0.0.1...v0.1.0) (2024-10-31)
+
+
+### Bug Fixes
+
+* Downgrade node to 18 ([#11](https://github.com/Basis-Theory/python-sdk/issues/11)) ([96ef39f](https://github.com/Basis-Theory/python-sdk/commit/96ef39f49dcc990a9312d7026c6e0a0436830f58))
+* Release fixes ([#8](https://github.com/Basis-Theory/python-sdk/issues/8)) ([f5beb7c](https://github.com/Basis-Theory/python-sdk/commit/f5beb7c5ca76a2e6b4e3bde4f806151d4c3fc84b))
+* Upgrade everything ([#13](https://github.com/Basis-Theory/python-sdk/issues/13)) ([dcc5426](https://github.com/Basis-Theory/python-sdk/commit/dcc542688733b2c14b93ca2f56d72e8a598b56a4))
+* Upgrade node ([#10](https://github.com/Basis-Theory/python-sdk/issues/10)) ([2afd85f](https://github.com/Basis-Theory/python-sdk/commit/2afd85febd1528e48798c8ef214fbd6639574e21))
+* Upgrade semantic release ([#12](https://github.com/Basis-Theory/python-sdk/issues/12)) ([d65b55e](https://github.com/Basis-Theory/python-sdk/commit/d65b55e37140f75dd9456fecc002695e711197bd))
+* Upgrade semantic-release-pypi ([#9](https://github.com/Basis-Theory/python-sdk/issues/9)) ([f61a944](https://github.com/Basis-Theory/python-sdk/commit/f61a944d66908c532dd2ff95d58707d77587a76e))
+
+
+### Features
+
+* Add release files ([#6](https://github.com/Basis-Theory/python-sdk/issues/6)) ([3d6fdf7](https://github.com/Basis-Theory/python-sdk/commit/3d6fdf7d4c41fcbc01cbabdebfcb9db64aef99ec))
