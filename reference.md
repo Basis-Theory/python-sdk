@@ -3810,7 +3810,6 @@ client = BasisTheory(
 client.threeds.authenticate_session(
     session_id="sessionId",
     authentication_category="authentication_category",
-    authentication_type="authentication_type",
     requestor_info=ThreeDsRequestorInfo(),
 )
 
@@ -3844,7 +3843,7 @@ client.threeds.authenticate_session(
 <dl>
 <dd>
 
-**authentication_type:** `str` 
+**requestor_info:** `ThreeDsRequestorInfo` 
     
 </dd>
 </dl>
@@ -3852,7 +3851,15 @@ client.threeds.authenticate_session(
 <dl>
 <dd>
 
-**requestor_info:** `ThreeDsRequestorInfo` 
+**authentication_type:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_authentication_type:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -4256,6 +4263,14 @@ client.webhooks.update(
 <dl>
 <dd>
 
+**notify_email:** `typing.Optional[str]` — The email address to use for management notification events. Ie: webhook disabled
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -4467,6 +4482,14 @@ client.webhooks.create(
 <dd>
 
 **events:** `typing.Sequence[str]` — An array of event types that the webhook will listen for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notify_email:** `typing.Optional[str]` — The email address to use for management notification events. Ie: webhook disabled
     
 </dd>
 </dl>
