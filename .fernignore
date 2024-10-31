@@ -5,6 +5,7 @@
 .gitignore
 .releaserc.json
 package.json
+pyproject.toml
 yarn.lock
 
 tests/custom/test_client.py

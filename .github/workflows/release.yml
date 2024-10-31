@@ -22,9 +22,13 @@ jobs:
           cache: 'yarn'
 
       # Set up Python 3
-      - uses: actions/setup-python@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
           python-version: 3.8
+
+      - name: "Install base dependencies"
+        run: python3 -m pip install wheel twine
 
       - name: Bootstrap poetry
         run: |
