@@ -33,9 +33,7 @@ def test_should_support_token_lifecycle() -> None:
 
     # Reactors
     reactor_id = create_reactor(application_id, management_client)
-    # REACT Doesn't work right now...? Returns a 403 requiring `token:use`.
-    # However, the application has `token:use` and the reactor appears to be setup correctly in the Portal 🤷
-    # react(management_client, reactor_id)
+    react(client, reactor_id)
     management_client.reactors.delete(id=reactor_id)
 
     management_client.applications.delete(id=application_id)
