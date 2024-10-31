@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/Basis-Theory/python-sdk/compare/v0.1.0...v0.1.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* Add changelog to fern ignore ([#15](https://github.com/Basis-Theory/python-sdk/issues/15)) ([1d6615c](https://github.com/Basis-Theory/python-sdk/commit/1d6615c10d0ce13f1e7ff9831e209e4307f1b9e3))
+
 # [0.1.0](https://github.com/Basis-Theory/python-sdk/compare/v0.0.1...v0.1.0) (2024-10-31)
 
 
