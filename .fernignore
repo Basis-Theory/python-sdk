@@ -2,6 +2,7 @@
 
 .github/workflows/ci.yml
 .github/workflows/release.yml
+.github/workflows/security-scan.yml
 .gitignore
 .releaserc.json
 CHANGELOG.md
