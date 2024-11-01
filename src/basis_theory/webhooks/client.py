@@ -13,9 +13,9 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.problem_details import ProblemDetails
 from ..errors.forbidden_error import ForbiddenError
+from ..errors.not_found_error import NotFoundError
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
-from ..errors.not_found_error import NotFoundError
 from ..errors.conflict_error import ConflictError
 from ..types.webhook_list import WebhookList
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
@@ -129,6 +129,16 @@ class WebhooksClient:
                         ),
                     )
                 )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -141,6 +151,7 @@ class WebhooksClient:
         name: str,
         url: str,
         events: typing.Sequence[str],
+        notify_email: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Webhook:
         """
@@ -158,6 +169,9 @@ class WebhooksClient:
 
         events : typing.Sequence[str]
             An array of event types that the webhook will listen for
+
+        notify_email : typing.Optional[str]
+            The email address to use for management notification events. Ie: webhook disabled
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -187,6 +201,7 @@ class WebhooksClient:
             json={
                 "name": name,
                 "url": url,
+                "notify_email": notify_email,
                 "events": events,
             },
             request_options=request_options,
@@ -382,6 +397,16 @@ class WebhooksClient:
                         object_=_response.json(),
                     ),
                 )
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -413,6 +438,7 @@ class WebhooksClient:
         name: str,
         url: str,
         events: typing.Sequence[str],
+        notify_email: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Webhook:
         """
@@ -428,6 +454,9 @@ class WebhooksClient:
 
         events : typing.Sequence[str]
             An array of event types that the webhook will listen for
+
+        notify_email : typing.Optional[str]
+            The email address to use for management notification events. Ie: webhook disabled
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -456,6 +485,7 @@ class WebhooksClient:
             json={
                 "name": name,
                 "url": url,
+                "notify_email": notify_email,
                 "events": events,
             },
             request_options=request_options,
@@ -634,6 +664,16 @@ class AsyncWebhooksClient:
                         ),
                     )
                 )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -646,6 +686,7 @@ class AsyncWebhooksClient:
         name: str,
         url: str,
         events: typing.Sequence[str],
+        notify_email: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Webhook:
         """
@@ -663,6 +704,9 @@ class AsyncWebhooksClient:
 
         events : typing.Sequence[str]
             An array of event types that the webhook will listen for
+
+        notify_email : typing.Optional[str]
+            The email address to use for management notification events. Ie: webhook disabled
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -700,6 +744,7 @@ class AsyncWebhooksClient:
             json={
                 "name": name,
                 "url": url,
+                "notify_email": notify_email,
                 "events": events,
             },
             request_options=request_options,
@@ -911,6 +956,16 @@ class AsyncWebhooksClient:
                         object_=_response.json(),
                     ),
                 )
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     typing.cast(
@@ -942,6 +997,7 @@ class AsyncWebhooksClient:
         name: str,
         url: str,
         events: typing.Sequence[str],
+        notify_email: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Webhook:
         """
@@ -957,6 +1013,9 @@ class AsyncWebhooksClient:
 
         events : typing.Sequence[str]
             An array of event types that the webhook will listen for
+
+        notify_email : typing.Optional[str]
+            The email address to use for management notification events. Ie: webhook disabled
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -993,6 +1052,7 @@ class AsyncWebhooksClient:
             json={
                 "name": name,
                 "url": url,
+                "notify_email": notify_email,
                 "events": events,
             },
             request_options=request_options,
