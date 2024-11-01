@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/Basis-Theory/python-sdk/compare/v0.1.1...v0.2.0) (2024-11-01)
+
+
+### Features
+
+* 3DS and Webhook Notify Email ([#16](https://github.com/Basis-Theory/python-sdk/issues/16)) ([4850616](https://github.com/Basis-Theory/python-sdk/commit/48506167eef57b37d030e460ff10cfef0a9c7390))
+
 ## [0.1.1](https://github.com/Basis-Theory/python-sdk/compare/v0.1.0...v0.1.1) (2024-10-31)
 
 
