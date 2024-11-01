@@ -34,8 +34,9 @@ class ThreedsClient:
         session_id: str,
         *,
         authentication_category: str,
-        authentication_type: str,
         requestor_info: ThreeDsRequestorInfo,
+        authentication_type: typing.Optional[str] = OMIT,
+        merchant_authentication_type: typing.Optional[str] = OMIT,
         challenge_preference: typing.Optional[str] = OMIT,
         purchase_info: typing.Optional[ThreeDsPurchaseInfo] = OMIT,
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
@@ -52,9 +53,11 @@ class ThreedsClient:
 
         authentication_category : str
 
-        authentication_type : str
-
         requestor_info : ThreeDsRequestorInfo
+
+        authentication_type : typing.Optional[str]
+
+        merchant_authentication_type : typing.Optional[str]
 
         challenge_preference : typing.Optional[str]
 
@@ -88,7 +91,6 @@ class ThreedsClient:
         client.threeds.authenticate_session(
             session_id="sessionId",
             authentication_category="authentication_category",
-            authentication_type="authentication_type",
             requestor_info=ThreeDsRequestorInfo(),
         )
         """
@@ -98,6 +100,7 @@ class ThreedsClient:
             json={
                 "authentication_category": authentication_category,
                 "authentication_type": authentication_type,
+                "merchant_authentication_type": merchant_authentication_type,
                 "challenge_preference": challenge_preference,
                 "purchase_info": convert_and_respect_annotation_metadata(
                     object_=purchase_info, annotation=ThreeDsPurchaseInfo, direction="write"
@@ -316,8 +319,9 @@ class AsyncThreedsClient:
         session_id: str,
         *,
         authentication_category: str,
-        authentication_type: str,
         requestor_info: ThreeDsRequestorInfo,
+        authentication_type: typing.Optional[str] = OMIT,
+        merchant_authentication_type: typing.Optional[str] = OMIT,
         challenge_preference: typing.Optional[str] = OMIT,
         purchase_info: typing.Optional[ThreeDsPurchaseInfo] = OMIT,
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
@@ -334,9 +338,11 @@ class AsyncThreedsClient:
 
         authentication_category : str
 
-        authentication_type : str
-
         requestor_info : ThreeDsRequestorInfo
+
+        authentication_type : typing.Optional[str]
+
+        merchant_authentication_type : typing.Optional[str]
 
         challenge_preference : typing.Optional[str]
 
@@ -375,7 +381,6 @@ class AsyncThreedsClient:
             await client.threeds.authenticate_session(
                 session_id="sessionId",
                 authentication_category="authentication_category",
-                authentication_type="authentication_type",
                 requestor_info=ThreeDsRequestorInfo(),
             )
 
@@ -388,6 +393,7 @@ class AsyncThreedsClient:
             json={
                 "authentication_category": authentication_category,
                 "authentication_type": authentication_type,
+                "merchant_authentication_type": merchant_authentication_type,
                 "challenge_preference": challenge_preference,
                 "purchase_info": convert_and_respect_annotation_metadata(
                     object_=purchase_info, annotation=ThreeDsPurchaseInfo, direction="write"

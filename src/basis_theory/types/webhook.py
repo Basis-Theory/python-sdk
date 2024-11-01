@@ -3,9 +3,9 @@
 from ..core.pydantic_utilities import UniversalBaseModel
 from .webhook_status import WebhookStatus
 import typing
+import pydantic
 import datetime as dt
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
-import pydantic
 
 
 class Webhook(UniversalBaseModel):
@@ -14,6 +14,11 @@ class Webhook(UniversalBaseModel):
     status: WebhookStatus
     name: str
     url: str
+    notify_email: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    The email address to use for management notification events. Ie: webhook disabled
+    """
+
     events: typing.List[str]
     created_by: str
     created_at: dt.datetime
