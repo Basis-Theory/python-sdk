@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/Basis-Theory/python-sdk/compare/v0.2.0...v0.3.0) (2024-11-05)
+
+
+### Features
+
+* Adds 3DS, Token Intents, Enrichments, and Tenant Owner ([#19](https://github.com/Basis-Theory/python-sdk/issues/19)) ([eaf6424](https://github.com/Basis-Theory/python-sdk/commit/eaf64240012b0b8d9ce22a5879033c8a2044ae9b))
+
 # [0.2.0](https://github.com/Basis-Theory/python-sdk/compare/v0.1.1...v0.2.0) (2024-11-01)
 
 
