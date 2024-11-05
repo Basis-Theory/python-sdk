@@ -2,22 +2,26 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
+from ..types.three_ds_device_info import ThreeDsDeviceInfo
+from ..core.request_options import RequestOptions
+from ..types.create_three_ds_session_response import CreateThreeDsSessionResponse
+from ..core.serialization import convert_and_respect_annotation_metadata
+from ..core.pydantic_utilities import parse_obj_as
+from ..errors.bad_request_error import BadRequestError
+from ..types.validation_problem_details import ValidationProblemDetails
+from ..errors.unauthorized_error import UnauthorizedError
+from ..types.problem_details import ProblemDetails
+from ..errors.forbidden_error import ForbiddenError
+from json.decoder import JSONDecodeError
+from ..core.api_error import ApiError
 from ..types.three_ds_requestor_info import ThreeDsRequestorInfo
 from ..types.three_ds_purchase_info import ThreeDsPurchaseInfo
 from ..types.three_ds_merchant_info import ThreeDsMerchantInfo
 from ..types.three_ds_cardholder_info import ThreeDsCardholderInfo
 from ..types.three_ds_message_extension import ThreeDsMessageExtension
-from ..core.request_options import RequestOptions
 from ..types.three_ds_authentication import ThreeDsAuthentication
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.serialization import convert_and_respect_annotation_metadata
-from ..core.pydantic_utilities import parse_obj_as
-from ..errors.unauthorized_error import UnauthorizedError
-from ..types.problem_details import ProblemDetails
-from ..errors.forbidden_error import ForbiddenError
 from ..errors.not_found_error import NotFoundError
-from json.decoder import JSONDecodeError
-from ..core.api_error import ApiError
 from ..types.three_ds_session import ThreeDsSession
 from ..core.client_wrapper import AsyncClientWrapper
 
@@ -29,14 +33,116 @@ class ThreedsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
+    def createsession(
+        self,
+        *,
+        pan: typing.Optional[str] = OMIT,
+        token_id: typing.Optional[str] = OMIT,
+        token_intent_id: typing.Optional[str] = OMIT,
+        type: typing.Optional[str] = OMIT,
+        device: typing.Optional[str] = OMIT,
+        device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateThreeDsSessionResponse:
+        """
+        Parameters
+        ----------
+        pan : typing.Optional[str]
+
+        token_id : typing.Optional[str]
+
+        token_intent_id : typing.Optional[str]
+
+        type : typing.Optional[str]
+
+        device : typing.Optional[str]
+
+        device_info : typing.Optional[ThreeDsDeviceInfo]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateThreeDsSessionResponse
+            Created
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+        client.threeds.createsession()
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "3ds/sessions",
+            method="POST",
+            json={
+                "pan": pan,
+                "token_id": token_id,
+                "token_intent_id": token_intent_id,
+                "type": type,
+                "device": device,
+                "device_info": convert_and_respect_annotation_metadata(
+                    object_=device_info, annotation=ThreeDsDeviceInfo, direction="write"
+                ),
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    CreateThreeDsSessionResponse,
+                    parse_obj_as(
+                        type_=CreateThreeDsSessionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
     def authenticate_session(
         self,
         session_id: str,
         *,
         authentication_category: str,
+        authentication_type: str,
         requestor_info: ThreeDsRequestorInfo,
-        authentication_type: typing.Optional[str] = OMIT,
-        merchant_authentication_type: typing.Optional[str] = OMIT,
         challenge_preference: typing.Optional[str] = OMIT,
         purchase_info: typing.Optional[ThreeDsPurchaseInfo] = OMIT,
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
@@ -53,11 +159,9 @@ class ThreedsClient:
 
         authentication_category : str
 
+        authentication_type : str
+
         requestor_info : ThreeDsRequestorInfo
-
-        authentication_type : typing.Optional[str]
-
-        merchant_authentication_type : typing.Optional[str]
 
         challenge_preference : typing.Optional[str]
 
@@ -91,6 +195,7 @@ class ThreedsClient:
         client.threeds.authenticate_session(
             session_id="sessionId",
             authentication_category="authentication_category",
+            authentication_type="authentication_type",
             requestor_info=ThreeDsRequestorInfo(),
         )
         """
@@ -100,7 +205,6 @@ class ThreedsClient:
             json={
                 "authentication_category": authentication_category,
                 "authentication_type": authentication_type,
-                "merchant_authentication_type": merchant_authentication_type,
                 "challenge_preference": challenge_preference,
                 "purchase_info": convert_and_respect_annotation_metadata(
                     object_=purchase_info, annotation=ThreeDsPurchaseInfo, direction="write"
@@ -314,14 +418,124 @@ class AsyncThreedsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
+    async def createsession(
+        self,
+        *,
+        pan: typing.Optional[str] = OMIT,
+        token_id: typing.Optional[str] = OMIT,
+        token_intent_id: typing.Optional[str] = OMIT,
+        type: typing.Optional[str] = OMIT,
+        device: typing.Optional[str] = OMIT,
+        device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateThreeDsSessionResponse:
+        """
+        Parameters
+        ----------
+        pan : typing.Optional[str]
+
+        token_id : typing.Optional[str]
+
+        token_intent_id : typing.Optional[str]
+
+        type : typing.Optional[str]
+
+        device : typing.Optional[str]
+
+        device_info : typing.Optional[ThreeDsDeviceInfo]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateThreeDsSessionResponse
+            Created
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.threeds.createsession()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "3ds/sessions",
+            method="POST",
+            json={
+                "pan": pan,
+                "token_id": token_id,
+                "token_intent_id": token_intent_id,
+                "type": type,
+                "device": device,
+                "device_info": convert_and_respect_annotation_metadata(
+                    object_=device_info, annotation=ThreeDsDeviceInfo, direction="write"
+                ),
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    CreateThreeDsSessionResponse,
+                    parse_obj_as(
+                        type_=CreateThreeDsSessionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
     async def authenticate_session(
         self,
         session_id: str,
         *,
         authentication_category: str,
+        authentication_type: str,
         requestor_info: ThreeDsRequestorInfo,
-        authentication_type: typing.Optional[str] = OMIT,
-        merchant_authentication_type: typing.Optional[str] = OMIT,
         challenge_preference: typing.Optional[str] = OMIT,
         purchase_info: typing.Optional[ThreeDsPurchaseInfo] = OMIT,
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
@@ -338,11 +552,9 @@ class AsyncThreedsClient:
 
         authentication_category : str
 
+        authentication_type : str
+
         requestor_info : ThreeDsRequestorInfo
-
-        authentication_type : typing.Optional[str]
-
-        merchant_authentication_type : typing.Optional[str]
 
         challenge_preference : typing.Optional[str]
 
@@ -381,6 +593,7 @@ class AsyncThreedsClient:
             await client.threeds.authenticate_session(
                 session_id="sessionId",
                 authentication_category="authentication_category",
+                authentication_type="authentication_type",
                 requestor_info=ThreeDsRequestorInfo(),
             )
 
@@ -393,7 +606,6 @@ class AsyncThreedsClient:
             json={
                 "authentication_category": authentication_category,
                 "authentication_type": authentication_type,
-                "merchant_authentication_type": merchant_authentication_type,
                 "challenge_preference": challenge_preference,
                 "purchase_info": convert_and_respect_annotation_metadata(
                     object_=purchase_info, annotation=ThreeDsPurchaseInfo, direction="write"

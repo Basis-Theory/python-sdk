@@ -1102,28 +1102,12 @@ for page in response.iter_pages():
 <dd>
 
 ```python
-from basis_theory import BasisTheory, Privacy
+from basis_theory import BasisTheory
 
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.tokens.create(
-    id="string",
-    type="string",
-    data={"key": "value"},
-    privacy=Privacy(
-        classification="string",
-        impact_level="string",
-        restriction_policy="string",
-    ),
-    metadata={},
-    search_indexes=["string"],
-    fingerprint_expression="string",
-    mask={"key": "value"},
-    deduplicate_token=True,
-    expires_at="string",
-    containers=["string"],
-)
+client.tokens.create()
 
 ```
 </dd>
@@ -1155,7 +1139,7 @@ client.tokens.create(
 <dl>
 <dd>
 
-**data:** `typing.Optional[typing.Any]` 
+**data:** `typing.Optional[typing.Optional[typing.Any]]` 
     
 </dd>
 </dl>
@@ -1220,6 +1204,14 @@ client.tokens.create(
 <dd>
 
 **containers:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token_intent_id:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -1717,6 +1709,79 @@ for page in response.iter_pages():
 <dd>
 
 **idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Enrichments
+<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">bankaccountverify</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.enrichments.bankaccountverify(
+    token_id="token_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**token_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country_code:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**routing_number:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -3788,7 +3853,148 @@ client.sessions.authorize(
 </dl>
 </details>
 
+## Tenants
+<details><summary><code>client.tenants.<a href="src/basis_theory/tenants/client.py">owner_get</a>()</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.tenants.owner_get()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Threeds
+<details><summary><code>client.threeds.<a href="src/basis_theory/threeds/client.py">createsession</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.threeds.createsession()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**pan:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token_intent_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**device:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**device_info:** `typing.Optional[ThreeDsDeviceInfo]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.threeds.<a href="src/basis_theory/threeds/client.py">authenticate_session</a>(...)</code></summary>
 <dl>
 <dd>
@@ -3810,6 +4016,7 @@ client = BasisTheory(
 client.threeds.authenticate_session(
     session_id="sessionId",
     authentication_category="authentication_category",
+    authentication_type="authentication_type",
     requestor_info=ThreeDsRequestorInfo(),
 )
 
@@ -3843,23 +4050,15 @@ client.threeds.authenticate_session(
 <dl>
 <dd>
 
+**authentication_type:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **requestor_info:** `ThreeDsRequestorInfo` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**authentication_type:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**merchant_authentication_type:** `typing.Optional[str]` 
     
 </dd>
 </dl>
