@@ -10,6 +10,7 @@ from .applications.client import ApplicationsClient
 from .application_keys.client import ApplicationKeysClient
 from .application_templates.client import ApplicationTemplatesClient
 from .tokens.client import TokensClient
+from .enrichments.client import EnrichmentsClient
 from .logs.client import LogsClient
 from .permissions.client import PermissionsClient
 from .proxies.client import ProxiesClient
@@ -25,6 +26,7 @@ from .applications.client import AsyncApplicationsClient
 from .application_keys.client import AsyncApplicationKeysClient
 from .application_templates.client import AsyncApplicationTemplatesClient
 from .tokens.client import AsyncTokensClient
+from .enrichments.client import AsyncEnrichmentsClient
 from .logs.client import AsyncLogsClient
 from .permissions.client import AsyncPermissionsClient
 from .proxies.client import AsyncProxiesClient
@@ -101,6 +103,7 @@ class BasisTheory:
         self.application_keys = ApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = ApplicationTemplatesClient(client_wrapper=self._client_wrapper)
         self.tokens = TokensClient(client_wrapper=self._client_wrapper)
+        self.enrichments = EnrichmentsClient(client_wrapper=self._client_wrapper)
         self.logs = LogsClient(client_wrapper=self._client_wrapper)
         self.permissions = PermissionsClient(client_wrapper=self._client_wrapper)
         self.proxies = ProxiesClient(client_wrapper=self._client_wrapper)
@@ -177,6 +180,7 @@ class AsyncBasisTheory:
         self.application_keys = AsyncApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = AsyncApplicationTemplatesClient(client_wrapper=self._client_wrapper)
         self.tokens = AsyncTokensClient(client_wrapper=self._client_wrapper)
+        self.enrichments = AsyncEnrichmentsClient(client_wrapper=self._client_wrapper)
         self.logs = AsyncLogsClient(client_wrapper=self._client_wrapper)
         self.permissions = AsyncPermissionsClient(client_wrapper=self._client_wrapper)
         self.proxies = AsyncProxiesClient(client_wrapper=self._client_wrapper)

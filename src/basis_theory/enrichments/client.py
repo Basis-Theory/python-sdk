@@ -2,64 +2,48 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
-from .sessions.client import SessionsClient
-from ..types.three_ds_device_info import ThreeDsDeviceInfo
 from ..core.request_options import RequestOptions
-from ..types.create_three_ds_session_response import CreateThreeDsSessionResponse
-from ..core.serialization import convert_and_respect_annotation_metadata
-from ..core.pydantic_utilities import parse_obj_as
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
+from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.problem_details import ProblemDetails
 from ..errors.forbidden_error import ForbiddenError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper
-from .sessions.client import AsyncSessionsClient
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class ThreedsClient:
+class EnrichmentsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
-        self.sessions = SessionsClient(client_wrapper=self._client_wrapper)
 
-    def createsession(
+    def bankaccountverify(
         self,
         *,
-        pan: typing.Optional[str] = OMIT,
-        token_id: typing.Optional[str] = OMIT,
-        token_intent_id: typing.Optional[str] = OMIT,
-        type: typing.Optional[str] = OMIT,
-        device: typing.Optional[str] = OMIT,
-        device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
+        token_id: str,
+        country_code: typing.Optional[str] = OMIT,
+        routing_number: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateThreeDsSessionResponse:
+    ) -> None:
         """
         Parameters
         ----------
-        pan : typing.Optional[str]
+        token_id : str
 
-        token_id : typing.Optional[str]
+        country_code : typing.Optional[str]
 
-        token_intent_id : typing.Optional[str]
-
-        type : typing.Optional[str]
-
-        device : typing.Optional[str]
-
-        device_info : typing.Optional[ThreeDsDeviceInfo]
+        routing_number : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CreateThreeDsSessionResponse
-            Created
+        None
 
         Examples
         --------
@@ -68,33 +52,24 @@ class ThreedsClient:
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.threeds.createsession()
+        client.enrichments.bankaccountverify(
+            token_id="token_id",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "3ds/sessions",
+            "enrichments/bank-account-verify",
             method="POST",
             json={
-                "pan": pan,
                 "token_id": token_id,
-                "token_intent_id": token_intent_id,
-                "type": type,
-                "device": device,
-                "device_info": convert_and_respect_annotation_metadata(
-                    object_=device_info, annotation=ThreeDsDeviceInfo, direction="write"
-                ),
+                "country_code": country_code,
+                "routing_number": routing_number,
             },
             request_options=request_options,
             omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    CreateThreeDsSessionResponse,
-                    parse_obj_as(
-                        type_=CreateThreeDsSessionResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
+                return
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -131,44 +106,33 @@ class ThreedsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
 
-class AsyncThreedsClient:
+class AsyncEnrichmentsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
-        self.sessions = AsyncSessionsClient(client_wrapper=self._client_wrapper)
 
-    async def createsession(
+    async def bankaccountverify(
         self,
         *,
-        pan: typing.Optional[str] = OMIT,
-        token_id: typing.Optional[str] = OMIT,
-        token_intent_id: typing.Optional[str] = OMIT,
-        type: typing.Optional[str] = OMIT,
-        device: typing.Optional[str] = OMIT,
-        device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
+        token_id: str,
+        country_code: typing.Optional[str] = OMIT,
+        routing_number: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateThreeDsSessionResponse:
+    ) -> None:
         """
         Parameters
         ----------
-        pan : typing.Optional[str]
+        token_id : str
 
-        token_id : typing.Optional[str]
+        country_code : typing.Optional[str]
 
-        token_intent_id : typing.Optional[str]
-
-        type : typing.Optional[str]
-
-        device : typing.Optional[str]
-
-        device_info : typing.Optional[ThreeDsDeviceInfo]
+        routing_number : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CreateThreeDsSessionResponse
-            Created
+        None
 
         Examples
         --------
@@ -182,36 +146,27 @@ class AsyncThreedsClient:
 
 
         async def main() -> None:
-            await client.threeds.createsession()
+            await client.enrichments.bankaccountverify(
+                token_id="token_id",
+            )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "3ds/sessions",
+            "enrichments/bank-account-verify",
             method="POST",
             json={
-                "pan": pan,
                 "token_id": token_id,
-                "token_intent_id": token_intent_id,
-                "type": type,
-                "device": device,
-                "device_info": convert_and_respect_annotation_metadata(
-                    object_=device_info, annotation=ThreeDsDeviceInfo, direction="write"
-                ),
+                "country_code": country_code,
+                "routing_number": routing_number,
             },
             request_options=request_options,
             omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    CreateThreeDsSessionResponse,
-                    parse_obj_as(
-                        type_=CreateThreeDsSessionResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
+                return
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(

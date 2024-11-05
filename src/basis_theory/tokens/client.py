@@ -318,7 +318,7 @@ class TokensClient:
         *,
         id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
-        data: typing.Optional[typing.Any] = OMIT,
+        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         privacy: typing.Optional[Privacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -327,6 +327,7 @@ class TokensClient:
         deduplicate_token: typing.Optional[bool] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
+        token_intent_id: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Token:
@@ -337,7 +338,7 @@ class TokensClient:
 
         type : typing.Optional[str]
 
-        data : typing.Optional[typing.Any]
+        data : typing.Optional[typing.Optional[typing.Any]]
 
         privacy : typing.Optional[Privacy]
 
@@ -355,6 +356,8 @@ class TokensClient:
 
         containers : typing.Optional[typing.Sequence[str]]
 
+        token_intent_id : typing.Optional[str]
+
         idempotency_key : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -367,28 +370,12 @@ class TokensClient:
 
         Examples
         --------
-        from basis_theory import BasisTheory, Privacy
+        from basis_theory import BasisTheory
 
         client = BasisTheory(
             api_key="YOUR_API_KEY",
         )
-        client.tokens.create(
-            id="string",
-            type="string",
-            data={"key": "value"},
-            privacy=Privacy(
-                classification="string",
-                impact_level="string",
-                restriction_policy="string",
-            ),
-            metadata={},
-            search_indexes=["string"],
-            fingerprint_expression="string",
-            mask={"key": "value"},
-            deduplicate_token=True,
-            expires_at="string",
-            containers=["string"],
-        )
+        client.tokens.create()
         """
         _response = self._client_wrapper.httpx_client.request(
             "tokens",
@@ -407,6 +394,7 @@ class TokensClient:
                 "deduplicate_token": deduplicate_token,
                 "expires_at": expires_at,
                 "containers": containers,
+                "token_intent_id": token_intent_id,
             },
             headers={
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
@@ -1401,7 +1389,7 @@ class AsyncTokensClient:
         *,
         id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
-        data: typing.Optional[typing.Any] = OMIT,
+        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         privacy: typing.Optional[Privacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -1410,6 +1398,7 @@ class AsyncTokensClient:
         deduplicate_token: typing.Optional[bool] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
+        token_intent_id: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Token:
@@ -1420,7 +1409,7 @@ class AsyncTokensClient:
 
         type : typing.Optional[str]
 
-        data : typing.Optional[typing.Any]
+        data : typing.Optional[typing.Optional[typing.Any]]
 
         privacy : typing.Optional[Privacy]
 
@@ -1438,6 +1427,8 @@ class AsyncTokensClient:
 
         containers : typing.Optional[typing.Sequence[str]]
 
+        token_intent_id : typing.Optional[str]
+
         idempotency_key : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -1452,7 +1443,7 @@ class AsyncTokensClient:
         --------
         import asyncio
 
-        from basis_theory import AsyncBasisTheory, Privacy
+        from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
             api_key="YOUR_API_KEY",
@@ -1460,23 +1451,7 @@ class AsyncTokensClient:
 
 
         async def main() -> None:
-            await client.tokens.create(
-                id="string",
-                type="string",
-                data={"key": "value"},
-                privacy=Privacy(
-                    classification="string",
-                    impact_level="string",
-                    restriction_policy="string",
-                ),
-                metadata={},
-                search_indexes=["string"],
-                fingerprint_expression="string",
-                mask={"key": "value"},
-                deduplicate_token=True,
-                expires_at="string",
-                containers=["string"],
-            )
+            await client.tokens.create()
 
 
         asyncio.run(main())
@@ -1498,6 +1473,7 @@ class AsyncTokensClient:
                 "deduplicate_token": deduplicate_token,
                 "expires_at": expires_at,
                 "containers": containers,
+                "token_intent_id": token_intent_id,
             },
             headers={
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,

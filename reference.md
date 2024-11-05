@@ -1102,28 +1102,12 @@ for page in response.iter_pages():
 <dd>
 
 ```python
-from basis_theory import BasisTheory, Privacy
+from basis_theory import BasisTheory
 
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.tokens.create(
-    id="string",
-    type="string",
-    data={"key": "value"},
-    privacy=Privacy(
-        classification="string",
-        impact_level="string",
-        restriction_policy="string",
-    ),
-    metadata={},
-    search_indexes=["string"],
-    fingerprint_expression="string",
-    mask={"key": "value"},
-    deduplicate_token=True,
-    expires_at="string",
-    containers=["string"],
-)
+client.tokens.create()
 
 ```
 </dd>
@@ -1155,7 +1139,7 @@ client.tokens.create(
 <dl>
 <dd>
 
-**data:** `typing.Optional[typing.Any]` 
+**data:** `typing.Optional[typing.Optional[typing.Any]]` 
     
 </dd>
 </dl>
@@ -1220,6 +1204,14 @@ client.tokens.create(
 <dd>
 
 **containers:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token_intent_id:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -1717,6 +1709,79 @@ for page in response.iter_pages():
 <dd>
 
 **idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Enrichments
+<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">bankaccountverify</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.enrichments.bankaccountverify(
+    token_id="token_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**token_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country_code:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**routing_number:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -3789,153 +3854,7 @@ client.sessions.authorize(
 </details>
 
 ## Threeds
-<details><summary><code>client.threeds.<a href="src/basis_theory/threeds/client.py">authenticate_session</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory, ThreeDsRequestorInfo
-
-client = BasisTheory(
-    api_key="YOUR_API_KEY",
-)
-client.threeds.authenticate_session(
-    session_id="sessionId",
-    authentication_category="authentication_category",
-    requestor_info=ThreeDsRequestorInfo(),
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**session_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**authentication_category:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestor_info:** `ThreeDsRequestorInfo` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**authentication_type:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**merchant_authentication_type:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**challenge_preference:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**purchase_info:** `typing.Optional[ThreeDsPurchaseInfo]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**merchant_info:** `typing.Optional[ThreeDsMerchantInfo]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**cardholder_info:** `typing.Optional[ThreeDsCardholderInfo]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**broadcast_info:** `typing.Optional[typing.Optional[typing.Any]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**message_extensions:** `typing.Optional[typing.Sequence[ThreeDsMessageExtension]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.threeds.<a href="src/basis_theory/threeds/client.py">get_challenge_result</a>(...)</code></summary>
+<details><summary><code>client.threeds.<a href="src/basis_theory/threeds/client.py">createsession</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3953,9 +3872,7 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
-client.threeds.get_challenge_result(
-    session_id="sessionId",
-)
+client.threeds.createsession()
 
 ```
 </dd>
@@ -3971,7 +3888,7 @@ client.threeds.get_challenge_result(
 <dl>
 <dd>
 
-**session_id:** `str` 
+**pan:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -3979,55 +3896,39 @@ client.threeds.get_challenge_result(
 <dl>
 <dd>
 
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+**token_id:** `typing.Optional[str]` 
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**token_intent_id:** `typing.Optional[str]` 
+    
 </dd>
 </dl>
 
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.threeds.<a href="src/basis_theory/threeds/client.py">get_session_by_id</a>(...)</code></summary>
 <dl>
 <dd>
 
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    api_key="YOUR_API_KEY",
-)
-client.threeds.get_session_by_id(
-    id="id",
-)
-
-```
-</dd>
-</dl>
+**type:** `typing.Optional[str]` 
+    
 </dd>
 </dl>
 
-#### ⚙️ Parameters
+<dl>
+<dd>
+
+**device:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
 
-<dl>
-<dd>
-
-**id:** `str` 
+**device_info:** `typing.Optional[ThreeDsDeviceInfo]` 
     
 </dd>
 </dl>
@@ -5179,6 +5080,53 @@ client.tenants.members.delete(
 </dl>
 </details>
 
+## Tenants Owner
+<details><summary><code>client.tenants.owner.<a href="src/basis_theory/tenants/owner/client.py">get</a>()</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.tenants.owner.get()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Tenants Self
 <details><summary><code>client.tenants.self_.<a href="src/basis_theory/tenants/self_/client.py">get_usage_reports</a>()</code></summary>
 <dl>
@@ -5374,6 +5322,258 @@ client.tenants.self_.delete()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Threeds Sessions
+<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">authenticate</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory, ThreeDsRequestorInfo
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.threeds.sessions.authenticate(
+    session_id="sessionId",
+    authentication_category="authentication_category",
+    authentication_type="authentication_type",
+    requestor_info=ThreeDsRequestorInfo(),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**session_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**authentication_category:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**authentication_type:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestor_info:** `ThreeDsRequestorInfo` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**challenge_preference:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purchase_info:** `typing.Optional[ThreeDsPurchaseInfo]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_info:** `typing.Optional[ThreeDsMerchantInfo]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cardholder_info:** `typing.Optional[ThreeDsCardholderInfo]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**broadcast_info:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_extensions:** `typing.Optional[typing.Sequence[ThreeDsMessageExtension]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">get_challenge_result</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.threeds.sessions.get_challenge_result(
+    session_id="sessionId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**session_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    api_key="YOUR_API_KEY",
+)
+client.threeds.sessions.get(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
