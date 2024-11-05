@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/Basis-Theory/python-sdk/compare/v0.3.1...v0.3.2) (2024-11-05)
+
+
+### Bug Fixes
+
+* Re-add README ([#22](https://github.com/Basis-Theory/python-sdk/issues/22)) ([8865474](https://github.com/Basis-Theory/python-sdk/commit/886547424c745354754e4b066f4d4d63c757bc76))
+
 ## [0.3.1](https://github.com/Basis-Theory/python-sdk/compare/v0.3.0...v0.3.1) (2024-11-05)
 
 
