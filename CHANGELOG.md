@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/Basis-Theory/python-sdk/compare/v0.3.0...v0.3.1) (2024-11-05)
+
+
+### Bug Fixes
+
+* Updated code generator ([#21](https://github.com/Basis-Theory/python-sdk/issues/21)) ([381d5b0](https://github.com/Basis-Theory/python-sdk/commit/381d5b0679c163f049579cdcaae6a961dff358fd))
+
 # [0.3.0](https://github.com/Basis-Theory/python-sdk/compare/v0.2.0...v0.3.0) (2024-11-05)
 
 
