@@ -13,8 +13,11 @@ import pydantic
 
 class ThreeDsSession(UniversalBaseModel):
     id: typing.Optional[str] = None
+    type: typing.Optional[str] = None
     tenant_id: typing.Optional[str] = None
     pan_token_id: typing.Optional[str] = None
+    token_id: typing.Optional[str] = None
+    token_intent_id: typing.Optional[str] = None
     card_brand: typing.Optional[str] = None
     expiration_date: typing.Optional[dt.datetime] = None
     created_date: typing.Optional[dt.datetime] = None

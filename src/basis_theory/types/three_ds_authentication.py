@@ -10,6 +10,8 @@ import pydantic
 
 class ThreeDsAuthentication(UniversalBaseModel):
     pan_token_id: typing.Optional[str] = None
+    token_id: typing.Optional[str] = None
+    token_intent_id: typing.Optional[str] = None
     threeds_version: typing.Optional[str] = None
     acs_transaction_id: typing.Optional[str] = None
     ds_transaction_id: typing.Optional[str] = None

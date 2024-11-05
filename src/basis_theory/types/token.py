@@ -5,6 +5,9 @@ import typing
 from .token_enrichments import TokenEnrichments
 import datetime as dt
 from .privacy import Privacy
+import typing_extensions
+from .token_extras import TokenExtras
+from ..core.serialization import FieldMetadata
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
@@ -28,6 +31,7 @@ class Token(UniversalBaseModel):
     expires_at: typing.Optional[dt.datetime] = None
     containers: typing.Optional[typing.List[str]] = None
     aliases: typing.Optional[typing.List[str]] = None
+    extras: typing_extensions.Annotated[typing.Optional[TokenExtras], FieldMetadata(alias="_extras")] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
