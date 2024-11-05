@@ -18,7 +18,13 @@
         "prepareCmd": "npm version ${nextRelease.version} --no-git-tag-version --allow-same-version"
       }
     ],
-    "@semantic-release/github",
+    [
+      "@semantic-release/github",
+      {
+        "successComment": false,
+        "failComment": false
+      }
+    ],
     [
       "@semantic-release/git",
       {
