@@ -36,6 +36,7 @@ class EventsClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.webhooks.events.list()
@@ -105,6 +106,7 @@ class AsyncEventsClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 

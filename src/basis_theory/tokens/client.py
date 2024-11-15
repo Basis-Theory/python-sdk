@@ -52,6 +52,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.tokens.detokenize(
@@ -140,6 +141,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.tokens.tokenize(
@@ -246,6 +248,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         response = client.tokens.list()
@@ -373,6 +376,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.tokens.create()
@@ -492,6 +496,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         response = client.tokens.search()
@@ -591,6 +596,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.tokens.get(
@@ -664,6 +670,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.tokens.delete(
@@ -777,6 +784,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.tokens.update(
@@ -896,6 +904,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         response = client.tokens.list_v2()
@@ -993,6 +1002,7 @@ class TokensClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         response = client.tokens.search_v2()
@@ -1101,6 +1111,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -1197,6 +1208,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -1311,6 +1323,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -1446,6 +1459,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -1573,6 +1587,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -1680,6 +1695,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -1761,6 +1777,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -1882,6 +1899,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -2009,6 +2027,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -2114,6 +2133,7 @@ class AsyncTokensClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 

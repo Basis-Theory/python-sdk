@@ -50,6 +50,7 @@ class ApplicationKeysClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.application_keys.list(
@@ -136,6 +137,7 @@ class ApplicationKeysClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.application_keys.create(
@@ -215,6 +217,7 @@ class ApplicationKeysClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.application_keys.get(
@@ -291,6 +294,7 @@ class ApplicationKeysClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.application_keys.delete(
@@ -378,6 +382,7 @@ class AsyncApplicationKeysClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -472,6 +477,7 @@ class AsyncApplicationKeysClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -561,6 +567,7 @@ class AsyncApplicationKeysClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -645,6 +652,7 @@ class AsyncApplicationKeysClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 

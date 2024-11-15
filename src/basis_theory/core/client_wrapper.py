@@ -7,7 +7,15 @@ from .http_client import AsyncHttpClient
 
 
 class BaseClientWrapper:
-    def __init__(self, *, api_key: str, base_url: str, timeout: typing.Optional[float] = None):
+    def __init__(
+        self,
+        *,
+        correlation_id: typing.Optional[str] = None,
+        api_key: str,
+        base_url: str,
+        timeout: typing.Optional[float] = None,
+    ):
+        self._correlation_id = correlation_id
         self.api_key = api_key
         self._base_url = base_url
         self._timeout = timeout
@@ -18,6 +26,8 @@ class BaseClientWrapper:
             "X-Fern-SDK-Name": "BasisTheoryClient",
             "X-Fern-SDK-Version": "0.0.1",
         }
+        if self._correlation_id is not None:
+            headers["BT-TRACE-ID"] = self._correlation_id
         headers["BT-API-KEY"] = self.api_key
         return headers
 
@@ -30,9 +40,15 @@ class BaseClientWrapper:
 
 class SyncClientWrapper(BaseClientWrapper):
     def __init__(
-        self, *, api_key: str, base_url: str, timeout: typing.Optional[float] = None, httpx_client: httpx.Client
+        self,
+        *,
+        correlation_id: typing.Optional[str] = None,
+        api_key: str,
+        base_url: str,
+        timeout: typing.Optional[float] = None,
+        httpx_client: httpx.Client,
     ):
-        super().__init__(api_key=api_key, base_url=base_url, timeout=timeout)
+        super().__init__(correlation_id=correlation_id, api_key=api_key, base_url=base_url, timeout=timeout)
         self.httpx_client = HttpClient(
             httpx_client=httpx_client,
             base_headers=self.get_headers,
@@ -43,9 +59,15 @@ class SyncClientWrapper(BaseClientWrapper):
 
 class AsyncClientWrapper(BaseClientWrapper):
     def __init__(
-        self, *, api_key: str, base_url: str, timeout: typing.Optional[float] = None, httpx_client: httpx.AsyncClient
+        self,
+        *,
+        correlation_id: typing.Optional[str] = None,
+        api_key: str,
+        base_url: str,
+        timeout: typing.Optional[float] = None,
+        httpx_client: httpx.AsyncClient,
     ):
-        super().__init__(api_key=api_key, base_url=base_url, timeout=timeout)
+        super().__init__(correlation_id=correlation_id, api_key=api_key, base_url=base_url, timeout=timeout)
         self.httpx_client = AsyncHttpClient(
             httpx_client=httpx_client,
             base_headers=self.get_headers,

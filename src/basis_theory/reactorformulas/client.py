@@ -63,6 +63,7 @@ class ReactorformulasClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         response = client.reactorformulas.list()
@@ -186,6 +187,7 @@ class ReactorformulasClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.reactorformulas.create(
@@ -281,6 +283,7 @@ class ReactorformulasClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.reactorformulas.get(
@@ -384,6 +387,7 @@ class ReactorformulasClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.reactorformulas.update(
@@ -488,6 +492,7 @@ class ReactorformulasClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.reactorformulas.delete(
@@ -577,6 +582,7 @@ class AsyncReactorformulasClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -708,6 +714,7 @@ class AsyncReactorformulasClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -811,6 +818,7 @@ class AsyncReactorformulasClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -922,6 +930,7 @@ class AsyncReactorformulasClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -1034,6 +1043,7 @@ class AsyncReactorformulasClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 

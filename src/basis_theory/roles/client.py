@@ -34,6 +34,7 @@ class RolesClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.roles.list()
@@ -101,6 +102,7 @@ class AsyncRolesClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 

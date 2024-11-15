@@ -57,6 +57,7 @@ class BasisTheory:
 
 
 
+    correlation_id : typing.Optional[str]
     api_key : typing.Optional[str]
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
@@ -72,6 +73,7 @@ class BasisTheory:
     from basis_theory import BasisTheory
 
     client = BasisTheory(
+        correlation_id="YOUR_CORRELATION_ID",
         api_key="YOUR_API_KEY",
     )
     """
@@ -81,6 +83,7 @@ class BasisTheory:
         *,
         base_url: typing.Optional[str] = None,
         environment: BasisTheoryEnvironment = BasisTheoryEnvironment.DEFAULT,
+        correlation_id: typing.Optional[str] = None,
         api_key: typing.Optional[str] = os.getenv("BT-API-KEY"),
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
@@ -91,6 +94,7 @@ class BasisTheory:
             raise ApiError(body="The client must be instantiated be either passing in api_key or setting BT-API-KEY")
         self._client_wrapper = SyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
+            correlation_id=correlation_id,
             api_key=api_key,
             httpx_client=httpx_client
             if httpx_client is not None
@@ -134,6 +138,7 @@ class AsyncBasisTheory:
 
 
 
+    correlation_id : typing.Optional[str]
     api_key : typing.Optional[str]
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
@@ -149,6 +154,7 @@ class AsyncBasisTheory:
     from basis_theory import AsyncBasisTheory
 
     client = AsyncBasisTheory(
+        correlation_id="YOUR_CORRELATION_ID",
         api_key="YOUR_API_KEY",
     )
     """
@@ -158,6 +164,7 @@ class AsyncBasisTheory:
         *,
         base_url: typing.Optional[str] = None,
         environment: BasisTheoryEnvironment = BasisTheoryEnvironment.DEFAULT,
+        correlation_id: typing.Optional[str] = None,
         api_key: typing.Optional[str] = os.getenv("BT-API-KEY"),
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
@@ -168,6 +175,7 @@ class AsyncBasisTheory:
             raise ApiError(body="The client must be instantiated be either passing in api_key or setting BT-API-KEY")
         self._client_wrapper = AsyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
+            correlation_id=correlation_id,
             api_key=api_key,
             httpx_client=httpx_client
             if httpx_client is not None
