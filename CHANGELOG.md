@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/Basis-Theory/python-sdk/compare/v0.3.2...v0.4.0) (2024-11-15)
+
+
+### Features
+
+* Add correlation id ([#26](https://github.com/Basis-Theory/python-sdk/issues/26)) ([9e164d4](https://github.com/Basis-Theory/python-sdk/commit/9e164d47b393cbfb3bdc863ce67ef2d8bcb68b24))
+
 ## [0.3.2](https://github.com/Basis-Theory/python-sdk/compare/v0.3.1...v0.3.2) (2024-11-05)
 
 
