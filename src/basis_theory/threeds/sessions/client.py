@@ -83,6 +83,7 @@ class SessionsClient:
         from basis_theory import BasisTheory, ThreeDsRequestorInfo
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.threeds.sessions.authenticate(
@@ -187,6 +188,7 @@ class SessionsClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.threeds.sessions.get_challenge_result(
@@ -261,6 +263,7 @@ class SessionsClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.threeds.sessions.get(
@@ -367,6 +370,7 @@ class AsyncSessionsClient:
         from basis_theory import AsyncBasisTheory, ThreeDsRequestorInfo
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -479,6 +483,7 @@ class AsyncSessionsClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -561,6 +566,7 @@ class AsyncSessionsClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 

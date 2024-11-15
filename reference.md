@@ -16,6 +16,7 @@
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.applications.list()
@@ -107,6 +108,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.applications.create(
@@ -212,6 +214,7 @@ client.applications.create(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.applications.get(
@@ -268,6 +271,7 @@ client.applications.get(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.applications.update(
@@ -357,6 +361,7 @@ client.applications.update(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.applications.delete(
@@ -413,6 +418,7 @@ client.applications.delete(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.applications.get_by_key()
@@ -459,6 +465,7 @@ client.applications.get_by_key()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.applications.regenerate_key(
@@ -524,6 +531,7 @@ client.applications.regenerate_key(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.application_keys.list(
@@ -596,6 +604,7 @@ client.application_keys.list(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.application_keys.create(
@@ -660,6 +669,7 @@ client.application_keys.create(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.application_keys.get(
@@ -725,6 +735,7 @@ client.application_keys.get(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.application_keys.delete(
@@ -791,6 +802,7 @@ client.application_keys.delete(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.application_templates.list()
@@ -837,6 +849,7 @@ client.application_templates.list()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.application_templates.get(
@@ -894,6 +907,7 @@ client.application_templates.get(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tokens.detokenize(
@@ -950,6 +964,7 @@ client.tokens.detokenize(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tokens.tokenize(
@@ -1014,6 +1029,7 @@ client.tokens.tokenize(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.tokens.list()
@@ -1105,6 +1121,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tokens.create()
@@ -1255,6 +1272,7 @@ client.tokens.create()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.tokens.search()
@@ -1346,6 +1364,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tokens.get(
@@ -1402,6 +1421,7 @@ client.tokens.get(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tokens.delete(
@@ -1458,6 +1478,7 @@ client.tokens.delete(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tokens.update(
@@ -1594,6 +1615,7 @@ client.tokens.update(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.tokens.list_v2()
@@ -1661,6 +1683,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.tokens.search_v2()
@@ -1745,6 +1768,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.enrichments.bankaccountverify(
@@ -1818,6 +1842,7 @@ client.enrichments.bankaccountverify(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.logs.list()
@@ -1925,6 +1950,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.logs.get_entity_types()
@@ -1972,6 +1998,7 @@ client.logs.get_entity_types()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.permissions.get()
@@ -2027,6 +2054,7 @@ client.permissions.get()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.proxies.list()
@@ -2118,6 +2146,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.proxies.create(
@@ -2247,6 +2276,7 @@ client.proxies.create(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.proxies.get(
@@ -2303,6 +2333,7 @@ client.proxies.get(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.proxies.update(
@@ -2441,6 +2472,7 @@ client.proxies.update(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.proxies.delete(
@@ -2497,6 +2529,7 @@ client.proxies.delete(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.proxies.patch(
@@ -2618,6 +2651,7 @@ client.proxies.patch(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.reactorformulas.list()
@@ -2701,6 +2735,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactorformulas.create(
@@ -2822,6 +2857,7 @@ client.reactorformulas.create(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactorformulas.get(
@@ -2878,6 +2914,7 @@ client.reactorformulas.get(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactorformulas.update(
@@ -3000,6 +3037,7 @@ client.reactorformulas.update(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactorformulas.delete(
@@ -3057,6 +3095,7 @@ client.reactorformulas.delete(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.reactors.list()
@@ -3148,6 +3187,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactors.create(
@@ -3237,6 +3277,7 @@ client.reactors.create(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactors.get(
@@ -3293,6 +3334,7 @@ client.reactors.get(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactors.update(
@@ -3391,6 +3433,7 @@ client.reactors.update(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactors.delete(
@@ -3447,6 +3490,7 @@ client.reactors.delete(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactors.patch(
@@ -3543,6 +3587,7 @@ client.reactors.patch(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactors.react(
@@ -3615,6 +3660,7 @@ client.reactors.react(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactors.react_async(
@@ -3680,6 +3726,7 @@ client.reactors.react_async(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.roles.list()
@@ -3727,6 +3774,7 @@ client.roles.list()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.sessions.create()
@@ -3781,6 +3829,7 @@ client.sessions.create()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.sessions.authorize(
@@ -3870,6 +3919,7 @@ client.sessions.authorize(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.threeds.createsession()
@@ -3979,6 +4029,7 @@ Simple endpoint that can be utilized to verify the application is running
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.webhooks.ping()
@@ -4039,6 +4090,7 @@ Returns the webhook
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.webhooks.get(
@@ -4109,6 +4161,7 @@ Update a new webhook
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.webhooks.update(
@@ -4214,6 +4267,7 @@ Delete a new webhook
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.webhooks.delete(
@@ -4284,6 +4338,7 @@ Returns the configured webhooks
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.webhooks.list()
@@ -4344,6 +4399,7 @@ Create a new webhook
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.webhooks.create(
@@ -4427,6 +4483,7 @@ client.webhooks.create(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.reactors.results.get(
@@ -4493,6 +4550,7 @@ client.reactors.results.get(
 from basis_theory import BasisTheory, TenantConnectionOptions
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.connections.create(
@@ -4566,6 +4624,7 @@ client.tenants.connections.create(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.connections.delete()
@@ -4613,6 +4672,7 @@ client.tenants.connections.delete()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.tenants.invitations.list()
@@ -4696,6 +4756,7 @@ for page in response.iter_pages():
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.invitations.create(
@@ -4768,6 +4829,7 @@ client.tenants.invitations.create(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.invitations.resend(
@@ -4832,6 +4894,7 @@ client.tenants.invitations.resend(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.invitations.delete(
@@ -4889,6 +4952,7 @@ client.tenants.invitations.delete(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.members.get()
@@ -4967,6 +5031,7 @@ client.tenants.members.get()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.members.update(
@@ -5040,6 +5105,7 @@ client.tenants.members.update(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.members.delete(
@@ -5097,6 +5163,7 @@ client.tenants.members.delete(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.owner.get()
@@ -5144,6 +5211,7 @@ client.tenants.owner.get()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.self_.get_usage_reports()
@@ -5190,6 +5258,7 @@ client.tenants.self_.get_usage_reports()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.self_.get()
@@ -5236,6 +5305,7 @@ client.tenants.self_.get()
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.self_.update(
@@ -5308,6 +5378,7 @@ client.tenants.self_.update(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.self_.delete()
@@ -5355,6 +5426,7 @@ client.tenants.self_.delete()
 from basis_theory import BasisTheory, ThreeDsRequestorInfo
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.threeds.sessions.authenticate(
@@ -5494,6 +5566,7 @@ client.threeds.sessions.authenticate(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.threeds.sessions.get_challenge_result(
@@ -5550,6 +5623,7 @@ client.threeds.sessions.get_challenge_result(
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.threeds.sessions.get(
@@ -5621,6 +5695,7 @@ Return a list of available event types
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.webhooks.events.list()
@@ -5682,6 +5757,7 @@ Returns the signing key
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.webhooks.signing_key.get()

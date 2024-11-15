@@ -55,6 +55,7 @@ class ConnectionsClient:
         from basis_theory import BasisTheory, TenantConnectionOptions
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.tenants.connections.create(
@@ -138,6 +139,7 @@ class ConnectionsClient:
         from basis_theory import BasisTheory
 
         client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
         client.tenants.connections.delete()
@@ -228,6 +230,7 @@ class AsyncConnectionsClient:
         from basis_theory import AsyncBasisTheory, TenantConnectionOptions
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
@@ -321,6 +324,7 @@ class AsyncConnectionsClient:
         from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
 
