@@ -18,9 +18,9 @@ from .reactorformulas.client import ReactorformulasClient
 from .reactors.client import ReactorsClient
 from .roles.client import RolesClient
 from .sessions.client import SessionsClient
-from .threeds.client import ThreedsClient
 from .webhooks.client import WebhooksClient
 from .tenants.client import TenantsClient
+from .threeds.client import ThreedsClient
 from .core.client_wrapper import AsyncClientWrapper
 from .applications.client import AsyncApplicationsClient
 from .application_keys.client import AsyncApplicationKeysClient
@@ -34,9 +34,9 @@ from .reactorformulas.client import AsyncReactorformulasClient
 from .reactors.client import AsyncReactorsClient
 from .roles.client import AsyncRolesClient
 from .sessions.client import AsyncSessionsClient
-from .threeds.client import AsyncThreedsClient
 from .webhooks.client import AsyncWebhooksClient
 from .tenants.client import AsyncTenantsClient
+from .threeds.client import AsyncThreedsClient
 
 
 class BasisTheory:
@@ -115,9 +115,9 @@ class BasisTheory:
         self.reactors = ReactorsClient(client_wrapper=self._client_wrapper)
         self.roles = RolesClient(client_wrapper=self._client_wrapper)
         self.sessions = SessionsClient(client_wrapper=self._client_wrapper)
-        self.threeds = ThreedsClient(client_wrapper=self._client_wrapper)
         self.webhooks = WebhooksClient(client_wrapper=self._client_wrapper)
         self.tenants = TenantsClient(client_wrapper=self._client_wrapper)
+        self.threeds = ThreedsClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncBasisTheory:
@@ -196,9 +196,9 @@ class AsyncBasisTheory:
         self.reactors = AsyncReactorsClient(client_wrapper=self._client_wrapper)
         self.roles = AsyncRolesClient(client_wrapper=self._client_wrapper)
         self.sessions = AsyncSessionsClient(client_wrapper=self._client_wrapper)
-        self.threeds = AsyncThreedsClient(client_wrapper=self._client_wrapper)
         self.webhooks = AsyncWebhooksClient(client_wrapper=self._client_wrapper)
         self.tenants = AsyncTenantsClient(client_wrapper=self._client_wrapper)
+        self.threeds = AsyncThreedsClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: BasisTheoryEnvironment) -> str:
