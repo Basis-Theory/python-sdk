@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/Basis-Theory/python-sdk/compare/v0.5.0...v0.5.1) (2024-11-19)
+
+
+### Bug Fixes
+
+* Add list members, fix response objects ([#29](https://github.com/Basis-Theory/python-sdk/issues/29)) ([c7fd645](https://github.com/Basis-Theory/python-sdk/commit/c7fd64593420efba4058789f331b2af7dfb09dff))
+
 # [0.5.0](https://github.com/Basis-Theory/python-sdk/compare/v0.4.0...v0.5.0) (2024-11-19)
 
 
