@@ -22,7 +22,7 @@ class EnrichmentsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def bankaccountverify(
+    def bank_account_verify(
         self,
         *,
         token_id: str,
@@ -55,7 +55,7 @@ class EnrichmentsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.enrichments.bankaccountverify(
+        client.enrichments.bank_account_verify(
             token_id="token_id",
         )
         """
@@ -119,7 +119,7 @@ class AsyncEnrichmentsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def bankaccountverify(
+    async def bank_account_verify(
         self,
         *,
         token_id: str,
@@ -157,7 +157,7 @@ class AsyncEnrichmentsClient:
 
 
         async def main() -> None:
-            await client.enrichments.bankaccountverify(
+            await client.enrichments.bank_account_verify(
                 token_id="token_id",
             )
 
