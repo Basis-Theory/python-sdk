@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/Basis-Theory/python-sdk/compare/v0.4.0...v0.5.0) (2024-11-19)
+
+
+### Features
+
+* Move 3DS session method ([#27](https://github.com/Basis-Theory/python-sdk/issues/27)) ([13fd9d1](https://github.com/Basis-Theory/python-sdk/commit/13fd9d14583c2ac5a1daf954b497ab227941276b))
+
 # [0.4.0](https://github.com/Basis-Theory/python-sdk/compare/v0.3.2...v0.4.0) (2024-11-15)
 
 
