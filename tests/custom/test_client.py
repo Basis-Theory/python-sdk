@@ -269,8 +269,7 @@ def test_should_support_idempotency_header() -> None:
 
     assert firstTokenId == secondTokenId
 
-pytest.mark.skip
-def test_should_support_correlation_id_header() -> None:
+def skip_test_should_support_correlation_id_header() -> None:
     client = new_private_client()
     correlation_id = str(uuid.uuid4())
 
