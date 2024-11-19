@@ -1982,7 +1982,7 @@ client.logs.get_entity_types()
 </details>
 
 ## Permissions
-<details><summary><code>client.permissions.<a href="src/basis_theory/permissions/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.permissions.<a href="src/basis_theory/permissions/client.py">list</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2001,7 +2001,7 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.permissions.get()
+client.permissions.list()
 
 ```
 </dd>
