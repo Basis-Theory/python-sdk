@@ -4782,6 +4782,63 @@ client.tenants.invitations.resend(
 </dl>
 </details>
 
+<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.tenants.invitations.get(
+    invitation_id="invitationId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invitation_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">delete</a>(...)</code></summary>
 <dl>
 <dd>
@@ -4840,7 +4897,7 @@ client.tenants.invitations.delete(
 </details>
 
 ## Tenants Members
-<details><summary><code>client.tenants.members.<a href="src/basis_theory/tenants/members/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.tenants.members.<a href="src/basis_theory/tenants/members/client.py">list</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4859,7 +4916,7 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.tenants.members.get()
+client.tenants.members.list()
 
 ```
 </dd>
@@ -5482,6 +5539,22 @@ client.threeds.sessions.authenticate(
 <dd>
 
 **challenge_preference:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_decoupled_challenge:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**decoupled_challenge_max_time:** `typing.Optional[int]` 
     
 </dd>
 </dl>

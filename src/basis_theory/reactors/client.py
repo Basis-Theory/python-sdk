@@ -21,6 +21,7 @@ from ..types.validation_problem_details import ValidationProblemDetails
 from ..core.jsonable_encoder import jsonable_encoder
 from ..types.react_response import ReactResponse
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.async_react_response import AsyncReactResponse
 from ..core.client_wrapper import AsyncClientWrapper
 from .results.client import AsyncResultsClient
 from ..core.pagination import AsyncPager
@@ -742,7 +743,7 @@ class ReactorsClient:
         *,
         args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ReactResponse:
+    ) -> AsyncReactResponse:
         """
         Parameters
         ----------
@@ -755,7 +756,7 @@ class ReactorsClient:
 
         Returns
         -------
-        ReactResponse
+        AsyncReactResponse
             Accepted
 
         Examples
@@ -782,9 +783,9 @@ class ReactorsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    ReactResponse,
+                    AsyncReactResponse,
                     parse_obj_as(
-                        type_=ReactResponse,  # type: ignore
+                        type_=AsyncReactResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1613,7 +1614,7 @@ class AsyncReactorsClient:
         *,
         args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ReactResponse:
+    ) -> AsyncReactResponse:
         """
         Parameters
         ----------
@@ -1626,7 +1627,7 @@ class AsyncReactorsClient:
 
         Returns
         -------
-        ReactResponse
+        AsyncReactResponse
             Accepted
 
         Examples
@@ -1661,9 +1662,9 @@ class AsyncReactorsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    ReactResponse,
+                    AsyncReactResponse,
                     parse_obj_as(
-                        type_=ReactResponse,  # type: ignore
+                        type_=AsyncReactResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

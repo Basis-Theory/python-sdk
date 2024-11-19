@@ -145,6 +145,8 @@ class SessionsClient:
         authentication_type: str,
         requestor_info: ThreeDsRequestorInfo,
         challenge_preference: typing.Optional[str] = OMIT,
+        request_decoupled_challenge: typing.Optional[bool] = OMIT,
+        decoupled_challenge_max_time: typing.Optional[int] = OMIT,
         purchase_info: typing.Optional[ThreeDsPurchaseInfo] = OMIT,
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
@@ -165,6 +167,10 @@ class SessionsClient:
         requestor_info : ThreeDsRequestorInfo
 
         challenge_preference : typing.Optional[str]
+
+        request_decoupled_challenge : typing.Optional[bool]
+
+        decoupled_challenge_max_time : typing.Optional[int]
 
         purchase_info : typing.Optional[ThreeDsPurchaseInfo]
 
@@ -208,6 +214,8 @@ class SessionsClient:
                 "authentication_category": authentication_category,
                 "authentication_type": authentication_type,
                 "challenge_preference": challenge_preference,
+                "request_decoupled_challenge": request_decoupled_challenge,
+                "decoupled_challenge_max_time": decoupled_challenge_max_time,
                 "purchase_info": convert_and_respect_annotation_metadata(
                     object_=purchase_info, annotation=ThreeDsPurchaseInfo, direction="write"
                 ),
@@ -542,6 +550,8 @@ class AsyncSessionsClient:
         authentication_type: str,
         requestor_info: ThreeDsRequestorInfo,
         challenge_preference: typing.Optional[str] = OMIT,
+        request_decoupled_challenge: typing.Optional[bool] = OMIT,
+        decoupled_challenge_max_time: typing.Optional[int] = OMIT,
         purchase_info: typing.Optional[ThreeDsPurchaseInfo] = OMIT,
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
@@ -562,6 +572,10 @@ class AsyncSessionsClient:
         requestor_info : ThreeDsRequestorInfo
 
         challenge_preference : typing.Optional[str]
+
+        request_decoupled_challenge : typing.Optional[bool]
+
+        decoupled_challenge_max_time : typing.Optional[int]
 
         purchase_info : typing.Optional[ThreeDsPurchaseInfo]
 
@@ -613,6 +627,8 @@ class AsyncSessionsClient:
                 "authentication_category": authentication_category,
                 "authentication_type": authentication_type,
                 "challenge_preference": challenge_preference,
+                "request_decoupled_challenge": request_decoupled_challenge,
+                "decoupled_challenge_max_time": decoupled_challenge_max_time,
                 "purchase_info": convert_and_respect_annotation_metadata(
                     object_=purchase_info, annotation=ThreeDsPurchaseInfo, direction="write"
                 ),
