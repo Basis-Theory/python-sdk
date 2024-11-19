@@ -6,6 +6,7 @@ from .application_key import ApplicationKey
 from .application_paginated_list import ApplicationPaginatedList
 from .application_template import ApplicationTemplate
 from .async_react_response import AsyncReactResponse
+from .bank_verification_response import BankVerificationResponse
 from .bin_details import BinDetails
 from .bin_details_bank import BinDetailsBank
 from .bin_details_country import BinDetailsCountry
@@ -95,6 +96,7 @@ __all__ = [
     "ApplicationPaginatedList",
     "ApplicationTemplate",
     "AsyncReactResponse",
+    "BankVerificationResponse",
     "BinDetails",
     "BinDetailsBank",
     "BinDetailsCountry",
