@@ -3,9 +3,10 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.bank_verification_response import BankVerificationResponse
+from ..core.pydantic_utilities import parse_obj_as
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
-from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.problem_details import ProblemDetails
 from ..errors.forbidden_error import ForbiddenError
@@ -28,7 +29,7 @@ class EnrichmentsClient:
         country_code: typing.Optional[str] = OMIT,
         routing_number: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> None:
+    ) -> BankVerificationResponse:
         """
         Parameters
         ----------
@@ -43,7 +44,8 @@ class EnrichmentsClient:
 
         Returns
         -------
-        None
+        BankVerificationResponse
+            Success
 
         Examples
         --------
@@ -70,7 +72,13 @@ class EnrichmentsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return
+                return typing.cast(
+                    BankVerificationResponse,
+                    parse_obj_as(
+                        type_=BankVerificationResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -118,7 +126,7 @@ class AsyncEnrichmentsClient:
         country_code: typing.Optional[str] = OMIT,
         routing_number: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> None:
+    ) -> BankVerificationResponse:
         """
         Parameters
         ----------
@@ -133,7 +141,8 @@ class AsyncEnrichmentsClient:
 
         Returns
         -------
-        None
+        BankVerificationResponse
+            Success
 
         Examples
         --------
@@ -168,7 +177,13 @@ class AsyncEnrichmentsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return
+                return typing.cast(
+                    BankVerificationResponse,
+                    parse_obj_as(
+                        type_=BankVerificationResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
