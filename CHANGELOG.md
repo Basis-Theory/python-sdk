@@ -1,3 +1,10 @@
+## [0.5.3](https://github.com/Basis-Theory/python-sdk/compare/v0.5.2...v0.5.3) (2024-11-19)
+
+
+### Bug Fixes
+
+* Rename bank_account_verify method ([#32](https://github.com/Basis-Theory/python-sdk/issues/32)) ([439ae37](https://github.com/Basis-Theory/python-sdk/commit/439ae373d80755853eb3cf72c69a66a6fdde8594))
+
 ## [0.5.2](https://github.com/Basis-Theory/python-sdk/compare/v0.5.1...v0.5.2) (2024-11-19)
 
 
