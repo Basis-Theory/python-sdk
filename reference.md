@@ -1752,7 +1752,7 @@ for page in response.iter_pages():
 </details>
 
 ## Enrichments
-<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">bankaccountverify</a>(...)</code></summary>
+<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">bank_account_verify</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1771,7 +1771,7 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.enrichments.bankaccountverify(
+client.enrichments.bank_account_verify(
     token_id="token_id",
 )
 
