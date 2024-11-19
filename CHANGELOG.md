@@ -1,3 +1,10 @@
+## [0.5.2](https://github.com/Basis-Theory/python-sdk/compare/v0.5.1...v0.5.2) (2024-11-19)
+
+
+### Bug Fixes
+
+* Fixes response object for bank-account-verify ([#30](https://github.com/Basis-Theory/python-sdk/issues/30)) ([d920427](https://github.com/Basis-Theory/python-sdk/commit/d92042768ee2c3b2346d7aebd7bb0ff6db12b9bc))
+
 ## [0.5.1](https://github.com/Basis-Theory/python-sdk/compare/v0.5.0...v0.5.1) (2024-11-19)
 
 
