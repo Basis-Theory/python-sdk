@@ -19,7 +19,7 @@ class PermissionsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get(
+    def list(
         self, *, application_type: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[Permission]:
         """
@@ -43,7 +43,7 @@ class PermissionsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.permissions.get()
+        client.permissions.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "permissions",
@@ -102,7 +102,7 @@ class AsyncPermissionsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get(
+    async def list(
         self, *, application_type: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[Permission]:
         """
@@ -131,7 +131,7 @@ class AsyncPermissionsClient:
 
 
         async def main() -> None:
-            await client.permissions.get()
+            await client.permissions.list()
 
 
         asyncio.run(main())
