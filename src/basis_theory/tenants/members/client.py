@@ -24,7 +24,7 @@ class MembersClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get(
+    def list(
         self,
         *,
         user_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
@@ -60,7 +60,7 @@ class MembersClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.tenants.members.get()
+        client.tenants.members.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "tenants/self/members",
@@ -284,7 +284,7 @@ class AsyncMembersClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get(
+    async def list(
         self,
         *,
         user_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
@@ -325,7 +325,7 @@ class AsyncMembersClient:
 
 
         async def main() -> None:
-            await client.tenants.members.get()
+            await client.tenants.members.list()
 
 
         asyncio.run(main())

@@ -3,9 +3,9 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..core.pydantic_utilities import parse_obj_as
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
-from ..core.pydantic_utilities import parse_obj_as
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.problem_details import ProblemDetails
 from ..errors.forbidden_error import ForbiddenError
@@ -34,7 +34,7 @@ class TokensClient:
 
     def detokenize(
         self, *, request: typing.Optional[typing.Any] = None, request_options: typing.Optional[RequestOptions] = None
-    ) -> None:
+    ) -> typing.Optional[typing.Any]:
         """
         Parameters
         ----------
@@ -45,7 +45,8 @@ class TokensClient:
 
         Returns
         -------
-        None
+        typing.Optional[typing.Any]
+            Success
 
         Examples
         --------
@@ -68,7 +69,13 @@ class TokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return
+                return typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
@@ -1091,7 +1098,7 @@ class AsyncTokensClient:
 
     async def detokenize(
         self, *, request: typing.Optional[typing.Any] = None, request_options: typing.Optional[RequestOptions] = None
-    ) -> None:
+    ) -> typing.Optional[typing.Any]:
         """
         Parameters
         ----------
@@ -1102,7 +1109,8 @@ class AsyncTokensClient:
 
         Returns
         -------
-        None
+        typing.Optional[typing.Any]
+            Success
 
         Examples
         --------
@@ -1133,7 +1141,13 @@ class AsyncTokensClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return
+                return typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(
