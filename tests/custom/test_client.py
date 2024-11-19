@@ -222,7 +222,7 @@ def test_bank_account_verify() -> None:
             "account_number": "00001"
         }
     )
-    actual = client.enrichments.bankaccountverify(
+    actual = client.enrichments.bank_account_verify(
         token_id=token.id
     )
     assert actual.status == "enabled"
