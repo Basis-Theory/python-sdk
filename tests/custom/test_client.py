@@ -11,6 +11,95 @@ def test_should_get_self() -> None:
     actual = client.tenants.self_.get()
     assert actual.name == 'SDK Integration Tests'
 
+def test_proxy_lifecycle() -> None:
+    client = new_management_client()
+    application_id = create_application(client)
+    proxy = client.proxies.create(
+        name="(Deletable) python-SDK-" + str(uuid.uuid4()),
+        destination_url = "https://example.com/api",
+        request_transform = {
+            "code": """
+                module.exports = async function (req) {
+                  // Do something with req.configuration.SERVICE_API_KEY 
+    
+                  return {
+                    headers: req.args.headers,
+                    body: req.args.body
+                  };
+                };
+            """
+        },
+        response_transform = {
+            "code": """
+                module.exports = async function (req) {
+                  // Do something with 'req.configuration.SERVICE_API_KEY'
+    
+                  return {
+                    headers: req.args.headers,
+                    body: req.args.body
+                  };
+                };
+            """
+        },
+        configuration = {
+            "SERVICE_API_KEY": "key_abcd134"
+        },
+        application = {
+            "id": application_id
+        },
+        require_auth = True
+    )
+    proxy_id = proxy.id;
+
+    updated_proxy = client.proxies.update(
+        id=proxy_id,
+        name="(Deletable) python-SDK-" + str(uuid.uuid4()),
+        destination_url="https://example.com/api",
+        request_transform={
+            "code": """
+                    module.exports = async function (req) {
+                      // Do something with req.configuration.SERVICE_API_KEY 
+
+                      return {
+                        headers: req.args.headers,
+                        body: req.args.body
+                      };
+                    };
+                """
+        },
+        response_transform={
+            "code": """
+                    module.exports = async function (req) {
+                      // Do something with 'req.configuration.SERVICE_API_KEY'
+
+                      return {
+                        headers: req.args.headers,
+                        body: req.args.body
+                      };
+                    };
+                """
+        },
+        configuration={
+            "SERVICE_API_KEY": "key_abcd134"
+        },
+        application={
+            "id": application_id
+        },
+        require_auth=True
+    )
+    assert updated_proxy.id == proxy_id
+
+    # client.proxies.patch(
+    #     id=proxy_id,
+    #     name="(Deletable) python-SDK-" + str(uuid.uuid4()),
+    #     destination_url="https://example.com/api",
+    #     configuration={
+    #         "SERVICE_API_KEY": "key_abcd134"
+    #     }
+    # )
+
+    client.proxies.delete(id=proxy_id)
+
 def test_should_create_update_patch_reactors() -> None:
     management_client = new_management_client()
     application_id = create_application(management_client)
@@ -82,6 +171,9 @@ def test_should_create_update_patch_reactors() -> None:
         }
     )
     assert react_async_response.async_reactor_request_id is not None
+
+    management_client.reactors.delete(id=reactor_id)
+
 
 def test_tokenize_basic() -> None:
     client = new_private_client()
