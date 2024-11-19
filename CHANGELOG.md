@@ -1,3 +1,10 @@
+## [0.5.4](https://github.com/Basis-Theory/python-sdk/compare/v0.5.3...v0.5.4) (2024-11-19)
+
+
+### Bug Fixes
+
+* permissions.list method ([#33](https://github.com/Basis-Theory/python-sdk/issues/33)) ([8db1e15](https://github.com/Basis-Theory/python-sdk/commit/8db1e15c573a267aef76c6aa13e7a8022de7d873))
+
 ## [0.5.3](https://github.com/Basis-Theory/python-sdk/compare/v0.5.2...v0.5.3) (2024-11-19)
 
 
