@@ -1,16 +1,231 @@
 import os
 import time
 import uuid
-from unittest.result import failfast
 
-from basis_theory import BasisTheory, BasisTheoryEnvironment, NotFoundError
+import pytest
 
+from basis_theory import BasisTheory, NotFoundError
 
 def test_should_get_self() -> None:
     client = new_management_client()
     actual = client.tenants.self_.get()
     assert actual.name == 'SDK Integration Tests'
 
+def test_should_create_update_patch_reactors() -> None:
+    management_client = new_management_client()
+    application_id = create_application(management_client)
+    reactor = management_client.reactors.create(
+        name='(Deletable) python-SDK-' + str(uuid.uuid4()),
+        code="""module.exports = async function (req) {
+            // Do something with req.configuration.SERVICE_API_KEY
+            return {
+                raw: {
+                    foo: "bar"
+                }
+            };
+        };""",
+        configuration={
+            "SERVICE_API_KEY": "key_abcd1234"
+        },
+        application={
+            "id": application_id
+        }
+    )
+    reactor_id = reactor.id
+    assert reactor_id is not None
+
+    reactor_update = management_client.reactors.update(
+        id = reactor_id,
+        name='(Deletable) python-SDK-' + str(uuid.uuid4()),
+        code="""module.exports = async function (req) {
+          // Do something with req.configuration.SERVICE_API_KEY
+        
+          return {
+            raw: {
+              foo: "bar",
+              update: "updated"
+            }
+          };
+        };""",
+        configuration={
+            "SERVICE_API_KEY": "key_abcd1234",
+            "NEW_API_KEY": "key_new"
+        },
+        application={
+            "id": application_id
+        }
+    )
+    update_reactor_id = reactor_update.id
+    assert update_reactor_id == reactor_id
+
+    # client.reactors.patch(
+    #     id = reactor_id,
+    #     name='(Deletable) python-SDK-' + str(uuid.uuid4()),
+    #     configuration={
+    #         "SERVICE_API_KEY": "key_abcd1234"
+    #     }
+    # )
+
+    client = new_private_client()
+    react_response = client.reactors.react(
+        id=reactor_id,
+        args={
+            "foo": "bar"
+        }
+    )
+    assert react_response.raw['foo'] == "bar"
+
+    react_async_response = client.reactors.react_async(
+        id=reactor_id,
+        args={
+            "foo": "bar"
+        }
+    )
+    assert react_async_response.async_reactor_request_id is not None
+
+def test_tokenize_basic() -> None:
+    client = new_private_client()
+    response = client.tokens.tokenize(
+        request={
+            "first_name": "John",
+            "last_name": "Doe"
+        }
+    )
+    assert is_guid(response["first_name"])
+    assert is_guid(response["last_name"])
+
+def test_tokenize_token() -> None:
+    client = new_private_client()
+    response = client.tokens.tokenize(
+        request={
+            "type": "token",
+            "data": "Sensitive Value",
+            "metadata": {
+                "nonSensitive": "Non-Sensitive Value"
+            },
+            "search_indexes": [
+                "{{ data }}"
+            ],
+            "fingerprint_expression": "{{ data }}"
+        }
+    )
+    assert is_guid(response["id"])
+
+def test_tokenize_card() -> None:
+    client = new_private_client()
+    response = client.tokens.tokenize(
+        request={
+            "type": "card",
+            "data": {
+                "number": "4242424242424242",
+                "expiration_month": 12,
+                "expiration_year": 2025,
+                "cvc": "123"
+            },
+            "metadata": {
+                "nonSensitive": "Non-Sensitive Value"
+            }
+        }
+    )
+    assert is_guid(response["id"])
+
+def test_tokenize_array() -> None:
+    client = new_private_client()
+    response = client.tokens.tokenize(
+        request=[
+            "John",
+            "Doe",
+            {
+                "type": "card",
+                "data": {
+                    "number": "4242424242424242",
+                    "expiration_month": 12,
+                    "expiration_year": 2025,
+                    "cvc": "123"
+                },
+                "metadata": {
+                    "nonSensitive": "Non-Sensitive Value"
+                }
+            },
+            {
+                "type": "token",
+                "data": "Sensitive Value"
+            }
+        ]
+    )
+    assert is_guid(response[0])
+    assert is_guid(response[1])
+    assert is_guid(response[2]["id"])
+    assert is_guid(response[3]["id"])
+
+def test_tokenize_composite() -> None:
+    client = new_private_client()
+    response = client.tokens.tokenize(
+        request={
+            "first_name": "John",
+            "last_name": "Doe",
+            "primary_card": {
+                "type": "card",
+                "data": {
+                    "number": "4242424242424242",
+                    "expiration_month": 12,
+                    "expiration_year": 2025,
+                    "cvc": "123"
+                }
+            },
+            "sensitive_tags": [
+                "preferred",
+                {
+                    "type": "token",
+                    "data": "vip"
+                }
+            ]
+        }
+    )
+    assert is_guid(response["first_name"])
+    assert is_guid(response["last_name"])
+    assert is_guid(response["primary_card"]["id"])
+    assert is_guid(response["sensitive_tags"][0])
+    assert is_guid(response["sensitive_tags"][1]["id"])
+
+def test_detokenize_single() -> None:
+    client = new_private_client()
+    token_id = create_token('4242424242424242', client)
+    actual = client.tokens.detokenize(
+        request={
+            "card_number": "{{ " + token_id+ " | json: '$.number' }}"
+        }
+    )
+    assert actual["card_number"] == "4242424242424242"
+
+def test_detokenize_list() -> None:
+    client = new_private_client()
+    token_id_1 = create_token('4242424242424242', client)
+    token_id_2 = create_token('4111111111111111', client)
+    actual = client.tokens.detokenize(
+        request={
+            "tokens": [
+                "{{ " + token_id_1 + "  }}",
+                "{{ " + token_id_2 + "  }}",
+            ]
+        }
+    )
+    assert actual["tokens"][0]["number"] == '4242424242424242'
+    assert actual["tokens"][1]["number"] == '4111111111111111'
+
+def test_bank_account_verify() -> None:
+    client = new_private_client()
+    token = client.tokens.create(
+        type="bank",
+        data={
+            "routing_number": "021000021",
+            "account_number": "00001"
+        }
+    )
+    actual = client.enrichments.bankaccountverify(
+        token_id=token.id
+    )
+    assert actual.status == "enabled"
 
 def test_should_support_token_lifecycle() -> None:
     client = new_private_client()
@@ -53,6 +268,12 @@ def test_should_support_idempotency_header() -> None:
     secondTokenId = create_token('4242424242424242', client, idempotency_key)
 
     assert firstTokenId == secondTokenId
+
+def skip_test_should_support_correlation_id_header() -> None:
+    client = new_private_client()
+    correlation_id = str(uuid.uuid4())
+
+    client.tenants.self_(correlation_id=correlation_id).get()
 
 def test_should_paginate_on_list_v1() -> None:
     client = new_private_client()
@@ -227,3 +448,10 @@ def new_private_client():
         api_key=os.getenv('BT_PVT_API_KEY'),
         base_url=os.getenv('BT_API_URL')
     )
+
+def is_guid(value):
+    try:
+        uuid.UUID(str(value))
+        return True
+    except ValueError:
+        return False
