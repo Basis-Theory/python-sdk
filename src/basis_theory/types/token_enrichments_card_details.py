@@ -2,15 +2,13 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .bin_details import BinDetails
-from .token_enrichments_card_details import TokenEnrichmentsCardDetails
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class TokenEnrichments(UniversalBaseModel):
-    bin_details: typing.Optional[BinDetails] = None
-    card_details: typing.Optional[TokenEnrichmentsCardDetails] = None
+class TokenEnrichmentsCardDetails(UniversalBaseModel):
+    bin: typing.Optional[str] = None
+    last4: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
