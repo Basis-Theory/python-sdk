@@ -100,6 +100,20 @@ def test_proxy_lifecycle() -> None:
 
     client.proxies.delete(id=proxy_id)
 
+def test_should_create_token_intent() -> None:
+    client = new_private_client()
+    tokenIntent = client.token_intents.create(
+        type="card",
+        data={
+            "number": '4242424242424242',
+            "expiration_month": 12,
+            "expiration_year": 2025,
+            "cvc": '123'
+        }
+    )
+    assert is_guid(tokenIntent.id)
+
+
 def test_should_create_update_patch_reactors() -> None:
     management_client = new_management_client()
     application_id = create_application(management_client)
