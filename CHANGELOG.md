@@ -1,3 +1,10 @@
+## [0.5.6](https://github.com/Basis-Theory/python-sdk/compare/v0.5.5...v0.5.6) (2024-11-20)
+
+
+### Bug Fixes
+
+* Add token-intents ([#36](https://github.com/Basis-Theory/python-sdk/issues/36)) ([9da9a93](https://github.com/Basis-Theory/python-sdk/commit/9da9a937397abe9439e0f169fec3b0fe2e4ce25f))
+
 ## [0.5.5](https://github.com/Basis-Theory/python-sdk/compare/v0.5.4...v0.5.5) (2024-11-20)
 
 
