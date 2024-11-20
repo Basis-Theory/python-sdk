@@ -3,7 +3,6 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from .events.client import EventsClient
-from .signing_key.client import SigningKeyClient
 from ..core.request_options import RequestOptions
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
@@ -21,7 +20,6 @@ from ..types.webhook_list import WebhookList
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..core.client_wrapper import AsyncClientWrapper
 from .events.client import AsyncEventsClient
-from .signing_key.client import AsyncSigningKeyClient
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -31,7 +29,6 @@ class WebhooksClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
         self.events = EventsClient(client_wrapper=self._client_wrapper)
-        self.signing_key = SigningKeyClient(client_wrapper=self._client_wrapper)
 
     def ping(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
@@ -556,7 +553,6 @@ class AsyncWebhooksClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
         self.events = AsyncEventsClient(client_wrapper=self._client_wrapper)
-        self.signing_key = AsyncSigningKeyClient(client_wrapper=self._client_wrapper)
 
     async def ping(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """

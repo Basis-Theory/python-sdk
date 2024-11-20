@@ -14,7 +14,6 @@ from .enrichments.client import EnrichmentsClient
 from .logs.client import LogsClient
 from .permissions.client import PermissionsClient
 from .proxies.client import ProxiesClient
-from .reactorformulas.client import ReactorformulasClient
 from .reactors.client import ReactorsClient
 from .roles.client import RolesClient
 from .sessions.client import SessionsClient
@@ -30,7 +29,6 @@ from .enrichments.client import AsyncEnrichmentsClient
 from .logs.client import AsyncLogsClient
 from .permissions.client import AsyncPermissionsClient
 from .proxies.client import AsyncProxiesClient
-from .reactorformulas.client import AsyncReactorformulasClient
 from .reactors.client import AsyncReactorsClient
 from .roles.client import AsyncRolesClient
 from .sessions.client import AsyncSessionsClient
@@ -111,7 +109,6 @@ class BasisTheory:
         self.logs = LogsClient(client_wrapper=self._client_wrapper)
         self.permissions = PermissionsClient(client_wrapper=self._client_wrapper)
         self.proxies = ProxiesClient(client_wrapper=self._client_wrapper)
-        self.reactorformulas = ReactorformulasClient(client_wrapper=self._client_wrapper)
         self.reactors = ReactorsClient(client_wrapper=self._client_wrapper)
         self.roles = RolesClient(client_wrapper=self._client_wrapper)
         self.sessions = SessionsClient(client_wrapper=self._client_wrapper)
@@ -192,7 +189,6 @@ class AsyncBasisTheory:
         self.logs = AsyncLogsClient(client_wrapper=self._client_wrapper)
         self.permissions = AsyncPermissionsClient(client_wrapper=self._client_wrapper)
         self.proxies = AsyncProxiesClient(client_wrapper=self._client_wrapper)
-        self.reactorformulas = AsyncReactorformulasClient(client_wrapper=self._client_wrapper)
         self.reactors = AsyncReactorsClient(client_wrapper=self._client_wrapper)
         self.roles = AsyncRolesClient(client_wrapper=self._client_wrapper)
         self.sessions = AsyncSessionsClient(client_wrapper=self._client_wrapper)

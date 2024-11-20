@@ -13,6 +13,7 @@ from .bin_details_country import BinDetailsCountry
 from .bin_details_product import BinDetailsProduct
 from .card_details import CardDetails
 from .condition import Condition
+from .create_reactor_formula_request import CreateReactorFormulaRequest
 from .create_session_response import CreateSessionResponse
 from .create_tenant_connection_response import CreateTenantConnectionResponse
 from .create_three_ds_session_response import CreateThreeDsSessionResponse
@@ -82,6 +83,7 @@ from .token_metrics import TokenMetrics
 from .token_paginated_list import TokenPaginatedList
 from .token_report import TokenReport
 from .update_privacy import UpdatePrivacy
+from .update_reactor_formula_request import UpdateReactorFormulaRequest
 from .user import User
 from .validation_problem_details import ValidationProblemDetails
 from .webhook import Webhook
@@ -103,6 +105,7 @@ __all__ = [
     "BinDetailsProduct",
     "CardDetails",
     "Condition",
+    "CreateReactorFormulaRequest",
     "CreateSessionResponse",
     "CreateTenantConnectionResponse",
     "CreateThreeDsSessionResponse",
@@ -172,6 +175,7 @@ __all__ = [
     "TokenPaginatedList",
     "TokenReport",
     "UpdatePrivacy",
+    "UpdateReactorFormulaRequest",
     "User",
     "ValidationProblemDetails",
     "Webhook",
