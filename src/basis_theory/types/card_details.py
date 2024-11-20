@@ -9,6 +9,11 @@ import pydantic
 class CardDetails(UniversalBaseModel):
     bin: typing.Optional[str] = None
     last4: typing.Optional[str] = None
+    expiration_month: typing.Optional[int] = None
+    expiration_year: typing.Optional[int] = None
+    brand: typing.Optional[str] = None
+    funding: typing.Optional[str] = None
+    authentication: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
