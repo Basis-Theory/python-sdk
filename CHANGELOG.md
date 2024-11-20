@@ -1,3 +1,10 @@
+## [0.5.5](https://github.com/Basis-Theory/python-sdk/compare/v0.5.4...v0.5.5) (2024-11-20)
+
+
+### Bug Fixes
+
+* Update to latest specs ([#35](https://github.com/Basis-Theory/python-sdk/issues/35)) ([ca12ab5](https://github.com/Basis-Theory/python-sdk/commit/ca12ab5deff5c80bca118cab30f279e70c365f5e))
+
 ## [0.5.4](https://github.com/Basis-Theory/python-sdk/compare/v0.5.3...v0.5.4) (2024-11-19)
 
 
