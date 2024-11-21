@@ -207,6 +207,7 @@ class ApplicationsClient:
                 "create_key": create_key,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -386,6 +387,7 @@ class ApplicationsClient:
                 ),
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -773,6 +775,7 @@ class AsyncApplicationsClient:
                 "create_key": create_key,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -968,6 +971,7 @@ class AsyncApplicationsClient:
                 ),
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,

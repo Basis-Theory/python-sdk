@@ -224,6 +224,7 @@ class ProxiesClient:
                 "require_auth": require_auth,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -432,6 +433,7 @@ class ProxiesClient:
                 "require_auth": require_auth,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -632,6 +634,7 @@ class ProxiesClient:
                 "require_auth": require_auth,
             },
             headers={
+                "content-type": "application/merge-patch+json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -900,6 +903,7 @@ class AsyncProxiesClient:
                 "require_auth": require_auth,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1124,6 +1128,7 @@ class AsyncProxiesClient:
                 "require_auth": require_auth,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1340,6 +1345,7 @@ class AsyncProxiesClient:
                 "require_auth": require_auth,
             },
             headers={
+                "content-type": "application/merge-patch+json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,

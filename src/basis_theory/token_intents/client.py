@@ -66,6 +66,9 @@ class TokenIntentsClient:
                 "type": type,
                 "data": data,
             },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -235,6 +238,9 @@ class AsyncTokenIntentsClient:
             json={
                 "type": type,
                 "data": data,
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
