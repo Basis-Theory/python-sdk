@@ -1,3 +1,10 @@
+## [0.5.7](https://github.com/Basis-Theory/python-sdk/compare/v0.5.6...v0.5.7) (2024-11-21)
+
+
+### Bug Fixes
+
+* Support correct PATCH content-type ([#38](https://github.com/Basis-Theory/python-sdk/issues/38)) ([ffb157d](https://github.com/Basis-Theory/python-sdk/commit/ffb157de1de43dfda02c02ddf9bfbc3c50477601))
+
 ## [0.5.6](https://github.com/Basis-Theory/python-sdk/compare/v0.5.5...v0.5.6) (2024-11-20)
 
 
