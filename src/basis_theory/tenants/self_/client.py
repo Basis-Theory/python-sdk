@@ -211,6 +211,7 @@ class SelfClient:
                 "settings": settings,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -550,6 +551,7 @@ class AsyncSelfClient:
                 "settings": settings,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,

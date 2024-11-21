@@ -67,6 +67,9 @@ class EnrichmentsClient:
                 "country_code": country_code,
                 "routing_number": routing_number,
             },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -171,6 +174,9 @@ class AsyncEnrichmentsClient:
                 "token_id": token_id,
                 "country_code": country_code,
                 "routing_number": routing_number,
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,

@@ -204,6 +204,9 @@ class WebhooksClient:
                 "notify_email": notify_email,
                 "events": events,
             },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -491,6 +494,9 @@ class WebhooksClient:
                 "notify_email": notify_email,
                 "events": events,
             },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -751,6 +757,9 @@ class AsyncWebhooksClient:
                 "url": url,
                 "notify_email": notify_email,
                 "events": events,
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -1062,6 +1071,9 @@ class AsyncWebhooksClient:
                 "url": url,
                 "notify_email": notify_email,
                 "events": events,
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,

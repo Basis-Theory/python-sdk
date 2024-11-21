@@ -90,6 +90,9 @@ class SessionsClient:
                     object_=device_info, annotation=ThreeDsDeviceInfo, direction="write"
                 ),
             },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -234,6 +237,7 @@ class SessionsClient:
                 ),
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -495,6 +499,9 @@ class AsyncSessionsClient:
                     object_=device_info, annotation=ThreeDsDeviceInfo, direction="write"
                 ),
             },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -647,6 +654,7 @@ class AsyncSessionsClient:
                 ),
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,

@@ -89,14 +89,14 @@ def test_proxy_lifecycle() -> None:
     )
     assert updated_proxy.id == proxy_id
 
-    # client.proxies.patch(
-    #     id=proxy_id,
-    #     name="(Deletable) python-SDK-" + str(uuid.uuid4()),
-    #     destination_url="https://example.com/api",
-    #     configuration={
-    #         "SERVICE_API_KEY": "key_abcd134"
-    #     }
-    # )
+    client.proxies.patch(
+        id=proxy_id,
+        name="(Deletable) python-SDK-" + str(uuid.uuid4()),
+        destination_url="https://example.com/api",
+        configuration={
+            "SERVICE_API_KEY": "key_abcd134"
+        }
+    )
 
     client.proxies.delete(id=proxy_id)
 
@@ -161,13 +161,13 @@ def test_should_create_update_patch_reactors() -> None:
     update_reactor_id = reactor_update.id
     assert update_reactor_id == reactor_id
 
-    # client.reactors.patch(
-    #     id = reactor_id,
-    #     name='(Deletable) python-SDK-' + str(uuid.uuid4()),
-    #     configuration={
-    #         "SERVICE_API_KEY": "key_abcd1234"
-    #     }
-    # )
+    management_client.reactors.patch(
+        id = reactor_id,
+        name='(Deletable) python-SDK-' + str(uuid.uuid4()),
+        configuration={
+            "SERVICE_API_KEY": "key_abcd1234"
+        }
+    )
 
     client = new_private_client()
     react_response = client.reactors.react(
@@ -341,10 +341,9 @@ def test_should_support_token_lifecycle() -> None:
     token_id = create_token(cardNumber, client)
     get_and_validate_card_number(cardNumber, client, token_id)
 
-    # PATCH does not currently support correct `content-header`
-    # updatedCardNumber = '4242424242424242'
-    # update_token(client, token_id, updatedCardNumber)
-    # get_and_validate_card_number(updatedCardNumber, client, token_id)
+    updatedCardNumber = '4242424242424242'
+    update_token(client, token_id, updatedCardNumber)
+    get_and_validate_card_number(updatedCardNumber, client, token_id)
 
     application_id = create_application(management_client)
 

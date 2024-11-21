@@ -408,6 +408,7 @@ class TokensClient:
                 "token_intent_id": token_intent_id,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -524,6 +525,7 @@ class TokensClient:
                 "size": size,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -815,6 +817,7 @@ class TokensClient:
                 "containers": containers,
             },
             headers={
+                "content-type": "application/merge-patch+json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1028,6 +1031,7 @@ class TokensClient:
                 "size": size,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1504,6 +1508,7 @@ class AsyncTokensClient:
                 "token_intent_id": token_intent_id,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1628,6 +1633,7 @@ class AsyncTokensClient:
                 "size": size,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1943,6 +1949,7 @@ class AsyncTokensClient:
                 "containers": containers,
             },
             headers={
+                "content-type": "application/merge-patch+json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -2172,6 +2179,7 @@ class AsyncTokensClient:
                 "size": size,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,

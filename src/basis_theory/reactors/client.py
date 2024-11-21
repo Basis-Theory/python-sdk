@@ -205,6 +205,7 @@ class ReactorsClient:
                 "configuration": configuration,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -389,6 +390,7 @@ class ReactorsClient:
                 "configuration": configuration,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -573,6 +575,7 @@ class ReactorsClient:
                 "configuration": configuration,
             },
             headers={
+                "content-type": "application/merge-patch+json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -669,6 +672,9 @@ class ReactorsClient:
             json={
                 "args": args,
                 "callback_url": callback_url,
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -776,6 +782,9 @@ class ReactorsClient:
             method="POST",
             json={
                 "args": args,
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -1036,6 +1045,7 @@ class AsyncReactorsClient:
                 "configuration": configuration,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1236,6 +1246,7 @@ class AsyncReactorsClient:
                 "configuration": configuration,
             },
             headers={
+                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1436,6 +1447,7 @@ class AsyncReactorsClient:
                 "configuration": configuration,
             },
             headers={
+                "content-type": "application/merge-patch+json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1540,6 +1552,9 @@ class AsyncReactorsClient:
             json={
                 "args": args,
                 "callback_url": callback_url,
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -1655,6 +1670,9 @@ class AsyncReactorsClient:
             method="POST",
             json={
                 "args": args,
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
