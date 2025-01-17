@@ -890,6 +890,10 @@ class TokensClient:
     def list_v2(
         self,
         *,
+        type: typing.Optional[str] = None,
+        container: typing.Optional[str] = None,
+        fingerprint: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None,
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -897,6 +901,14 @@ class TokensClient:
         """
         Parameters
         ----------
+        type : typing.Optional[str]
+
+        container : typing.Optional[str]
+
+        fingerprint : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
         start : typing.Optional[str]
 
         size : typing.Optional[int]
@@ -928,6 +940,10 @@ class TokensClient:
             "v2/tokens",
             method="GET",
             params={
+                "type": type,
+                "container": container,
+                "fingerprint": fingerprint,
+                "metadata": metadata,
                 "start": start,
                 "size": size,
             },
@@ -948,6 +964,10 @@ class TokensClient:
                     _parsed_next = _parsed_response.pagination.next
                     _has_next = _parsed_next is not None and _parsed_next != ""
                     _get_next = lambda: self.list_v2(
+                        type=type,
+                        container=container,
+                        fingerprint=fingerprint,
+                        metadata=metadata,
                         start=_parsed_next,
                         size=size,
                         request_options=request_options,
@@ -2022,6 +2042,10 @@ class AsyncTokensClient:
     async def list_v2(
         self,
         *,
+        type: typing.Optional[str] = None,
+        container: typing.Optional[str] = None,
+        fingerprint: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None,
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -2029,6 +2053,14 @@ class AsyncTokensClient:
         """
         Parameters
         ----------
+        type : typing.Optional[str]
+
+        container : typing.Optional[str]
+
+        fingerprint : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
         start : typing.Optional[str]
 
         size : typing.Optional[int]
@@ -2068,6 +2100,10 @@ class AsyncTokensClient:
             "v2/tokens",
             method="GET",
             params={
+                "type": type,
+                "container": container,
+                "fingerprint": fingerprint,
+                "metadata": metadata,
                 "start": start,
                 "size": size,
             },
@@ -2088,6 +2124,10 @@ class AsyncTokensClient:
                     _parsed_next = _parsed_response.pagination.next
                     _has_next = _parsed_next is not None and _parsed_next != ""
                     _get_next = lambda: self.list_v2(
+                        type=type,
+                        container=container,
+                        fingerprint=fingerprint,
+                        metadata=metadata,
                         start=_parsed_next,
                         size=size,
                         request_options=request_options,

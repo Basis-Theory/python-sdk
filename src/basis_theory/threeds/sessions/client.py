@@ -41,6 +41,7 @@ class SessionsClient:
         token_intent_id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
         device: typing.Optional[str] = OMIT,
+        web_challenge_mode: typing.Optional[str] = OMIT,
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateThreeDsSessionResponse:
@@ -56,6 +57,8 @@ class SessionsClient:
         type : typing.Optional[str]
 
         device : typing.Optional[str]
+
+        web_challenge_mode : typing.Optional[str]
 
         device_info : typing.Optional[ThreeDsDeviceInfo]
 
@@ -86,6 +89,7 @@ class SessionsClient:
                 "token_intent_id": token_intent_id,
                 "type": type,
                 "device": device,
+                "web_challenge_mode": web_challenge_mode,
                 "device_info": convert_and_respect_annotation_metadata(
                     object_=device_info, annotation=ThreeDsDeviceInfo, direction="write"
                 ),
@@ -442,6 +446,7 @@ class AsyncSessionsClient:
         token_intent_id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
         device: typing.Optional[str] = OMIT,
+        web_challenge_mode: typing.Optional[str] = OMIT,
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateThreeDsSessionResponse:
@@ -457,6 +462,8 @@ class AsyncSessionsClient:
         type : typing.Optional[str]
 
         device : typing.Optional[str]
+
+        web_challenge_mode : typing.Optional[str]
 
         device_info : typing.Optional[ThreeDsDeviceInfo]
 
@@ -495,6 +502,7 @@ class AsyncSessionsClient:
                 "token_intent_id": token_intent_id,
                 "type": type,
                 "device": device,
+                "web_challenge_mode": web_challenge_mode,
                 "device_info": convert_and_respect_annotation_metadata(
                     object_=device_info, annotation=ThreeDsDeviceInfo, direction="write"
                 ),

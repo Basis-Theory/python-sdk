@@ -26,6 +26,7 @@ class ThreeDsSession(UniversalBaseModel):
     modified_by: typing.Optional[str] = None
     device: typing.Optional[str] = None
     device_info: typing.Optional[ThreeDsDeviceInfo] = None
+    web_challenge_mode: typing.Optional[str] = None
     version: typing.Optional[ThreeDsVersion] = None
     method: typing.Optional[ThreeDsMethod] = None
     authentication: typing.Optional[ThreeDsAuthentication] = None

@@ -15,7 +15,6 @@ from ..errors.forbidden_error import ForbiddenError
 from ..errors.not_found_error import NotFoundError
 from ..errors.bad_request_error import BadRequestError
 from ..types.validation_problem_details import ValidationProblemDetails
-from ..errors.conflict_error import ConflictError
 from ..types.webhook_list import WebhookList
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..core.client_wrapper import AsyncClientWrapper
@@ -259,16 +258,6 @@ class WebhooksClient:
                         ),
                     )
                 )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -345,16 +334,6 @@ class WebhooksClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
                             object_=_response.json(),
                         ),
                     )
@@ -813,16 +792,6 @@ class AsyncWebhooksClient:
                         ),
                     )
                 )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -907,16 +876,6 @@ class AsyncWebhooksClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
                             object_=_response.json(),
                         ),
                     )

@@ -29,8 +29,11 @@ class ThreeDsAuthentication(UniversalBaseModel):
     acs_rendering_type: typing.Optional[ThreeDsAcsRenderingType] = None
     acs_signed_content: typing.Optional[str] = None
     acs_challenge_url: typing.Optional[str] = None
+    challenge_preference: typing.Optional[str] = None
+    challenge_preference_code: typing.Optional[str] = None
     challenge_attempts: typing.Optional[str] = None
     challenge_cancel_reason: typing.Optional[str] = None
+    challenge_cancel_reason_code: typing.Optional[str] = None
     cardholder_info: typing.Optional[str] = None
     whitelist_status: typing.Optional[str] = None
     whitelist_status_source: typing.Optional[str] = None
