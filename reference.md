@@ -1574,6 +1574,38 @@ for page in response.iter_pages():
 <dl>
 <dd>
 
+**type:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**container:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fingerprint:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **start:** `typing.Optional[str]` 
     
 </dd>
@@ -3414,7 +3446,7 @@ client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
 client.token_intents.create(
-    type="string",
+    type="x",
     data={"key": "value"},
 )
 
@@ -5054,6 +5086,14 @@ client.threeds.sessions.create()
 <dd>
 
 **device:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**web_challenge_mode:** `typing.Optional[str]` 
     
 </dd>
 </dl>

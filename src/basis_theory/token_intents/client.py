@@ -55,7 +55,7 @@ class TokenIntentsClient:
             api_key="YOUR_API_KEY",
         )
         client.token_intents.create(
-            type="string",
+            type="x",
             data={"key": "value"},
         )
         """
@@ -225,7 +225,7 @@ class AsyncTokenIntentsClient:
 
         async def main() -> None:
             await client.token_intents.create(
-                type="string",
+                type="x",
                 data={"key": "value"},
             )
 

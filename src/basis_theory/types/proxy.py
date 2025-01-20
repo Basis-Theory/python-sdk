@@ -22,6 +22,7 @@ class Proxy(UniversalBaseModel):
     application_id: typing.Optional[str] = None
     configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
     proxy_host: typing.Optional[str] = None
+    timeout: typing.Optional[int] = None
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
     modified_by: typing.Optional[str] = None

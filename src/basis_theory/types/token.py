@@ -4,6 +4,7 @@ from ..core.pydantic_utilities import UniversalBaseModel
 import typing
 from .token_enrichments import TokenEnrichments
 import datetime as dt
+from .card_details import CardDetails
 from .privacy import Privacy
 import typing_extensions
 from .token_extras import TokenExtras
@@ -21,6 +22,7 @@ class Token(UniversalBaseModel):
     enrichments: typing.Optional[TokenEnrichments] = None
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
+    card: typing.Optional[CardDetails] = None
     modified_by: typing.Optional[str] = None
     modified_at: typing.Optional[dt.datetime] = None
     fingerprint: typing.Optional[str] = None

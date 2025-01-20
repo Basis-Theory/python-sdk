@@ -2,17 +2,13 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
+from .google_payment_method_token import GooglePaymentMethodToken
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class GetTokensV2(UniversalBaseModel):
-    type: typing.Optional[str] = None
-    container: typing.Optional[str] = None
-    fingerprint: typing.Optional[str] = None
-    metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
-    start: typing.Optional[str] = None
-    size: typing.Optional[int] = None
+class GooglePayTokenizeRequest(UniversalBaseModel):
+    google_payment_method_token: typing.Optional[GooglePaymentMethodToken] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

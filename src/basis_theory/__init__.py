@@ -2,6 +2,7 @@
 
 from .types import (
     AccessRule,
+    AdditionalCardDetails,
     Application,
     ApplicationKey,
     ApplicationPaginatedList,
@@ -31,6 +32,9 @@ from .types import (
     GetTenantMembers,
     GetTokens,
     GetTokensV2,
+    GooglePayTokenizeRequest,
+    GooglePaymentMethodToken,
+    IntermediateSigningKey,
     Log,
     LogEntityType,
     LogPaginatedList,
@@ -125,6 +129,7 @@ from .version import __version__
 
 __all__ = [
     "AccessRule",
+    "AdditionalCardDetails",
     "Application",
     "ApplicationKey",
     "ApplicationPaginatedList",
@@ -160,6 +165,9 @@ __all__ = [
     "GetTenantMembers",
     "GetTokens",
     "GetTokensV2",
+    "GooglePayTokenizeRequest",
+    "GooglePaymentMethodToken",
+    "IntermediateSigningKey",
     "Log",
     "LogEntityType",
     "LogPaginatedList",
