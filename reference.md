@@ -1792,6 +1792,62 @@ client.enrichments.bank_account_verify(
 </dl>
 </details>
 
+## Googlepay
+<details><summary><code>client.googlepay.<a href="src/basis_theory/googlepay/client.py">tokenize</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.googlepay.tokenize()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**google_payment_method_token:** `typing.Optional[GooglePaymentMethodToken]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Logs
 <details><summary><code>client.logs.<a href="src/basis_theory/logs/client.py">list</a>(...)</code></summary>
 <dl>

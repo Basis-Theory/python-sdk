@@ -2,14 +2,13 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .token_service_provider_details import TokenServiceProviderDetails
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class TokenExtras(UniversalBaseModel):
-    deduplicated: typing.Optional[bool] = None
-    tsp_details: typing.Optional[TokenServiceProviderDetails] = None
+class AssuranceDetails(UniversalBaseModel):
+    account_verified: typing.Optional[bool] = None
+    card_holder_authenticated: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

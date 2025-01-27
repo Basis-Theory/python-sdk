@@ -4,6 +4,10 @@ from ..core.pydantic_utilities import UniversalBaseModel
 import typing
 import datetime as dt
 from .card_details import CardDetails
+from .token_authentication import TokenAuthentication
+import typing_extensions
+from .token_intent_extras import TokenIntentExtras
+from ..core.serialization import FieldMetadata
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
@@ -17,6 +21,8 @@ class CreateTokenIntentResponse(UniversalBaseModel):
     created_at: typing.Optional[dt.datetime] = None
     expires_at: typing.Optional[dt.datetime] = None
     card: typing.Optional[CardDetails] = None
+    authentication: typing.Optional[TokenAuthentication] = None
+    extras: typing_extensions.Annotated[typing.Optional[TokenIntentExtras], FieldMetadata(alias="_extras")] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
