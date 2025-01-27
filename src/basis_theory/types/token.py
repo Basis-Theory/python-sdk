@@ -6,6 +6,7 @@ from .token_enrichments import TokenEnrichments
 import datetime as dt
 from .card_details import CardDetails
 from .privacy import Privacy
+from .token_authentication import TokenAuthentication
 import typing_extensions
 from .token_extras import TokenExtras
 from ..core.serialization import FieldMetadata
@@ -33,6 +34,7 @@ class Token(UniversalBaseModel):
     expires_at: typing.Optional[dt.datetime] = None
     containers: typing.Optional[typing.List[str]] = None
     aliases: typing.Optional[typing.List[str]] = None
+    authentication: typing.Optional[TokenAuthentication] = None
     extras: typing_extensions.Annotated[typing.Optional[TokenExtras], FieldMetadata(alias="_extras")] = None
 
     if IS_PYDANTIC_V2:

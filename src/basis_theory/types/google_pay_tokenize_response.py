@@ -2,14 +2,13 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .token_service_provider_details import TokenServiceProviderDetails
+from .create_token_intent_response import CreateTokenIntentResponse
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class TokenExtras(UniversalBaseModel):
-    deduplicated: typing.Optional[bool] = None
-    tsp_details: typing.Optional[TokenServiceProviderDetails] = None
+class GooglePayTokenizeResponse(UniversalBaseModel):
+    token_intent: typing.Optional[CreateTokenIntentResponse] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

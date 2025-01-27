@@ -6,6 +6,7 @@ from .application import Application
 from .application_key import ApplicationKey
 from .application_paginated_list import ApplicationPaginatedList
 from .application_template import ApplicationTemplate
+from .assurance_details import AssuranceDetails
 from .async_react_response import AsyncReactResponse
 from .bank_verification_response import BankVerificationResponse
 from .bin_details import BinDetails
@@ -31,7 +32,7 @@ from .get_tenant_invitations import GetTenantInvitations
 from .get_tenant_members import GetTenantMembers
 from .get_tokens import GetTokens
 from .get_tokens_v2 import GetTokensV2
-from .google_pay_tokenize_request import GooglePayTokenizeRequest
+from .google_pay_tokenize_response import GooglePayTokenizeResponse
 from .google_payment_method_token import GooglePaymentMethodToken
 from .intermediate_signing_key import IntermediateSigningKey
 from .log import Log
@@ -81,13 +82,16 @@ from .three_ds_requestor_info import ThreeDsRequestorInfo
 from .three_ds_session import ThreeDsSession
 from .three_ds_version import ThreeDsVersion
 from .token import Token
+from .token_authentication import TokenAuthentication
 from .token_cursor_paginated_list import TokenCursorPaginatedList
 from .token_enrichments import TokenEnrichments
 from .token_enrichments_card_details import TokenEnrichmentsCardDetails
 from .token_extras import TokenExtras
+from .token_intent_extras import TokenIntentExtras
 from .token_metrics import TokenMetrics
 from .token_paginated_list import TokenPaginatedList
 from .token_report import TokenReport
+from .token_service_provider_details import TokenServiceProviderDetails
 from .update_privacy import UpdatePrivacy
 from .update_reactor_formula_request import UpdateReactorFormulaRequest
 from .user import User
@@ -104,6 +108,7 @@ __all__ = [
     "ApplicationKey",
     "ApplicationPaginatedList",
     "ApplicationTemplate",
+    "AssuranceDetails",
     "AsyncReactResponse",
     "BankVerificationResponse",
     "BinDetails",
@@ -129,7 +134,7 @@ __all__ = [
     "GetTenantMembers",
     "GetTokens",
     "GetTokensV2",
-    "GooglePayTokenizeRequest",
+    "GooglePayTokenizeResponse",
     "GooglePaymentMethodToken",
     "IntermediateSigningKey",
     "Log",
@@ -179,13 +184,16 @@ __all__ = [
     "ThreeDsSession",
     "ThreeDsVersion",
     "Token",
+    "TokenAuthentication",
     "TokenCursorPaginatedList",
     "TokenEnrichments",
     "TokenEnrichmentsCardDetails",
     "TokenExtras",
+    "TokenIntentExtras",
     "TokenMetrics",
     "TokenPaginatedList",
     "TokenReport",
+    "TokenServiceProviderDetails",
     "UpdatePrivacy",
     "UpdateReactorFormulaRequest",
     "User",
