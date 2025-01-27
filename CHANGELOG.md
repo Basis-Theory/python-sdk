@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/Basis-Theory/python-sdk/compare/v0.5.7...v0.6.0) (2025-01-27)
+
+
+### Features
+
+* Google Pay ([5750685](https://github.com/Basis-Theory/python-sdk/commit/5750685fb517ea6812bdf0244c9780c5ca19cc91))
+
 ## [0.5.7](https://github.com/Basis-Theory/python-sdk/compare/v0.5.6...v0.5.7) (2024-11-21)
 
 
