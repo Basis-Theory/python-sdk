@@ -24,6 +24,7 @@ class Token(UniversalBaseModel):
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
     card: typing.Optional[CardDetails] = None
+    network_token: typing.Optional[CardDetails] = None
     modified_by: typing.Optional[str] = None
     modified_at: typing.Optional[dt.datetime] = None
     fingerprint: typing.Optional[str] = None
