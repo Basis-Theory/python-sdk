@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/Basis-Theory/python-sdk/compare/v0.6.0...v0.7.0) (2025-01-30)
+
+
+### Features
+
+* Add Google Pay Tokenization ([6b35761](https://github.com/Basis-Theory/python-sdk/commit/6b357619bba7db3259faf98d263c5d2f9c0cbbf5))
+
 # [0.6.0](https://github.com/Basis-Theory/python-sdk/compare/v0.5.7...v0.6.0) (2025-01-27)
 
 
