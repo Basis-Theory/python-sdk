@@ -13,6 +13,7 @@ from ..errors.unauthorized_error import UnauthorizedError
 from ..types.problem_details import ProblemDetails
 from ..errors.forbidden_error import ForbiddenError
 from ..errors.conflict_error import ConflictError
+from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper
@@ -109,6 +110,16 @@ class GooglepayClient:
                 )
             if _response.status_code == 409:
                 raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
                     typing.cast(
                         ProblemDetails,
                         parse_obj_as(
@@ -219,6 +230,16 @@ class AsyncGooglepayClient:
                 )
             if _response.status_code == 409:
                 raise ConflictError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
                     typing.cast(
                         ProblemDetails,
                         parse_obj_as(
