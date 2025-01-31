@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/Basis-Theory/python-sdk/compare/v0.7.0...v0.7.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* Add `network_token` to token intents ([2417b5d](https://github.com/Basis-Theory/python-sdk/commit/2417b5d13f1476d7b381dbd9812b670dbb4c1475))
+
 # [0.7.0](https://github.com/Basis-Theory/python-sdk/compare/v0.6.0...v0.7.0) (2025-01-30)
 
 
