@@ -1,3 +1,15 @@
+# [1.0.0](https://github.com/Basis-Theory/python-sdk/compare/v0.7.1...v1.0.0) (2025-03-05)
+
+
+### Features
+
+* adding get token intents ([354f87f](https://github.com/Basis-Theory/python-sdk/commit/354f87fc05a98e0f996b218d884179434e7b09fe))
+
+
+### BREAKING CHANGES
+
+* Updated Token Usage response and removes expires_at from Applications
+
 ## [0.7.1](https://github.com/Basis-Theory/python-sdk/compare/v0.7.0...v0.7.1) (2025-01-31)
 
 
