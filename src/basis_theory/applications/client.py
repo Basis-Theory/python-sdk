@@ -148,7 +148,6 @@ class ApplicationsClient:
         *,
         name: str,
         type: str,
-        expires_at: typing.Optional[str] = OMIT,
         permissions: typing.Optional[typing.Sequence[str]] = OMIT,
         rules: typing.Optional[typing.Sequence[AccessRule]] = OMIT,
         create_key: typing.Optional[bool] = OMIT,
@@ -161,8 +160,6 @@ class ApplicationsClient:
         name : str
 
         type : str
-
-        expires_at : typing.Optional[str]
 
         permissions : typing.Optional[typing.Sequence[str]]
 
@@ -199,7 +196,6 @@ class ApplicationsClient:
             json={
                 "name": name,
                 "type": type,
-                "expires_at": expires_at,
                 "permissions": permissions,
                 "rules": convert_and_respect_annotation_metadata(
                     object_=rules, annotation=typing.Sequence[AccessRule], direction="write"
@@ -708,7 +704,6 @@ class AsyncApplicationsClient:
         *,
         name: str,
         type: str,
-        expires_at: typing.Optional[str] = OMIT,
         permissions: typing.Optional[typing.Sequence[str]] = OMIT,
         rules: typing.Optional[typing.Sequence[AccessRule]] = OMIT,
         create_key: typing.Optional[bool] = OMIT,
@@ -721,8 +716,6 @@ class AsyncApplicationsClient:
         name : str
 
         type : str
-
-        expires_at : typing.Optional[str]
 
         permissions : typing.Optional[typing.Sequence[str]]
 
@@ -767,7 +760,6 @@ class AsyncApplicationsClient:
             json={
                 "name": name,
                 "type": type,
-                "expires_at": expires_at,
                 "permissions": permissions,
                 "rules": convert_and_respect_annotation_metadata(
                     object_=rules, annotation=typing.Sequence[AccessRule], direction="write"

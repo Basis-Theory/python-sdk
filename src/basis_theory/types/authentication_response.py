@@ -2,14 +2,14 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-import datetime as dt
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class TokenMetrics(UniversalBaseModel):
-    count: typing.Optional[int] = None
-    last_created_at: typing.Optional[dt.datetime] = None
+class AuthenticationResponse(UniversalBaseModel):
+    merchant_identifier: typing.Optional[str] = None
+    authentication_data: typing.Optional[str] = None
+    transaction_amount: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

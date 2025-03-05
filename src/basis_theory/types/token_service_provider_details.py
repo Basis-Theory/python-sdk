@@ -3,6 +3,7 @@
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
 from .assurance_details import AssuranceDetails
+from .authentication_response import AuthenticationResponse
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
@@ -13,6 +14,14 @@ class TokenServiceProviderDetails(UniversalBaseModel):
     message_id: typing.Optional[str] = None
     eci_indicator: typing.Optional[str] = None
     assurance_details: typing.Optional[AssuranceDetails] = None
+    transaction_id: typing.Optional[str] = None
+    currency_code: typing.Optional[str] = None
+    transaction_amount: typing.Optional[int] = None
+    cardholder_name: typing.Optional[str] = None
+    device_manufacturer_identifier: typing.Optional[str] = None
+    payment_data_type: typing.Optional[str] = None
+    merchant_token_identifier: typing.Optional[str] = None
+    authentication_responses: typing.Optional[typing.List[AuthenticationResponse]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

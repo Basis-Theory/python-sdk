@@ -2,26 +2,28 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .application_key import ApplicationKey
 import datetime as dt
-from .access_rule import AccessRule
+from .card_details import CardDetails
+from .token_authentication import TokenAuthentication
+import typing_extensions
+from .token_intent_extras import TokenIntentExtras
+from ..core.serialization import FieldMetadata
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class Application(UniversalBaseModel):
+class TokenIntent(UniversalBaseModel):
     id: typing.Optional[str] = None
-    tenant_id: typing.Optional[str] = None
-    name: typing.Optional[str] = None
-    key: typing.Optional[str] = None
-    keys: typing.Optional[typing.List[ApplicationKey]] = None
     type: typing.Optional[str] = None
+    tenant_id: typing.Optional[str] = None
+    fingerprint: typing.Optional[str] = None
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
-    modified_by: typing.Optional[str] = None
-    modified_at: typing.Optional[dt.datetime] = None
-    permissions: typing.Optional[typing.List[str]] = None
-    rules: typing.Optional[typing.List[AccessRule]] = None
+    expires_at: typing.Optional[dt.datetime] = None
+    card: typing.Optional[CardDetails] = None
+    network_token: typing.Optional[CardDetails] = None
+    authentication: typing.Optional[TokenAuthentication] = None
+    extras: typing_extensions.Annotated[typing.Optional[TokenIntentExtras], FieldMetadata(alias="_extras")] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

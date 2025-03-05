@@ -10,6 +10,10 @@ class ThreeDsRequestorInfo(UniversalBaseModel):
     id: typing.Optional[str] = None
     name: typing.Optional[str] = None
     url: typing.Optional[str] = None
+    discover_client_id: typing.Optional[str] = None
+    discover_requestor_id: typing.Optional[str] = None
+    amex_requestor_type: typing.Optional[str] = None
+    cb_siret_number: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

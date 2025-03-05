@@ -18,6 +18,7 @@ class ThreeDsAuthentication(UniversalBaseModel):
     sdk_transaction_id: typing.Optional[str] = None
     acs_reference_number: typing.Optional[str] = None
     ds_reference_number: typing.Optional[str] = None
+    liability_shifted: typing.Optional[bool] = None
     authentication_value: typing.Optional[str] = None
     authentication_status: typing.Optional[str] = None
     authentication_status_code: typing.Optional[str] = None
