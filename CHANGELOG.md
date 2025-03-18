@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Basis-Theory/python-sdk/compare/v1.0.0...v1.1.0) (2025-03-18)
+
+
+### Features
+
+* Apple Pay support ([ced1ba2](https://github.com/Basis-Theory/python-sdk/commit/ced1ba24deb30a27f6764a855efae89764476934))
+
 # [1.0.0](https://github.com/Basis-Theory/python-sdk/compare/v0.7.1...v1.0.0) (2025-03-05)
 
 
