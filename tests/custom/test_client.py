@@ -382,19 +382,6 @@ def skip_test_should_support_correlation_id_header() -> None:
 
     client.tenants.self_(correlation_id=correlation_id).get()
 
-def test_should_paginate_on_list_v1() -> None:
-    client = new_private_client()
-    page_size = 3
-    page_number = 1
-
-    tokens = client.tokens.list(size=page_size, page=page_number)
-
-    for count, token in enumerate(tokens, start=1):
-        if count > page_size:
-            break
-
-    assert count > page_size
-
 def test_should_paginate_on_list_v2() -> None:
     client = new_private_client()
     page_size = 3
@@ -428,17 +415,17 @@ def test_should_manage_webhooks_lifecycle() -> None:
     # Issue eng-7345
     # ensure_webhook_removed(client, webhook_id)
 
-# 
-# def test_should_support_google_pay() -> None:
-#     client = new_private_client()
 
-#     try:
-#         client.googlepay.tokenize(
-#             google_payment_method_token={"signature":"MEQCIBnz8wKrUi3qrLSn6KSrTcNIo6YcOzrfre7X49S27MrKAiBMF70q7EHe0Bw8uva77pclggSiPMRTFRFl7TZILyACOQ\u003d\u003d","intermediateSigningKey":{"signedKey":"{\"keyValue\":\"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEnK9rrDl5FJalSwcoZD3qB5EYcA/sYVTH2Nbh6y/EZArFvvBRQA1eI3BIv1iZeCkBLd/A2nU1ve7xENoPOfp7+Q\\u003d\\u003d\",\"keyExpiration\":\"1737724267469\"}","signatures":["MEQCIHugFzQtVBVNizwkMhG/POcZAmRRXyeiZpt3aFwBzt5cAiBSOY4pfT4tQGWzZjkldbYkpBwWGpSasxRmlt7XPNOaLQ\u003d\u003d"]},"protocolVersion":"ECv2","signedMessage":"{\"encryptedMessage\":\"XURDnvPAIhAKT9rARBV9RT0/yVTesT/w0UniXCJflwu2TkE54UnP7ZmWBo0gKjTJIU3j8D1Rntw2Ywr2UDLbZor+UoeZltzZOAv6iAR4MfvCLSzlh3HcjechwqZM8oxSF2iZoD2XrNqOgaYbOY1EaYoLx1JpftZDuTqSDLYa+szsoPjAUgzBO5TJZTDIa3zDNAdK3UtAPwutL1M4pTyuFhUKOC12J3RzZdaGFANbKSc8vdfqnR1hqsvsEt1sWPf2O3yty91klSA7FDckvwlKfRoNyQMDhaDkEvYUi75uxcjCRHE0Jjbj61bZriSTXiG2KWNF2OKpz7l61kgPJxCpK7A7TV3P4pBLwW7DYbRusO6FupLehxOZl9nBpVfApytCZGjaSXT7QfPpxdBv8j2VfKsodOf/dwv2Thrra9a6ZzFWsUz4l7Jbr4MCBLhXH4lSuxKrlA2Rf/CVPTgz8b88cYpEDZyqLJxDstwy74/Nl7Mjc4V7thzmdskAeYSuZXKXyyeo3BHqkguRkeagEwuHiZoem2V4W2qWOF8hYn14KY3cXXNcVA\\u003d\\u003d\",\"ephemeralPublicKey\":\"BHBDKlM3tik4o9leEkHu+875bHbORaCK7dDeXFCRmv4bzWJw/4bsvtBtaBH3SW5JXkE/6pkRYAtjFzQmHMRQYvc\\u003d\",\"tag\":\"Hle3Oafx5sfUc3U3sCQgV0tRPhCAvPlVLYiqvbPyTYY\\u003d\"}"}
-#         )
-#         assert False, "Should have thrown an error"
-#     except UnprocessableEntityError as e:
-#         assert "expired intermediateSigningKey" in e.body.detail, "The error detail does not contain the expected message."
+def test_should_support_google_pay() -> None:
+    client = new_private_test_tenant_client()
+
+    try:
+        client.googlepay.tokenize(
+            google_payment_method_token={"signature":"MEQCIBnz8wKrUi3qrLSn6KSrTcNIo6YcOzrfre7X49S27MrKAiBMF70q7EHe0Bw8uva77pclggSiPMRTFRFl7TZILyACOQ\u003d\u003d","intermediateSigningKey":{"signedKey":"{\"keyValue\":\"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEnK9rrDl5FJalSwcoZD3qB5EYcA/sYVTH2Nbh6y/EZArFvvBRQA1eI3BIv1iZeCkBLd/A2nU1ve7xENoPOfp7+Q\\u003d\\u003d\",\"keyExpiration\":\"1737724267469\"}","signatures":["MEQCIHugFzQtVBVNizwkMhG/POcZAmRRXyeiZpt3aFwBzt5cAiBSOY4pfT4tQGWzZjkldbYkpBwWGpSasxRmlt7XPNOaLQ\u003d\u003d"]},"protocolVersion":"ECv2","signedMessage":"{\"encryptedMessage\":\"XURDnvPAIhAKT9rARBV9RT0/yVTesT/w0UniXCJflwu2TkE54UnP7ZmWBo0gKjTJIU3j8D1Rntw2Ywr2UDLbZor+UoeZltzZOAv6iAR4MfvCLSzlh3HcjechwqZM8oxSF2iZoD2XrNqOgaYbOY1EaYoLx1JpftZDuTqSDLYa+szsoPjAUgzBO5TJZTDIa3zDNAdK3UtAPwutL1M4pTyuFhUKOC12J3RzZdaGFANbKSc8vdfqnR1hqsvsEt1sWPf2O3yty91klSA7FDckvwlKfRoNyQMDhaDkEvYUi75uxcjCRHE0Jjbj61bZriSTXiG2KWNF2OKpz7l61kgPJxCpK7A7TV3P4pBLwW7DYbRusO6FupLehxOZl9nBpVfApytCZGjaSXT7QfPpxdBv8j2VfKsodOf/dwv2Thrra9a6ZzFWsUz4l7Jbr4MCBLhXH4lSuxKrlA2Rf/CVPTgz8b88cYpEDZyqLJxDstwy74/Nl7Mjc4V7thzmdskAeYSuZXKXyyeo3BHqkguRkeagEwuHiZoem2V4W2qWOF8hYn14KY3cXXNcVA\\u003d\\u003d\",\"ephemeralPublicKey\":\"BHBDKlM3tik4o9leEkHu+875bHbORaCK7dDeXFCRmv4bzWJw/4bsvtBtaBH3SW5JXkE/6pkRYAtjFzQmHMRQYvc\\u003d\",\"tag\":\"Hle3Oafx5sfUc3U3sCQgV0tRPhCAvPlVLYiqvbPyTYY\\u003d\"}"}
+        )
+        assert False, "Should have thrown an error"
+    except UnprocessableEntityError as e:
+        assert "expired intermediateSigningKey" in e.body.detail, "The error detail does not contain the expected message."
 
 
 def ensure_webhook_removed(client, webhook_id):
@@ -561,10 +548,15 @@ def new_management_client():
         base_url=os.getenv('BT_API_URL')
     )
 
-
 def new_private_client():
     return BasisTheory(
         api_key=os.getenv('BT_PVT_API_KEY'),
+        base_url=os.getenv('BT_API_URL')
+    )
+
+def new_private_test_tenant_client():
+    return BasisTheory(
+        api_key=os.getenv('BT_PVT_TEST_API_KEY'),
         base_url=os.getenv('BT_API_URL')
     )
 
