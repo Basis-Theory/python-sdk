@@ -2,6 +2,9 @@
 
 from .access_rule import AccessRule
 from .additional_card_details import AdditionalCardDetails
+from .apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
+from .apple_pay_method_token import ApplePayMethodToken
+from .apple_pay_tokenize_response import ApplePayTokenizeResponse
 from .application import Application
 from .application_key import ApplicationKey
 from .application_paginated_list import ApplicationPaginatedList
@@ -23,6 +26,7 @@ from .create_tenant_connection_response import CreateTenantConnectionResponse
 from .create_three_ds_session_response import CreateThreeDsSessionResponse
 from .create_token_intent_response import CreateTokenIntentResponse
 from .cursor_pagination import CursorPagination
+from .domain_registration_response import DomainRegistrationResponse
 from .event_types import EventTypes
 from .get_applications import GetApplications
 from .get_logs import GetLogs
@@ -36,11 +40,13 @@ from .get_tokens import GetTokens
 from .get_tokens_v2 import GetTokensV2
 from .google_pay_tokenize_response import GooglePayTokenizeResponse
 from .google_payment_method_token import GooglePaymentMethodToken
+from .header import Header
 from .intermediate_signing_key import IntermediateSigningKey
 from .log import Log
 from .log_entity_type import LogEntityType
 from .log_paginated_list import LogPaginatedList
 from .pagination import Pagination
+from .payment_data import PaymentData
 from .permission import Permission
 from .privacy import Privacy
 from .problem_details import ProblemDetails
@@ -105,6 +111,9 @@ from .webhook_status import WebhookStatus
 __all__ = [
     "AccessRule",
     "AdditionalCardDetails",
+    "ApplePayDomainRegistrationResponse",
+    "ApplePayMethodToken",
+    "ApplePayTokenizeResponse",
     "Application",
     "ApplicationKey",
     "ApplicationPaginatedList",
@@ -126,6 +135,7 @@ __all__ = [
     "CreateThreeDsSessionResponse",
     "CreateTokenIntentResponse",
     "CursorPagination",
+    "DomainRegistrationResponse",
     "EventTypes",
     "GetApplications",
     "GetLogs",
@@ -139,11 +149,13 @@ __all__ = [
     "GetTokensV2",
     "GooglePayTokenizeResponse",
     "GooglePaymentMethodToken",
+    "Header",
     "IntermediateSigningKey",
     "Log",
     "LogEntityType",
     "LogPaginatedList",
     "Pagination",
+    "PaymentData",
     "Permission",
     "Privacy",
     "ProblemDetails",

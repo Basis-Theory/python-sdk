@@ -6,6 +6,7 @@ import os
 import httpx
 from .core.api_error import ApiError
 from .core.client_wrapper import SyncClientWrapper
+from .apple_pay.client import ApplePayClient
 from .applications.client import ApplicationsClient
 from .application_keys.client import ApplicationKeysClient
 from .application_templates.client import ApplicationTemplatesClient
@@ -23,6 +24,7 @@ from .webhooks.client import WebhooksClient
 from .tenants.client import TenantsClient
 from .threeds.client import ThreedsClient
 from .core.client_wrapper import AsyncClientWrapper
+from .apple_pay.client import AsyncApplePayClient
 from .applications.client import AsyncApplicationsClient
 from .application_keys.client import AsyncApplicationKeysClient
 from .application_templates.client import AsyncApplicationTemplatesClient
@@ -105,6 +107,7 @@ class BasisTheory:
             else httpx.Client(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
+        self.apple_pay = ApplePayClient(client_wrapper=self._client_wrapper)
         self.applications = ApplicationsClient(client_wrapper=self._client_wrapper)
         self.application_keys = ApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = ApplicationTemplatesClient(client_wrapper=self._client_wrapper)
@@ -187,6 +190,7 @@ class AsyncBasisTheory:
             else httpx.AsyncClient(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
+        self.apple_pay = AsyncApplePayClient(client_wrapper=self._client_wrapper)
         self.applications = AsyncApplicationsClient(client_wrapper=self._client_wrapper)
         self.application_keys = AsyncApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = AsyncApplicationTemplatesClient(client_wrapper=self._client_wrapper)
