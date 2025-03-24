@@ -5529,7 +5529,7 @@ client.threeds.sessions.create()
 <dd>
 
 ```python
-from basis_theory import BasisTheory, ThreeDsRequestorInfo
+from basis_theory import BasisTheory
 
 client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
@@ -5539,7 +5539,6 @@ client.threeds.sessions.authenticate(
     session_id="sessionId",
     authentication_category="authentication_category",
     authentication_type="authentication_type",
-    requestor_info=ThreeDsRequestorInfo(),
 )
 
 ```
@@ -5580,14 +5579,6 @@ client.threeds.sessions.authenticate(
 <dl>
 <dd>
 
-**requestor_info:** `ThreeDsRequestorInfo` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **challenge_preference:** `typing.Optional[str]` 
     
 </dd>
@@ -5621,6 +5612,14 @@ client.threeds.sessions.authenticate(
 <dd>
 
 **merchant_info:** `typing.Optional[ThreeDsMerchantInfo]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestor_info:** `typing.Optional[ThreeDsRequestorInfo]` 
     
 </dd>
 </dl>

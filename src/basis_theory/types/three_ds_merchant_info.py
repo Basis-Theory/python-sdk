@@ -13,6 +13,7 @@ class ThreeDsMerchantInfo(UniversalBaseModel):
     name: typing.Optional[str] = None
     country_code: typing.Optional[str] = None
     category_code: typing.Optional[str] = None
+    url: typing.Optional[str] = None
     risk_info: typing.Optional[ThreeDsMerchantRiskInfo] = None
 
     if IS_PYDANTIC_V2:

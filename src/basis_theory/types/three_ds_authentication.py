@@ -12,6 +12,7 @@ class ThreeDsAuthentication(UniversalBaseModel):
     pan_token_id: typing.Optional[str] = None
     token_id: typing.Optional[str] = None
     token_intent_id: typing.Optional[str] = None
+    session_id: typing.Optional[str] = None
     threeds_version: typing.Optional[str] = None
     acs_transaction_id: typing.Optional[str] = None
     ds_transaction_id: typing.Optional[str] = None
@@ -22,6 +23,7 @@ class ThreeDsAuthentication(UniversalBaseModel):
     authentication_value: typing.Optional[str] = None
     authentication_status: typing.Optional[str] = None
     authentication_status_code: typing.Optional[str] = None
+    directory_status_code: typing.Optional[str] = None
     authentication_status_reason: typing.Optional[str] = None
     eci: typing.Optional[str] = None
     acs_challenge_mandated: typing.Optional[str] = None

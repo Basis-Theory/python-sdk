@@ -14,9 +14,9 @@ from ...types.problem_details import ProblemDetails
 from ...errors.forbidden_error import ForbiddenError
 from json.decoder import JSONDecodeError
 from ...core.api_error import ApiError
-from ...types.three_ds_requestor_info import ThreeDsRequestorInfo
 from ...types.three_ds_purchase_info import ThreeDsPurchaseInfo
 from ...types.three_ds_merchant_info import ThreeDsMerchantInfo
+from ...types.three_ds_requestor_info import ThreeDsRequestorInfo
 from ...types.three_ds_cardholder_info import ThreeDsCardholderInfo
 from ...types.three_ds_message_extension import ThreeDsMessageExtension
 from ...types.three_ds_authentication import ThreeDsAuthentication
@@ -150,12 +150,12 @@ class SessionsClient:
         *,
         authentication_category: str,
         authentication_type: str,
-        requestor_info: ThreeDsRequestorInfo,
         challenge_preference: typing.Optional[str] = OMIT,
         request_decoupled_challenge: typing.Optional[bool] = OMIT,
         decoupled_challenge_max_time: typing.Optional[int] = OMIT,
         purchase_info: typing.Optional[ThreeDsPurchaseInfo] = OMIT,
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
+        requestor_info: typing.Optional[ThreeDsRequestorInfo] = OMIT,
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
         broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
@@ -171,8 +171,6 @@ class SessionsClient:
 
         authentication_type : str
 
-        requestor_info : ThreeDsRequestorInfo
-
         challenge_preference : typing.Optional[str]
 
         request_decoupled_challenge : typing.Optional[bool]
@@ -182,6 +180,8 @@ class SessionsClient:
         purchase_info : typing.Optional[ThreeDsPurchaseInfo]
 
         merchant_info : typing.Optional[ThreeDsMerchantInfo]
+
+        requestor_info : typing.Optional[ThreeDsRequestorInfo]
 
         cardholder_info : typing.Optional[ThreeDsCardholderInfo]
 
@@ -201,7 +201,7 @@ class SessionsClient:
 
         Examples
         --------
-        from basis_theory import BasisTheory, ThreeDsRequestorInfo
+        from basis_theory import BasisTheory
 
         client = BasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
@@ -211,7 +211,6 @@ class SessionsClient:
             session_id="sessionId",
             authentication_category="authentication_category",
             authentication_type="authentication_type",
-            requestor_info=ThreeDsRequestorInfo(),
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -563,12 +562,12 @@ class AsyncSessionsClient:
         *,
         authentication_category: str,
         authentication_type: str,
-        requestor_info: ThreeDsRequestorInfo,
         challenge_preference: typing.Optional[str] = OMIT,
         request_decoupled_challenge: typing.Optional[bool] = OMIT,
         decoupled_challenge_max_time: typing.Optional[int] = OMIT,
         purchase_info: typing.Optional[ThreeDsPurchaseInfo] = OMIT,
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
+        requestor_info: typing.Optional[ThreeDsRequestorInfo] = OMIT,
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
         broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
@@ -584,8 +583,6 @@ class AsyncSessionsClient:
 
         authentication_type : str
 
-        requestor_info : ThreeDsRequestorInfo
-
         challenge_preference : typing.Optional[str]
 
         request_decoupled_challenge : typing.Optional[bool]
@@ -595,6 +592,8 @@ class AsyncSessionsClient:
         purchase_info : typing.Optional[ThreeDsPurchaseInfo]
 
         merchant_info : typing.Optional[ThreeDsMerchantInfo]
+
+        requestor_info : typing.Optional[ThreeDsRequestorInfo]
 
         cardholder_info : typing.Optional[ThreeDsCardholderInfo]
 
@@ -616,7 +615,7 @@ class AsyncSessionsClient:
         --------
         import asyncio
 
-        from basis_theory import AsyncBasisTheory, ThreeDsRequestorInfo
+        from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
@@ -629,7 +628,6 @@ class AsyncSessionsClient:
                 session_id="sessionId",
                 authentication_category="authentication_category",
                 authentication_type="authentication_type",
-                requestor_info=ThreeDsRequestorInfo(),
             )
 
 
