@@ -397,13 +397,13 @@ def test_should_paginate_on_list_v2() -> None:
 def test_should_manage_webhooks_lifecycle() -> None:
     client = new_management_client()
 
-    url = 'https://echo.basistheory.com/' + str(uuid.uuid4())
+    url = 'https://echo.flock-dev.com/' + str(uuid.uuid4())
     webhook_id = create_webhook(client, url)
     get_and_validate_webhook_url(client, webhook_id, url)
 
     time.sleep(2) # Required to avoid error `The webhook subscription is undergoing another concurrent operation. Please wait a few seconds, then try again.`
 
-    updated_url = 'https://echo.basistheory.com/' + str(uuid.uuid4())
+    updated_url = 'https://echo.flock-dev.com/' + str(uuid.uuid4())
     update_webhook(client, webhook_id, updated_url)
     get_and_validate_webhook_url(client, webhook_id, updated_url)
 
