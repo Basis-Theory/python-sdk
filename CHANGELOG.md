@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Basis-Theory/python-sdk/compare/v1.1.0...v1.2.0) (2025-03-28)
+
+
+### Features
+
+* update threeds authentication props ([35147b3](https://github.com/Basis-Theory/python-sdk/commit/35147b30cc1f4a1cc44e7ec9ed60c42340f85de1))
+
 # [1.1.0](https://github.com/Basis-Theory/python-sdk/compare/v1.0.0...v1.1.0) (2025-03-18)
 
 
