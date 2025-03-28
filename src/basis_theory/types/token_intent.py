@@ -4,6 +4,7 @@ from ..core.pydantic_utilities import UniversalBaseModel
 import typing
 import datetime as dt
 from .card_details import CardDetails
+from .bank_details import BankDetails
 from .token_authentication import TokenAuthentication
 import typing_extensions
 from .token_intent_extras import TokenIntentExtras
@@ -21,6 +22,7 @@ class TokenIntent(UniversalBaseModel):
     created_at: typing.Optional[dt.datetime] = None
     expires_at: typing.Optional[dt.datetime] = None
     card: typing.Optional[CardDetails] = None
+    bank: typing.Optional[BankDetails] = None
     network_token: typing.Optional[CardDetails] = None
     authentication: typing.Optional[TokenAuthentication] = None
     extras: typing_extensions.Annotated[typing.Optional[TokenIntentExtras], FieldMetadata(alias="_extras")] = None
