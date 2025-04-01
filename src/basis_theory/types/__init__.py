@@ -2,6 +2,7 @@
 
 from .access_rule import AccessRule
 from .additional_card_details import AdditionalCardDetails
+from .address import Address
 from .apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
 from .apple_pay_method_token import ApplePayMethodToken
 from .apple_pay_tokenize_response import ApplePayTokenizeResponse
@@ -18,8 +19,10 @@ from .bin_details import BinDetails
 from .bin_details_bank import BinDetailsBank
 from .bin_details_country import BinDetailsCountry
 from .bin_details_product import BinDetailsProduct
+from .card import Card
 from .card_details import CardDetails
 from .card_issuer_country import CardIssuerCountry
+from .cardholder_info import CardholderInfo
 from .condition import Condition
 from .create_reactor_formula_request import CreateReactorFormulaRequest
 from .create_session_response import CreateSessionResponse
@@ -91,7 +94,6 @@ from .three_ds_requestor_info import ThreeDsRequestorInfo
 from .three_ds_session import ThreeDsSession
 from .three_ds_version import ThreeDsVersion
 from .token import Token
-from .token_authentication import TokenAuthentication
 from .token_cursor_paginated_list import TokenCursorPaginatedList
 from .token_enrichments import TokenEnrichments
 from .token_enrichments_card_details import TokenEnrichmentsCardDetails
@@ -112,6 +114,7 @@ from .webhook_status import WebhookStatus
 __all__ = [
     "AccessRule",
     "AdditionalCardDetails",
+    "Address",
     "ApplePayDomainRegistrationResponse",
     "ApplePayMethodToken",
     "ApplePayTokenizeResponse",
@@ -128,8 +131,10 @@ __all__ = [
     "BinDetailsBank",
     "BinDetailsCountry",
     "BinDetailsProduct",
+    "Card",
     "CardDetails",
     "CardIssuerCountry",
+    "CardholderInfo",
     "Condition",
     "CreateReactorFormulaRequest",
     "CreateSessionResponse",
@@ -201,7 +206,6 @@ __all__ = [
     "ThreeDsSession",
     "ThreeDsVersion",
     "Token",
-    "TokenAuthentication",
     "TokenCursorPaginatedList",
     "TokenEnrichments",
     "TokenEnrichmentsCardDetails",

@@ -141,12 +141,15 @@ class DomainClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def register(
-        self, *, domain: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        domains: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> ApplePayDomainRegistrationResponse:
         """
         Parameters
         ----------
-        domain : str
+        domains : typing.Optional[typing.Sequence[str]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -164,15 +167,13 @@ class DomainClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.domain.register(
-            domain="domain",
-        )
+        client.apple_pay.domain.register()
         """
         _response = self._client_wrapper.httpx_client.request(
             "connections/apple-pay/domain-registration",
-            method="POST",
+            method="PUT",
             json={
-                "domain": domain,
+                "domains": domains,
             },
             headers={
                 "content-type": "application/json",
@@ -384,12 +385,15 @@ class AsyncDomainClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def register(
-        self, *, domain: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        domains: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> ApplePayDomainRegistrationResponse:
         """
         Parameters
         ----------
-        domain : str
+        domains : typing.Optional[typing.Sequence[str]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -412,18 +416,16 @@ class AsyncDomainClient:
 
 
         async def main() -> None:
-            await client.apple_pay.domain.register(
-                domain="domain",
-            )
+            await client.apple_pay.domain.register()
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
             "connections/apple-pay/domain-registration",
-            method="POST",
+            method="PUT",
             json={
-                "domain": domain,
+                "domains": domains,
             },
             headers={
                 "content-type": "application/json",

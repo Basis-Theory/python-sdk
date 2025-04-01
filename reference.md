@@ -873,6 +873,86 @@ client.application_templates.get(
 </dl>
 </details>
 
+## NetworkTokens
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">tokenize</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.network_tokens.tokenize()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**data:** `typing.Optional[Card]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cardholder_info:** `typing.Optional[CardholderInfo]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**containers:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Tokens
 <details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">detokenize</a>(...)</code></summary>
 <dl>
@@ -4302,9 +4382,7 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.apple_pay.domain.register(
-    domain="domain",
-)
+client.apple_pay.domain.register()
 
 ```
 </dd>
@@ -4320,7 +4398,7 @@ client.apple_pay.domain.register(
 <dl>
 <dd>
 
-**domain:** `str` 
+**domains:** `typing.Optional[typing.Sequence[str]]` 
     
 </dd>
 </dl>
