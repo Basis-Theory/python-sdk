@@ -5,7 +5,6 @@ import typing
 import datetime as dt
 from .card_details import CardDetails
 from .bank_details import BankDetails
-from .token_authentication import TokenAuthentication
 import typing_extensions
 from .token_intent_extras import TokenIntentExtras
 from ..core.serialization import FieldMetadata
@@ -24,7 +23,7 @@ class TokenIntent(UniversalBaseModel):
     card: typing.Optional[CardDetails] = None
     bank: typing.Optional[BankDetails] = None
     network_token: typing.Optional[CardDetails] = None
-    authentication: typing.Optional[TokenAuthentication] = None
+    authentication: typing.Optional[typing.Optional[typing.Any]] = None
     extras: typing_extensions.Annotated[typing.Optional[TokenIntentExtras], FieldMetadata(alias="_extras")] = None
 
     if IS_PYDANTIC_V2:

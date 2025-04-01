@@ -22,6 +22,7 @@ class TokenServiceProviderDetails(UniversalBaseModel):
     payment_data_type: typing.Optional[str] = None
     merchant_token_identifier: typing.Optional[str] = None
     authentication_responses: typing.Optional[typing.List[AuthenticationResponse]] = None
+    status: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
