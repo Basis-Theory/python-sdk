@@ -2,13 +2,14 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
+from .address import Address
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class TokenAuthentication(UniversalBaseModel):
-    threeds_cryptogram: typing.Optional[str] = None
-    eci_indicator: typing.Optional[str] = None
+class CardholderInfo(UniversalBaseModel):
+    name: typing.Optional[str] = None
+    address: typing.Optional[Address] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
