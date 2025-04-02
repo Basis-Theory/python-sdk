@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Basis-Theory/python-sdk/compare/v1.2.0...v1.3.0) (2025-04-02)
+
+
+### Features
+
+* Add registerAll to Apple Pay Domains and network token create ([80dba04](https://github.com/Basis-Theory/python-sdk/commit/80dba04f8932589e4e72a0ac3c09d8a92b4c2872))
+
 # [1.2.0](https://github.com/Basis-Theory/python-sdk/compare/v1.1.0...v1.2.0) (2025-03-28)
 
 
