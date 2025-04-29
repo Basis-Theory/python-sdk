@@ -2,16 +2,21 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .card_issuer import CardIssuer
+from .card import Card
+from .card_details import CardDetails
+import datetime as dt
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class AdditionalCardDetails(UniversalBaseModel):
-    brand: typing.Optional[str] = None
-    funding: typing.Optional[str] = None
-    authentication: typing.Optional[str] = None
-    issuer: typing.Optional[CardIssuer] = None
+class NetworkToken(UniversalBaseModel):
+    id: typing.Optional[str] = None
+    tenant_id: typing.Optional[str] = None
+    data: typing.Optional[Card] = None
+    network_token: typing.Optional[CardDetails] = None
+    status: typing.Optional[str] = None
+    created_by: typing.Optional[str] = None
+    created_at: typing.Optional[dt.datetime] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

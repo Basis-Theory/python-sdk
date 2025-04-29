@@ -2,16 +2,13 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .card_issuer import CardIssuer
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class AdditionalCardDetails(UniversalBaseModel):
-    brand: typing.Optional[str] = None
-    funding: typing.Optional[str] = None
-    authentication: typing.Optional[str] = None
-    issuer: typing.Optional[CardIssuer] = None
+class CardIssuer(UniversalBaseModel):
+    country: typing.Optional[str] = None
+    name: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
