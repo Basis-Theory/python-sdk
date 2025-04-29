@@ -2,6 +2,7 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
+from .card_issuer import CardIssuer
 from .card_issuer_country import CardIssuerCountry
 from .additional_card_details import AdditionalCardDetails
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
@@ -16,7 +17,9 @@ class CardDetails(UniversalBaseModel):
     brand: typing.Optional[str] = None
     funding: typing.Optional[str] = None
     authentication: typing.Optional[str] = None
+    issuer: typing.Optional[CardIssuer] = None
     issuer_country: typing.Optional[CardIssuerCountry] = None
+    segment: typing.Optional[str] = None
     additional: typing.Optional[typing.List[AdditionalCardDetails]] = None
 
     if IS_PYDANTIC_V2:

@@ -10,11 +10,11 @@ from .apple_pay.client import ApplePayClient
 from .applications.client import ApplicationsClient
 from .application_keys.client import ApplicationKeysClient
 from .application_templates.client import ApplicationTemplatesClient
-from .network_tokens.client import NetworkTokensClient
 from .tokens.client import TokensClient
 from .enrichments.client import EnrichmentsClient
 from .googlepay.client import GooglepayClient
 from .logs.client import LogsClient
+from .network_tokens.client import NetworkTokensClient
 from .permissions.client import PermissionsClient
 from .proxies.client import ProxiesClient
 from .reactors.client import ReactorsClient
@@ -29,11 +29,11 @@ from .apple_pay.client import AsyncApplePayClient
 from .applications.client import AsyncApplicationsClient
 from .application_keys.client import AsyncApplicationKeysClient
 from .application_templates.client import AsyncApplicationTemplatesClient
-from .network_tokens.client import AsyncNetworkTokensClient
 from .tokens.client import AsyncTokensClient
 from .enrichments.client import AsyncEnrichmentsClient
 from .googlepay.client import AsyncGooglepayClient
 from .logs.client import AsyncLogsClient
+from .network_tokens.client import AsyncNetworkTokensClient
 from .permissions.client import AsyncPermissionsClient
 from .proxies.client import AsyncProxiesClient
 from .reactors.client import AsyncReactorsClient
@@ -113,11 +113,11 @@ class BasisTheory:
         self.applications = ApplicationsClient(client_wrapper=self._client_wrapper)
         self.application_keys = ApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = ApplicationTemplatesClient(client_wrapper=self._client_wrapper)
-        self.network_tokens = NetworkTokensClient(client_wrapper=self._client_wrapper)
         self.tokens = TokensClient(client_wrapper=self._client_wrapper)
         self.enrichments = EnrichmentsClient(client_wrapper=self._client_wrapper)
         self.googlepay = GooglepayClient(client_wrapper=self._client_wrapper)
         self.logs = LogsClient(client_wrapper=self._client_wrapper)
+        self.network_tokens = NetworkTokensClient(client_wrapper=self._client_wrapper)
         self.permissions = PermissionsClient(client_wrapper=self._client_wrapper)
         self.proxies = ProxiesClient(client_wrapper=self._client_wrapper)
         self.reactors = ReactorsClient(client_wrapper=self._client_wrapper)
@@ -197,11 +197,11 @@ class AsyncBasisTheory:
         self.applications = AsyncApplicationsClient(client_wrapper=self._client_wrapper)
         self.application_keys = AsyncApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = AsyncApplicationTemplatesClient(client_wrapper=self._client_wrapper)
-        self.network_tokens = AsyncNetworkTokensClient(client_wrapper=self._client_wrapper)
         self.tokens = AsyncTokensClient(client_wrapper=self._client_wrapper)
         self.enrichments = AsyncEnrichmentsClient(client_wrapper=self._client_wrapper)
         self.googlepay = AsyncGooglepayClient(client_wrapper=self._client_wrapper)
         self.logs = AsyncLogsClient(client_wrapper=self._client_wrapper)
+        self.network_tokens = AsyncNetworkTokensClient(client_wrapper=self._client_wrapper)
         self.permissions = AsyncPermissionsClient(client_wrapper=self._client_wrapper)
         self.proxies = AsyncProxiesClient(client_wrapper=self._client_wrapper)
         self.reactors = AsyncReactorsClient(client_wrapper=self._client_wrapper)
