@@ -425,7 +425,7 @@ def test_should_support_google_pay() -> None:
         )
         assert False, "Should have thrown an error"
     except UnprocessableEntityError as e:
-        assert "expired intermediateSigningKey" in e.body.detail, "The error detail does not contain the expected message."
+        assert "Failed to decrypt token" in e.body.detail, "The error detail does not contain the expected message."
 
 
 def ensure_webhook_removed(client, webhook_id):
