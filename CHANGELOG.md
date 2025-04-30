@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Basis-Theory/python-sdk/compare/v1.3.0...v1.4.0) (2025-04-30)
+
+
+### Features
+
+* Add card fields to tokens and token-intents ([#57](https://github.com/Basis-Theory/python-sdk/issues/57)) ([a708b22](https://github.com/Basis-Theory/python-sdk/commit/a708b22fc48fecadd5b6c1af0328e406cef6b47d))
+
 # [1.3.0](https://github.com/Basis-Theory/python-sdk/compare/v1.2.0...v1.3.0) (2025-04-02)
 
 
