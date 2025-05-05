@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Basis-Theory/python-sdk/compare/v1.4.0...v1.5.0) (2025-05-05)
+
+
+### Features
+
+* adds account updater endpoints ([#58](https://github.com/Basis-Theory/python-sdk/issues/58)) ([37a79f9](https://github.com/Basis-Theory/python-sdk/commit/37a79f9baba58071d1437c28a15cb12887f4ce7b))
+
 # [1.4.0](https://github.com/Basis-Theory/python-sdk/compare/v1.3.0...v1.4.0) (2025-04-30)
 
 
