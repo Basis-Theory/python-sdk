@@ -4226,6 +4226,304 @@ client.webhooks.create(
 </dl>
 </details>
 
+## AccountUpdater Jobs
+<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the account updater batch job
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.account_updater.jobs.get(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of account updater batch jobs
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.account_updater.jobs.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` — The maximum number of jobs to return
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` — Cursor for pagination
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">create</a>()</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the created account updater batch job
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.account_updater.jobs.create()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AccountUpdater RealTime
+<details><summary><code>client.account_updater.real_time.<a href="src/basis_theory/account_updater/real_time/client.py">invoke</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the update result
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.account_updater.real_time.invoke(
+    token_id="9a420b15-ddfe-4793-9466-48f53520e47c",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**token_id:** `str` — Card Token identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiration_year:** `typing.Optional[int]` — The 4-digit expiration year of the account number. Not required if the card token already stores this value.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiration_month:** `typing.Optional[int]` — The 2-digit expiration month of the account number. Not required if the card token already stores this value.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ApplePay Domain
 <details><summary><code>client.apple_pay.domain.<a href="src/basis_theory/apple_pay/domain/client.py">deregister</a>(...)</code></summary>
 <dl>

@@ -2,6 +2,11 @@
 
 from .types import (
     AccessRule,
+    AccountUpdaterJob,
+    AccountUpdaterJobList,
+    AccountUpdaterJobListPagination,
+    AccountUpdaterJobStatus,
+    AccountUpdaterRealTimeResponse,
     AdditionalCardDetails,
     Address,
     ApplePayDomainRegistrationResponse,
@@ -125,6 +130,7 @@ from .errors import (
     UnprocessableEntityError,
 )
 from . import (
+    account_updater,
     apple_pay,
     application_keys,
     application_templates,
@@ -150,6 +156,11 @@ from .version import __version__
 
 __all__ = [
     "AccessRule",
+    "AccountUpdaterJob",
+    "AccountUpdaterJobList",
+    "AccountUpdaterJobListPagination",
+    "AccountUpdaterJobStatus",
+    "AccountUpdaterRealTimeResponse",
     "AdditionalCardDetails",
     "Address",
     "ApplePayDomainRegistrationResponse",
@@ -273,6 +284,7 @@ __all__ = [
     "WebhookListPagination",
     "WebhookStatus",
     "__version__",
+    "account_updater",
     "apple_pay",
     "application_keys",
     "application_templates",

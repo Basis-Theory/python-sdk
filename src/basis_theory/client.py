@@ -22,6 +22,7 @@ from .roles.client import RolesClient
 from .sessions.client import SessionsClient
 from .token_intents.client import TokenIntentsClient
 from .webhooks.client import WebhooksClient
+from .account_updater.client import AccountUpdaterClient
 from .tenants.client import TenantsClient
 from .threeds.client import ThreedsClient
 from .core.client_wrapper import AsyncClientWrapper
@@ -41,6 +42,7 @@ from .roles.client import AsyncRolesClient
 from .sessions.client import AsyncSessionsClient
 from .token_intents.client import AsyncTokenIntentsClient
 from .webhooks.client import AsyncWebhooksClient
+from .account_updater.client import AsyncAccountUpdaterClient
 from .tenants.client import AsyncTenantsClient
 from .threeds.client import AsyncThreedsClient
 
@@ -125,6 +127,7 @@ class BasisTheory:
         self.sessions = SessionsClient(client_wrapper=self._client_wrapper)
         self.token_intents = TokenIntentsClient(client_wrapper=self._client_wrapper)
         self.webhooks = WebhooksClient(client_wrapper=self._client_wrapper)
+        self.account_updater = AccountUpdaterClient(client_wrapper=self._client_wrapper)
         self.tenants = TenantsClient(client_wrapper=self._client_wrapper)
         self.threeds = ThreedsClient(client_wrapper=self._client_wrapper)
 
@@ -209,6 +212,7 @@ class AsyncBasisTheory:
         self.sessions = AsyncSessionsClient(client_wrapper=self._client_wrapper)
         self.token_intents = AsyncTokenIntentsClient(client_wrapper=self._client_wrapper)
         self.webhooks = AsyncWebhooksClient(client_wrapper=self._client_wrapper)
+        self.account_updater = AsyncAccountUpdaterClient(client_wrapper=self._client_wrapper)
         self.tenants = AsyncTenantsClient(client_wrapper=self._client_wrapper)
         self.threeds = AsyncThreedsClient(client_wrapper=self._client_wrapper)
 
