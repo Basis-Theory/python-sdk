@@ -2100,6 +2100,63 @@ client.network_tokens.create()
 </dl>
 </details>
 
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">cryptogram</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.network_tokens.cryptogram(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Permissions
 <details><summary><code>client.permissions.<a href="src/basis_theory/permissions/client.py">list</a>(...)</code></summary>
 <dl>
@@ -5973,6 +6030,14 @@ client.threeds.sessions.authenticate(
 <dd>
 
 **authentication_type:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**card_brand:** `typing.Optional[str]` 
     
 </dd>
 </dl>

@@ -19,6 +19,7 @@ class ThreeDsSession(UniversalBaseModel):
     token_id: typing.Optional[str] = None
     token_intent_id: typing.Optional[str] = None
     card_brand: typing.Optional[str] = None
+    additional_card_brands: typing.Optional[typing.List[str]] = None
     expiration_date: typing.Optional[dt.datetime] = None
     created_date: typing.Optional[dt.datetime] = None
     created_by: typing.Optional[str] = None
