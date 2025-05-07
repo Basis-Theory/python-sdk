@@ -150,6 +150,7 @@ class SessionsClient:
         *,
         authentication_category: str,
         authentication_type: str,
+        card_brand: typing.Optional[str] = OMIT,
         challenge_preference: typing.Optional[str] = OMIT,
         request_decoupled_challenge: typing.Optional[bool] = OMIT,
         decoupled_challenge_max_time: typing.Optional[int] = OMIT,
@@ -170,6 +171,8 @@ class SessionsClient:
         authentication_category : str
 
         authentication_type : str
+
+        card_brand : typing.Optional[str]
 
         challenge_preference : typing.Optional[str]
 
@@ -219,6 +222,7 @@ class SessionsClient:
             json={
                 "authentication_category": authentication_category,
                 "authentication_type": authentication_type,
+                "card_brand": card_brand,
                 "challenge_preference": challenge_preference,
                 "request_decoupled_challenge": request_decoupled_challenge,
                 "decoupled_challenge_max_time": decoupled_challenge_max_time,
@@ -562,6 +566,7 @@ class AsyncSessionsClient:
         *,
         authentication_category: str,
         authentication_type: str,
+        card_brand: typing.Optional[str] = OMIT,
         challenge_preference: typing.Optional[str] = OMIT,
         request_decoupled_challenge: typing.Optional[bool] = OMIT,
         decoupled_challenge_max_time: typing.Optional[int] = OMIT,
@@ -582,6 +587,8 @@ class AsyncSessionsClient:
         authentication_category : str
 
         authentication_type : str
+
+        card_brand : typing.Optional[str]
 
         challenge_preference : typing.Optional[str]
 
@@ -639,6 +646,7 @@ class AsyncSessionsClient:
             json={
                 "authentication_category": authentication_category,
                 "authentication_type": authentication_type,
+                "card_brand": card_brand,
                 "challenge_preference": challenge_preference,
                 "request_decoupled_challenge": request_decoupled_challenge,
                 "decoupled_challenge_max_time": decoupled_challenge_max_time,
