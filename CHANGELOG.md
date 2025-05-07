@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/Basis-Theory/python-sdk/compare/v1.5.0...v1.6.0) (2025-05-07)
+
+
+### Features
+
+* add network tokens and 3ds co-badged cards props ([4aace4a](https://github.com/Basis-Theory/python-sdk/commit/4aace4a96c3f37cef8b4366dd0fcddab96c528f5))
+
 # [1.5.0](https://github.com/Basis-Theory/python-sdk/compare/v1.4.0...v1.5.0) (2025-05-05)
 
 
