@@ -2053,7 +2053,7 @@ client.logs.get_entity_types()
 </details>
 
 ## NetworkTokens
-<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">create</a>()</code></summary>
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">create</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2084,6 +2084,22 @@ client.network_tokens.create()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**data:** `typing.Optional[Card]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cardholder_info:** `typing.Optional[CardholderInfo]` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -2120,6 +2136,120 @@ client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
 client.network_tokens.cryptogram(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.network_tokens.get(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.network_tokens.delete(
     id="id",
 )
 
