@@ -13,6 +13,7 @@ from .application_templates.client import ApplicationTemplatesClient
 from .tokens.client import TokensClient
 from .enrichments.client import EnrichmentsClient
 from .googlepay.client import GooglepayClient
+from .keys.client import KeysClient
 from .logs.client import LogsClient
 from .network_tokens.client import NetworkTokensClient
 from .permissions.client import PermissionsClient
@@ -33,6 +34,7 @@ from .application_templates.client import AsyncApplicationTemplatesClient
 from .tokens.client import AsyncTokensClient
 from .enrichments.client import AsyncEnrichmentsClient
 from .googlepay.client import AsyncGooglepayClient
+from .keys.client import AsyncKeysClient
 from .logs.client import AsyncLogsClient
 from .network_tokens.client import AsyncNetworkTokensClient
 from .permissions.client import AsyncPermissionsClient
@@ -118,6 +120,7 @@ class BasisTheory:
         self.tokens = TokensClient(client_wrapper=self._client_wrapper)
         self.enrichments = EnrichmentsClient(client_wrapper=self._client_wrapper)
         self.googlepay = GooglepayClient(client_wrapper=self._client_wrapper)
+        self.keys = KeysClient(client_wrapper=self._client_wrapper)
         self.logs = LogsClient(client_wrapper=self._client_wrapper)
         self.network_tokens = NetworkTokensClient(client_wrapper=self._client_wrapper)
         self.permissions = PermissionsClient(client_wrapper=self._client_wrapper)
@@ -203,6 +206,7 @@ class AsyncBasisTheory:
         self.tokens = AsyncTokensClient(client_wrapper=self._client_wrapper)
         self.enrichments = AsyncEnrichmentsClient(client_wrapper=self._client_wrapper)
         self.googlepay = AsyncGooglepayClient(client_wrapper=self._client_wrapper)
+        self.keys = AsyncKeysClient(client_wrapper=self._client_wrapper)
         self.logs = AsyncLogsClient(client_wrapper=self._client_wrapper)
         self.network_tokens = AsyncNetworkTokensClient(client_wrapper=self._client_wrapper)
         self.permissions = AsyncPermissionsClient(client_wrapper=self._client_wrapper)

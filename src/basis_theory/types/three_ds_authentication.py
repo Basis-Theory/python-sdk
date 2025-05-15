@@ -25,6 +25,7 @@ class ThreeDsAuthentication(UniversalBaseModel):
     authentication_status_code: typing.Optional[str] = None
     directory_status_code: typing.Optional[str] = None
     authentication_status_reason: typing.Optional[str] = None
+    authentication_status_reason_code: typing.Optional[str] = None
     eci: typing.Optional[str] = None
     acs_challenge_mandated: typing.Optional[str] = None
     acs_decoupled_authentication: typing.Optional[str] = None

@@ -34,6 +34,8 @@ class NetworkTokensClient:
         self,
         *,
         data: typing.Optional[Card] = OMIT,
+        token_id: typing.Optional[str] = OMIT,
+        token_intent_id: typing.Optional[str] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> NetworkToken:
@@ -41,6 +43,10 @@ class NetworkTokensClient:
         Parameters
         ----------
         data : typing.Optional[Card]
+
+        token_id : typing.Optional[str]
+
+        token_intent_id : typing.Optional[str]
 
         cardholder_info : typing.Optional[CardholderInfo]
 
@@ -67,6 +73,8 @@ class NetworkTokensClient:
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(object_=data, annotation=Card, direction="write"),
+                "token_id": token_id,
+                "token_intent_id": token_intent_id,
                 "cardholder_info": convert_and_respect_annotation_metadata(
                     object_=cardholder_info, annotation=CardholderInfo, direction="write"
                 ),
@@ -408,6 +416,8 @@ class AsyncNetworkTokensClient:
         self,
         *,
         data: typing.Optional[Card] = OMIT,
+        token_id: typing.Optional[str] = OMIT,
+        token_intent_id: typing.Optional[str] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> NetworkToken:
@@ -415,6 +425,10 @@ class AsyncNetworkTokensClient:
         Parameters
         ----------
         data : typing.Optional[Card]
+
+        token_id : typing.Optional[str]
+
+        token_intent_id : typing.Optional[str]
 
         cardholder_info : typing.Optional[CardholderInfo]
 
@@ -449,6 +463,8 @@ class AsyncNetworkTokensClient:
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(object_=data, annotation=Card, direction="write"),
+                "token_id": token_id,
+                "token_intent_id": token_intent_id,
                 "cardholder_info": convert_and_respect_annotation_metadata(
                     object_=cardholder_info, annotation=CardholderInfo, direction="write"
                 ),
