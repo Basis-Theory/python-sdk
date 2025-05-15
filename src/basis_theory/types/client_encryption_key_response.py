@@ -2,16 +2,17 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .token_service_provider_details import TokenServiceProviderDetails
+import typing_extensions
+from ..core.serialization import FieldMetadata
+import datetime as dt
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class TokenExtras(UniversalBaseModel):
-    deduplicated: typing.Optional[bool] = None
-    tsp_details: typing.Optional[TokenServiceProviderDetails] = None
-    deduplication_behavior: typing.Optional[str] = None
-    network_token_ids: typing.Optional[typing.List[str]] = None
+class ClientEncryptionKeyResponse(UniversalBaseModel):
+    id: typing.Optional[str] = None
+    public_key_pem: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="publicKeyPEM")] = None
+    expires_at: typing_extensions.Annotated[typing.Optional[dt.datetime], FieldMetadata(alias="expiresAt")] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
