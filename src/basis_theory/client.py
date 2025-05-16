@@ -6,10 +6,10 @@ import os
 import httpx
 from .core.api_error import ApiError
 from .core.client_wrapper import SyncClientWrapper
-from .apple_pay.client import ApplePayClient
 from .applications.client import ApplicationsClient
 from .application_keys.client import ApplicationKeysClient
 from .application_templates.client import ApplicationTemplatesClient
+from .apple_pay.client import ApplePayClient
 from .tokens.client import TokensClient
 from .enrichments.client import EnrichmentsClient
 from .googlepay.client import GooglepayClient
@@ -24,13 +24,14 @@ from .sessions.client import SessionsClient
 from .token_intents.client import TokenIntentsClient
 from .webhooks.client import WebhooksClient
 from .account_updater.client import AccountUpdaterClient
+from .connections.client import ConnectionsClient
 from .tenants.client import TenantsClient
 from .threeds.client import ThreedsClient
 from .core.client_wrapper import AsyncClientWrapper
-from .apple_pay.client import AsyncApplePayClient
 from .applications.client import AsyncApplicationsClient
 from .application_keys.client import AsyncApplicationKeysClient
 from .application_templates.client import AsyncApplicationTemplatesClient
+from .apple_pay.client import AsyncApplePayClient
 from .tokens.client import AsyncTokensClient
 from .enrichments.client import AsyncEnrichmentsClient
 from .googlepay.client import AsyncGooglepayClient
@@ -45,6 +46,7 @@ from .sessions.client import AsyncSessionsClient
 from .token_intents.client import AsyncTokenIntentsClient
 from .webhooks.client import AsyncWebhooksClient
 from .account_updater.client import AsyncAccountUpdaterClient
+from .connections.client import AsyncConnectionsClient
 from .tenants.client import AsyncTenantsClient
 from .threeds.client import AsyncThreedsClient
 
@@ -113,10 +115,10 @@ class BasisTheory:
             else httpx.Client(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
-        self.apple_pay = ApplePayClient(client_wrapper=self._client_wrapper)
         self.applications = ApplicationsClient(client_wrapper=self._client_wrapper)
         self.application_keys = ApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = ApplicationTemplatesClient(client_wrapper=self._client_wrapper)
+        self.apple_pay = ApplePayClient(client_wrapper=self._client_wrapper)
         self.tokens = TokensClient(client_wrapper=self._client_wrapper)
         self.enrichments = EnrichmentsClient(client_wrapper=self._client_wrapper)
         self.googlepay = GooglepayClient(client_wrapper=self._client_wrapper)
@@ -131,6 +133,7 @@ class BasisTheory:
         self.token_intents = TokenIntentsClient(client_wrapper=self._client_wrapper)
         self.webhooks = WebhooksClient(client_wrapper=self._client_wrapper)
         self.account_updater = AccountUpdaterClient(client_wrapper=self._client_wrapper)
+        self.connections = ConnectionsClient(client_wrapper=self._client_wrapper)
         self.tenants = TenantsClient(client_wrapper=self._client_wrapper)
         self.threeds = ThreedsClient(client_wrapper=self._client_wrapper)
 
@@ -199,10 +202,10 @@ class AsyncBasisTheory:
             else httpx.AsyncClient(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
-        self.apple_pay = AsyncApplePayClient(client_wrapper=self._client_wrapper)
         self.applications = AsyncApplicationsClient(client_wrapper=self._client_wrapper)
         self.application_keys = AsyncApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = AsyncApplicationTemplatesClient(client_wrapper=self._client_wrapper)
+        self.apple_pay = AsyncApplePayClient(client_wrapper=self._client_wrapper)
         self.tokens = AsyncTokensClient(client_wrapper=self._client_wrapper)
         self.enrichments = AsyncEnrichmentsClient(client_wrapper=self._client_wrapper)
         self.googlepay = AsyncGooglepayClient(client_wrapper=self._client_wrapper)
@@ -217,6 +220,7 @@ class AsyncBasisTheory:
         self.token_intents = AsyncTokenIntentsClient(client_wrapper=self._client_wrapper)
         self.webhooks = AsyncWebhooksClient(client_wrapper=self._client_wrapper)
         self.account_updater = AsyncAccountUpdaterClient(client_wrapper=self._client_wrapper)
+        self.connections = AsyncConnectionsClient(client_wrapper=self._client_wrapper)
         self.tenants = AsyncTenantsClient(client_wrapper=self._client_wrapper)
         self.threeds = AsyncThreedsClient(client_wrapper=self._client_wrapper)
 
