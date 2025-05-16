@@ -6,7 +6,7 @@ from .domain.client import DomainClient
 from .session.client import SessionClient
 from ..types.apple_pay_method_token import ApplePayMethodToken
 from ..core.request_options import RequestOptions
-from ..types.apple_pay_tokenize_response import ApplePayTokenizeResponse
+from ..types.apple_pay_create_response import ApplePayCreateResponse
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.pydantic_utilities import parse_obj_as
 from ..errors.bad_request_error import BadRequestError
@@ -17,6 +17,8 @@ from ..errors.forbidden_error import ForbiddenError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
+from ..types.apple_pay_token import ApplePayToken
+from ..core.jsonable_encoder import jsonable_encoder
 from ..core.client_wrapper import AsyncClientWrapper
 from .domain.client import AsyncDomainClient
 from .session.client import AsyncSessionClient
@@ -31,24 +33,27 @@ class ApplePayClient:
         self.domain = DomainClient(client_wrapper=self._client_wrapper)
         self.session = SessionClient(client_wrapper=self._client_wrapper)
 
-    def tokenize(
+    def create(
         self,
         *,
-        apple_payment_method_token: typing.Optional[ApplePayMethodToken] = OMIT,
+        expires_at: typing.Optional[str] = OMIT,
+        apple_payment_data: typing.Optional[ApplePayMethodToken] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplePayTokenizeResponse:
+    ) -> ApplePayCreateResponse:
         """
         Parameters
         ----------
-        apple_payment_method_token : typing.Optional[ApplePayMethodToken]
+        expires_at : typing.Optional[str]
+
+        apple_payment_data : typing.Optional[ApplePayMethodToken]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        ApplePayTokenizeResponse
-            Created
+        ApplePayCreateResponse
+            Success
 
         Examples
         --------
@@ -58,14 +63,15 @@ class ApplePayClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.tokenize()
+        client.apple_pay.create()
         """
         _response = self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/tokenize",
+            "apple-pay",
             method="POST",
             json={
-                "apple_payment_method_token": convert_and_respect_annotation_metadata(
-                    object_=apple_payment_method_token, annotation=ApplePayMethodToken, direction="write"
+                "expires_at": expires_at,
+                "apple_payment_data": convert_and_respect_annotation_metadata(
+                    object_=apple_payment_data, annotation=ApplePayMethodToken, direction="write"
                 ),
             },
             headers={
@@ -77,9 +83,9 @@ class ApplePayClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    ApplePayTokenizeResponse,
+                    ApplePayCreateResponse,
                     parse_obj_as(
-                        type_=ApplePayTokenizeResponse,  # type: ignore
+                        type_=ApplePayCreateResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -128,6 +134,71 @@ class ApplePayClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayToken:
+        """
+        Parameters
+        ----------
+        id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ApplePayToken
+            Success
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+        client.apple_pay.get(
+            id="id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"apple-pay/{jsonable_encoder(id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    ApplePayToken,
+                    parse_obj_as(
+                        type_=ApplePayToken,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
 
 class AsyncApplePayClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -135,24 +206,27 @@ class AsyncApplePayClient:
         self.domain = AsyncDomainClient(client_wrapper=self._client_wrapper)
         self.session = AsyncSessionClient(client_wrapper=self._client_wrapper)
 
-    async def tokenize(
+    async def create(
         self,
         *,
-        apple_payment_method_token: typing.Optional[ApplePayMethodToken] = OMIT,
+        expires_at: typing.Optional[str] = OMIT,
+        apple_payment_data: typing.Optional[ApplePayMethodToken] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplePayTokenizeResponse:
+    ) -> ApplePayCreateResponse:
         """
         Parameters
         ----------
-        apple_payment_method_token : typing.Optional[ApplePayMethodToken]
+        expires_at : typing.Optional[str]
+
+        apple_payment_data : typing.Optional[ApplePayMethodToken]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        ApplePayTokenizeResponse
-            Created
+        ApplePayCreateResponse
+            Success
 
         Examples
         --------
@@ -167,17 +241,18 @@ class AsyncApplePayClient:
 
 
         async def main() -> None:
-            await client.apple_pay.tokenize()
+            await client.apple_pay.create()
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/tokenize",
+            "apple-pay",
             method="POST",
             json={
-                "apple_payment_method_token": convert_and_respect_annotation_metadata(
-                    object_=apple_payment_method_token, annotation=ApplePayMethodToken, direction="write"
+                "expires_at": expires_at,
+                "apple_payment_data": convert_and_respect_annotation_metadata(
+                    object_=apple_payment_data, annotation=ApplePayMethodToken, direction="write"
                 ),
             },
             headers={
@@ -189,9 +264,9 @@ class AsyncApplePayClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    ApplePayTokenizeResponse,
+                    ApplePayCreateResponse,
                     parse_obj_as(
-                        type_=ApplePayTokenizeResponse,  # type: ignore
+                        type_=ApplePayCreateResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -227,6 +302,79 @@ class AsyncApplePayClient:
                 )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayToken:
+        """
+        Parameters
+        ----------
+        id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ApplePayToken
+            Success
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.apple_pay.get(
+                id="id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"apple-pay/{jsonable_encoder(id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    ApplePayToken,
+                    parse_obj_as(
+                        type_=ApplePayToken,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     typing.cast(
                         ProblemDetails,
                         parse_obj_as(
