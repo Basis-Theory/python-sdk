@@ -8,8 +8,15 @@ from .account_updater_job_status import AccountUpdaterJobStatus
 from .account_updater_real_time_response import AccountUpdaterRealTimeResponse
 from .additional_card_details import AdditionalCardDetails
 from .address import Address
+from .apple_pay_create_response import ApplePayCreateResponse
+from .apple_pay_create_token_response import ApplePayCreateTokenResponse
+from .apple_pay_domain_deregistration_request import ApplePayDomainDeregistrationRequest
+from .apple_pay_domain_registration_list_request import ApplePayDomainRegistrationListRequest
+from .apple_pay_domain_registration_request import ApplePayDomainRegistrationRequest
 from .apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
 from .apple_pay_method_token import ApplePayMethodToken
+from .apple_pay_session_request import ApplePaySessionRequest
+from .apple_pay_token import ApplePayToken
 from .apple_pay_tokenize_response import ApplePayTokenizeResponse
 from .application import Application
 from .application_key import ApplicationKey
@@ -18,6 +25,7 @@ from .application_template import ApplicationTemplate
 from .assurance_details import AssuranceDetails
 from .async_react_response import AsyncReactResponse
 from .authenticate_three_ds_session_request import AuthenticateThreeDsSessionRequest
+from .authentication import Authentication
 from .authentication_response import AuthenticationResponse
 from .bank_details import BankDetails
 from .bank_verification_response import BankVerificationResponse
@@ -78,6 +86,7 @@ from .reactor_formula_request_parameter import ReactorFormulaRequestParameter
 from .reactor_paginated_list import ReactorPaginatedList
 from .role import Role
 from .string_string_key_value_pair import StringStringKeyValuePair
+from .submerchant_authentication_response import SubmerchantAuthenticationResponse
 from .tenant import Tenant
 from .tenant_connection_options import TenantConnectionOptions
 from .tenant_invitation_response import TenantInvitationResponse
@@ -131,8 +140,15 @@ __all__ = [
     "AccountUpdaterRealTimeResponse",
     "AdditionalCardDetails",
     "Address",
+    "ApplePayCreateResponse",
+    "ApplePayCreateTokenResponse",
+    "ApplePayDomainDeregistrationRequest",
+    "ApplePayDomainRegistrationListRequest",
+    "ApplePayDomainRegistrationRequest",
     "ApplePayDomainRegistrationResponse",
     "ApplePayMethodToken",
+    "ApplePaySessionRequest",
+    "ApplePayToken",
     "ApplePayTokenizeResponse",
     "Application",
     "ApplicationKey",
@@ -141,6 +157,7 @@ __all__ = [
     "AssuranceDetails",
     "AsyncReactResponse",
     "AuthenticateThreeDsSessionRequest",
+    "Authentication",
     "AuthenticationResponse",
     "BankDetails",
     "BankVerificationResponse",
@@ -201,6 +218,7 @@ __all__ = [
     "ReactorPaginatedList",
     "Role",
     "StringStringKeyValuePair",
+    "SubmerchantAuthenticationResponse",
     "Tenant",
     "TenantConnectionOptions",
     "TenantInvitationResponse",

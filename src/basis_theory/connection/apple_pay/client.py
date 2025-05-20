@@ -2,7 +2,12 @@
 
 import typing
 from ...core.client_wrapper import SyncClientWrapper
+from .domain.client import DomainClient
+from .session.client import SessionClient
+from ...types.apple_pay_method_token import ApplePayMethodToken
 from ...core.request_options import RequestOptions
+from ...types.apple_pay_tokenize_response import ApplePayTokenizeResponse
+from ...core.serialization import convert_and_respect_annotation_metadata
 from ...core.pydantic_utilities import parse_obj_as
 from ...errors.bad_request_error import BadRequestError
 from ...types.validation_problem_details import ValidationProblemDetails
@@ -13,39 +18,37 @@ from ...errors.unprocessable_entity_error import UnprocessableEntityError
 from json.decoder import JSONDecodeError
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper
+from .domain.client import AsyncDomainClient
+from .session.client import AsyncSessionClient
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class SessionClient:
+class ApplePayClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+        self.domain = DomainClient(client_wrapper=self._client_wrapper)
+        self.session = SessionClient(client_wrapper=self._client_wrapper)
 
-    def create(
+    def tokenize(
         self,
         *,
-        validation_url: typing.Optional[str] = OMIT,
-        display_name: typing.Optional[str] = OMIT,
-        domain: typing.Optional[str] = OMIT,
+        apple_payment_method_token: typing.Optional[ApplePayMethodToken] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> str:
+    ) -> ApplePayTokenizeResponse:
         """
         Parameters
         ----------
-        validation_url : typing.Optional[str]
-
-        display_name : typing.Optional[str]
-
-        domain : typing.Optional[str]
+        apple_payment_method_token : typing.Optional[ApplePayMethodToken]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        str
-            Success
+        ApplePayTokenizeResponse
+            Created
 
         Examples
         --------
@@ -55,15 +58,18 @@ class SessionClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.session.create()
+        client.connection.apple_pay.tokenize()
         """
         _response = self._client_wrapper.httpx_client.request(
-            "apple-pay/session",
+            "connections/apple-pay/tokenize",
             method="POST",
             json={
-                "validation_url": validation_url,
-                "display_name": display_name,
-                "domain": domain,
+                "apple_payment_method_token": convert_and_respect_annotation_metadata(
+                    object_=apple_payment_method_token, annotation=ApplePayMethodToken, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -71,9 +77,9 @@ class SessionClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    str,
+                    ApplePayTokenizeResponse,
                     parse_obj_as(
-                        type_=str,  # type: ignore
+                        type_=ApplePayTokenizeResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -123,34 +129,30 @@ class SessionClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
 
-class AsyncSessionClient:
+class AsyncApplePayClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
+        self.domain = AsyncDomainClient(client_wrapper=self._client_wrapper)
+        self.session = AsyncSessionClient(client_wrapper=self._client_wrapper)
 
-    async def create(
+    async def tokenize(
         self,
         *,
-        validation_url: typing.Optional[str] = OMIT,
-        display_name: typing.Optional[str] = OMIT,
-        domain: typing.Optional[str] = OMIT,
+        apple_payment_method_token: typing.Optional[ApplePayMethodToken] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> str:
+    ) -> ApplePayTokenizeResponse:
         """
         Parameters
         ----------
-        validation_url : typing.Optional[str]
-
-        display_name : typing.Optional[str]
-
-        domain : typing.Optional[str]
+        apple_payment_method_token : typing.Optional[ApplePayMethodToken]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        str
-            Success
+        ApplePayTokenizeResponse
+            Created
 
         Examples
         --------
@@ -165,18 +167,21 @@ class AsyncSessionClient:
 
 
         async def main() -> None:
-            await client.apple_pay.session.create()
+            await client.connection.apple_pay.tokenize()
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "apple-pay/session",
+            "connections/apple-pay/tokenize",
             method="POST",
             json={
-                "validation_url": validation_url,
-                "display_name": display_name,
-                "domain": domain,
+                "apple_payment_method_token": convert_and_respect_annotation_metadata(
+                    object_=apple_payment_method_token, annotation=ApplePayMethodToken, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -184,9 +189,9 @@ class AsyncSessionClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    str,
+                    ApplePayTokenizeResponse,
                     parse_obj_as(
-                        type_=str,  # type: ignore
+                        type_=ApplePayTokenizeResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
