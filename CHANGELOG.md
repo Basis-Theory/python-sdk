@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/Basis-Theory/python-sdk/compare/v1.6.0...v2.0.0) (2025-05-20)
+
+
+### Features
+
+* Add Apple Pay Token support ([db73afb](https://github.com/Basis-Theory/python-sdk/commit/db73afb5a57eab810c681057d0dfbb1b0e19e36a))
+
+
+### BREAKING CHANGES
+
+* The old methods for using Apple Pay and Token Intents have moved to the "connection" namespace.
+
 # [1.6.0](https://github.com/Basis-Theory/python-sdk/compare/v1.5.0...v1.6.0) (2025-05-07)
 
 
