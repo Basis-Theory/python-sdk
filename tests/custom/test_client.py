@@ -566,3 +566,26 @@ def is_guid(value):
         return True
     except ValueError:
         return False
+
+def test_should_support_client_encryption_key_lifecycle() -> None:
+    client = new_management_client()
+
+    # Create a new key
+    key = client.keys.create()
+    assert key.id is not None
+    assert key.public_key_pem is not None
+
+    # Retrieve the key
+    retrieved_key = client.keys.get(id=key.id)
+    assert retrieved_key.id == key.id
+    assert retrieved_key.expires_at is not None
+
+    # Delete the key
+    client.keys.delete(id=key.id)
+
+    # Verify key is deleted
+    try:
+        client.keys.get(id=key.id)
+        assert False, "Should have raised a 404 for key not found"
+    except NotFoundError:
+        pass
