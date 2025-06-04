@@ -13,10 +13,13 @@ class NetworkToken(UniversalBaseModel):
     id: typing.Optional[str] = None
     tenant_id: typing.Optional[str] = None
     data: typing.Optional[Card] = None
+    card: typing.Optional[CardDetails] = None
     network_token: typing.Optional[CardDetails] = None
     status: typing.Optional[str] = None
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
+    modified_by: typing.Optional[str] = None
+    modified_at: typing.Optional[dt.datetime] = None
     token_id: typing.Optional[str] = None
     token_intent_id: typing.Optional[str] = None
 
