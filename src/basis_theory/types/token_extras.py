@@ -12,6 +12,7 @@ class TokenExtras(UniversalBaseModel):
     tsp_details: typing.Optional[TokenServiceProviderDetails] = None
     deduplication_behavior: typing.Optional[str] = None
     network_token_ids: typing.Optional[typing.List[str]] = None
+    decrypted_payload: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
