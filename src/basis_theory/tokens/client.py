@@ -329,6 +329,7 @@ class TokensClient:
         id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
         data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        encrypted: typing.Optional[str] = OMIT,
         privacy: typing.Optional[Privacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -349,6 +350,8 @@ class TokensClient:
         type : typing.Optional[str]
 
         data : typing.Optional[typing.Optional[typing.Any]]
+
+        encrypted : typing.Optional[str]
 
         privacy : typing.Optional[Privacy]
 
@@ -395,6 +398,7 @@ class TokensClient:
                 "id": id,
                 "type": type,
                 "data": data,
+                "encrypted": encrypted,
                 "privacy": convert_and_respect_annotation_metadata(
                     object_=privacy, annotation=Privacy, direction="write"
                 ),
@@ -1441,6 +1445,7 @@ class AsyncTokensClient:
         id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
         data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        encrypted: typing.Optional[str] = OMIT,
         privacy: typing.Optional[Privacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -1461,6 +1466,8 @@ class AsyncTokensClient:
         type : typing.Optional[str]
 
         data : typing.Optional[typing.Optional[typing.Any]]
+
+        encrypted : typing.Optional[str]
 
         privacy : typing.Optional[Privacy]
 
@@ -1515,6 +1522,7 @@ class AsyncTokensClient:
                 "id": id,
                 "type": type,
                 "data": data,
+                "encrypted": encrypted,
                 "privacy": convert_and_respect_annotation_metadata(
                     object_=privacy, annotation=Privacy, direction="write"
                 ),

@@ -17,6 +17,8 @@ class ApplePayToken(UniversalBaseModel):
     expires_at: typing.Optional[dt.datetime] = None
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
+    modified_by: typing.Optional[str] = None
+    modified_at: typing.Optional[dt.datetime] = None
     card: typing.Optional[CardDetails] = None
     data: typing.Optional[typing.Optional[typing.Any]] = None
     authentication: typing.Optional[Authentication] = None
