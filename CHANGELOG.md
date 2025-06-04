@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/Basis-Theory/python-sdk/compare/v2.0.0...v2.1.0) (2025-06-04)
+
+
+### Features
+
+* Add Apple Pay unlink support ([8621af2](https://github.com/Basis-Theory/python-sdk/commit/8621af25ffcdb02727cf15053d5726da12723621))
+
 # [2.0.0](https://github.com/Basis-Theory/python-sdk/compare/v1.6.0...v2.0.0) (2025-05-20)
 
 
