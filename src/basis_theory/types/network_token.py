@@ -5,6 +5,9 @@ import typing
 from .card import Card
 from .card_details import CardDetails
 import datetime as dt
+import typing_extensions
+from .network_token_extras import NetworkTokenExtras
+from ..core.serialization import FieldMetadata
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
@@ -22,6 +25,7 @@ class NetworkToken(UniversalBaseModel):
     modified_at: typing.Optional[dt.datetime] = None
     token_id: typing.Optional[str] = None
     token_intent_id: typing.Optional[str] = None
+    extras: typing_extensions.Annotated[typing.Optional[NetworkTokenExtras], FieldMetadata(alias="_extras")] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

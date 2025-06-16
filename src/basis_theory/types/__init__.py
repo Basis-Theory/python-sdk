@@ -68,6 +68,7 @@ from .log_entity_type import LogEntityType
 from .log_paginated_list import LogPaginatedList
 from .network_token import NetworkToken
 from .network_token_cryptogram import NetworkTokenCryptogram
+from .network_token_extras import NetworkTokenExtras
 from .pagination import Pagination
 from .payment_data import PaymentData
 from .permission import Permission
@@ -200,6 +201,7 @@ __all__ = [
     "LogPaginatedList",
     "NetworkToken",
     "NetworkTokenCryptogram",
+    "NetworkTokenExtras",
     "Pagination",
     "PaymentData",
     "Permission",
