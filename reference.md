@@ -1369,98 +1369,6 @@ client.tokens.create()
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">search</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
-)
-response = client.tokens.search()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**query:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**page:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**start:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**size:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">get</a>(...)</code></summary>
 <dl>
 <dd>
@@ -2613,6 +2521,120 @@ client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
 client.network_tokens.delete(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">suspend</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.network_tokens.suspend(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">resume</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.network_tokens.resume(
     id="id",
 )
 
@@ -5062,6 +5084,14 @@ client.account_updater.real_time.invoke(
 <dl>
 <dd>
 
+**deduplicate_token:** `typing.Optional[bool]` — Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -6801,6 +6831,14 @@ client.threeds.sessions.create()
 <dd>
 
 **authentication_request:** `typing.Optional[AuthenticateThreeDsSessionRequest]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callback_urls:** `typing.Optional[ThreeDsCallbackUrls]` 
     
 </dd>
 </dl>

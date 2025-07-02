@@ -4,6 +4,7 @@ import typing
 from ...core.client_wrapper import SyncClientWrapper
 from ...types.three_ds_device_info import ThreeDsDeviceInfo
 from ...types.authenticate_three_ds_session_request import AuthenticateThreeDsSessionRequest
+from ...types.three_ds_callback_urls import ThreeDsCallbackUrls
 from ...core.request_options import RequestOptions
 from ...types.create_three_ds_session_response import CreateThreeDsSessionResponse
 from ...core.serialization import convert_and_respect_annotation_metadata
@@ -45,6 +46,7 @@ class SessionsClient:
         web_challenge_mode: typing.Optional[str] = OMIT,
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
+        callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateThreeDsSessionResponse:
         """
@@ -65,6 +67,8 @@ class SessionsClient:
         device_info : typing.Optional[ThreeDsDeviceInfo]
 
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
+
+        callback_urls : typing.Optional[ThreeDsCallbackUrls]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -99,6 +103,9 @@ class SessionsClient:
                 ),
                 "authentication_request": convert_and_respect_annotation_metadata(
                     object_=authentication_request, annotation=AuthenticateThreeDsSessionRequest, direction="write"
+                ),
+                "callback_urls": convert_and_respect_annotation_metadata(
+                    object_=callback_urls, annotation=ThreeDsCallbackUrls, direction="write"
                 ),
             },
             headers={
@@ -458,6 +465,7 @@ class AsyncSessionsClient:
         web_challenge_mode: typing.Optional[str] = OMIT,
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
+        callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateThreeDsSessionResponse:
         """
@@ -478,6 +486,8 @@ class AsyncSessionsClient:
         device_info : typing.Optional[ThreeDsDeviceInfo]
 
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
+
+        callback_urls : typing.Optional[ThreeDsCallbackUrls]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -520,6 +530,9 @@ class AsyncSessionsClient:
                 ),
                 "authentication_request": convert_and_respect_annotation_metadata(
                     object_=authentication_request, annotation=AuthenticateThreeDsSessionRequest, direction="write"
+                ),
+                "callback_urls": convert_and_respect_annotation_metadata(
+                    object_=callback_urls, annotation=ThreeDsCallbackUrls, direction="write"
                 ),
             },
             headers={
