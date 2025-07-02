@@ -41,6 +41,7 @@ from .cardholder_info import CardholderInfo
 from .client_encryption_key_metadata_response import ClientEncryptionKeyMetadataResponse
 from .client_encryption_key_response import ClientEncryptionKeyResponse
 from .condition import Condition
+from .create_account_updater_job_request import CreateAccountUpdaterJobRequest
 from .create_reactor_formula_request import CreateReactorFormulaRequest
 from .create_session_response import CreateSessionResponse
 from .create_tenant_connection_response import CreateTenantConnectionResponse
@@ -99,6 +100,7 @@ from .tenant_usage_report import TenantUsageReport
 from .three_ds_acs_rendering_type import ThreeDsAcsRenderingType
 from .three_ds_address import ThreeDsAddress
 from .three_ds_authentication import ThreeDsAuthentication
+from .three_ds_callback_urls import ThreeDsCallbackUrls
 from .three_ds_cardholder_account_info import ThreeDsCardholderAccountInfo
 from .three_ds_cardholder_authentication_info import ThreeDsCardholderAuthenticationInfo
 from .three_ds_cardholder_info import ThreeDsCardholderInfo
@@ -174,6 +176,7 @@ __all__ = [
     "ClientEncryptionKeyMetadataResponse",
     "ClientEncryptionKeyResponse",
     "Condition",
+    "CreateAccountUpdaterJobRequest",
     "CreateReactorFormulaRequest",
     "CreateSessionResponse",
     "CreateTenantConnectionResponse",
@@ -232,6 +235,7 @@ __all__ = [
     "ThreeDsAcsRenderingType",
     "ThreeDsAddress",
     "ThreeDsAuthentication",
+    "ThreeDsCallbackUrls",
     "ThreeDsCardholderAccountInfo",
     "ThreeDsCardholderAuthenticationInfo",
     "ThreeDsCardholderInfo",

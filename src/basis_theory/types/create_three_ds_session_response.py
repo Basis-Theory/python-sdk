@@ -17,6 +17,7 @@ class CreateThreeDsSessionResponse(UniversalBaseModel):
     method_notification_url: typing.Optional[str] = None
     directory_server_id: typing.Optional[str] = None
     recommended_version: typing.Optional[str] = None
+    redirect_url: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
