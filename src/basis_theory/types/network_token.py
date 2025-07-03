@@ -18,6 +18,7 @@ class NetworkToken(UniversalBaseModel):
     data: typing.Optional[Card] = None
     card: typing.Optional[CardDetails] = None
     network_token: typing.Optional[CardDetails] = None
+    par: typing.Optional[str] = None
     status: typing.Optional[str] = None
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
