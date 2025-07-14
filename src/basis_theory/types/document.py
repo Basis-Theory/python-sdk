@@ -2,15 +2,18 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-import pydantic
+import datetime as dt
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
+import pydantic
 
 
-class CreateAccountUpdaterJobRequest(UniversalBaseModel):
-    deduplicate_tokens: typing.Optional[bool] = pydantic.Field(default=None)
-    """
-    Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
-    """
+class Document(UniversalBaseModel):
+    id: typing.Optional[str] = None
+    tenant_id: typing.Optional[str] = None
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
+    content_type: typing.Optional[str] = None
+    created_by: typing.Optional[str] = None
+    created_at: typing.Optional[dt.datetime] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

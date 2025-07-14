@@ -29,7 +29,6 @@ class RealTimeClient:
         token_id: str,
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
-        deduplicate_token: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AccountUpdaterRealTimeResponse:
         """
@@ -45,9 +44,6 @@ class RealTimeClient:
 
         expiration_month : typing.Optional[int]
             The 2-digit expiration month of the account number. Not required if the card token already stores this value.
-
-        deduplicate_token : typing.Optional[bool]
-            Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -76,7 +72,6 @@ class RealTimeClient:
                 "token_id": token_id,
                 "expiration_year": expiration_year,
                 "expiration_month": expiration_month,
-                "deduplicate_token": deduplicate_token,
             },
             headers={
                 "content-type": "application/json",
@@ -149,7 +144,6 @@ class AsyncRealTimeClient:
         token_id: str,
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
-        deduplicate_token: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AccountUpdaterRealTimeResponse:
         """
@@ -165,9 +159,6 @@ class AsyncRealTimeClient:
 
         expiration_month : typing.Optional[int]
             The 2-digit expiration month of the account number. Not required if the card token already stores this value.
-
-        deduplicate_token : typing.Optional[bool]
-            Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -204,7 +195,6 @@ class AsyncRealTimeClient:
                 "token_id": token_id,
                 "expiration_year": expiration_year,
                 "expiration_month": expiration_month,
-                "deduplicate_token": deduplicate_token,
             },
             headers={
                 "content-type": "application/json",

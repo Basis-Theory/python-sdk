@@ -41,13 +41,14 @@ from .cardholder_info import CardholderInfo
 from .client_encryption_key_metadata_response import ClientEncryptionKeyMetadataResponse
 from .client_encryption_key_response import ClientEncryptionKeyResponse
 from .condition import Condition
-from .create_account_updater_job_request import CreateAccountUpdaterJobRequest
+from .create_document_request import CreateDocumentRequest
 from .create_reactor_formula_request import CreateReactorFormulaRequest
 from .create_session_response import CreateSessionResponse
 from .create_tenant_connection_response import CreateTenantConnectionResponse
 from .create_three_ds_session_response import CreateThreeDsSessionResponse
 from .create_token_intent_response import CreateTokenIntentResponse
 from .cursor_pagination import CursorPagination
+from .document import Document
 from .domain_registration_response import DomainRegistrationResponse
 from .event_types import EventTypes
 from .get_applications import GetApplications
@@ -176,13 +177,14 @@ __all__ = [
     "ClientEncryptionKeyMetadataResponse",
     "ClientEncryptionKeyResponse",
     "Condition",
-    "CreateAccountUpdaterJobRequest",
+    "CreateDocumentRequest",
     "CreateReactorFormulaRequest",
     "CreateSessionResponse",
     "CreateTenantConnectionResponse",
     "CreateThreeDsSessionResponse",
     "CreateTokenIntentResponse",
     "CursorPagination",
+    "Document",
     "DomainRegistrationResponse",
     "EventTypes",
     "GetApplications",
