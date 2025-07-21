@@ -428,6 +428,7 @@ def test_should_support_google_pay() -> None:
         assert "Failed to decrypt token" in e.body.detail, "The error detail does not contain the expected message."
 
 
+
 def ensure_webhook_removed(client, webhook_id):
     try:
         client.webhooks.get(id=webhook_id)
