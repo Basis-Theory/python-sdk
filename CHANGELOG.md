@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/Basis-Theory/python-sdk/compare/v2.1.0...v2.2.0) (2025-07-22)
+
+
+### Features
+
+* Add documents ([#75](https://github.com/Basis-Theory/python-sdk/issues/75)) ([ac6f95e](https://github.com/Basis-Theory/python-sdk/commit/ac6f95e27151194fa820195d1b871cebacce2b06))
+
 # [2.1.0](https://github.com/Basis-Theory/python-sdk/compare/v2.0.0...v2.1.0) (2025-06-04)
 
 
