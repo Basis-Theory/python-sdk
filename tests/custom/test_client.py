@@ -1,9 +1,6 @@
-import json
 import os
 import time
 import uuid
-
-import pytest
 
 from basis_theory import BasisTheory, NotFoundError, UnprocessableEntityError
 
@@ -428,6 +425,39 @@ def test_should_support_google_pay() -> None:
         assert "Failed to decrypt token" in e.body.detail, "The error detail does not contain the expected message."
 
 
+def test_documents_lifecycle() -> None:
+    client = new_private_client()
+
+    # Upload
+    document_content = "This is a test document"
+    document1 = client.documents.upload(
+        document=("test_document.txt", document_content, "text/plain"),
+        request={
+            "metadata": {
+                "description": "Test document",
+                "source": "Python SDK test"
+            }
+        }
+    )
+    document_id = document1.id
+
+    # GET info
+    document = client.documents.get(id=document_id)
+    assert document.id == document_id
+    assert document.metadata is not None
+    assert document.metadata.get("description") == "Test document"
+    assert document.metadata.get("source") == "Python SDK test"
+    assert document.content_type == "text/plain"
+
+    # GET data
+    get_and_validate_document_data(client, document_id, document_content)
+
+    # DELETE
+    client.documents.delete(id=document_id)
+    ensure_document_removed(client, document_id)
+
+
+
 def ensure_webhook_removed(client, webhook_id):
     try:
         client.webhooks.get(id=webhook_id)
@@ -587,5 +617,25 @@ def test_should_support_client_encryption_key_lifecycle() -> None:
     try:
         client.keys.get(id=key.id)
         assert False, "Should have raised a 404 for key not found"
+    except NotFoundError:
+        pass
+
+
+def get_and_validate_document_data(client, document_id, expected_content):
+    """Gets document data and validates its content."""
+    data_bytes = b""
+    for chunk in client.documents.data.get(document_id=document_id):
+        data_bytes += chunk
+    
+    # Convert bytes to string for comparison
+    data_content = data_bytes.decode('utf-8')
+    assert data_content == expected_content
+
+
+def ensure_document_removed(client, document_id):
+    """Verifies that a document is deleted."""
+    try:
+        client.documents.get(id=document_id)
+        assert False, "Document should no longer be retrievable"
     except NotFoundError:
         pass
