@@ -98,6 +98,7 @@ def test_proxy_lifecycle() -> None:
     )
 
     client.proxies.delete(id=proxy_id)
+    client.applications.delete(id=application_id)
 
 def test_should_create_token_intent() -> None:
     client = new_private_client()
@@ -186,6 +187,7 @@ def test_should_create_update_patch_reactors() -> None:
     assert react_async_response.async_reactor_request_id is not None
 
     management_client.reactors.delete(id=reactor_id)
+    management_client.applications.delete(id=application_id)
 
 
 def test_tokenize_basic() -> None:
