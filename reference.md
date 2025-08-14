@@ -995,6 +995,184 @@ client.apple_pay.unlink(
 </dl>
 </details>
 
+## GooglePay
+<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.create()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**expires_at:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_payment_data:** `typing.Optional[GooglePayMethodToken]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.get(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.delete(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Documents
 <details><summary><code>client.documents.<a href="src/basis_theory/documents/client.py">upload</a>(...)</code></summary>
 <dl>
@@ -2058,8 +2236,7 @@ client.enrichments.bank_account_verify(
 </dl>
 </details>
 
-## Googlepay
-<details><summary><code>client.googlepay.<a href="src/basis_theory/googlepay/client.py">tokenize</a>(...)</code></summary>
+<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">getcarddetails</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2078,7 +2255,9 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.googlepay.tokenize()
+client.enrichments.getcarddetails(
+    bin="bin",
+)
 
 ```
 </dd>
@@ -2094,7 +2273,7 @@ client.googlepay.tokenize()
 <dl>
 <dd>
 
-**google_payment_method_token:** `typing.Optional[GooglePaymentMethodToken]` 
+**bin:** `str` 
     
 </dd>
 </dl>
@@ -3087,6 +3266,22 @@ client.proxies.create(
 <dl>
 <dd>
 
+**request_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**response_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **application:** `typing.Optional[Application]` 
     
 </dd>
@@ -3283,6 +3478,22 @@ client.proxies.update(
 <dl>
 <dd>
 
+**request_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**response_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **application:** `typing.Optional[Application]` 
     
 </dd>
@@ -3454,6 +3665,22 @@ client.proxies.patch(
 <dd>
 
 **response_transform:** `typing.Optional[ProxyTransform]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**response_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
     
 </dd>
 </dl>
@@ -5522,351 +5749,6 @@ client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
 client.apple_pay.session.create()
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**validation_url:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**display_name:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**domain:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Connection ApplePay
-<details><summary><code>client.connection.apple_pay.<a href="src/basis_theory/connection/apple_pay/client.py">tokenize</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
-)
-client.connection.apple_pay.tokenize()
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**apple_payment_method_token:** `typing.Optional[ApplePayMethodToken]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Connection ApplePay Domain
-<details><summary><code>client.connection.apple_pay.domain.<a href="src/basis_theory/connection/apple_pay/domain/client.py">deregister</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
-)
-client.connection.apple_pay.domain.deregister(
-    domain="domain",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**domain:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.connection.apple_pay.domain.<a href="src/basis_theory/connection/apple_pay/domain/client.py">get</a>()</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
-)
-client.connection.apple_pay.domain.get()
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.connection.apple_pay.domain.<a href="src/basis_theory/connection/apple_pay/domain/client.py">register</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
-)
-client.connection.apple_pay.domain.register(
-    domain="domain",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**domain:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.connection.apple_pay.domain.<a href="src/basis_theory/connection/apple_pay/domain/client.py">register_all</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
-)
-client.connection.apple_pay.domain.register_all()
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**domains:** `typing.Optional[typing.Sequence[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Connection ApplePay Session
-<details><summary><code>client.connection.apple_pay.session.<a href="src/basis_theory/connection/apple_pay/session/client.py">create</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-
-client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
-)
-client.connection.apple_pay.session.create()
 
 ```
 </dd>

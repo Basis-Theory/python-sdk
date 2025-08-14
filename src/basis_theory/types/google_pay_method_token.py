@@ -9,7 +9,7 @@ from ..core.serialization import FieldMetadata
 from .intermediate_signing_key import IntermediateSigningKey
 
 
-class GooglePaymentMethodToken(UniversalBaseModel):
+class GooglePayMethodToken(UniversalBaseModel):
     protocol_version: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="protocolVersion")] = None
     signature: typing.Optional[str] = None
     intermediate_signing_key: typing_extensions.Annotated[

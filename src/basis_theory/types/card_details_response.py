@@ -4,10 +4,16 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .additional_card_detail import AdditionalCardDetail
+from .card_issuer_details import CardIssuerDetails
 
 
-class ApplePayDomainRegistrationListRequest(UniversalBaseModel):
-    domains: typing.Optional[typing.List[str]] = None
+class CardDetailsResponse(UniversalBaseModel):
+    brand: typing.Optional[str] = None
+    funding: typing.Optional[str] = None
+    segment: typing.Optional[str] = None
+    issuer: typing.Optional[CardIssuerDetails] = None
+    additional: typing.Optional[typing.List[AdditionalCardDetail]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

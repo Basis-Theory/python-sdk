@@ -6,10 +6,9 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class ApplePaySessionRequest(UniversalBaseModel):
-    validation_url: typing.Optional[str] = None
-    display_name: typing.Optional[str] = None
-    domain: typing.Optional[str] = None
+class TokenAuthentication(UniversalBaseModel):
+    threeds_cryptogram: typing.Optional[str] = None
+    eci_indicator: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

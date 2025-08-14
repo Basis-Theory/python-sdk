@@ -9,13 +9,12 @@ from .apple_pay.client import ApplePayClient, AsyncApplePayClient
 from .application_keys.client import ApplicationKeysClient, AsyncApplicationKeysClient
 from .application_templates.client import ApplicationTemplatesClient, AsyncApplicationTemplatesClient
 from .applications.client import ApplicationsClient, AsyncApplicationsClient
-from .connection.client import AsyncConnectionClient, ConnectionClient
 from .core.api_error import ApiError
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .documents.client import AsyncDocumentsClient, DocumentsClient
 from .enrichments.client import AsyncEnrichmentsClient, EnrichmentsClient
 from .environment import BasisTheoryEnvironment
-from .googlepay.client import AsyncGooglepayClient, GooglepayClient
+from .google_pay.client import AsyncGooglePayClient, GooglePayClient
 from .keys.client import AsyncKeysClient, KeysClient
 from .logs.client import AsyncLogsClient, LogsClient
 from .network_tokens.client import AsyncNetworkTokensClient, NetworkTokensClient
@@ -106,10 +105,10 @@ class BasisTheory:
         self.application_keys = ApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = ApplicationTemplatesClient(client_wrapper=self._client_wrapper)
         self.apple_pay = ApplePayClient(client_wrapper=self._client_wrapper)
+        self.google_pay = GooglePayClient(client_wrapper=self._client_wrapper)
         self.documents = DocumentsClient(client_wrapper=self._client_wrapper)
         self.tokens = TokensClient(client_wrapper=self._client_wrapper)
         self.enrichments = EnrichmentsClient(client_wrapper=self._client_wrapper)
-        self.googlepay = GooglepayClient(client_wrapper=self._client_wrapper)
         self.keys = KeysClient(client_wrapper=self._client_wrapper)
         self.logs = LogsClient(client_wrapper=self._client_wrapper)
         self.network_tokens = NetworkTokensClient(client_wrapper=self._client_wrapper)
@@ -121,7 +120,6 @@ class BasisTheory:
         self.token_intents = TokenIntentsClient(client_wrapper=self._client_wrapper)
         self.webhooks = WebhooksClient(client_wrapper=self._client_wrapper)
         self.account_updater = AccountUpdaterClient(client_wrapper=self._client_wrapper)
-        self.connection = ConnectionClient(client_wrapper=self._client_wrapper)
         self.tenants = TenantsClient(client_wrapper=self._client_wrapper)
         self.threeds = ThreedsClient(client_wrapper=self._client_wrapper)
 
@@ -201,10 +199,10 @@ class AsyncBasisTheory:
         self.application_keys = AsyncApplicationKeysClient(client_wrapper=self._client_wrapper)
         self.application_templates = AsyncApplicationTemplatesClient(client_wrapper=self._client_wrapper)
         self.apple_pay = AsyncApplePayClient(client_wrapper=self._client_wrapper)
+        self.google_pay = AsyncGooglePayClient(client_wrapper=self._client_wrapper)
         self.documents = AsyncDocumentsClient(client_wrapper=self._client_wrapper)
         self.tokens = AsyncTokensClient(client_wrapper=self._client_wrapper)
         self.enrichments = AsyncEnrichmentsClient(client_wrapper=self._client_wrapper)
-        self.googlepay = AsyncGooglepayClient(client_wrapper=self._client_wrapper)
         self.keys = AsyncKeysClient(client_wrapper=self._client_wrapper)
         self.logs = AsyncLogsClient(client_wrapper=self._client_wrapper)
         self.network_tokens = AsyncNetworkTokensClient(client_wrapper=self._client_wrapper)
@@ -216,7 +214,6 @@ class AsyncBasisTheory:
         self.token_intents = AsyncTokenIntentsClient(client_wrapper=self._client_wrapper)
         self.webhooks = AsyncWebhooksClient(client_wrapper=self._client_wrapper)
         self.account_updater = AsyncAccountUpdaterClient(client_wrapper=self._client_wrapper)
-        self.connection = AsyncConnectionClient(client_wrapper=self._client_wrapper)
         self.tenants = AsyncTenantsClient(client_wrapper=self._client_wrapper)
         self.threeds = AsyncThreedsClient(client_wrapper=self._client_wrapper)
 

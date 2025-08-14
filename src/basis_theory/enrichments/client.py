@@ -5,6 +5,7 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.bank_verification_response import BankVerificationResponse
+from ..types.card_details_response import CardDetailsResponse
 from .raw_client import AsyncRawEnrichmentsClient, RawEnrichmentsClient
 
 # this is used as the default value for optional parameters
@@ -66,6 +67,37 @@ class EnrichmentsClient:
         _response = self._raw_client.bank_account_verify(
             token_id=token_id, country_code=country_code, routing_number=routing_number, request_options=request_options
         )
+        return _response.data
+
+    def getcarddetails(
+        self, *, bin: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> CardDetailsResponse:
+        """
+        Parameters
+        ----------
+        bin : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CardDetailsResponse
+            Success
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+        client.enrichments.getcarddetails(
+            bin="bin",
+        )
+        """
+        _response = self._raw_client.getcarddetails(bin=bin, request_options=request_options)
         return _response.data
 
 
@@ -132,4 +164,43 @@ class AsyncEnrichmentsClient:
         _response = await self._raw_client.bank_account_verify(
             token_id=token_id, country_code=country_code, routing_number=routing_number, request_options=request_options
         )
+        return _response.data
+
+    async def getcarddetails(
+        self, *, bin: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> CardDetailsResponse:
+        """
+        Parameters
+        ----------
+        bin : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CardDetailsResponse
+            Success
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.enrichments.getcarddetails(
+                bin="bin",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.getcarddetails(bin=bin, request_options=request_options)
         return _response.data
