@@ -144,6 +144,8 @@ class RawProxiesClient:
         response_reactor_id: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -164,6 +166,10 @@ class RawProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -194,6 +200,12 @@ class RawProxiesClient:
                 ),
                 "response_transform": convert_and_respect_annotation_metadata(
                     object_=response_transform, annotation=ProxyTransform, direction="write"
+                ),
+                "request_transforms": convert_and_respect_annotation_metadata(
+                    object_=request_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
+                ),
+                "response_transforms": convert_and_respect_annotation_metadata(
+                    object_=response_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
                 ),
                 "application": convert_and_respect_annotation_metadata(
                     object_=application, annotation=Application, direction="write"
@@ -333,6 +345,8 @@ class RawProxiesClient:
         response_reactor_id: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -355,6 +369,10 @@ class RawProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -385,6 +403,12 @@ class RawProxiesClient:
                 ),
                 "response_transform": convert_and_respect_annotation_metadata(
                     object_=response_transform, annotation=ProxyTransform, direction="write"
+                ),
+                "request_transforms": convert_and_respect_annotation_metadata(
+                    object_=request_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
+                ),
+                "response_transforms": convert_and_respect_annotation_metadata(
+                    object_=response_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
                 ),
                 "application": convert_and_respect_annotation_metadata(
                     object_=application, annotation=Application, direction="write"
@@ -525,6 +549,8 @@ class RawProxiesClient:
         destination_url: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -543,6 +569,10 @@ class RawProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -570,6 +600,12 @@ class RawProxiesClient:
                 ),
                 "response_transform": convert_and_respect_annotation_metadata(
                     object_=response_transform, annotation=ProxyTransform, direction="write"
+                ),
+                "request_transforms": convert_and_respect_annotation_metadata(
+                    object_=request_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
+                ),
+                "response_transforms": convert_and_respect_annotation_metadata(
+                    object_=response_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
                 ),
                 "application": convert_and_respect_annotation_metadata(
                     object_=application, annotation=Application, direction="write"
@@ -758,6 +794,8 @@ class AsyncRawProxiesClient:
         response_reactor_id: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -778,6 +816,10 @@ class AsyncRawProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -808,6 +850,12 @@ class AsyncRawProxiesClient:
                 ),
                 "response_transform": convert_and_respect_annotation_metadata(
                     object_=response_transform, annotation=ProxyTransform, direction="write"
+                ),
+                "request_transforms": convert_and_respect_annotation_metadata(
+                    object_=request_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
+                ),
+                "response_transforms": convert_and_respect_annotation_metadata(
+                    object_=response_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
                 ),
                 "application": convert_and_respect_annotation_metadata(
                     object_=application, annotation=Application, direction="write"
@@ -949,6 +997,8 @@ class AsyncRawProxiesClient:
         response_reactor_id: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -971,6 +1021,10 @@ class AsyncRawProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -1001,6 +1055,12 @@ class AsyncRawProxiesClient:
                 ),
                 "response_transform": convert_and_respect_annotation_metadata(
                     object_=response_transform, annotation=ProxyTransform, direction="write"
+                ),
+                "request_transforms": convert_and_respect_annotation_metadata(
+                    object_=request_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
+                ),
+                "response_transforms": convert_and_respect_annotation_metadata(
+                    object_=response_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
                 ),
                 "application": convert_and_respect_annotation_metadata(
                     object_=application, annotation=Application, direction="write"
@@ -1143,6 +1203,8 @@ class AsyncRawProxiesClient:
         destination_url: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -1161,6 +1223,10 @@ class AsyncRawProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -1188,6 +1254,12 @@ class AsyncRawProxiesClient:
                 ),
                 "response_transform": convert_and_respect_annotation_metadata(
                     object_=response_transform, annotation=ProxyTransform, direction="write"
+                ),
+                "request_transforms": convert_and_respect_annotation_metadata(
+                    object_=request_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
+                ),
+                "response_transforms": convert_and_respect_annotation_metadata(
+                    object_=response_transforms, annotation=typing.Sequence[ProxyTransform], direction="write"
                 ),
                 "application": convert_and_respect_annotation_metadata(
                     object_=application, annotation=Application, direction="write"

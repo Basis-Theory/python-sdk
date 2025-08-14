@@ -19,6 +19,8 @@ class Proxy(UniversalBaseModel):
     require_auth: typing.Optional[bool] = None
     request_transform: typing.Optional[ProxyTransform] = None
     response_transform: typing.Optional[ProxyTransform] = None
+    request_transforms: typing.Optional[typing.List[ProxyTransform]] = None
+    response_transforms: typing.Optional[typing.List[ProxyTransform]] = None
     application_id: typing.Optional[str] = None
     configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
     proxy_host: typing.Optional[str] = None

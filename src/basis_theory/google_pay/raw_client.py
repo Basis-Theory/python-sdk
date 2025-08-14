@@ -3,46 +3,63 @@
 import typing
 from json.decoder import JSONDecodeError
 
-from ....core.api_error import ApiError
-from ....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from ....core.http_response import AsyncHttpResponse, HttpResponse
-from ....core.pydantic_utilities import parse_obj_as
-from ....core.request_options import RequestOptions
-from ....errors.bad_request_error import BadRequestError
-from ....errors.forbidden_error import ForbiddenError
-from ....errors.service_unavailable_error import ServiceUnavailableError
-from ....errors.unauthorized_error import UnauthorizedError
-from ....errors.unprocessable_entity_error import UnprocessableEntityError
-from ....types.apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
-from ....types.problem_details import ProblemDetails
-from ....types.validation_problem_details import ValidationProblemDetails
+from ..core.api_error import ApiError
+from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.http_response import AsyncHttpResponse, HttpResponse
+from ..core.jsonable_encoder import jsonable_encoder
+from ..core.pydantic_utilities import parse_obj_as
+from ..core.request_options import RequestOptions
+from ..core.serialization import convert_and_respect_annotation_metadata
+from ..errors.bad_request_error import BadRequestError
+from ..errors.conflict_error import ConflictError
+from ..errors.forbidden_error import ForbiddenError
+from ..errors.not_found_error import NotFoundError
+from ..errors.unauthorized_error import UnauthorizedError
+from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.google_pay_create_response import GooglePayCreateResponse
+from ..types.google_pay_method_token import GooglePayMethodToken
+from ..types.google_pay_token import GooglePayToken
+from ..types.problem_details import ProblemDetails
+from ..types.validation_problem_details import ValidationProblemDetails
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class RawDomainClient:
+class RawGooglePayClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def deregister(self, *, domain: str, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[None]:
+    def create(
+        self,
+        *,
+        expires_at: typing.Optional[str] = OMIT,
+        google_payment_data: typing.Optional[GooglePayMethodToken] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[GooglePayCreateResponse]:
         """
         Parameters
         ----------
-        domain : str
+        expires_at : typing.Optional[str]
+
+        google_payment_data : typing.Optional[GooglePayMethodToken]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[None]
+        HttpResponse[GooglePayCreateResponse]
+            Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/domain-deregistration",
+            "google-pay",
             method="POST",
             json={
-                "domain": domain,
+                "expires_at": expires_at,
+                "google_payment_data": convert_and_respect_annotation_metadata(
+                    object_=google_payment_data, annotation=GooglePayMethodToken, direction="write"
+                ),
             },
             headers={
                 "content-type": "application/json",
@@ -52,7 +69,25 @@ class RawDomainClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return HttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    GooglePayCreateResponse,
+                    parse_obj_as(
+                        type_=GooglePayCreateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -75,105 +110,62 @@ class RawDomainClient:
                         ),
                     ),
                 )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[ApplePayDomainRegistrationResponse]:
+    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[GooglePayToken]:
         """
         Parameters
         ----------
+        id : str
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[ApplePayDomainRegistrationResponse]
+        HttpResponse[GooglePayToken]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/domain-registration",
+            f"google-pay/{jsonable_encoder(id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ApplePayDomainRegistrationResponse,
+                    GooglePayToken,
                     parse_obj_as(
-                        type_=ApplePayDomainRegistrationResponse,  # type: ignore
+                        type_=GooglePayToken,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def register(
-        self, *, domain: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[ApplePayDomainRegistrationResponse]:
-        """
-        Parameters
-        ----------
-        domain : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[ApplePayDomainRegistrationResponse]
-            Accepted
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/domain-registration",
-            method="POST",
-            json={
-                "domain": domain,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    ApplePayDomainRegistrationResponse,
-                    parse_obj_as(
-                        type_=ApplePayDomainRegistrationResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ValidationProblemDetails,
-                        parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -196,24 +188,13 @@ class RawDomainClient:
                         ),
                     ),
                 )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 503:
-                raise ServiceUnavailableError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -223,58 +204,35 @@ class RawDomainClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def register_all(
-        self,
-        *,
-        domains: typing.Optional[typing.Sequence[str]] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[ApplePayDomainRegistrationResponse]:
+    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[str]:
         """
         Parameters
         ----------
-        domains : typing.Optional[typing.Sequence[str]]
+        id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[ApplePayDomainRegistrationResponse]
-            Accepted
+        HttpResponse[str]
+            Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/domain-registration",
-            method="PUT",
-            json={
-                "domains": domains,
-            },
-            headers={
-                "content-type": "application/json",
-            },
+            f"google-pay/{jsonable_encoder(id)}",
+            method="DELETE",
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ApplePayDomainRegistrationResponse,
+                    str,
                     parse_obj_as(
-                        type_=ApplePayDomainRegistrationResponse,  # type: ignore
+                        type_=str,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ValidationProblemDetails,
-                        parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -297,24 +255,13 @@ class RawDomainClient:
                         ),
                     ),
                 )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 503:
-                raise ServiceUnavailableError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -325,30 +272,40 @@ class RawDomainClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawDomainClient:
+class AsyncRawGooglePayClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def deregister(
-        self, *, domain: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[None]:
+    async def create(
+        self,
+        *,
+        expires_at: typing.Optional[str] = OMIT,
+        google_payment_data: typing.Optional[GooglePayMethodToken] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[GooglePayCreateResponse]:
         """
         Parameters
         ----------
-        domain : str
+        expires_at : typing.Optional[str]
+
+        google_payment_data : typing.Optional[GooglePayMethodToken]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[None]
+        AsyncHttpResponse[GooglePayCreateResponse]
+            Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/domain-deregistration",
+            "google-pay",
             method="POST",
             json={
-                "domain": domain,
+                "expires_at": expires_at,
+                "google_payment_data": convert_and_respect_annotation_metadata(
+                    object_=google_payment_data, annotation=GooglePayMethodToken, direction="write"
+                ),
             },
             headers={
                 "content-type": "application/json",
@@ -358,7 +315,25 @@ class AsyncRawDomainClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return AsyncHttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    GooglePayCreateResponse,
+                    parse_obj_as(
+                        type_=GooglePayCreateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ValidationProblemDetails,
+                        parse_obj_as(
+                            type_=ValidationProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -372,6 +347,28 @@ class AsyncRawDomainClient:
                 )
             if _response.status_code == 403:
                 raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ProblemDetails,
@@ -387,99 +384,36 @@ class AsyncRawDomainClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[ApplePayDomainRegistrationResponse]:
+        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[GooglePayToken]:
         """
         Parameters
         ----------
+        id : str
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[ApplePayDomainRegistrationResponse]
+        AsyncHttpResponse[GooglePayToken]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/domain-registration",
+            f"google-pay/{jsonable_encoder(id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ApplePayDomainRegistrationResponse,
+                    GooglePayToken,
                     parse_obj_as(
-                        type_=ApplePayDomainRegistrationResponse,  # type: ignore
+                        type_=GooglePayToken,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def register(
-        self, *, domain: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[ApplePayDomainRegistrationResponse]:
-        """
-        Parameters
-        ----------
-        domain : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[ApplePayDomainRegistrationResponse]
-            Accepted
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/domain-registration",
-            method="POST",
-            json={
-                "domain": domain,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    ApplePayDomainRegistrationResponse,
-                    parse_obj_as(
-                        type_=ApplePayDomainRegistrationResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ValidationProblemDetails,
-                        parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -502,24 +436,13 @@ class AsyncRawDomainClient:
                         ),
                     ),
                 )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 503:
-                raise ServiceUnavailableError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -529,58 +452,37 @@ class AsyncRawDomainClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def register_all(
-        self,
-        *,
-        domains: typing.Optional[typing.Sequence[str]] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[ApplePayDomainRegistrationResponse]:
+    async def delete(
+        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[str]:
         """
         Parameters
         ----------
-        domains : typing.Optional[typing.Sequence[str]]
+        id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[ApplePayDomainRegistrationResponse]
-            Accepted
+        AsyncHttpResponse[str]
+            Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "connections/apple-pay/domain-registration",
-            method="PUT",
-            json={
-                "domains": domains,
-            },
-            headers={
-                "content-type": "application/json",
-            },
+            f"google-pay/{jsonable_encoder(id)}",
+            method="DELETE",
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ApplePayDomainRegistrationResponse,
+                    str,
                     parse_obj_as(
-                        type_=ApplePayDomainRegistrationResponse,  # type: ignore
+                        type_=str,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ValidationProblemDetails,
-                        parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -603,24 +505,13 @@ class AsyncRawDomainClient:
                         ),
                     ),
                 )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 503:
-                raise ServiceUnavailableError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
