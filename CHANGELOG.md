@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/Basis-Theory/python-sdk/compare/v2.3.0...v3.0.0) (2025-08-14)
+
+
+### Features
+
+* Add Google Pay endpoints ([2ffa7b2](https://github.com/Basis-Theory/python-sdk/commit/2ffa7b2b10fb42a755fdaa7bda145a08eaf74190))
+
+
+### BREAKING CHANGES
+
+* Deprecating old Google Pay and Apple Pay endpoints
+
 # [2.3.0](https://github.com/Basis-Theory/python-sdk/compare/v2.2.0...v2.3.0) (2025-07-29)
 
 
