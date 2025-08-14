@@ -4,16 +4,14 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .proxy_transform_options import ProxyTransformOptions
+from .card_issuer_details import CardIssuerDetails
 
 
-class ProxyTransform(UniversalBaseModel):
-    type: typing.Optional[str] = None
-    code: typing.Optional[str] = None
-    matcher: typing.Optional[str] = None
-    expression: typing.Optional[str] = None
-    replacement: typing.Optional[str] = None
-    options: typing.Optional[ProxyTransformOptions] = None
+class AdditionalCardDetail(UniversalBaseModel):
+    brand: typing.Optional[str] = None
+    funding: typing.Optional[str] = None
+    segment: typing.Optional[str] = None
+    issuer: typing.Optional[CardIssuerDetails] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

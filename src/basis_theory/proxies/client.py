@@ -88,6 +88,8 @@ class ProxiesClient:
         response_reactor_id: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -108,6 +110,10 @@ class ProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -145,6 +151,8 @@ class ProxiesClient:
             response_reactor_id=response_reactor_id,
             request_transform=request_transform,
             response_transform=response_transform,
+            request_transforms=request_transforms,
+            response_transforms=response_transforms,
             application=application,
             configuration=configuration,
             require_auth=require_auth,
@@ -192,6 +200,8 @@ class ProxiesClient:
         response_reactor_id: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -214,6 +224,10 @@ class ProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -253,6 +267,8 @@ class ProxiesClient:
             response_reactor_id=response_reactor_id,
             request_transform=request_transform,
             response_transform=response_transform,
+            request_transforms=request_transforms,
+            response_transforms=response_transforms,
             application=application,
             configuration=configuration,
             require_auth=require_auth,
@@ -297,6 +313,8 @@ class ProxiesClient:
         destination_url: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -315,6 +333,10 @@ class ProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -349,6 +371,8 @@ class ProxiesClient:
             destination_url=destination_url,
             request_transform=request_transform,
             response_transform=response_transform,
+            request_transforms=request_transforms,
+            response_transforms=response_transforms,
             application=application,
             configuration=configuration,
             require_auth=require_auth,
@@ -441,6 +465,8 @@ class AsyncProxiesClient:
         response_reactor_id: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -461,6 +487,10 @@ class AsyncProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -506,6 +536,8 @@ class AsyncProxiesClient:
             response_reactor_id=response_reactor_id,
             request_transform=request_transform,
             response_transform=response_transform,
+            request_transforms=request_transforms,
+            response_transforms=response_transforms,
             application=application,
             configuration=configuration,
             require_auth=require_auth,
@@ -561,6 +593,8 @@ class AsyncProxiesClient:
         response_reactor_id: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -583,6 +617,10 @@ class AsyncProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -630,6 +668,8 @@ class AsyncProxiesClient:
             response_reactor_id=response_reactor_id,
             request_transform=request_transform,
             response_transform=response_transform,
+            request_transforms=request_transforms,
+            response_transforms=response_transforms,
             application=application,
             configuration=configuration,
             require_auth=require_auth,
@@ -682,6 +722,8 @@ class AsyncProxiesClient:
         destination_url: typing.Optional[str] = OMIT,
         request_transform: typing.Optional[ProxyTransform] = OMIT,
         response_transform: typing.Optional[ProxyTransform] = OMIT,
+        request_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
+        response_transforms: typing.Optional[typing.Sequence[ProxyTransform]] = OMIT,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
@@ -700,6 +742,10 @@ class AsyncProxiesClient:
         request_transform : typing.Optional[ProxyTransform]
 
         response_transform : typing.Optional[ProxyTransform]
+
+        request_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
+
+        response_transforms : typing.Optional[typing.Sequence[ProxyTransform]]
 
         application : typing.Optional[Application]
 
@@ -742,6 +788,8 @@ class AsyncProxiesClient:
             destination_url=destination_url,
             request_transform=request_transform,
             response_transform=response_transform,
+            request_transforms=request_transforms,
+            response_transforms=response_transforms,
             application=application,
             configuration=configuration,
             require_auth=require_auth,
