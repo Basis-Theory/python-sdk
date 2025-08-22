@@ -99,7 +99,7 @@ class ApplePayClient:
         _response = self._raw_client.get(id, request_options=request_options)
         return _response.data
 
-    def unlink(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
+    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
         """
         Parameters
         ----------
@@ -121,11 +121,11 @@ class ApplePayClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.unlink(
+        client.apple_pay.delete(
             id="id",
         )
         """
-        _response = self._raw_client.unlink(id, request_options=request_options)
+        _response = self._raw_client.delete(id, request_options=request_options)
         return _response.data
 
 
@@ -229,7 +229,7 @@ class AsyncApplePayClient:
         _response = await self._raw_client.get(id, request_options=request_options)
         return _response.data
 
-    async def unlink(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
+    async def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
         """
         Parameters
         ----------
@@ -256,12 +256,12 @@ class AsyncApplePayClient:
 
 
         async def main() -> None:
-            await client.apple_pay.unlink(
+            await client.apple_pay.delete(
                 id="id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.unlink(id, request_options=request_options)
+        _response = await self._raw_client.delete(id, request_options=request_options)
         return _response.data

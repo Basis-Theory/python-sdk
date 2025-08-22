@@ -192,7 +192,7 @@ class RawApplePayClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def unlink(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[str]:
+    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[str]:
         """
         Parameters
         ----------
@@ -207,8 +207,8 @@ class RawApplePayClient:
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"apple-pay/{jsonable_encoder(id)}/unlink",
-            method="POST",
+            f"apple-pay/{jsonable_encoder(id)}",
+            method="DELETE",
             request_options=request_options,
         )
         try:
@@ -243,13 +243,13 @@ class RawApplePayClient:
                         ),
                     ),
                 )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -429,7 +429,7 @@ class AsyncRawApplePayClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def unlink(
+    async def delete(
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[str]:
         """
@@ -446,8 +446,8 @@ class AsyncRawApplePayClient:
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"apple-pay/{jsonable_encoder(id)}/unlink",
-            method="POST",
+            f"apple-pay/{jsonable_encoder(id)}",
+            method="DELETE",
             request_options=request_options,
         )
         try:
@@ -482,13 +482,13 @@ class AsyncRawApplePayClient:
                         ),
                     ),
                 )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

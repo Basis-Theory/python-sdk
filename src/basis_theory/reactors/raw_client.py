@@ -144,6 +144,8 @@ class RawReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        runtime: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Reactor]:
@@ -157,6 +159,10 @@ class RawReactorsClient:
         application : typing.Optional[Application]
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        dependencies : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        runtime : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -178,6 +184,8 @@ class RawReactorsClient:
                     object_=application, annotation=Application, direction="write"
                 ),
                 "configuration": configuration,
+                "dependencies": dependencies,
+                "runtime": runtime,
             },
             headers={
                 "content-type": "application/json",
@@ -309,6 +317,8 @@ class RawReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        runtime: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Reactor]:
@@ -324,6 +334,10 @@ class RawReactorsClient:
         application : typing.Optional[Application]
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        dependencies : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        runtime : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -345,6 +359,8 @@ class RawReactorsClient:
                 ),
                 "code": code,
                 "configuration": configuration,
+                "dependencies": dependencies,
+                "runtime": runtime,
             },
             headers={
                 "content-type": "application/json",
@@ -906,6 +922,8 @@ class AsyncRawReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        runtime: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Reactor]:
@@ -919,6 +937,10 @@ class AsyncRawReactorsClient:
         application : typing.Optional[Application]
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        dependencies : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        runtime : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -940,6 +962,8 @@ class AsyncRawReactorsClient:
                     object_=application, annotation=Application, direction="write"
                 ),
                 "configuration": configuration,
+                "dependencies": dependencies,
+                "runtime": runtime,
             },
             headers={
                 "content-type": "application/json",
@@ -1073,6 +1097,8 @@ class AsyncRawReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        runtime: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Reactor]:
@@ -1088,6 +1114,10 @@ class AsyncRawReactorsClient:
         application : typing.Optional[Application]
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        dependencies : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        runtime : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -1109,6 +1139,8 @@ class AsyncRawReactorsClient:
                 ),
                 "code": code,
                 "configuration": configuration,
+                "dependencies": dependencies,
+                "runtime": runtime,
             },
             headers={
                 "content-type": "application/json",
