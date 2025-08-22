@@ -938,7 +938,7 @@ client.apple_pay.get(
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">unlink</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -957,7 +957,7 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.apple_pay.unlink(
+client.apple_pay.delete(
     id="id",
 )
 
@@ -3895,6 +3895,22 @@ client.reactors.create(
 <dl>
 <dd>
 
+**dependencies:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runtime:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **idempotency_key:** `typing.Optional[str]` 
     
 </dd>
@@ -4044,6 +4060,22 @@ client.reactors.update(
 <dd>
 
 **configuration:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dependencies:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runtime:** `typing.Optional[str]` 
     
 </dd>
 </dl>

@@ -89,6 +89,8 @@ class ReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        runtime: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Reactor:
@@ -102,6 +104,10 @@ class ReactorsClient:
         application : typing.Optional[Application]
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        dependencies : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        runtime : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -131,6 +137,8 @@ class ReactorsClient:
             code=code,
             application=application,
             configuration=configuration,
+            dependencies=dependencies,
+            runtime=runtime,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -173,6 +181,8 @@ class ReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        runtime: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Reactor:
@@ -188,6 +198,10 @@ class ReactorsClient:
         application : typing.Optional[Application]
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        dependencies : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        runtime : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -219,6 +233,8 @@ class ReactorsClient:
             code=code,
             application=application,
             configuration=configuration,
+            dependencies=dependencies,
+            runtime=runtime,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -468,6 +484,8 @@ class AsyncReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        runtime: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Reactor:
@@ -481,6 +499,10 @@ class AsyncReactorsClient:
         application : typing.Optional[Application]
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        dependencies : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        runtime : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -518,6 +540,8 @@ class AsyncReactorsClient:
             code=code,
             application=application,
             configuration=configuration,
+            dependencies=dependencies,
+            runtime=runtime,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -568,6 +592,8 @@ class AsyncReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        runtime: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Reactor:
@@ -583,6 +609,10 @@ class AsyncReactorsClient:
         application : typing.Optional[Application]
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        dependencies : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        runtime : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -622,6 +652,8 @@ class AsyncReactorsClient:
             code=code,
             application=application,
             configuration=configuration,
+            dependencies=dependencies,
+            runtime=runtime,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
