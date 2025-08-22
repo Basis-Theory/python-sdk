@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/Basis-Theory/python-sdk/compare/v3.0.0...v3.1.0) (2025-08-22)
+
+
+### Features
+
+* Add DELETE endpoint for ApplePay ([26c9daa](https://github.com/Basis-Theory/python-sdk/commit/26c9daa54b0360cc2b2444ffb0ed4d205c12127d))
+
 # [3.0.0](https://github.com/Basis-Theory/python-sdk/compare/v2.3.0...v3.0.0) (2025-08-14)
 
 

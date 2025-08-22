@@ -3,7 +3,7 @@ name = "BasisTheoryClient"
 
 [tool.poetry]
 name = "BasisTheoryClient"
-version = "0.0.1"
+version = "3.1.0"
 description = ""
 readme = "README.md"
 authors = []
