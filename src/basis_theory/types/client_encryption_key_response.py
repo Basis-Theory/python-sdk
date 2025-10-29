@@ -4,15 +4,13 @@ import datetime as dt
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 
 
 class ClientEncryptionKeyResponse(UniversalBaseModel):
-    id: typing.Optional[str] = None
-    public_key_pem: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="publicKeyPEM")] = None
-    expires_at: typing_extensions.Annotated[typing.Optional[dt.datetime], FieldMetadata(alias="expiresAt")] = None
+    key_id: typing.Optional[str] = None
+    public_key_pem: typing.Optional[str] = None
+    expires_at: typing.Optional[dt.datetime] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

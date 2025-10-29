@@ -15,6 +15,7 @@ class ThreeDsAuthentication(UniversalBaseModel):
     session_id: typing.Optional[str] = None
     threeds_version: typing.Optional[str] = None
     acs_transaction_id: typing.Optional[str] = None
+    acs_operator_id: typing.Optional[str] = None
     ds_transaction_id: typing.Optional[str] = None
     sdk_transaction_id: typing.Optional[str] = None
     acs_reference_number: typing.Optional[str] = None

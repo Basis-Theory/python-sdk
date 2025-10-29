@@ -2,76 +2,30 @@
 
 import typing
 
-from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from ..core.request_options import RequestOptions
-from ..types.apple_pay_create_response import ApplePayCreateResponse
-from ..types.apple_pay_method_token import ApplePayMethodToken
-from ..types.apple_pay_token import ApplePayToken
-from .domain.client import AsyncDomainClient, DomainClient
-from .merchant.client import AsyncMerchantClient, MerchantClient
-from .raw_client import AsyncRawApplePayClient, RawApplePayClient
-from .session.client import AsyncSessionClient, SessionClient
+from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ...core.request_options import RequestOptions
+from ...types.apple_pay_merchant import ApplePayMerchant
+from ...types.apple_pay_token import ApplePayToken
+from .raw_client import AsyncRawMerchantClient, RawMerchantClient
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class ApplePayClient:
+class MerchantClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
-        self._raw_client = RawApplePayClient(client_wrapper=client_wrapper)
-        self.merchant = MerchantClient(client_wrapper=client_wrapper)
-
-        self.domain = DomainClient(client_wrapper=client_wrapper)
-
-        self.session = SessionClient(client_wrapper=client_wrapper)
+        self._raw_client = RawMerchantClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> RawApplePayClient:
+    def with_raw_response(self) -> RawMerchantClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        RawApplePayClient
+        RawMerchantClient
         """
         return self._raw_client
-
-    def create(
-        self,
-        *,
-        expires_at: typing.Optional[str] = OMIT,
-        apple_payment_data: typing.Optional[ApplePayMethodToken] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplePayCreateResponse:
-        """
-        Parameters
-        ----------
-        expires_at : typing.Optional[str]
-
-        apple_payment_data : typing.Optional[ApplePayMethodToken]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ApplePayCreateResponse
-            Success
-
-        Examples
-        --------
-        from basis_theory import BasisTheory
-
-        client = BasisTheory(
-            correlation_id="YOUR_CORRELATION_ID",
-            api_key="YOUR_API_KEY",
-        )
-        client.apple_pay.create()
-        """
-        _response = self._raw_client.create(
-            expires_at=expires_at, apple_payment_data=apple_payment_data, request_options=request_options
-        )
-        return _response.data
 
     def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayToken:
         """
@@ -95,14 +49,14 @@ class ApplePayClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.get(
+        client.apple_pay.merchant.get(
             id="id",
         )
         """
         _response = self._raw_client.get(id, request_options=request_options)
         return _response.data
 
-    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
+    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
         Parameters
         ----------
@@ -113,7 +67,40 @@ class ApplePayClient:
 
         Returns
         -------
-        str
+        None
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+        client.apple_pay.merchant.delete(
+            id="id",
+        )
+        """
+        _response = self._raw_client.delete(id, request_options=request_options)
+        return _response.data
+
+    def create(
+        self,
+        *,
+        merchant_identifier: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ApplePayMerchant:
+        """
+        Parameters
+        ----------
+        merchant_identifier : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ApplePayMerchant
             Success
 
         Examples
@@ -124,78 +111,26 @@ class ApplePayClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.delete(
-            id="id",
-        )
+        client.apple_pay.merchant.create()
         """
-        _response = self._raw_client.delete(id, request_options=request_options)
+        _response = self._raw_client.create(merchant_identifier=merchant_identifier, request_options=request_options)
         return _response.data
 
 
-class AsyncApplePayClient:
+class AsyncMerchantClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._raw_client = AsyncRawApplePayClient(client_wrapper=client_wrapper)
-        self.merchant = AsyncMerchantClient(client_wrapper=client_wrapper)
-
-        self.domain = AsyncDomainClient(client_wrapper=client_wrapper)
-
-        self.session = AsyncSessionClient(client_wrapper=client_wrapper)
+        self._raw_client = AsyncRawMerchantClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> AsyncRawApplePayClient:
+    def with_raw_response(self) -> AsyncRawMerchantClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        AsyncRawApplePayClient
+        AsyncRawMerchantClient
         """
         return self._raw_client
-
-    async def create(
-        self,
-        *,
-        expires_at: typing.Optional[str] = OMIT,
-        apple_payment_data: typing.Optional[ApplePayMethodToken] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplePayCreateResponse:
-        """
-        Parameters
-        ----------
-        expires_at : typing.Optional[str]
-
-        apple_payment_data : typing.Optional[ApplePayMethodToken]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ApplePayCreateResponse
-            Success
-
-        Examples
-        --------
-        import asyncio
-
-        from basis_theory import AsyncBasisTheory
-
-        client = AsyncBasisTheory(
-            correlation_id="YOUR_CORRELATION_ID",
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.apple_pay.create()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.create(
-            expires_at=expires_at, apple_payment_data=apple_payment_data, request_options=request_options
-        )
-        return _response.data
 
     async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayToken:
         """
@@ -224,7 +159,7 @@ class AsyncApplePayClient:
 
 
         async def main() -> None:
-            await client.apple_pay.get(
+            await client.apple_pay.merchant.get(
                 id="id",
             )
 
@@ -234,7 +169,7 @@ class AsyncApplePayClient:
         _response = await self._raw_client.get(id, request_options=request_options)
         return _response.data
 
-    async def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
+    async def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
         Parameters
         ----------
@@ -245,7 +180,48 @@ class AsyncApplePayClient:
 
         Returns
         -------
-        str
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.apple_pay.merchant.delete(
+                id="id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete(id, request_options=request_options)
+        return _response.data
+
+    async def create(
+        self,
+        *,
+        merchant_identifier: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ApplePayMerchant:
+        """
+        Parameters
+        ----------
+        merchant_identifier : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ApplePayMerchant
             Success
 
         Examples
@@ -261,12 +237,12 @@ class AsyncApplePayClient:
 
 
         async def main() -> None:
-            await client.apple_pay.delete(
-                id="id",
-            )
+            await client.apple_pay.merchant.create()
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.delete(id, request_options=request_options)
+        _response = await self._raw_client.create(
+            merchant_identifier=merchant_identifier, request_options=request_options
+        )
         return _response.data
