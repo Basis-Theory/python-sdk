@@ -4,13 +4,10 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .pagination import Pagination
-from .token import Token
 
 
-class TokenPaginatedList(UniversalBaseModel):
-    pagination: typing.Optional[Pagination] = None
-    data: typing.Optional[typing.List[Token]] = None
+class RuntimeOptions(UniversalBaseModel):
+    dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

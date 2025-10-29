@@ -99,143 +99,6 @@ class TokensClient:
         )
         return _response.data
 
-    def list(
-        self,
-        *,
-        id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None,
-        page: typing.Optional[int] = None,
-        start: typing.Optional[str] = None,
-        size: typing.Optional[int] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Token]:
-        """
-        Parameters
-        ----------
-        id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
-
-        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
-
-        page : typing.Optional[int]
-
-        start : typing.Optional[str]
-
-        size : typing.Optional[int]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SyncPager[Token]
-            Success
-
-        Examples
-        --------
-        from basis_theory import BasisTheory
-
-        client = BasisTheory(
-            correlation_id="YOUR_CORRELATION_ID",
-            api_key="YOUR_API_KEY",
-        )
-        response = client.tokens.list()
-        for item in response:
-            yield item
-        # alternatively, you can paginate page-by-page
-        for page in response.iter_pages():
-            yield page
-        """
-        return self._raw_client.list(
-            id=id, metadata=metadata, page=page, start=start, size=size, request_options=request_options
-        )
-
-    def create(
-        self,
-        *,
-        id: typing.Optional[str] = OMIT,
-        type: typing.Optional[str] = OMIT,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        encrypted: typing.Optional[str] = OMIT,
-        privacy: typing.Optional[Privacy] = OMIT,
-        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
-        fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        deduplicate_token: typing.Optional[bool] = OMIT,
-        expires_at: typing.Optional[str] = OMIT,
-        containers: typing.Optional[typing.Sequence[str]] = OMIT,
-        token_intent_id: typing.Optional[str] = OMIT,
-        idempotency_key: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> Token:
-        """
-        Parameters
-        ----------
-        id : typing.Optional[str]
-
-        type : typing.Optional[str]
-
-        data : typing.Optional[typing.Optional[typing.Any]]
-
-        encrypted : typing.Optional[str]
-
-        privacy : typing.Optional[Privacy]
-
-        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
-
-        search_indexes : typing.Optional[typing.Sequence[str]]
-
-        fingerprint_expression : typing.Optional[str]
-
-        mask : typing.Optional[typing.Optional[typing.Any]]
-
-        deduplicate_token : typing.Optional[bool]
-
-        expires_at : typing.Optional[str]
-
-        containers : typing.Optional[typing.Sequence[str]]
-
-        token_intent_id : typing.Optional[str]
-
-        idempotency_key : typing.Optional[str]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        Token
-            Created
-
-        Examples
-        --------
-        from basis_theory import BasisTheory
-
-        client = BasisTheory(
-            correlation_id="YOUR_CORRELATION_ID",
-            api_key="YOUR_API_KEY",
-        )
-        client.tokens.create()
-        """
-        _response = self._raw_client.create(
-            id=id,
-            type=type,
-            data=data,
-            encrypted=encrypted,
-            privacy=privacy,
-            metadata=metadata,
-            search_indexes=search_indexes,
-            fingerprint_expression=fingerprint_expression,
-            mask=mask,
-            deduplicate_token=deduplicate_token,
-            expires_at=expires_at,
-            containers=containers,
-            token_intent_id=token_intent_id,
-            idempotency_key=idempotency_key,
-            request_options=request_options,
-        )
-        return _response.data
-
     def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Token:
         """
         Parameters
@@ -365,6 +228,93 @@ class TokensClient:
             expires_at=expires_at,
             deduplicate_token=deduplicate_token,
             containers=containers,
+            idempotency_key=idempotency_key,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def create(
+        self,
+        *,
+        id: typing.Optional[str] = OMIT,
+        type: typing.Optional[str] = OMIT,
+        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        encrypted: typing.Optional[str] = OMIT,
+        privacy: typing.Optional[Privacy] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
+        fingerprint_expression: typing.Optional[str] = OMIT,
+        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        deduplicate_token: typing.Optional[bool] = OMIT,
+        expires_at: typing.Optional[str] = OMIT,
+        containers: typing.Optional[typing.Sequence[str]] = OMIT,
+        token_intent_id: typing.Optional[str] = OMIT,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> Token:
+        """
+        Parameters
+        ----------
+        id : typing.Optional[str]
+
+        type : typing.Optional[str]
+
+        data : typing.Optional[typing.Optional[typing.Any]]
+
+        encrypted : typing.Optional[str]
+
+        privacy : typing.Optional[Privacy]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        search_indexes : typing.Optional[typing.Sequence[str]]
+
+        fingerprint_expression : typing.Optional[str]
+
+        mask : typing.Optional[typing.Optional[typing.Any]]
+
+        deduplicate_token : typing.Optional[bool]
+
+        expires_at : typing.Optional[str]
+
+        containers : typing.Optional[typing.Sequence[str]]
+
+        token_intent_id : typing.Optional[str]
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Token
+            Created
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+        client.tokens.create()
+        """
+        _response = self._raw_client.create(
+            id=id,
+            type=type,
+            data=data,
+            encrypted=encrypted,
+            privacy=privacy,
+            metadata=metadata,
+            search_indexes=search_indexes,
+            fingerprint_expression=fingerprint_expression,
+            mask=mask,
+            deduplicate_token=deduplicate_token,
+            expires_at=expires_at,
+            containers=containers,
+            token_intent_id=token_intent_id,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -578,160 +528,6 @@ class AsyncTokensClient:
         )
         return _response.data
 
-    async def list(
-        self,
-        *,
-        id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None,
-        page: typing.Optional[int] = None,
-        start: typing.Optional[str] = None,
-        size: typing.Optional[int] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Token]:
-        """
-        Parameters
-        ----------
-        id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
-
-        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
-
-        page : typing.Optional[int]
-
-        start : typing.Optional[str]
-
-        size : typing.Optional[int]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncPager[Token]
-            Success
-
-        Examples
-        --------
-        import asyncio
-
-        from basis_theory import AsyncBasisTheory
-
-        client = AsyncBasisTheory(
-            correlation_id="YOUR_CORRELATION_ID",
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            response = await client.tokens.list()
-            async for item in response:
-                yield item
-
-            # alternatively, you can paginate page-by-page
-            async for page in response.iter_pages():
-                yield page
-
-
-        asyncio.run(main())
-        """
-        return await self._raw_client.list(
-            id=id, metadata=metadata, page=page, start=start, size=size, request_options=request_options
-        )
-
-    async def create(
-        self,
-        *,
-        id: typing.Optional[str] = OMIT,
-        type: typing.Optional[str] = OMIT,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        encrypted: typing.Optional[str] = OMIT,
-        privacy: typing.Optional[Privacy] = OMIT,
-        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
-        fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        deduplicate_token: typing.Optional[bool] = OMIT,
-        expires_at: typing.Optional[str] = OMIT,
-        containers: typing.Optional[typing.Sequence[str]] = OMIT,
-        token_intent_id: typing.Optional[str] = OMIT,
-        idempotency_key: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> Token:
-        """
-        Parameters
-        ----------
-        id : typing.Optional[str]
-
-        type : typing.Optional[str]
-
-        data : typing.Optional[typing.Optional[typing.Any]]
-
-        encrypted : typing.Optional[str]
-
-        privacy : typing.Optional[Privacy]
-
-        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
-
-        search_indexes : typing.Optional[typing.Sequence[str]]
-
-        fingerprint_expression : typing.Optional[str]
-
-        mask : typing.Optional[typing.Optional[typing.Any]]
-
-        deduplicate_token : typing.Optional[bool]
-
-        expires_at : typing.Optional[str]
-
-        containers : typing.Optional[typing.Sequence[str]]
-
-        token_intent_id : typing.Optional[str]
-
-        idempotency_key : typing.Optional[str]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        Token
-            Created
-
-        Examples
-        --------
-        import asyncio
-
-        from basis_theory import AsyncBasisTheory
-
-        client = AsyncBasisTheory(
-            correlation_id="YOUR_CORRELATION_ID",
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.tokens.create()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.create(
-            id=id,
-            type=type,
-            data=data,
-            encrypted=encrypted,
-            privacy=privacy,
-            metadata=metadata,
-            search_indexes=search_indexes,
-            fingerprint_expression=fingerprint_expression,
-            mask=mask,
-            deduplicate_token=deduplicate_token,
-            expires_at=expires_at,
-            containers=containers,
-            token_intent_id=token_intent_id,
-            idempotency_key=idempotency_key,
-            request_options=request_options,
-        )
-        return _response.data
-
     async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Token:
         """
         Parameters
@@ -885,6 +681,101 @@ class AsyncTokensClient:
             expires_at=expires_at,
             deduplicate_token=deduplicate_token,
             containers=containers,
+            idempotency_key=idempotency_key,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def create(
+        self,
+        *,
+        id: typing.Optional[str] = OMIT,
+        type: typing.Optional[str] = OMIT,
+        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        encrypted: typing.Optional[str] = OMIT,
+        privacy: typing.Optional[Privacy] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
+        search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
+        fingerprint_expression: typing.Optional[str] = OMIT,
+        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        deduplicate_token: typing.Optional[bool] = OMIT,
+        expires_at: typing.Optional[str] = OMIT,
+        containers: typing.Optional[typing.Sequence[str]] = OMIT,
+        token_intent_id: typing.Optional[str] = OMIT,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> Token:
+        """
+        Parameters
+        ----------
+        id : typing.Optional[str]
+
+        type : typing.Optional[str]
+
+        data : typing.Optional[typing.Optional[typing.Any]]
+
+        encrypted : typing.Optional[str]
+
+        privacy : typing.Optional[Privacy]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+
+        search_indexes : typing.Optional[typing.Sequence[str]]
+
+        fingerprint_expression : typing.Optional[str]
+
+        mask : typing.Optional[typing.Optional[typing.Any]]
+
+        deduplicate_token : typing.Optional[bool]
+
+        expires_at : typing.Optional[str]
+
+        containers : typing.Optional[typing.Sequence[str]]
+
+        token_intent_id : typing.Optional[str]
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Token
+            Created
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.tokens.create()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create(
+            id=id,
+            type=type,
+            data=data,
+            encrypted=encrypted,
+            privacy=privacy,
+            metadata=metadata,
+            search_indexes=search_indexes,
+            fingerprint_expression=fingerprint_expression,
+            mask=mask,
+            deduplicate_token=deduplicate_token,
+            expires_at=expires_at,
+            containers=containers,
+            token_intent_id=token_intent_id,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )

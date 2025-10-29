@@ -37,6 +37,18 @@ class DataClient:
         -------
         typing.Iterator[bytes]
             Success
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+        client.documents.data.get(
+            document_id="documentId",
+        )
         """
         with self._raw_client.get(document_id, request_options=request_options) as r:
             yield from r.data
@@ -72,6 +84,26 @@ class AsyncDataClient:
         -------
         typing.AsyncIterator[bytes]
             Success
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.documents.data.get(
+                document_id="documentId",
+            )
+
+
+        asyncio.run(main())
         """
         async with self._raw_client.get(document_id, request_options=request_options) as r:
             async for _chunk in r.data:

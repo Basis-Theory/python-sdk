@@ -14,6 +14,7 @@ class Proxy(UniversalBaseModel):
     tenant_id: typing.Optional[str] = None
     name: typing.Optional[str] = None
     destination_url: typing.Optional[str] = None
+    state: typing.Optional[str] = None
     request_reactor_id: typing.Optional[str] = None
     response_reactor_id: typing.Optional[str] = None
     require_auth: typing.Optional[bool] = None

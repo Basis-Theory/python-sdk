@@ -5,19 +5,14 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .card_details import CardDetails
-from .token_service_provider_details import TokenServiceProviderDetails
 
 
-class GooglePayCreateTokenResponse(UniversalBaseModel):
+class ApplePayMerchant(UniversalBaseModel):
     id: typing.Optional[str] = None
     tenant_id: typing.Optional[str] = None
-    status: typing.Optional[str] = None
-    expires_at: typing.Optional[dt.datetime] = None
+    merchant_identifier: typing.Optional[str] = None
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
-    card: typing.Optional[CardDetails] = None
-    details: typing.Optional[TokenServiceProviderDetails] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

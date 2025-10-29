@@ -2,6 +2,3 @@
 
 # isort: skip_file
 
-from . import domain, merchant, session
-
-__all__ = ["domain", "merchant", "session"]
