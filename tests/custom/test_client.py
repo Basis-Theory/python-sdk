@@ -604,20 +604,20 @@ def test_should_support_client_encryption_key_lifecycle() -> None:
 
     # Create a new key
     key = client.keys.create()
-    assert key.id is not None
+    assert key.key_id is not None
     assert key.public_key_pem is not None
 
     # Retrieve the key
-    retrieved_key = client.keys.get(id=key.id)
-    assert retrieved_key.id == key.id
+    retrieved_key = client.keys.get(id=key.key_id)
+    assert retrieved_key.key_id == key.key_id
     assert retrieved_key.expires_at is not None
 
     # Delete the key
-    client.keys.delete(id=key.id)
+    client.keys.delete(id=key.key_id)
 
     # Verify key is deleted
     try:
-        client.keys.get(id=key.id)
+        client.keys.get(id=key.key_id)
         assert False, "Should have raised a 404 for key not found"
     except NotFoundError:
         pass
