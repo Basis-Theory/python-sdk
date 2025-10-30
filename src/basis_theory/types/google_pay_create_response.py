@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .create_token_intent_response import CreateTokenIntentResponse
-from .google_pay_create_token_response import GooglePayCreateTokenResponse
+from .google_pay_token import GooglePayToken
 
 
 class GooglePayCreateResponse(UniversalBaseModel):
-    google_pay: typing.Optional[GooglePayCreateTokenResponse] = None
+    google_pay: typing.Optional[GooglePayToken] = None
     token_intent: typing.Optional[CreateTokenIntentResponse] = None
 
     if IS_PYDANTIC_V2:

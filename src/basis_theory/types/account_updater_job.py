@@ -45,6 +45,16 @@ class AccountUpdaterJob(UniversalBaseModel):
     List of errors encountered during processing
     """
 
+    requests: typing.Optional[int] = pydantic.Field(default=None)
+    """
+    Total number of requests processed
+    """
+
+    results: typing.Optional[typing.Dict[str, int]] = pydantic.Field(default=None)
+    """
+    Summary count breakdown by result code for all processed rows
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

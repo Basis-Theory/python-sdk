@@ -22,6 +22,7 @@ class ApplePayToken(UniversalBaseModel):
     card: typing.Optional[CardDetails] = None
     data: typing.Optional[typing.Optional[typing.Any]] = None
     authentication: typing.Optional[Authentication] = None
+    fingerprint: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
