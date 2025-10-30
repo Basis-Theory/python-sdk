@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/Basis-Theory/python-sdk/compare/v3.1.0...v4.0.0) (2025-10-30)
+
+
+### Features
+
+* renaming keys endpoint properties, and removing get tokens v1  ([#87](https://github.com/Basis-Theory/python-sdk/issues/87)) ([ae41a3a](https://github.com/Basis-Theory/python-sdk/commit/ae41a3a83b644b4d112650f2e3d050c97d95030f))
+
+
+### BREAKING CHANGES
+
+* The get tokens v1 endpoint was removed, and the properties of the keys endpoint were renamed
+
 # [3.1.0](https://github.com/Basis-Theory/python-sdk/compare/v3.0.0...v3.1.0) (2025-08-22)
 
 
