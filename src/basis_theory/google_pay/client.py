@@ -7,6 +7,7 @@ from ..core.request_options import RequestOptions
 from ..types.google_pay_create_response import GooglePayCreateResponse
 from ..types.google_pay_method_token import GooglePayMethodToken
 from ..types.google_pay_token import GooglePayToken
+from .merchant.client import AsyncMerchantClient, MerchantClient
 from .raw_client import AsyncRawGooglePayClient, RawGooglePayClient
 
 # this is used as the default value for optional parameters
@@ -16,6 +17,7 @@ OMIT = typing.cast(typing.Any, ...)
 class GooglePayClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._raw_client = RawGooglePayClient(client_wrapper=client_wrapper)
+        self.merchant = MerchantClient(client_wrapper=client_wrapper)
 
     @property
     def with_raw_response(self) -> RawGooglePayClient:
@@ -33,6 +35,7 @@ class GooglePayClient:
         *,
         expires_at: typing.Optional[str] = OMIT,
         google_payment_data: typing.Optional[GooglePayMethodToken] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GooglePayCreateResponse:
         """
@@ -41,6 +44,8 @@ class GooglePayClient:
         expires_at : typing.Optional[str]
 
         google_payment_data : typing.Optional[GooglePayMethodToken]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -61,7 +66,10 @@ class GooglePayClient:
         client.google_pay.create()
         """
         _response = self._raw_client.create(
-            expires_at=expires_at, google_payment_data=google_payment_data, request_options=request_options
+            expires_at=expires_at,
+            google_payment_data=google_payment_data,
+            merchant_registration_id=merchant_registration_id,
+            request_options=request_options,
         )
         return _response.data
 
@@ -127,6 +135,7 @@ class GooglePayClient:
 class AsyncGooglePayClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._raw_client = AsyncRawGooglePayClient(client_wrapper=client_wrapper)
+        self.merchant = AsyncMerchantClient(client_wrapper=client_wrapper)
 
     @property
     def with_raw_response(self) -> AsyncRawGooglePayClient:
@@ -144,6 +153,7 @@ class AsyncGooglePayClient:
         *,
         expires_at: typing.Optional[str] = OMIT,
         google_payment_data: typing.Optional[GooglePayMethodToken] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GooglePayCreateResponse:
         """
@@ -152,6 +162,8 @@ class AsyncGooglePayClient:
         expires_at : typing.Optional[str]
 
         google_payment_data : typing.Optional[GooglePayMethodToken]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -180,7 +192,10 @@ class AsyncGooglePayClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.create(
-            expires_at=expires_at, google_payment_data=google_payment_data, request_options=request_options
+            expires_at=expires_at,
+            google_payment_data=google_payment_data,
+            merchant_registration_id=merchant_registration_id,
+            request_options=request_options,
         )
         return _response.data
 

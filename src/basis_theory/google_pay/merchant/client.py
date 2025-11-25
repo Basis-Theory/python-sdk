@@ -4,7 +4,7 @@ import typing
 
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
-from ...types.apple_pay_merchant import ApplePayMerchant
+from ...types.google_pay_merchant import GooglePayMerchant
 from .certificates.client import AsyncCertificatesClient, CertificatesClient
 from .raw_client import AsyncRawMerchantClient, RawMerchantClient
 
@@ -28,7 +28,7 @@ class MerchantClient:
         """
         return self._raw_client
 
-    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayMerchant:
+    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> GooglePayMerchant:
         """
         Parameters
         ----------
@@ -39,7 +39,7 @@ class MerchantClient:
 
         Returns
         -------
-        ApplePayMerchant
+        GooglePayMerchant
             Success
 
         Examples
@@ -50,7 +50,7 @@ class MerchantClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.merchant.get(
+        client.google_pay.merchant.get(
             id="id",
         )
         """
@@ -78,7 +78,7 @@ class MerchantClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.merchant.delete(
+        client.google_pay.merchant.delete(
             id="id",
         )
         """
@@ -90,7 +90,7 @@ class MerchantClient:
         *,
         merchant_identifier: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplePayMerchant:
+    ) -> GooglePayMerchant:
         """
         Parameters
         ----------
@@ -101,7 +101,7 @@ class MerchantClient:
 
         Returns
         -------
-        ApplePayMerchant
+        GooglePayMerchant
             Success
 
         Examples
@@ -112,7 +112,7 @@ class MerchantClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.merchant.create()
+        client.google_pay.merchant.create()
         """
         _response = self._raw_client.create(merchant_identifier=merchant_identifier, request_options=request_options)
         return _response.data
@@ -134,7 +134,7 @@ class AsyncMerchantClient:
         """
         return self._raw_client
 
-    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayMerchant:
+    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> GooglePayMerchant:
         """
         Parameters
         ----------
@@ -145,7 +145,7 @@ class AsyncMerchantClient:
 
         Returns
         -------
-        ApplePayMerchant
+        GooglePayMerchant
             Success
 
         Examples
@@ -161,7 +161,7 @@ class AsyncMerchantClient:
 
 
         async def main() -> None:
-            await client.apple_pay.merchant.get(
+            await client.google_pay.merchant.get(
                 id="id",
             )
 
@@ -197,7 +197,7 @@ class AsyncMerchantClient:
 
 
         async def main() -> None:
-            await client.apple_pay.merchant.delete(
+            await client.google_pay.merchant.delete(
                 id="id",
             )
 
@@ -212,7 +212,7 @@ class AsyncMerchantClient:
         *,
         merchant_identifier: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplePayMerchant:
+    ) -> GooglePayMerchant:
         """
         Parameters
         ----------
@@ -223,7 +223,7 @@ class AsyncMerchantClient:
 
         Returns
         -------
-        ApplePayMerchant
+        GooglePayMerchant
             Success
 
         Examples
@@ -239,7 +239,7 @@ class AsyncMerchantClient:
 
 
         async def main() -> None:
-            await client.apple_pay.merchant.create()
+            await client.google_pay.merchant.create()
 
 
         asyncio.run(main())

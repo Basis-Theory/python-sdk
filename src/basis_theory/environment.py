@@ -4,4 +4,4 @@ import enum
 
 
 class BasisTheoryEnvironment(enum.Enum):
-    DEFAULT = "https://api.basistheory.com"
+    PRODUCTION = "https://api.basistheory.com"

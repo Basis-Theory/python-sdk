@@ -6,10 +6,8 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class RuntimeOptions(UniversalBaseModel):
-    dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
-    warm_concurrency: typing.Optional[int] = None
-    permissions: typing.Optional[typing.List[str]] = None
+class ThreeDsBrandingOptions(UniversalBaseModel):
+    hide_basis_theory_branding: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

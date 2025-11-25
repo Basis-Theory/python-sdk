@@ -44,7 +44,7 @@ class BasisTheory:
 
 
 
-        Defaults to BasisTheoryEnvironment.DEFAULT
+        Defaults to BasisTheoryEnvironment.PRODUCTION
 
 
 
@@ -76,7 +76,7 @@ class BasisTheory:
         self,
         *,
         base_url: typing.Optional[str] = None,
-        environment: BasisTheoryEnvironment = BasisTheoryEnvironment.DEFAULT,
+        environment: BasisTheoryEnvironment = BasisTheoryEnvironment.PRODUCTION,
         correlation_id: typing.Optional[str] = None,
         api_key: typing.Optional[str] = os.getenv("BT-API-KEY"),
         headers: typing.Optional[typing.Dict[str, str]] = None,
@@ -138,7 +138,7 @@ class AsyncBasisTheory:
 
 
 
-        Defaults to BasisTheoryEnvironment.DEFAULT
+        Defaults to BasisTheoryEnvironment.PRODUCTION
 
 
 
@@ -170,7 +170,7 @@ class AsyncBasisTheory:
         self,
         *,
         base_url: typing.Optional[str] = None,
-        environment: BasisTheoryEnvironment = BasisTheoryEnvironment.DEFAULT,
+        environment: BasisTheoryEnvironment = BasisTheoryEnvironment.PRODUCTION,
         correlation_id: typing.Optional[str] = None,
         api_key: typing.Optional[str] = os.getenv("BT-API-KEY"),
         headers: typing.Optional[typing.Dict[str, str]] = None,
