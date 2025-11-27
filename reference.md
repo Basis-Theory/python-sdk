@@ -1047,6 +1047,14 @@ client.google_pay.create()
 <dl>
 <dd>
 
+**merchant_registration_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -5926,6 +5934,236 @@ client.apple_pay.session.create()
 </dl>
 </details>
 
+## ApplePay Merchant Certificates
+<details><summary><code>client.apple_pay.merchant.certificates.<a href="src/basis_theory/apple_pay/merchant/certificates/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.apple_pay.merchant.certificates.get(
+    merchant_id="merchantId",
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**merchant_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.apple_pay.merchant.certificates.<a href="src/basis_theory/apple_pay/merchant/certificates/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.apple_pay.merchant.certificates.delete(
+    merchant_id="merchantId",
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**merchant_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.apple_pay.merchant.certificates.<a href="src/basis_theory/apple_pay/merchant/certificates/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.apple_pay.merchant.certificates.create(
+    merchant_id="merchantId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**merchant_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_certificate_data:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_certificate_password:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payment_processor_certificate_data:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payment_processor_certificate_password:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**domain:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Documents Data
 <details><summary><code>client.documents.data.<a href="src/basis_theory/documents/data/client.py">get</a>(...)</code></summary>
 <dl>
@@ -5973,6 +6211,382 @@ client.documents.data.get(
 <dd>
 
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## GooglePay Merchant
+<details><summary><code>client.google_pay.merchant.<a href="src/basis_theory/google_pay/merchant/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.merchant.get(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.google_pay.merchant.<a href="src/basis_theory/google_pay/merchant/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.merchant.delete(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.google_pay.merchant.<a href="src/basis_theory/google_pay/merchant/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.merchant.create()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**merchant_identifier:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## GooglePay Merchant Certificates
+<details><summary><code>client.google_pay.merchant.certificates.<a href="src/basis_theory/google_pay/merchant/certificates/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.merchant.certificates.get(
+    merchant_id="merchantId",
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**merchant_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.google_pay.merchant.certificates.<a href="src/basis_theory/google_pay/merchant/certificates/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.merchant.certificates.delete(
+    merchant_id="merchantId",
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**merchant_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.google_pay.merchant.certificates.<a href="src/basis_theory/google_pay/merchant/certificates/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.google_pay.merchant.certificates.create(
+    merchant_id="merchantId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**merchant_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_certificate_data:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_certificate_password:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>

@@ -2,36 +2,38 @@
 
 import typing
 
-from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from ...core.request_options import RequestOptions
-from ...types.apple_pay_merchant import ApplePayMerchant
-from .certificates.client import AsyncCertificatesClient, CertificatesClient
-from .raw_client import AsyncRawMerchantClient, RawMerchantClient
+from ....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ....core.request_options import RequestOptions
+from ....types.google_pay_merchant_certificates import GooglePayMerchantCertificates
+from .raw_client import AsyncRawCertificatesClient, RawCertificatesClient
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class MerchantClient:
+class CertificatesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
-        self._raw_client = RawMerchantClient(client_wrapper=client_wrapper)
-        self.certificates = CertificatesClient(client_wrapper=client_wrapper)
+        self._raw_client = RawCertificatesClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> RawMerchantClient:
+    def with_raw_response(self) -> RawCertificatesClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        RawMerchantClient
+        RawCertificatesClient
         """
         return self._raw_client
 
-    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayMerchant:
+    def get(
+        self, merchant_id: str, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GooglePayMerchantCertificates:
         """
         Parameters
         ----------
+        merchant_id : str
+
         id : str
 
         request_options : typing.Optional[RequestOptions]
@@ -39,7 +41,7 @@ class MerchantClient:
 
         Returns
         -------
-        ApplePayMerchant
+        GooglePayMerchantCertificates
             Success
 
         Examples
@@ -50,17 +52,20 @@ class MerchantClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.merchant.get(
+        client.google_pay.merchant.certificates.get(
+            merchant_id="merchantId",
             id="id",
         )
         """
-        _response = self._raw_client.get(id, request_options=request_options)
+        _response = self._raw_client.get(merchant_id, id, request_options=request_options)
         return _response.data
 
-    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+    def delete(self, merchant_id: str, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
         Parameters
         ----------
+        merchant_id : str
+
         id : str
 
         request_options : typing.Optional[RequestOptions]
@@ -78,30 +83,37 @@ class MerchantClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.merchant.delete(
+        client.google_pay.merchant.certificates.delete(
+            merchant_id="merchantId",
             id="id",
         )
         """
-        _response = self._raw_client.delete(id, request_options=request_options)
+        _response = self._raw_client.delete(merchant_id, id, request_options=request_options)
         return _response.data
 
     def create(
         self,
+        merchant_id: str,
         *,
-        merchant_identifier: typing.Optional[str] = OMIT,
+        merchant_certificate_data: typing.Optional[str] = OMIT,
+        merchant_certificate_password: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplePayMerchant:
+    ) -> GooglePayMerchantCertificates:
         """
         Parameters
         ----------
-        merchant_identifier : typing.Optional[str]
+        merchant_id : str
+
+        merchant_certificate_data : typing.Optional[str]
+
+        merchant_certificate_password : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        ApplePayMerchant
+        GooglePayMerchantCertificates
             Success
 
         Examples
@@ -112,32 +124,42 @@ class MerchantClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.apple_pay.merchant.create()
+        client.google_pay.merchant.certificates.create(
+            merchant_id="merchantId",
+        )
         """
-        _response = self._raw_client.create(merchant_identifier=merchant_identifier, request_options=request_options)
+        _response = self._raw_client.create(
+            merchant_id,
+            merchant_certificate_data=merchant_certificate_data,
+            merchant_certificate_password=merchant_certificate_password,
+            request_options=request_options,
+        )
         return _response.data
 
 
-class AsyncMerchantClient:
+class AsyncCertificatesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._raw_client = AsyncRawMerchantClient(client_wrapper=client_wrapper)
-        self.certificates = AsyncCertificatesClient(client_wrapper=client_wrapper)
+        self._raw_client = AsyncRawCertificatesClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> AsyncRawMerchantClient:
+    def with_raw_response(self) -> AsyncRawCertificatesClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        AsyncRawMerchantClient
+        AsyncRawCertificatesClient
         """
         return self._raw_client
 
-    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayMerchant:
+    async def get(
+        self, merchant_id: str, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GooglePayMerchantCertificates:
         """
         Parameters
         ----------
+        merchant_id : str
+
         id : str
 
         request_options : typing.Optional[RequestOptions]
@@ -145,7 +167,7 @@ class AsyncMerchantClient:
 
         Returns
         -------
-        ApplePayMerchant
+        GooglePayMerchantCertificates
             Success
 
         Examples
@@ -161,20 +183,25 @@ class AsyncMerchantClient:
 
 
         async def main() -> None:
-            await client.apple_pay.merchant.get(
+            await client.google_pay.merchant.certificates.get(
+                merchant_id="merchantId",
                 id="id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get(id, request_options=request_options)
+        _response = await self._raw_client.get(merchant_id, id, request_options=request_options)
         return _response.data
 
-    async def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+    async def delete(
+        self, merchant_id: str, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> None:
         """
         Parameters
         ----------
+        merchant_id : str
+
         id : str
 
         request_options : typing.Optional[RequestOptions]
@@ -197,33 +224,40 @@ class AsyncMerchantClient:
 
 
         async def main() -> None:
-            await client.apple_pay.merchant.delete(
+            await client.google_pay.merchant.certificates.delete(
+                merchant_id="merchantId",
                 id="id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.delete(id, request_options=request_options)
+        _response = await self._raw_client.delete(merchant_id, id, request_options=request_options)
         return _response.data
 
     async def create(
         self,
+        merchant_id: str,
         *,
-        merchant_identifier: typing.Optional[str] = OMIT,
+        merchant_certificate_data: typing.Optional[str] = OMIT,
+        merchant_certificate_password: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ApplePayMerchant:
+    ) -> GooglePayMerchantCertificates:
         """
         Parameters
         ----------
-        merchant_identifier : typing.Optional[str]
+        merchant_id : str
+
+        merchant_certificate_data : typing.Optional[str]
+
+        merchant_certificate_password : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        ApplePayMerchant
+        GooglePayMerchantCertificates
             Success
 
         Examples
@@ -239,12 +273,17 @@ class AsyncMerchantClient:
 
 
         async def main() -> None:
-            await client.apple_pay.merchant.create()
+            await client.google_pay.merchant.certificates.create(
+                merchant_id="merchantId",
+            )
 
 
         asyncio.run(main())
         """
         _response = await self._raw_client.create(
-            merchant_identifier=merchant_identifier, request_options=request_options
+            merchant_id,
+            merchant_certificate_data=merchant_certificate_data,
+            merchant_certificate_password=merchant_certificate_password,
+            request_options=request_options,
         )
         return _response.data
