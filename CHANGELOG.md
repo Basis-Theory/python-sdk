@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/Basis-Theory/python-sdk/compare/v4.0.0...v4.1.0) (2025-12-02)
+
+
+### Features
+
+* supporting new environments ([8ee5248](https://github.com/Basis-Theory/python-sdk/commit/8ee5248f7bcf56a76be7c0eb1a57acb54bdb3412))
+
 # [4.0.0](https://github.com/Basis-Theory/python-sdk/compare/v3.1.0...v4.0.0) (2025-10-30)
 
 
