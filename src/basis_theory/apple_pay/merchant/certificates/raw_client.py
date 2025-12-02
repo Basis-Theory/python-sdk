@@ -3,148 +3,34 @@
 import typing
 from json.decoder import JSONDecodeError
 
-from ..core.api_error import ApiError
-from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
-from ..core.request_options import RequestOptions
-from ..core.serialization import convert_and_respect_annotation_metadata
-from ..errors.bad_request_error import BadRequestError
-from ..errors.conflict_error import ConflictError
-from ..errors.forbidden_error import ForbiddenError
-from ..errors.not_found_error import NotFoundError
-from ..errors.unauthorized_error import UnauthorizedError
-from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.google_pay_create_response import GooglePayCreateResponse
-from ..types.google_pay_method_token import GooglePayMethodToken
-from ..types.google_pay_token import GooglePayToken
-from ..types.problem_details import ProblemDetails
-from ..types.validation_problem_details import ValidationProblemDetails
+from ....core.api_error import ApiError
+from ....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ....core.http_response import AsyncHttpResponse, HttpResponse
+from ....core.jsonable_encoder import jsonable_encoder
+from ....core.pydantic_utilities import parse_obj_as
+from ....core.request_options import RequestOptions
+from ....errors.forbidden_error import ForbiddenError
+from ....errors.not_found_error import NotFoundError
+from ....errors.unauthorized_error import UnauthorizedError
+from ....types.apple_pay_merchant_certificates import ApplePayMerchantCertificates
+from ....types.problem_details import ProblemDetails
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class RawGooglePayClient:
+class RawCertificatesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def create(
-        self,
-        *,
-        expires_at: typing.Optional[str] = OMIT,
-        google_payment_data: typing.Optional[GooglePayMethodToken] = OMIT,
-        merchant_registration_id: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[GooglePayCreateResponse]:
+    def get(
+        self, merchant_id: str, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ApplePayMerchantCertificates]:
         """
         Parameters
         ----------
-        expires_at : typing.Optional[str]
+        merchant_id : str
 
-        google_payment_data : typing.Optional[GooglePayMethodToken]
-
-        merchant_registration_id : typing.Optional[str]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[GooglePayCreateResponse]
-            Success
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "google-pay",
-            method="POST",
-            json={
-                "expires_at": expires_at,
-                "google_payment_data": convert_and_respect_annotation_metadata(
-                    object_=google_payment_data, annotation=GooglePayMethodToken, direction="write"
-                ),
-                "merchant_registration_id": merchant_registration_id,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    GooglePayCreateResponse,
-                    parse_obj_as(
-                        type_=GooglePayCreateResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ValidationProblemDetails,
-                        parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[GooglePayToken]:
-        """
-        Parameters
-        ----------
         id : str
 
         request_options : typing.Optional[RequestOptions]
@@ -152,20 +38,20 @@ class RawGooglePayClient:
 
         Returns
         -------
-        HttpResponse[GooglePayToken]
+        HttpResponse[ApplePayMerchantCertificates]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"google-pay/{jsonable_encoder(id)}",
+            f"apple-pay/merchant-registration/{jsonable_encoder(merchant_id)}/certificates/{jsonable_encoder(id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GooglePayToken,
+                    ApplePayMerchantCertificates,
                     parse_obj_as(
-                        type_=GooglePayToken,  # type: ignore
+                        type_=ApplePayMerchantCertificates,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -208,10 +94,14 @@ class RawGooglePayClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[str]:
+    def delete(
+        self, merchant_id: str, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[None]:
         """
         Parameters
         ----------
+        merchant_id : str
+
         id : str
 
         request_options : typing.Optional[RequestOptions]
@@ -219,20 +109,110 @@ class RawGooglePayClient:
 
         Returns
         -------
-        HttpResponse[str]
-            Success
+        HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"google-pay/{jsonable_encoder(id)}",
+            f"apple-pay/merchant-registration/{jsonable_encoder(merchant_id)}/certificates/{jsonable_encoder(id)}",
             method="DELETE",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
+                return HttpResponse(response=_response, data=None)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def create(
+        self,
+        merchant_id: str,
+        *,
+        merchant_certificate_data: typing.Optional[str] = OMIT,
+        merchant_certificate_password: typing.Optional[str] = OMIT,
+        payment_processor_certificate_data: typing.Optional[str] = OMIT,
+        payment_processor_certificate_password: typing.Optional[str] = OMIT,
+        domain: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ApplePayMerchantCertificates]:
+        """
+        Parameters
+        ----------
+        merchant_id : str
+
+        merchant_certificate_data : typing.Optional[str]
+
+        merchant_certificate_password : typing.Optional[str]
+
+        payment_processor_certificate_data : typing.Optional[str]
+
+        payment_processor_certificate_password : typing.Optional[str]
+
+        domain : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ApplePayMerchantCertificates]
+            Success
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"apple-pay/merchant-registration/{jsonable_encoder(merchant_id)}/certificates",
+            method="POST",
+            json={
+                "merchant_certificate_data": merchant_certificate_data,
+                "merchant_certificate_password": merchant_certificate_password,
+                "payment_processor_certificate_data": payment_processor_certificate_data,
+                "payment_processor_certificate_password": payment_processor_certificate_password,
+                "domain": domain,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    str,
+                    ApplePayMerchantCertificates,
                     parse_obj_as(
-                        type_=str,  # type: ignore
+                        type_=ApplePayMerchantCertificates,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -276,127 +256,18 @@ class RawGooglePayClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawGooglePayClient:
+class AsyncRawCertificatesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def create(
-        self,
-        *,
-        expires_at: typing.Optional[str] = OMIT,
-        google_payment_data: typing.Optional[GooglePayMethodToken] = OMIT,
-        merchant_registration_id: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[GooglePayCreateResponse]:
-        """
-        Parameters
-        ----------
-        expires_at : typing.Optional[str]
-
-        google_payment_data : typing.Optional[GooglePayMethodToken]
-
-        merchant_registration_id : typing.Optional[str]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[GooglePayCreateResponse]
-            Success
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "google-pay",
-            method="POST",
-            json={
-                "expires_at": expires_at,
-                "google_payment_data": convert_and_respect_annotation_metadata(
-                    object_=google_payment_data, annotation=GooglePayMethodToken, direction="write"
-                ),
-                "merchant_registration_id": merchant_registration_id,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    GooglePayCreateResponse,
-                    parse_obj_as(
-                        type_=GooglePayCreateResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ValidationProblemDetails,
-                        parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
     async def get(
-        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[GooglePayToken]:
+        self, merchant_id: str, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ApplePayMerchantCertificates]:
         """
         Parameters
         ----------
+        merchant_id : str
+
         id : str
 
         request_options : typing.Optional[RequestOptions]
@@ -404,20 +275,20 @@ class AsyncRawGooglePayClient:
 
         Returns
         -------
-        AsyncHttpResponse[GooglePayToken]
+        AsyncHttpResponse[ApplePayMerchantCertificates]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"google-pay/{jsonable_encoder(id)}",
+            f"apple-pay/merchant-registration/{jsonable_encoder(merchant_id)}/certificates/{jsonable_encoder(id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GooglePayToken,
+                    ApplePayMerchantCertificates,
                     parse_obj_as(
-                        type_=GooglePayToken,  # type: ignore
+                        type_=ApplePayMerchantCertificates,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -461,11 +332,13 @@ class AsyncRawGooglePayClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete(
-        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[str]:
+        self, merchant_id: str, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[None]:
         """
         Parameters
         ----------
+        merchant_id : str
+
         id : str
 
         request_options : typing.Optional[RequestOptions]
@@ -473,20 +346,110 @@ class AsyncRawGooglePayClient:
 
         Returns
         -------
-        AsyncHttpResponse[str]
-            Success
+        AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"google-pay/{jsonable_encoder(id)}",
+            f"apple-pay/merchant-registration/{jsonable_encoder(merchant_id)}/certificates/{jsonable_encoder(id)}",
             method="DELETE",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
+                return AsyncHttpResponse(response=_response, data=None)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def create(
+        self,
+        merchant_id: str,
+        *,
+        merchant_certificate_data: typing.Optional[str] = OMIT,
+        merchant_certificate_password: typing.Optional[str] = OMIT,
+        payment_processor_certificate_data: typing.Optional[str] = OMIT,
+        payment_processor_certificate_password: typing.Optional[str] = OMIT,
+        domain: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ApplePayMerchantCertificates]:
+        """
+        Parameters
+        ----------
+        merchant_id : str
+
+        merchant_certificate_data : typing.Optional[str]
+
+        merchant_certificate_password : typing.Optional[str]
+
+        payment_processor_certificate_data : typing.Optional[str]
+
+        payment_processor_certificate_password : typing.Optional[str]
+
+        domain : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ApplePayMerchantCertificates]
+            Success
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"apple-pay/merchant-registration/{jsonable_encoder(merchant_id)}/certificates",
+            method="POST",
+            json={
+                "merchant_certificate_data": merchant_certificate_data,
+                "merchant_certificate_password": merchant_certificate_password,
+                "payment_processor_certificate_data": payment_processor_certificate_data,
+                "payment_processor_certificate_password": payment_processor_certificate_password,
+                "domain": domain,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    str,
+                    ApplePayMerchantCertificates,
                     parse_obj_as(
-                        type_=str,  # type: ignore
+                        type_=ApplePayMerchantCertificates,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -14,6 +14,10 @@ class ProxyTransformOptions(UniversalBaseModel):
     location: typing.Optional[str] = None
     runtime: typing.Optional[str] = None
     dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
+    permissions: typing.Optional[typing.List[str]] = None
+    warm_concurrency: typing.Optional[int] = None
+    timeout: typing.Optional[int] = None
+    resources: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

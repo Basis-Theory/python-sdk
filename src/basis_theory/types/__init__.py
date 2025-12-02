@@ -14,6 +14,7 @@ from .address import Address
 from .apple_pay_create_response import ApplePayCreateResponse
 from .apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
 from .apple_pay_merchant import ApplePayMerchant
+from .apple_pay_merchant_certificates import ApplePayMerchantCertificates
 from .apple_pay_method_token import ApplePayMethodToken
 from .apple_pay_token import ApplePayToken
 from .apple_pay_tokenize_request import ApplePayTokenizeRequest
@@ -65,6 +66,8 @@ from .get_tenant_invitations import GetTenantInvitations
 from .get_tenant_members import GetTenantMembers
 from .get_tokens_v2 import GetTokensV2
 from .google_pay_create_response import GooglePayCreateResponse
+from .google_pay_merchant import GooglePayMerchant
+from .google_pay_merchant_certificates import GooglePayMerchantCertificates
 from .google_pay_method_token import GooglePayMethodToken
 from .google_pay_token import GooglePayToken
 from .google_pay_tokenize_request import GooglePayTokenizeRequest
@@ -109,6 +112,7 @@ from .tenant_usage_report import TenantUsageReport
 from .three_ds_acs_rendering_type import ThreeDsAcsRenderingType
 from .three_ds_address import ThreeDsAddress
 from .three_ds_authentication import ThreeDsAuthentication
+from .three_ds_branding_options import ThreeDsBrandingOptions
 from .three_ds_callback_urls import ThreeDsCallbackUrls
 from .three_ds_cardholder_account_info import ThreeDsCardholderAccountInfo
 from .three_ds_cardholder_authentication_info import ThreeDsCardholderAuthenticationInfo
@@ -156,6 +160,7 @@ __all__ = [
     "ApplePayCreateResponse",
     "ApplePayDomainRegistrationResponse",
     "ApplePayMerchant",
+    "ApplePayMerchantCertificates",
     "ApplePayMethodToken",
     "ApplePayToken",
     "ApplePayTokenizeRequest",
@@ -207,6 +212,8 @@ __all__ = [
     "GetTenantMembers",
     "GetTokensV2",
     "GooglePayCreateResponse",
+    "GooglePayMerchant",
+    "GooglePayMerchantCertificates",
     "GooglePayMethodToken",
     "GooglePayToken",
     "GooglePayTokenizeRequest",
@@ -251,6 +258,7 @@ __all__ = [
     "ThreeDsAcsRenderingType",
     "ThreeDsAddress",
     "ThreeDsAuthentication",
+    "ThreeDsBrandingOptions",
     "ThreeDsCallbackUrls",
     "ThreeDsCardholderAccountInfo",
     "ThreeDsCardholderAuthenticationInfo",

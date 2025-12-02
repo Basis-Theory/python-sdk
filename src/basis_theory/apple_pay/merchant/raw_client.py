@@ -13,7 +13,6 @@ from ...errors.forbidden_error import ForbiddenError
 from ...errors.not_found_error import NotFoundError
 from ...errors.unauthorized_error import UnauthorizedError
 from ...types.apple_pay_merchant import ApplePayMerchant
-from ...types.apple_pay_token import ApplePayToken
 from ...types.problem_details import ProblemDetails
 
 # this is used as the default value for optional parameters
@@ -24,7 +23,9 @@ class RawMerchantClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[ApplePayToken]:
+    def get(
+        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ApplePayMerchant]:
         """
         Parameters
         ----------
@@ -35,7 +36,7 @@ class RawMerchantClient:
 
         Returns
         -------
-        HttpResponse[ApplePayToken]
+        HttpResponse[ApplePayMerchant]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -46,9 +47,9 @@ class RawMerchantClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ApplePayToken,
+                    ApplePayMerchant,
                     parse_obj_as(
-                        type_=ApplePayToken,  # type: ignore
+                        type_=ApplePayMerchant,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -225,7 +226,7 @@ class AsyncRawMerchantClient:
 
     async def get(
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[ApplePayToken]:
+    ) -> AsyncHttpResponse[ApplePayMerchant]:
         """
         Parameters
         ----------
@@ -236,7 +237,7 @@ class AsyncRawMerchantClient:
 
         Returns
         -------
-        AsyncHttpResponse[ApplePayToken]
+        AsyncHttpResponse[ApplePayMerchant]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -247,9 +248,9 @@ class AsyncRawMerchantClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ApplePayToken,
+                    ApplePayMerchant,
                     parse_obj_as(
-                        type_=ApplePayToken,  # type: ignore
+                        type_=ApplePayMerchant,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
