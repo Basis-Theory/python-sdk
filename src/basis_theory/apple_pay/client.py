@@ -41,6 +41,7 @@ class ApplePayClient:
         *,
         expires_at: typing.Optional[str] = OMIT,
         apple_payment_data: typing.Optional[ApplePayMethodToken] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ApplePayCreateResponse:
         """
@@ -49,6 +50,8 @@ class ApplePayClient:
         expires_at : typing.Optional[str]
 
         apple_payment_data : typing.Optional[ApplePayMethodToken]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -69,7 +72,10 @@ class ApplePayClient:
         client.apple_pay.create()
         """
         _response = self._raw_client.create(
-            expires_at=expires_at, apple_payment_data=apple_payment_data, request_options=request_options
+            expires_at=expires_at,
+            apple_payment_data=apple_payment_data,
+            merchant_registration_id=merchant_registration_id,
+            request_options=request_options,
         )
         return _response.data
 
@@ -157,6 +163,7 @@ class AsyncApplePayClient:
         *,
         expires_at: typing.Optional[str] = OMIT,
         apple_payment_data: typing.Optional[ApplePayMethodToken] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ApplePayCreateResponse:
         """
@@ -165,6 +172,8 @@ class AsyncApplePayClient:
         expires_at : typing.Optional[str]
 
         apple_payment_data : typing.Optional[ApplePayMethodToken]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -193,7 +202,10 @@ class AsyncApplePayClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.create(
-            expires_at=expires_at, apple_payment_data=apple_payment_data, request_options=request_options
+            expires_at=expires_at,
+            apple_payment_data=apple_payment_data,
+            merchant_registration_id=merchant_registration_id,
+            request_options=request_options,
         )
         return _response.data
 

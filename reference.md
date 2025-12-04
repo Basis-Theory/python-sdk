@@ -869,6 +869,14 @@ client.apple_pay.create()
 <dl>
 <dd>
 
+**merchant_registration_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -5915,6 +5923,14 @@ client.apple_pay.session.create()
 <dd>
 
 **domain:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_registration_id:** `typing.Optional[str]` 
     
 </dd>
 </dl>
