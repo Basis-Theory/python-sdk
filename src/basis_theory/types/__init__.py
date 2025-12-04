@@ -35,6 +35,7 @@ from .bin_details_bank import BinDetailsBank
 from .bin_details_country import BinDetailsCountry
 from .bin_details_product import BinDetailsProduct
 from .card import Card
+from .card_bin_range import CardBinRange
 from .card_details import CardDetails
 from .card_details_response import CardDetailsResponse
 from .card_issuer import CardIssuer
@@ -181,6 +182,7 @@ __all__ = [
     "BinDetailsCountry",
     "BinDetailsProduct",
     "Card",
+    "CardBinRange",
     "CardDetails",
     "CardDetailsResponse",
     "CardIssuer",
