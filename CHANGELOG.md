@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/Basis-Theory/python-sdk/compare/v4.1.0...v4.2.0) (2025-12-09)
+
+
+### Features
+
+* Change Reactor Runtime to object ([424a212](https://github.com/Basis-Theory/python-sdk/commit/424a212474e2fdfa3ed7edd7a17a9f7969681a38))
+
 # [4.1.0](https://github.com/Basis-Theory/python-sdk/compare/v4.0.0...v4.1.0) (2025-12-02)
 
 
