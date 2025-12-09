@@ -7,7 +7,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .application import Application
 from .reactor_formula import ReactorFormula
-from .runtime_options import RuntimeOptions
+from .runtime import Runtime
 
 
 class Reactor(UniversalBaseModel):
@@ -23,8 +23,7 @@ class Reactor(UniversalBaseModel):
     modified_by: typing.Optional[str] = None
     modified_at: typing.Optional[dt.datetime] = None
     configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
-    runtime: typing.Optional[str] = None
-    options: typing.Optional[RuntimeOptions] = None
+    runtime: typing.Optional[Runtime] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

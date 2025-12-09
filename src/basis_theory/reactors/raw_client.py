@@ -22,7 +22,7 @@ from ..types.problem_details import ProblemDetails
 from ..types.react_response import ReactResponse
 from ..types.reactor import Reactor
 from ..types.reactor_paginated_list import ReactorPaginatedList
-from ..types.runtime_options import RuntimeOptions
+from ..types.runtime import Runtime
 from ..types.validation_problem_details import ValidationProblemDetails
 
 # this is used as the default value for optional parameters
@@ -145,8 +145,7 @@ class RawReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Reactor]:
@@ -161,9 +160,7 @@ class RawReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -185,9 +182,8 @@ class RawReactorsClient:
                     object_=application, annotation=Application, direction="write"
                 ),
                 "configuration": configuration,
-                "runtime": runtime,
-                "options": convert_and_respect_annotation_metadata(
-                    object_=options, annotation=RuntimeOptions, direction="write"
+                "runtime": convert_and_respect_annotation_metadata(
+                    object_=runtime, annotation=Runtime, direction="write"
                 ),
             },
             headers={
@@ -320,8 +316,7 @@ class RawReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Reactor]:
@@ -338,9 +333,7 @@ class RawReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -362,9 +355,8 @@ class RawReactorsClient:
                 ),
                 "code": code,
                 "configuration": configuration,
-                "runtime": runtime,
-                "options": convert_and_respect_annotation_metadata(
-                    object_=options, annotation=RuntimeOptions, direction="write"
+                "runtime": convert_and_respect_annotation_metadata(
+                    object_=runtime, annotation=Runtime, direction="write"
                 ),
             },
             headers={
@@ -500,8 +492,7 @@ class RawReactorsClient:
         application: typing.Optional[Application] = OMIT,
         code: typing.Optional[str] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
@@ -518,9 +509,7 @@ class RawReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -541,9 +530,8 @@ class RawReactorsClient:
                 ),
                 "code": code,
                 "configuration": configuration,
-                "runtime": runtime,
-                "options": convert_and_respect_annotation_metadata(
-                    object_=options, annotation=RuntimeOptions, direction="write"
+                "runtime": convert_and_respect_annotation_metadata(
+                    object_=runtime, annotation=Runtime, direction="write"
                 ),
             },
             headers={
@@ -937,8 +925,7 @@ class AsyncRawReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Reactor]:
@@ -953,9 +940,7 @@ class AsyncRawReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -977,9 +962,8 @@ class AsyncRawReactorsClient:
                     object_=application, annotation=Application, direction="write"
                 ),
                 "configuration": configuration,
-                "runtime": runtime,
-                "options": convert_and_respect_annotation_metadata(
-                    object_=options, annotation=RuntimeOptions, direction="write"
+                "runtime": convert_and_respect_annotation_metadata(
+                    object_=runtime, annotation=Runtime, direction="write"
                 ),
             },
             headers={
@@ -1114,8 +1098,7 @@ class AsyncRawReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Reactor]:
@@ -1132,9 +1115,7 @@ class AsyncRawReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -1156,9 +1137,8 @@ class AsyncRawReactorsClient:
                 ),
                 "code": code,
                 "configuration": configuration,
-                "runtime": runtime,
-                "options": convert_and_respect_annotation_metadata(
-                    object_=options, annotation=RuntimeOptions, direction="write"
+                "runtime": convert_and_respect_annotation_metadata(
+                    object_=runtime, annotation=Runtime, direction="write"
                 ),
             },
             headers={
@@ -1296,8 +1276,7 @@ class AsyncRawReactorsClient:
         application: typing.Optional[Application] = OMIT,
         code: typing.Optional[str] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
@@ -1314,9 +1293,7 @@ class AsyncRawReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -1337,9 +1314,8 @@ class AsyncRawReactorsClient:
                 ),
                 "code": code,
                 "configuration": configuration,
-                "runtime": runtime,
-                "options": convert_and_respect_annotation_metadata(
-                    object_=options, annotation=RuntimeOptions, direction="write"
+                "runtime": convert_and_respect_annotation_metadata(
+                    object_=runtime, annotation=Runtime, direction="write"
                 ),
             },
             headers={

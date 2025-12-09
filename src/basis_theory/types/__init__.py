@@ -99,7 +99,7 @@ from .reactor_formula_paginated_list import ReactorFormulaPaginatedList
 from .reactor_formula_request_parameter import ReactorFormulaRequestParameter
 from .reactor_paginated_list import ReactorPaginatedList
 from .role import Role
-from .runtime_options import RuntimeOptions
+from .runtime import Runtime
 from .string_string_key_value_pair import StringStringKeyValuePair
 from .submerchant_authentication_response import SubmerchantAuthenticationResponse
 from .tenant import Tenant
@@ -246,7 +246,7 @@ __all__ = [
     "ReactorFormulaRequestParameter",
     "ReactorPaginatedList",
     "Role",
-    "RuntimeOptions",
+    "Runtime",
     "StringStringKeyValuePair",
     "SubmerchantAuthenticationResponse",
     "Tenant",

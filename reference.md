@@ -3819,15 +3819,7 @@ client.reactors.create(
 <dl>
 <dd>
 
-**runtime:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**options:** `typing.Optional[RuntimeOptions]` 
+**runtime:** `typing.Optional[Runtime]` 
     
 </dd>
 </dl>
@@ -3991,15 +3983,7 @@ client.reactors.update(
 <dl>
 <dd>
 
-**runtime:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**options:** `typing.Optional[RuntimeOptions]` 
+**runtime:** `typing.Optional[Runtime]` 
     
 </dd>
 </dl>
@@ -4161,15 +4145,7 @@ client.reactors.patch(
 <dl>
 <dd>
 
-**runtime:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**options:** `typing.Optional[RuntimeOptions]` 
+**runtime:** `typing.Optional[Runtime]` 
     
 </dd>
 </dl>
