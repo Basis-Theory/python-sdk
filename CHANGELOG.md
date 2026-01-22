@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/Basis-Theory/python-sdk/compare/v4.2.0...v5.0.0) (2026-01-22)
+
+
+### Features
+
+* Updating Reactor Request objects ([4c4cee2](https://github.com/Basis-Theory/python-sdk/commit/4c4cee2d7d484a8fefcd68f1d5878723db985b3f))
+
+
+### BREAKING CHANGES
+
+* This version removes the existing Reactors Request objects for Reactors and Reactors Async, allowing the use of dynamic objects
+
 # [4.2.0](https://github.com/Basis-Theory/python-sdk/compare/v4.1.0...v4.2.0) (2025-12-09)
 
 
