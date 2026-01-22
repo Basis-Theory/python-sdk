@@ -597,8 +597,7 @@ class RawReactorsClient:
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        callback_url: typing.Optional[str] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[ReactResponse]:
         """
@@ -606,9 +605,7 @@ class RawReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
-
-        callback_url : typing.Optional[str]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -621,10 +618,7 @@ class RawReactorsClient:
         _response = self._client_wrapper.httpx_client.request(
             f"reactors/{jsonable_encoder(id)}/react",
             method="POST",
-            json={
-                "args": args,
-                "callback_url": callback_url,
-            },
+            json=request,
             headers={
                 "content-type": "application/json",
             },
@@ -705,7 +699,7 @@ class RawReactorsClient:
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[AsyncReactResponse]:
         """
@@ -713,7 +707,7 @@ class RawReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -726,9 +720,7 @@ class RawReactorsClient:
         _response = self._client_wrapper.httpx_client.request(
             f"reactors/{jsonable_encoder(id)}/react-async",
             method="POST",
-            json={
-                "args": args,
-            },
+            json=request,
             headers={
                 "content-type": "application/json",
             },
@@ -1381,8 +1373,7 @@ class AsyncRawReactorsClient:
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        callback_url: typing.Optional[str] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[ReactResponse]:
         """
@@ -1390,9 +1381,7 @@ class AsyncRawReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
-
-        callback_url : typing.Optional[str]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1405,10 +1394,7 @@ class AsyncRawReactorsClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"reactors/{jsonable_encoder(id)}/react",
             method="POST",
-            json={
-                "args": args,
-                "callback_url": callback_url,
-            },
+            json=request,
             headers={
                 "content-type": "application/json",
             },
@@ -1489,7 +1475,7 @@ class AsyncRawReactorsClient:
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[AsyncReactResponse]:
         """
@@ -1497,7 +1483,7 @@ class AsyncRawReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1510,9 +1496,7 @@ class AsyncRawReactorsClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"reactors/{jsonable_encoder(id)}/react-async",
             method="POST",
-            json={
-                "args": args,
-            },
+            json=request,
             headers={
                 "content-type": "application/json",
             },
