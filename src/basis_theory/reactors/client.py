@@ -325,8 +325,7 @@ class ReactorsClient:
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        callback_url: typing.Optional[str] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ReactResponse:
         """
@@ -334,9 +333,7 @@ class ReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
-
-        callback_url : typing.Optional[str]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -356,16 +353,17 @@ class ReactorsClient:
         )
         client.reactors.react(
             id="id",
+            request={"key": "value"},
         )
         """
-        _response = self._raw_client.react(id, args=args, callback_url=callback_url, request_options=request_options)
+        _response = self._raw_client.react(id, request=request, request_options=request_options)
         return _response.data
 
     def react_async(
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncReactResponse:
         """
@@ -373,7 +371,7 @@ class ReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -393,9 +391,10 @@ class ReactorsClient:
         )
         client.reactors.react_async(
             id="id",
+            request={"key": "value"},
         )
         """
-        _response = self._raw_client.react_async(id, args=args, request_options=request_options)
+        _response = self._raw_client.react_async(id, request=request, request_options=request_options)
         return _response.data
 
 
@@ -756,8 +755,7 @@ class AsyncReactorsClient:
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        callback_url: typing.Optional[str] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ReactResponse:
         """
@@ -765,9 +763,7 @@ class AsyncReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
-
-        callback_url : typing.Optional[str]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -792,21 +788,20 @@ class AsyncReactorsClient:
         async def main() -> None:
             await client.reactors.react(
                 id="id",
+                request={"key": "value"},
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.react(
-            id, args=args, callback_url=callback_url, request_options=request_options
-        )
+        _response = await self._raw_client.react(id, request=request, request_options=request_options)
         return _response.data
 
     async def react_async(
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncReactResponse:
         """
@@ -814,7 +809,7 @@ class AsyncReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -839,10 +834,11 @@ class AsyncReactorsClient:
         async def main() -> None:
             await client.reactors.react_async(
                 id="id",
+                request={"key": "value"},
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.react_async(id, args=args, request_options=request_options)
+        _response = await self._raw_client.react_async(id, request=request, request_options=request_options)
         return _response.data

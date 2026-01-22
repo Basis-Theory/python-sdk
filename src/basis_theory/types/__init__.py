@@ -83,6 +83,8 @@ from .network_token_cryptogram import NetworkTokenCryptogram
 from .network_token_extras import NetworkTokenExtras
 from .pagination import Pagination
 from .payment_data import PaymentData
+from .pending_proxy import PendingProxy
+from .pending_reactor import PendingReactor
 from .permission import Permission
 from .privacy import Privacy
 from .problem_details import ProblemDetails
@@ -98,6 +100,8 @@ from .reactor_formula_configuration import ReactorFormulaConfiguration
 from .reactor_formula_paginated_list import ReactorFormulaPaginatedList
 from .reactor_formula_request_parameter import ReactorFormulaRequestParameter
 from .reactor_paginated_list import ReactorPaginatedList
+from .requested_proxy import RequestedProxy
+from .requested_reactor import RequestedReactor
 from .role import Role
 from .runtime import Runtime
 from .string_string_key_value_pair import StringStringKeyValuePair
@@ -230,6 +234,8 @@ __all__ = [
     "NetworkTokenExtras",
     "Pagination",
     "PaymentData",
+    "PendingProxy",
+    "PendingReactor",
     "Permission",
     "Privacy",
     "ProblemDetails",
@@ -245,6 +251,8 @@ __all__ = [
     "ReactorFormulaPaginatedList",
     "ReactorFormulaRequestParameter",
     "ReactorPaginatedList",
+    "RequestedProxy",
+    "RequestedReactor",
     "Role",
     "Runtime",
     "StringStringKeyValuePair",

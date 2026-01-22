@@ -6,6 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .proxy_transform import ProxyTransform
+from .requested_proxy import RequestedProxy
 
 
 class Proxy(UniversalBaseModel):
@@ -27,6 +28,7 @@ class Proxy(UniversalBaseModel):
     proxy_host: typing.Optional[str] = None
     timeout: typing.Optional[int] = None
     client_certificate: typing.Optional[str] = None
+    requested: typing.Optional[RequestedProxy] = None
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
     modified_by: typing.Optional[str] = None

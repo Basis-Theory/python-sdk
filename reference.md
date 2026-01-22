@@ -2658,6 +2658,14 @@ client.network_tokens.create()
 <dl>
 <dd>
 
+**merchant_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -4194,6 +4202,7 @@ client = BasisTheory(
 )
 client.reactors.react(
     id="id",
+    request={"key": "value"},
 )
 
 ```
@@ -4218,15 +4227,7 @@ client.reactors.react(
 <dl>
 <dd>
 
-**args:** `typing.Optional[typing.Optional[typing.Any]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**callback_url:** `typing.Optional[str]` 
+**request:** `typing.Optional[typing.Any]` 
     
 </dd>
 </dl>
@@ -4267,6 +4268,7 @@ client = BasisTheory(
 )
 client.reactors.react_async(
     id="id",
+    request={"key": "value"},
 )
 
 ```
@@ -4291,7 +4293,7 @@ client.reactors.react_async(
 <dl>
 <dd>
 
-**args:** `typing.Optional[typing.Optional[typing.Any]]` 
+**request:** `typing.Optional[typing.Any]` 
     
 </dd>
 </dl>
