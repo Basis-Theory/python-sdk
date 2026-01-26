@@ -3238,6 +3238,14 @@ client.proxies.create(
 <dl>
 <dd>
 
+**disable_detokenization:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **idempotency_key:** `typing.Optional[str]` 
     
 </dd>
@@ -3450,6 +3458,14 @@ client.proxies.update(
 <dl>
 <dd>
 
+**disable_detokenization:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **idempotency_key:** `typing.Optional[str]` 
     
 </dd>
@@ -3637,6 +3653,14 @@ client.proxies.patch(
 <dd>
 
 **require_auth:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**disable_detokenization:** `typing.Optional[bool]` 
     
 </dd>
 </dl>
