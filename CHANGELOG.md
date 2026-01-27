@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/Basis-Theory/python-sdk/compare/v5.0.0...v5.1.0) (2026-01-27)
+
+
+### Features
+
+* add disable_detokenization to proxy configuration  ([a51a494](https://github.com/Basis-Theory/python-sdk/commit/a51a4948fd091f1771e86e70cd02217fe7feaad9))
+
 # [5.0.0](https://github.com/Basis-Theory/python-sdk/compare/v4.2.0...v5.0.0) (2026-01-22)
 
 
