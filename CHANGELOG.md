@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/Basis-Theory/python-sdk/compare/v5.1.0...v5.2.0) (2026-02-04)
+
+
+### Features
+
+* Adding 3DS metadata attributes ([#102](https://github.com/Basis-Theory/python-sdk/issues/102)) ([8b92ca1](https://github.com/Basis-Theory/python-sdk/commit/8b92ca19011794e372113e4898d275ce003bbae7))
+
 # [5.1.0](https://github.com/Basis-Theory/python-sdk/compare/v5.0.0...v5.1.0) (2026-01-27)
 
 
