@@ -48,6 +48,7 @@ class RawSessionsClient:
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
         callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateThreeDsSessionResponse]:
         """
@@ -70,6 +71,8 @@ class RawSessionsClient:
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
 
         callback_urls : typing.Optional[ThreeDsCallbackUrls]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -98,6 +101,7 @@ class RawSessionsClient:
                 "callback_urls": convert_and_respect_annotation_metadata(
                     object_=callback_urls, annotation=ThreeDsCallbackUrls, direction="write"
                 ),
+                "metadata": metadata,
             },
             headers={
                 "content-type": "application/json",
@@ -435,6 +439,7 @@ class AsyncRawSessionsClient:
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
         callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateThreeDsSessionResponse]:
         """
@@ -457,6 +462,8 @@ class AsyncRawSessionsClient:
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
 
         callback_urls : typing.Optional[ThreeDsCallbackUrls]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -485,6 +492,7 @@ class AsyncRawSessionsClient:
                 "callback_urls": convert_and_respect_annotation_metadata(
                     object_=callback_urls, annotation=ThreeDsCallbackUrls, direction="write"
                 ),
+                "metadata": metadata,
             },
             headers={
                 "content-type": "application/json",

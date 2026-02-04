@@ -5473,6 +5473,14 @@ client.account_updater.real_time.invoke(
 <dl>
 <dd>
 
+**merchant_id:** `typing.Optional[str]` — Tenant merchant identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -7717,6 +7725,14 @@ client.threeds.sessions.create()
 <dd>
 
 **callback_urls:** `typing.Optional[ThreeDsCallbackUrls]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
     
 </dd>
 </dl>
