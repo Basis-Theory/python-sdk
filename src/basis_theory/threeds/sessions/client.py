@@ -48,6 +48,7 @@ class SessionsClient:
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
         callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateThreeDsSessionResponse:
         """
@@ -70,6 +71,8 @@ class SessionsClient:
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
 
         callback_urls : typing.Optional[ThreeDsCallbackUrls]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -99,6 +102,7 @@ class SessionsClient:
             device_info=device_info,
             authentication_request=authentication_request,
             callback_urls=callback_urls,
+            metadata=metadata,
             request_options=request_options,
         )
         return _response.data
@@ -282,6 +286,7 @@ class AsyncSessionsClient:
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
         callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateThreeDsSessionResponse:
         """
@@ -304,6 +309,8 @@ class AsyncSessionsClient:
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
 
         callback_urls : typing.Optional[ThreeDsCallbackUrls]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -341,6 +348,7 @@ class AsyncSessionsClient:
             device_info=device_info,
             authentication_request=authentication_request,
             callback_urls=callback_urls,
+            metadata=metadata,
             request_options=request_options,
         )
         return _response.data

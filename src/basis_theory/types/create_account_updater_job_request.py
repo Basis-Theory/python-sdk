@@ -12,6 +12,11 @@ class CreateAccountUpdaterJobRequest(UniversalBaseModel):
     Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
     """
 
+    merchant_id: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Tenant merchant identifier
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

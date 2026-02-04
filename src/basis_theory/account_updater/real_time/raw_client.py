@@ -31,6 +31,7 @@ class RawRealTimeClient:
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[AccountUpdaterRealTimeResponse]:
         """
@@ -50,6 +51,9 @@ class RawRealTimeClient:
         deduplicate_token : typing.Optional[bool]
             Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
+        merchant_id : typing.Optional[str]
+            Tenant merchant identifier
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -66,6 +70,7 @@ class RawRealTimeClient:
                 "expiration_year": expiration_year,
                 "expiration_month": expiration_month,
                 "deduplicate_token": deduplicate_token,
+                "merchant_id": merchant_id,
             },
             headers={
                 "content-type": "application/json",
@@ -144,6 +149,7 @@ class AsyncRawRealTimeClient:
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[AccountUpdaterRealTimeResponse]:
         """
@@ -163,6 +169,9 @@ class AsyncRawRealTimeClient:
         deduplicate_token : typing.Optional[bool]
             Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
+        merchant_id : typing.Optional[str]
+            Tenant merchant identifier
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -179,6 +188,7 @@ class AsyncRawRealTimeClient:
                 "expiration_year": expiration_year,
                 "expiration_month": expiration_month,
                 "deduplicate_token": deduplicate_token,
+                "merchant_id": merchant_id,
             },
             headers={
                 "content-type": "application/json",
