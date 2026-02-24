@@ -6,12 +6,15 @@ from .invitations.client import AsyncInvitationsClient, InvitationsClient
 from .members.client import AsyncMembersClient, MembersClient
 from .owner.client import AsyncOwnerClient, OwnerClient
 from .raw_client import AsyncRawTenantsClient, RawTenantsClient
+from .security_contact.client import AsyncSecurityContactClient, SecurityContactClient
 from .self_.client import AsyncSelfClient, SelfClient
 
 
 class TenantsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._raw_client = RawTenantsClient(client_wrapper=client_wrapper)
+        self.security_contact = SecurityContactClient(client_wrapper=client_wrapper)
+
         self.connections = ConnectionsClient(client_wrapper=client_wrapper)
 
         self.invitations = InvitationsClient(client_wrapper=client_wrapper)
@@ -37,6 +40,8 @@ class TenantsClient:
 class AsyncTenantsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._raw_client = AsyncRawTenantsClient(client_wrapper=client_wrapper)
+        self.security_contact = AsyncSecurityContactClient(client_wrapper=client_wrapper)
+
         self.connections = AsyncConnectionsClient(client_wrapper=client_wrapper)
 
         self.invitations = AsyncInvitationsClient(client_wrapper=client_wrapper)

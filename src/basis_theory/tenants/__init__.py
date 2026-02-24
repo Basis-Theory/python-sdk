@@ -2,6 +2,6 @@
 
 # isort: skip_file
 
-from . import connections, invitations, members, owner, self_
+from . import connections, invitations, members, owner, security_contact, self_
 
-__all__ = ["connections", "invitations", "members", "owner", "self_"]
+__all__ = ["connections", "invitations", "members", "owner", "security_contact", "self_"]
