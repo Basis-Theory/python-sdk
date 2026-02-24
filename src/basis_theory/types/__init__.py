@@ -104,6 +104,7 @@ from .requested_proxy import RequestedProxy
 from .requested_reactor import RequestedReactor
 from .role import Role
 from .runtime import Runtime
+from .security_contact_email_response import SecurityContactEmailResponse
 from .string_string_key_value_pair import StringStringKeyValuePair
 from .submerchant_authentication_response import SubmerchantAuthenticationResponse
 from .tenant import Tenant
@@ -255,6 +256,7 @@ __all__ = [
     "RequestedReactor",
     "Role",
     "Runtime",
+    "SecurityContactEmailResponse",
     "StringStringKeyValuePair",
     "SubmerchantAuthenticationResponse",
     "Tenant",
