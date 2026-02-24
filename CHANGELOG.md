@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/Basis-Theory/python-sdk/compare/v5.2.0...v5.3.0) (2026-02-24)
+
+
+### Features
+
+* Updating API contracts ([#104](https://github.com/Basis-Theory/python-sdk/issues/104)) ([bc77d1a](https://github.com/Basis-Theory/python-sdk/commit/bc77d1a3dc493c13bdb3553b6676ddd8b351e507))
+
 # [5.2.0](https://github.com/Basis-Theory/python-sdk/compare/v5.1.0...v5.2.0) (2026-02-04)
 
 
