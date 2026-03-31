@@ -8000,6 +8000,14 @@ client.threeds.sessions.authenticate(
 <dl>
 <dd>
 
+**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **idempotency_key:** `typing.Optional[str]` 
     
 </dd>

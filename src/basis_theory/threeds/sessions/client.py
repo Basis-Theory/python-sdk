@@ -123,6 +123,7 @@ class SessionsClient:
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
         broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ThreeDsAuthentication:
@@ -154,6 +155,8 @@ class SessionsClient:
         broadcast_info : typing.Optional[typing.Optional[typing.Any]]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         idempotency_key : typing.Optional[str]
 
@@ -193,6 +196,7 @@ class SessionsClient:
             cardholder_info=cardholder_info,
             broadcast_info=broadcast_info,
             message_extensions=message_extensions,
+            metadata=metadata,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -369,6 +373,7 @@ class AsyncSessionsClient:
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
         broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ThreeDsAuthentication:
@@ -400,6 +405,8 @@ class AsyncSessionsClient:
         broadcast_info : typing.Optional[typing.Optional[typing.Any]]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         idempotency_key : typing.Optional[str]
 
@@ -447,6 +454,7 @@ class AsyncSessionsClient:
             cardholder_info=cardholder_info,
             broadcast_info=broadcast_info,
             message_extensions=message_extensions,
+            metadata=metadata,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
