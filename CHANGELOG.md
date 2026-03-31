@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/Basis-Theory/python-sdk/compare/v5.3.0...v5.4.0) (2026-03-31)
+
+
+### Features
+
+* Add metatdata to 3DS authenticate session ([b177b04](https://github.com/Basis-Theory/python-sdk/commit/b177b040d5c4bc8c5779fb13e84a6fb3453b1784))
+
 # [5.3.0](https://github.com/Basis-Theory/python-sdk/compare/v5.2.0...v5.3.0) (2026-02-24)
 
 
