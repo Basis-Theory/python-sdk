@@ -28,8 +28,8 @@ class BinDetails(UniversalBaseModel):
     issuer_currency: typing.Optional[str] = None
     combo_card: typing.Optional[str] = None
     bin_length: typing.Optional[int] = None
-    authentication: typing.Optional[typing.Optional[typing.Any]] = None
-    cost: typing.Optional[typing.Optional[typing.Any]] = None
+    authentication: typing.Optional[typing.Any] = None
+    cost: typing.Optional[typing.Any] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

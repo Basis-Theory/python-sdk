@@ -85,18 +85,14 @@ class TokenIntentsClient:
         return _response.data
 
     def create(
-        self,
-        *,
-        type: str,
-        data: typing.Optional[typing.Any] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, *, type: str, data: typing.Any, request_options: typing.Optional[RequestOptions] = None
     ) -> CreateTokenIntentResponse:
         """
         Parameters
         ----------
         type : str
 
-        data : typing.Optional[typing.Any]
+        data : typing.Any
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -212,18 +208,14 @@ class AsyncTokenIntentsClient:
         return _response.data
 
     async def create(
-        self,
-        *,
-        type: str,
-        data: typing.Optional[typing.Any] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, *, type: str, data: typing.Any, request_options: typing.Optional[RequestOptions] = None
     ) -> CreateTokenIntentResponse:
         """
         Parameters
         ----------
         type : str
 
-        data : typing.Optional[typing.Any]
+        data : typing.Any
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

@@ -12,34 +12,32 @@ from .account_updater_job_status import AccountUpdaterJobStatus
 
 class AccountUpdaterJob(UniversalBaseModel):
     id: str
-    tenant_id: typing_extensions.Annotated[str, FieldMetadata(alias="tenantId")]
+    tenant_id: typing_extensions.Annotated[str, FieldMetadata(alias="tenantId"), pydantic.Field(alias="tenantId")]
     status: AccountUpdaterJobStatus = pydantic.Field()
     """
     The current status of the job
     """
 
-    upload_url: typing_extensions.Annotated[str, FieldMetadata(alias="uploadUrl")] = pydantic.Field()
-    """
-    Pre-signed URL for uploading job data
-    """
-
-    created_by: typing_extensions.Annotated[str, FieldMetadata(alias="createdBy")] = pydantic.Field()
-    """
-    Application id that created the job
-    """
-
-    created_at: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="createdAt")] = pydantic.Field()
-    """
-    Date and time when the job was created
-    """
-
-    expires_at: typing_extensions.Annotated[typing.Optional[dt.datetime], FieldMetadata(alias="expiresAt")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Date and time when the job expires if no data is uploaded
-    """
-
+    upload_url: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="uploadUrl"),
+        pydantic.Field(alias="uploadUrl", description="Pre-signed URL for uploading job data"),
+    ]
+    created_by: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="createdBy"),
+        pydantic.Field(alias="createdBy", description="Application id that created the job"),
+    ]
+    created_at: typing_extensions.Annotated[
+        dt.datetime,
+        FieldMetadata(alias="createdAt"),
+        pydantic.Field(alias="createdAt", description="Date and time when the job was created"),
+    ]
+    expires_at: typing_extensions.Annotated[
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="expiresAt"),
+        pydantic.Field(alias="expiresAt", description="Date and time when the job expires if no data is uploaded"),
+    ] = None
     errors: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     List of errors encountered during processing

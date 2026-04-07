@@ -2,156 +2,434 @@
 
 # isort: skip_file
 
-from .access_rule import AccessRule
-from .account_updater_job import AccountUpdaterJob
-from .account_updater_job_list import AccountUpdaterJobList
-from .account_updater_job_list_pagination import AccountUpdaterJobListPagination
-from .account_updater_job_status import AccountUpdaterJobStatus
-from .account_updater_real_time_response import AccountUpdaterRealTimeResponse
-from .additional_card_detail import AdditionalCardDetail
-from .additional_card_details import AdditionalCardDetails
-from .address import Address
-from .apple_pay_create_response import ApplePayCreateResponse
-from .apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
-from .apple_pay_merchant import ApplePayMerchant
-from .apple_pay_merchant_certificates import ApplePayMerchantCertificates
-from .apple_pay_method_token import ApplePayMethodToken
-from .apple_pay_token import ApplePayToken
-from .apple_pay_tokenize_request import ApplePayTokenizeRequest
-from .apple_pay_tokenize_response import ApplePayTokenizeResponse
-from .application import Application
-from .application_key import ApplicationKey
-from .application_paginated_list import ApplicationPaginatedList
-from .application_template import ApplicationTemplate
-from .assurance_details import AssuranceDetails
-from .async_react_response import AsyncReactResponse
-from .authenticate_three_ds_session_request import AuthenticateThreeDsSessionRequest
-from .authentication import Authentication
-from .authentication_response import AuthenticationResponse
-from .bank_details import BankDetails
-from .bank_verification_response import BankVerificationResponse
-from .bin_details import BinDetails
-from .bin_details_bank import BinDetailsBank
-from .bin_details_country import BinDetailsCountry
-from .bin_details_product import BinDetailsProduct
-from .card import Card
-from .card_bin_range import CardBinRange
-from .card_details import CardDetails
-from .card_details_response import CardDetailsResponse
-from .card_issuer import CardIssuer
-from .card_issuer_country import CardIssuerCountry
-from .card_issuer_details import CardIssuerDetails
-from .cardholder_info import CardholderInfo
-from .client_encryption_key_metadata_response import ClientEncryptionKeyMetadataResponse
-from .client_encryption_key_response import ClientEncryptionKeyResponse
-from .condition import Condition
-from .create_account_updater_job_request import CreateAccountUpdaterJobRequest
-from .create_document_request import CreateDocumentRequest
-from .create_reactor_formula_request import CreateReactorFormulaRequest
-from .create_session_response import CreateSessionResponse
-from .create_tenant_connection_response import CreateTenantConnectionResponse
-from .create_three_ds_session_response import CreateThreeDsSessionResponse
-from .create_token_intent_response import CreateTokenIntentResponse
-from .create_token_request import CreateTokenRequest
-from .cursor_pagination import CursorPagination
-from .document import Document
-from .domain_registration_response import DomainRegistrationResponse
-from .event_types import EventTypes
-from .get_applications import GetApplications
-from .get_logs import GetLogs
-from .get_permissions import GetPermissions
-from .get_proxies import GetProxies
-from .get_reactor_formulas import GetReactorFormulas
-from .get_reactors import GetReactors
-from .get_tenant_invitations import GetTenantInvitations
-from .get_tenant_members import GetTenantMembers
-from .get_tokens_v2 import GetTokensV2
-from .google_pay_create_response import GooglePayCreateResponse
-from .google_pay_merchant import GooglePayMerchant
-from .google_pay_merchant_certificates import GooglePayMerchantCertificates
-from .google_pay_method_token import GooglePayMethodToken
-from .google_pay_token import GooglePayToken
-from .google_pay_tokenize_request import GooglePayTokenizeRequest
-from .google_pay_tokenize_response import GooglePayTokenizeResponse
-from .header import Header
-from .intermediate_signing_key import IntermediateSigningKey
-from .log import Log
-from .log_entity_type import LogEntityType
-from .log_paginated_list import LogPaginatedList
-from .network_token import NetworkToken
-from .network_token_cryptogram import NetworkTokenCryptogram
-from .network_token_extras import NetworkTokenExtras
-from .pagination import Pagination
-from .payment_data import PaymentData
-from .pending_proxy import PendingProxy
-from .pending_reactor import PendingReactor
-from .permission import Permission
-from .privacy import Privacy
-from .problem_details import ProblemDetails
-from .proxy import Proxy
-from .proxy_paginated_list import ProxyPaginatedList
-from .proxy_transform import ProxyTransform
-from .proxy_transform_options import ProxyTransformOptions
-from .public_key import PublicKey
-from .react_response import ReactResponse
-from .reactor import Reactor
-from .reactor_formula import ReactorFormula
-from .reactor_formula_configuration import ReactorFormulaConfiguration
-from .reactor_formula_paginated_list import ReactorFormulaPaginatedList
-from .reactor_formula_request_parameter import ReactorFormulaRequestParameter
-from .reactor_paginated_list import ReactorPaginatedList
-from .requested_proxy import RequestedProxy
-from .requested_reactor import RequestedReactor
-from .role import Role
-from .runtime import Runtime
-from .security_contact_email_response import SecurityContactEmailResponse
-from .string_string_key_value_pair import StringStringKeyValuePair
-from .submerchant_authentication_response import SubmerchantAuthenticationResponse
-from .tenant import Tenant
-from .tenant_connection_options import TenantConnectionOptions
-from .tenant_invitation_response import TenantInvitationResponse
-from .tenant_invitation_response_paginated_list import TenantInvitationResponsePaginatedList
-from .tenant_invitation_status import TenantInvitationStatus
-from .tenant_member_response import TenantMemberResponse
-from .tenant_member_response_paginated_list import TenantMemberResponsePaginatedList
-from .tenant_usage_report import TenantUsageReport
-from .three_ds_acs_rendering_type import ThreeDsAcsRenderingType
-from .three_ds_address import ThreeDsAddress
-from .three_ds_authentication import ThreeDsAuthentication
-from .three_ds_branding_options import ThreeDsBrandingOptions
-from .three_ds_callback_urls import ThreeDsCallbackUrls
-from .three_ds_cardholder_account_info import ThreeDsCardholderAccountInfo
-from .three_ds_cardholder_authentication_info import ThreeDsCardholderAuthenticationInfo
-from .three_ds_cardholder_info import ThreeDsCardholderInfo
-from .three_ds_cardholder_phone_number import ThreeDsCardholderPhoneNumber
-from .three_ds_device_info import ThreeDsDeviceInfo
-from .three_ds_merchant_info import ThreeDsMerchantInfo
-from .three_ds_merchant_risk_info import ThreeDsMerchantRiskInfo
-from .three_ds_message_extension import ThreeDsMessageExtension
-from .three_ds_method import ThreeDsMethod
-from .three_ds_mobile_sdk_render_options import ThreeDsMobileSdkRenderOptions
-from .three_ds_prior_authentication_info import ThreeDsPriorAuthenticationInfo
-from .three_ds_purchase_info import ThreeDsPurchaseInfo
-from .three_ds_requestor_info import ThreeDsRequestorInfo
-from .three_ds_session import ThreeDsSession
-from .three_ds_version import ThreeDsVersion
-from .token import Token
-from .token_authentication import TokenAuthentication
-from .token_cursor_paginated_list import TokenCursorPaginatedList
-from .token_enrichments import TokenEnrichments
-from .token_enrichments_card_details import TokenEnrichmentsCardDetails
-from .token_extras import TokenExtras
-from .token_intent import TokenIntent
-from .token_intent_extras import TokenIntentExtras
-from .token_service_provider_details import TokenServiceProviderDetails
-from .update_privacy import UpdatePrivacy
-from .update_reactor_formula_request import UpdateReactorFormulaRequest
-from .user import User
-from .validation_problem_details import ValidationProblemDetails
-from .webhook import Webhook
-from .webhook_list import WebhookList
-from .webhook_list_pagination import WebhookListPagination
-from .webhook_status import WebhookStatus
+import typing
+from importlib import import_module
+
+if typing.TYPE_CHECKING:
+    from .access_rule import AccessRule
+    from .account_updater_job import AccountUpdaterJob
+    from .account_updater_job_list import AccountUpdaterJobList
+    from .account_updater_job_list_pagination import AccountUpdaterJobListPagination
+    from .account_updater_job_status import AccountUpdaterJobStatus
+    from .account_updater_real_time_response import AccountUpdaterRealTimeResponse
+    from .additional_card_detail import AdditionalCardDetail
+    from .additional_card_details import AdditionalCardDetails
+    from .address import Address
+    from .agent import Agent
+    from .agentic_card import AgenticCard
+    from .agentic_card_brand import AgenticCardBrand
+    from .agentic_merchant import AgenticMerchant
+    from .amount import Amount
+    from .apple_pay_create_response import ApplePayCreateResponse
+    from .apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
+    from .apple_pay_merchant import ApplePayMerchant
+    from .apple_pay_merchant_certificates import ApplePayMerchantCertificates
+    from .apple_pay_method_token import ApplePayMethodToken
+    from .apple_pay_token import ApplePayToken
+    from .apple_pay_tokenize_request import ApplePayTokenizeRequest
+    from .apple_pay_tokenize_response import ApplePayTokenizeResponse
+    from .application import Application
+    from .application_key import ApplicationKey
+    from .application_paginated_list import ApplicationPaginatedList
+    from .application_template import ApplicationTemplate
+    from .assurance_details import AssuranceDetails
+    from .async_react_response import AsyncReactResponse
+    from .authenticate_three_ds_session_request import AuthenticateThreeDsSessionRequest
+    from .authentication import Authentication
+    from .authentication_response import AuthenticationResponse
+    from .bank_details import BankDetails
+    from .bank_verification_response import BankVerificationResponse
+    from .bin_details import BinDetails
+    from .bin_details_bank import BinDetailsBank
+    from .bin_details_country import BinDetailsCountry
+    from .bin_details_product import BinDetailsProduct
+    from .card import Card
+    from .card_bin_range import CardBinRange
+    from .card_details import CardDetails
+    from .card_details_response import CardDetailsResponse
+    from .card_display import CardDisplay
+    from .card_issuer import CardIssuer
+    from .card_issuer_country import CardIssuerCountry
+    from .card_issuer_details import CardIssuerDetails
+    from .cardholder_info import CardholderInfo
+    from .client_encryption_key_metadata_response import ClientEncryptionKeyMetadataResponse
+    from .client_encryption_key_response import ClientEncryptionKeyResponse
+    from .condition import Condition
+    from .confirmation_entry import ConfirmationEntry
+    from .consumer import Consumer
+    from .create_account_updater_job_request import CreateAccountUpdaterJobRequest
+    from .create_account_updater_job_request_result_version import CreateAccountUpdaterJobRequestResultVersion
+    from .create_document_request import CreateDocumentRequest
+    from .create_reactor_formula_request import CreateReactorFormulaRequest
+    from .create_session_response import CreateSessionResponse
+    from .create_tenant_connection_response import CreateTenantConnectionResponse
+    from .create_three_ds_session_response import CreateThreeDsSessionResponse
+    from .create_token_intent_response import CreateTokenIntentResponse
+    from .create_token_request import CreateTokenRequest
+    from .credentials import Credentials
+    from .credentials_card import CredentialsCard
+    from .cursor_pagination import CursorPagination
+    from .delivery_method import DeliveryMethod
+    from .device_context import DeviceContext
+    from .device_context_platform_type import DeviceContextPlatformType
+    from .device_context_session_context import DeviceContextSessionContext
+    from .device_type import DeviceType
+    from .document import Document
+    from .domain_registration_response import DomainRegistrationResponse
+    from .encryption_jwk import EncryptionJwk
+    from .enrollment import Enrollment
+    from .enrollment_list import EnrollmentList
+    from .enrollment_list_pagination import EnrollmentListPagination
+    from .enrollment_provider import EnrollmentProvider
+    from .enrollment_status import EnrollmentStatus
+    from .event_types import EventTypes
+    from .get_applications import GetApplications
+    from .get_logs import GetLogs
+    from .get_permissions import GetPermissions
+    from .get_proxies import GetProxies
+    from .get_reactor_formulas import GetReactorFormulas
+    from .get_reactors import GetReactors
+    from .get_tenant_invitations import GetTenantInvitations
+    from .get_tenant_members import GetTenantMembers
+    from .get_tokens_v2 import GetTokensV2
+    from .google_pay_create_response import GooglePayCreateResponse
+    from .google_pay_merchant import GooglePayMerchant
+    from .google_pay_merchant_certificates import GooglePayMerchantCertificates
+    from .google_pay_method_token import GooglePayMethodToken
+    from .google_pay_token import GooglePayToken
+    from .google_pay_tokenize_request import GooglePayTokenizeRequest
+    from .google_pay_tokenize_response import GooglePayTokenizeResponse
+    from .header import Header
+    from .instance_details import InstanceDetails
+    from .instruction import Instruction
+    from .instruction_list import InstructionList
+    from .instruction_list_pagination import InstructionListPagination
+    from .instruction_status import InstructionStatus
+    from .intermediate_signing_key import IntermediateSigningKey
+    from .log import Log
+    from .log_entity_type import LogEntityType
+    from .log_paginated_list import LogPaginatedList
+    from .mpp_challenge import MppChallenge
+    from .mpp_credentials_request import MppCredentialsRequest
+    from .mpp_credentials_response import MppCredentialsResponse
+    from .mpp_source import MppSource
+    from .mpp_source_type import MppSourceType
+    from .network_token import NetworkToken
+    from .network_token_cryptogram import NetworkTokenCryptogram
+    from .network_token_extras import NetworkTokenExtras
+    from .pagination import Pagination
+    from .payment_data import PaymentData
+    from .pending_proxy import PendingProxy
+    from .pending_reactor import PendingReactor
+    from .permission import Permission
+    from .privacy import Privacy
+    from .problem_details import ProblemDetails
+    from .product import Product
+    from .proxy import Proxy
+    from .proxy_paginated_list import ProxyPaginatedList
+    from .proxy_transform import ProxyTransform
+    from .proxy_transform_options import ProxyTransformOptions
+    from .public_key import PublicKey
+    from .publish_confirmation_request import PublishConfirmationRequest
+    from .react_response import ReactResponse
+    from .reactor import Reactor
+    from .reactor_formula import ReactorFormula
+    from .reactor_formula_configuration import ReactorFormulaConfiguration
+    from .reactor_formula_paginated_list import ReactorFormulaPaginatedList
+    from .reactor_formula_request_parameter import ReactorFormulaRequestParameter
+    from .reactor_paginated_list import ReactorPaginatedList
+    from .recurring import Recurring
+    from .recurring_frequency import RecurringFrequency
+    from .requested_proxy import RequestedProxy
+    from .requested_reactor import RequestedReactor
+    from .role import Role
+    from .runtime import Runtime
+    from .security_contact_email_response import SecurityContactEmailResponse
+    from .shipping_address import ShippingAddress
+    from .start_verification_request import StartVerificationRequest
+    from .string_string_key_value_pair import StringStringKeyValuePair
+    from .submerchant_authentication_response import SubmerchantAuthenticationResponse
+    from .tenant import Tenant
+    from .tenant_connection_options import TenantConnectionOptions
+    from .tenant_invitation_response import TenantInvitationResponse
+    from .tenant_invitation_response_paginated_list import TenantInvitationResponsePaginatedList
+    from .tenant_invitation_status import TenantInvitationStatus
+    from .tenant_member_response import TenantMemberResponse
+    from .tenant_member_response_paginated_list import TenantMemberResponsePaginatedList
+    from .tenant_usage_report import TenantUsageReport
+    from .three_ds_acs_rendering_type import ThreeDsAcsRenderingType
+    from .three_ds_address import ThreeDsAddress
+    from .three_ds_authentication import ThreeDsAuthentication
+    from .three_ds_branding_options import ThreeDsBrandingOptions
+    from .three_ds_callback_urls import ThreeDsCallbackUrls
+    from .three_ds_cardholder_account_info import ThreeDsCardholderAccountInfo
+    from .three_ds_cardholder_authentication_info import ThreeDsCardholderAuthenticationInfo
+    from .three_ds_cardholder_info import ThreeDsCardholderInfo
+    from .three_ds_cardholder_phone_number import ThreeDsCardholderPhoneNumber
+    from .three_ds_device_info import ThreeDsDeviceInfo
+    from .three_ds_merchant_info import ThreeDsMerchantInfo
+    from .three_ds_merchant_risk_info import ThreeDsMerchantRiskInfo
+    from .three_ds_message_extension import ThreeDsMessageExtension
+    from .three_ds_method import ThreeDsMethod
+    from .three_ds_mobile_sdk_render_options import ThreeDsMobileSdkRenderOptions
+    from .three_ds_prior_authentication_info import ThreeDsPriorAuthenticationInfo
+    from .three_ds_purchase_info import ThreeDsPurchaseInfo
+    from .three_ds_requestor_info import ThreeDsRequestorInfo
+    from .three_ds_session import ThreeDsSession
+    from .three_ds_version import ThreeDsVersion
+    from .token import Token
+    from .token_authentication import TokenAuthentication
+    from .token_cursor_paginated_list import TokenCursorPaginatedList
+    from .token_enrichments import TokenEnrichments
+    from .token_enrichments_card_details import TokenEnrichmentsCardDetails
+    from .token_extras import TokenExtras
+    from .token_intent import TokenIntent
+    from .token_intent_extras import TokenIntentExtras
+    from .token_service_provider_details import TokenServiceProviderDetails
+    from .transaction_status import TransactionStatus
+    from .transaction_type import TransactionType
+    from .update_privacy import UpdatePrivacy
+    from .update_reactor_formula_request import UpdateReactorFormulaRequest
+    from .user import User
+    from .validation_problem_details import ValidationProblemDetails
+    from .verification_response import VerificationResponse
+    from .verification_response_brand import VerificationResponseBrand
+    from .verification_response_methods_item import VerificationResponseMethodsItem
+    from .verification_response_passkey_context import VerificationResponsePasskeyContext
+    from .verification_response_passkey_context_action import VerificationResponsePasskeyContextAction
+    from .verification_response_passkey_context_auth_preferences import (
+        VerificationResponsePasskeyContextAuthPreferences,
+    )
+    from .verification_response_passkey_context_display_context import VerificationResponsePasskeyContextDisplayContext
+    from .verification_response_passkey_context_platform_type import VerificationResponsePasskeyContextPlatformType
+    from .verification_response_status import VerificationResponseStatus
+    from .webhook import Webhook
+    from .webhook_list import WebhookList
+    from .webhook_list_pagination import WebhookListPagination
+    from .webhook_status import WebhookStatus
+_dynamic_imports: typing.Dict[str, str] = {
+    "AccessRule": ".access_rule",
+    "AccountUpdaterJob": ".account_updater_job",
+    "AccountUpdaterJobList": ".account_updater_job_list",
+    "AccountUpdaterJobListPagination": ".account_updater_job_list_pagination",
+    "AccountUpdaterJobStatus": ".account_updater_job_status",
+    "AccountUpdaterRealTimeResponse": ".account_updater_real_time_response",
+    "AdditionalCardDetail": ".additional_card_detail",
+    "AdditionalCardDetails": ".additional_card_details",
+    "Address": ".address",
+    "Agent": ".agent",
+    "AgenticCard": ".agentic_card",
+    "AgenticCardBrand": ".agentic_card_brand",
+    "AgenticMerchant": ".agentic_merchant",
+    "Amount": ".amount",
+    "ApplePayCreateResponse": ".apple_pay_create_response",
+    "ApplePayDomainRegistrationResponse": ".apple_pay_domain_registration_response",
+    "ApplePayMerchant": ".apple_pay_merchant",
+    "ApplePayMerchantCertificates": ".apple_pay_merchant_certificates",
+    "ApplePayMethodToken": ".apple_pay_method_token",
+    "ApplePayToken": ".apple_pay_token",
+    "ApplePayTokenizeRequest": ".apple_pay_tokenize_request",
+    "ApplePayTokenizeResponse": ".apple_pay_tokenize_response",
+    "Application": ".application",
+    "ApplicationKey": ".application_key",
+    "ApplicationPaginatedList": ".application_paginated_list",
+    "ApplicationTemplate": ".application_template",
+    "AssuranceDetails": ".assurance_details",
+    "AsyncReactResponse": ".async_react_response",
+    "AuthenticateThreeDsSessionRequest": ".authenticate_three_ds_session_request",
+    "Authentication": ".authentication",
+    "AuthenticationResponse": ".authentication_response",
+    "BankDetails": ".bank_details",
+    "BankVerificationResponse": ".bank_verification_response",
+    "BinDetails": ".bin_details",
+    "BinDetailsBank": ".bin_details_bank",
+    "BinDetailsCountry": ".bin_details_country",
+    "BinDetailsProduct": ".bin_details_product",
+    "Card": ".card",
+    "CardBinRange": ".card_bin_range",
+    "CardDetails": ".card_details",
+    "CardDetailsResponse": ".card_details_response",
+    "CardDisplay": ".card_display",
+    "CardIssuer": ".card_issuer",
+    "CardIssuerCountry": ".card_issuer_country",
+    "CardIssuerDetails": ".card_issuer_details",
+    "CardholderInfo": ".cardholder_info",
+    "ClientEncryptionKeyMetadataResponse": ".client_encryption_key_metadata_response",
+    "ClientEncryptionKeyResponse": ".client_encryption_key_response",
+    "Condition": ".condition",
+    "ConfirmationEntry": ".confirmation_entry",
+    "Consumer": ".consumer",
+    "CreateAccountUpdaterJobRequest": ".create_account_updater_job_request",
+    "CreateAccountUpdaterJobRequestResultVersion": ".create_account_updater_job_request_result_version",
+    "CreateDocumentRequest": ".create_document_request",
+    "CreateReactorFormulaRequest": ".create_reactor_formula_request",
+    "CreateSessionResponse": ".create_session_response",
+    "CreateTenantConnectionResponse": ".create_tenant_connection_response",
+    "CreateThreeDsSessionResponse": ".create_three_ds_session_response",
+    "CreateTokenIntentResponse": ".create_token_intent_response",
+    "CreateTokenRequest": ".create_token_request",
+    "Credentials": ".credentials",
+    "CredentialsCard": ".credentials_card",
+    "CursorPagination": ".cursor_pagination",
+    "DeliveryMethod": ".delivery_method",
+    "DeviceContext": ".device_context",
+    "DeviceContextPlatformType": ".device_context_platform_type",
+    "DeviceContextSessionContext": ".device_context_session_context",
+    "DeviceType": ".device_type",
+    "Document": ".document",
+    "DomainRegistrationResponse": ".domain_registration_response",
+    "EncryptionJwk": ".encryption_jwk",
+    "Enrollment": ".enrollment",
+    "EnrollmentList": ".enrollment_list",
+    "EnrollmentListPagination": ".enrollment_list_pagination",
+    "EnrollmentProvider": ".enrollment_provider",
+    "EnrollmentStatus": ".enrollment_status",
+    "EventTypes": ".event_types",
+    "GetApplications": ".get_applications",
+    "GetLogs": ".get_logs",
+    "GetPermissions": ".get_permissions",
+    "GetProxies": ".get_proxies",
+    "GetReactorFormulas": ".get_reactor_formulas",
+    "GetReactors": ".get_reactors",
+    "GetTenantInvitations": ".get_tenant_invitations",
+    "GetTenantMembers": ".get_tenant_members",
+    "GetTokensV2": ".get_tokens_v2",
+    "GooglePayCreateResponse": ".google_pay_create_response",
+    "GooglePayMerchant": ".google_pay_merchant",
+    "GooglePayMerchantCertificates": ".google_pay_merchant_certificates",
+    "GooglePayMethodToken": ".google_pay_method_token",
+    "GooglePayToken": ".google_pay_token",
+    "GooglePayTokenizeRequest": ".google_pay_tokenize_request",
+    "GooglePayTokenizeResponse": ".google_pay_tokenize_response",
+    "Header": ".header",
+    "InstanceDetails": ".instance_details",
+    "Instruction": ".instruction",
+    "InstructionList": ".instruction_list",
+    "InstructionListPagination": ".instruction_list_pagination",
+    "InstructionStatus": ".instruction_status",
+    "IntermediateSigningKey": ".intermediate_signing_key",
+    "Log": ".log",
+    "LogEntityType": ".log_entity_type",
+    "LogPaginatedList": ".log_paginated_list",
+    "MppChallenge": ".mpp_challenge",
+    "MppCredentialsRequest": ".mpp_credentials_request",
+    "MppCredentialsResponse": ".mpp_credentials_response",
+    "MppSource": ".mpp_source",
+    "MppSourceType": ".mpp_source_type",
+    "NetworkToken": ".network_token",
+    "NetworkTokenCryptogram": ".network_token_cryptogram",
+    "NetworkTokenExtras": ".network_token_extras",
+    "Pagination": ".pagination",
+    "PaymentData": ".payment_data",
+    "PendingProxy": ".pending_proxy",
+    "PendingReactor": ".pending_reactor",
+    "Permission": ".permission",
+    "Privacy": ".privacy",
+    "ProblemDetails": ".problem_details",
+    "Product": ".product",
+    "Proxy": ".proxy",
+    "ProxyPaginatedList": ".proxy_paginated_list",
+    "ProxyTransform": ".proxy_transform",
+    "ProxyTransformOptions": ".proxy_transform_options",
+    "PublicKey": ".public_key",
+    "PublishConfirmationRequest": ".publish_confirmation_request",
+    "ReactResponse": ".react_response",
+    "Reactor": ".reactor",
+    "ReactorFormula": ".reactor_formula",
+    "ReactorFormulaConfiguration": ".reactor_formula_configuration",
+    "ReactorFormulaPaginatedList": ".reactor_formula_paginated_list",
+    "ReactorFormulaRequestParameter": ".reactor_formula_request_parameter",
+    "ReactorPaginatedList": ".reactor_paginated_list",
+    "Recurring": ".recurring",
+    "RecurringFrequency": ".recurring_frequency",
+    "RequestedProxy": ".requested_proxy",
+    "RequestedReactor": ".requested_reactor",
+    "Role": ".role",
+    "Runtime": ".runtime",
+    "SecurityContactEmailResponse": ".security_contact_email_response",
+    "ShippingAddress": ".shipping_address",
+    "StartVerificationRequest": ".start_verification_request",
+    "StringStringKeyValuePair": ".string_string_key_value_pair",
+    "SubmerchantAuthenticationResponse": ".submerchant_authentication_response",
+    "Tenant": ".tenant",
+    "TenantConnectionOptions": ".tenant_connection_options",
+    "TenantInvitationResponse": ".tenant_invitation_response",
+    "TenantInvitationResponsePaginatedList": ".tenant_invitation_response_paginated_list",
+    "TenantInvitationStatus": ".tenant_invitation_status",
+    "TenantMemberResponse": ".tenant_member_response",
+    "TenantMemberResponsePaginatedList": ".tenant_member_response_paginated_list",
+    "TenantUsageReport": ".tenant_usage_report",
+    "ThreeDsAcsRenderingType": ".three_ds_acs_rendering_type",
+    "ThreeDsAddress": ".three_ds_address",
+    "ThreeDsAuthentication": ".three_ds_authentication",
+    "ThreeDsBrandingOptions": ".three_ds_branding_options",
+    "ThreeDsCallbackUrls": ".three_ds_callback_urls",
+    "ThreeDsCardholderAccountInfo": ".three_ds_cardholder_account_info",
+    "ThreeDsCardholderAuthenticationInfo": ".three_ds_cardholder_authentication_info",
+    "ThreeDsCardholderInfo": ".three_ds_cardholder_info",
+    "ThreeDsCardholderPhoneNumber": ".three_ds_cardholder_phone_number",
+    "ThreeDsDeviceInfo": ".three_ds_device_info",
+    "ThreeDsMerchantInfo": ".three_ds_merchant_info",
+    "ThreeDsMerchantRiskInfo": ".three_ds_merchant_risk_info",
+    "ThreeDsMessageExtension": ".three_ds_message_extension",
+    "ThreeDsMethod": ".three_ds_method",
+    "ThreeDsMobileSdkRenderOptions": ".three_ds_mobile_sdk_render_options",
+    "ThreeDsPriorAuthenticationInfo": ".three_ds_prior_authentication_info",
+    "ThreeDsPurchaseInfo": ".three_ds_purchase_info",
+    "ThreeDsRequestorInfo": ".three_ds_requestor_info",
+    "ThreeDsSession": ".three_ds_session",
+    "ThreeDsVersion": ".three_ds_version",
+    "Token": ".token",
+    "TokenAuthentication": ".token_authentication",
+    "TokenCursorPaginatedList": ".token_cursor_paginated_list",
+    "TokenEnrichments": ".token_enrichments",
+    "TokenEnrichmentsCardDetails": ".token_enrichments_card_details",
+    "TokenExtras": ".token_extras",
+    "TokenIntent": ".token_intent",
+    "TokenIntentExtras": ".token_intent_extras",
+    "TokenServiceProviderDetails": ".token_service_provider_details",
+    "TransactionStatus": ".transaction_status",
+    "TransactionType": ".transaction_type",
+    "UpdatePrivacy": ".update_privacy",
+    "UpdateReactorFormulaRequest": ".update_reactor_formula_request",
+    "User": ".user",
+    "ValidationProblemDetails": ".validation_problem_details",
+    "VerificationResponse": ".verification_response",
+    "VerificationResponseBrand": ".verification_response_brand",
+    "VerificationResponseMethodsItem": ".verification_response_methods_item",
+    "VerificationResponsePasskeyContext": ".verification_response_passkey_context",
+    "VerificationResponsePasskeyContextAction": ".verification_response_passkey_context_action",
+    "VerificationResponsePasskeyContextAuthPreferences": ".verification_response_passkey_context_auth_preferences",
+    "VerificationResponsePasskeyContextDisplayContext": ".verification_response_passkey_context_display_context",
+    "VerificationResponsePasskeyContextPlatformType": ".verification_response_passkey_context_platform_type",
+    "VerificationResponseStatus": ".verification_response_status",
+    "Webhook": ".webhook",
+    "WebhookList": ".webhook_list",
+    "WebhookListPagination": ".webhook_list_pagination",
+    "WebhookStatus": ".webhook_status",
+}
+
+
+def __getattr__(attr_name: str) -> typing.Any:
+    module_name = _dynamic_imports.get(attr_name)
+    if module_name is None:
+        raise AttributeError(f"No {attr_name} found in _dynamic_imports for module name -> {__name__}")
+    try:
+        module = import_module(module_name, __package__)
+        if module_name == f".{attr_name}":
+            return module
+        else:
+            return getattr(module, attr_name)
+    except ImportError as e:
+        raise ImportError(f"Failed to import {attr_name} from {module_name}: {e}") from e
+    except AttributeError as e:
+        raise AttributeError(f"Failed to get {attr_name} from {module_name}: {e}") from e
+
+
+def __dir__():
+    lazy_attrs = list(_dynamic_imports.keys())
+    return sorted(lazy_attrs)
+
 
 __all__ = [
     "AccessRule",
@@ -163,6 +441,11 @@ __all__ = [
     "AdditionalCardDetail",
     "AdditionalCardDetails",
     "Address",
+    "Agent",
+    "AgenticCard",
+    "AgenticCardBrand",
+    "AgenticMerchant",
+    "Amount",
     "ApplePayCreateResponse",
     "ApplePayDomainRegistrationResponse",
     "ApplePayMerchant",
@@ -190,6 +473,7 @@ __all__ = [
     "CardBinRange",
     "CardDetails",
     "CardDetailsResponse",
+    "CardDisplay",
     "CardIssuer",
     "CardIssuerCountry",
     "CardIssuerDetails",
@@ -197,7 +481,10 @@ __all__ = [
     "ClientEncryptionKeyMetadataResponse",
     "ClientEncryptionKeyResponse",
     "Condition",
+    "ConfirmationEntry",
+    "Consumer",
     "CreateAccountUpdaterJobRequest",
+    "CreateAccountUpdaterJobRequestResultVersion",
     "CreateDocumentRequest",
     "CreateReactorFormulaRequest",
     "CreateSessionResponse",
@@ -205,9 +492,22 @@ __all__ = [
     "CreateThreeDsSessionResponse",
     "CreateTokenIntentResponse",
     "CreateTokenRequest",
+    "Credentials",
+    "CredentialsCard",
     "CursorPagination",
+    "DeliveryMethod",
+    "DeviceContext",
+    "DeviceContextPlatformType",
+    "DeviceContextSessionContext",
+    "DeviceType",
     "Document",
     "DomainRegistrationResponse",
+    "EncryptionJwk",
+    "Enrollment",
+    "EnrollmentList",
+    "EnrollmentListPagination",
+    "EnrollmentProvider",
+    "EnrollmentStatus",
     "EventTypes",
     "GetApplications",
     "GetLogs",
@@ -226,10 +526,20 @@ __all__ = [
     "GooglePayTokenizeRequest",
     "GooglePayTokenizeResponse",
     "Header",
+    "InstanceDetails",
+    "Instruction",
+    "InstructionList",
+    "InstructionListPagination",
+    "InstructionStatus",
     "IntermediateSigningKey",
     "Log",
     "LogEntityType",
     "LogPaginatedList",
+    "MppChallenge",
+    "MppCredentialsRequest",
+    "MppCredentialsResponse",
+    "MppSource",
+    "MppSourceType",
     "NetworkToken",
     "NetworkTokenCryptogram",
     "NetworkTokenExtras",
@@ -240,11 +550,13 @@ __all__ = [
     "Permission",
     "Privacy",
     "ProblemDetails",
+    "Product",
     "Proxy",
     "ProxyPaginatedList",
     "ProxyTransform",
     "ProxyTransformOptions",
     "PublicKey",
+    "PublishConfirmationRequest",
     "ReactResponse",
     "Reactor",
     "ReactorFormula",
@@ -252,11 +564,15 @@ __all__ = [
     "ReactorFormulaPaginatedList",
     "ReactorFormulaRequestParameter",
     "ReactorPaginatedList",
+    "Recurring",
+    "RecurringFrequency",
     "RequestedProxy",
     "RequestedReactor",
     "Role",
     "Runtime",
     "SecurityContactEmailResponse",
+    "ShippingAddress",
+    "StartVerificationRequest",
     "StringStringKeyValuePair",
     "SubmerchantAuthenticationResponse",
     "Tenant",
@@ -296,10 +612,21 @@ __all__ = [
     "TokenIntent",
     "TokenIntentExtras",
     "TokenServiceProviderDetails",
+    "TransactionStatus",
+    "TransactionType",
     "UpdatePrivacy",
     "UpdateReactorFormulaRequest",
     "User",
     "ValidationProblemDetails",
+    "VerificationResponse",
+    "VerificationResponseBrand",
+    "VerificationResponseMethodsItem",
+    "VerificationResponsePasskeyContext",
+    "VerificationResponsePasskeyContextAction",
+    "VerificationResponsePasskeyContextAuthPreferences",
+    "VerificationResponsePasskeyContextDisplayContext",
+    "VerificationResponsePasskeyContextPlatformType",
+    "VerificationResponseStatus",
     "Webhook",
     "WebhookList",
     "WebhookListPagination",

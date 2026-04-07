@@ -7,6 +7,7 @@ from ..core.pagination import AsyncPager, SyncPager
 from ..core.request_options import RequestOptions
 from ..types.access_rule import AccessRule
 from ..types.application import Application
+from ..types.application_paginated_list import ApplicationPaginatedList
 from .raw_client import AsyncRawApplicationsClient, RawApplicationsClient
 
 # this is used as the default value for optional parameters
@@ -37,7 +38,7 @@ class ApplicationsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Application]:
+    ) -> SyncPager[Application, ApplicationPaginatedList]:
         """
         Parameters
         ----------
@@ -56,7 +57,7 @@ class ApplicationsClient:
 
         Returns
         -------
-        SyncPager[Application]
+        SyncPager[Application, ApplicationPaginatedList]
             Success
 
         Examples
@@ -67,7 +68,11 @@ class ApplicationsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.applications.list()
+        response = client.applications.list(
+            page=1,
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -297,7 +302,7 @@ class AsyncApplicationsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Application]:
+    ) -> AsyncPager[Application, ApplicationPaginatedList]:
         """
         Parameters
         ----------
@@ -316,7 +321,7 @@ class AsyncApplicationsClient:
 
         Returns
         -------
-        AsyncPager[Application]
+        AsyncPager[Application, ApplicationPaginatedList]
             Success
 
         Examples
@@ -332,7 +337,11 @@ class AsyncApplicationsClient:
 
 
         async def main() -> None:
-            response = await client.applications.list()
+            response = await client.applications.list(
+                page=1,
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 
