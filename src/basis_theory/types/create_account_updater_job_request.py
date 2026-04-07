@@ -4,6 +4,7 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .create_account_updater_job_request_result_version import CreateAccountUpdaterJobRequestResultVersion
 
 
 class CreateAccountUpdaterJobRequest(UniversalBaseModel):
@@ -15,6 +16,11 @@ class CreateAccountUpdaterJobRequest(UniversalBaseModel):
     merchant_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Tenant merchant identifier
+    """
+
+    result_version: typing.Optional[CreateAccountUpdaterJobRequestResultVersion] = pydantic.Field(default=None)
+    """
+    Version of the result CSV format. Version '1' returns base columns. Version '1.1' adds new_fingerprint and new_brand columns.
     """
 
     if IS_PYDANTIC_V2:

@@ -18,7 +18,7 @@ class Token(UniversalBaseModel):
     id: typing.Optional[str] = None
     type: typing.Optional[str] = None
     tenant_id: typing.Optional[str] = None
-    data: typing.Optional[typing.Optional[typing.Any]] = None
+    data: typing.Optional[typing.Any] = None
     metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
     enrichments: typing.Optional[TokenEnrichments] = None
     created_by: typing.Optional[str] = None
@@ -30,14 +30,16 @@ class Token(UniversalBaseModel):
     modified_at: typing.Optional[dt.datetime] = None
     fingerprint: typing.Optional[str] = None
     fingerprint_expression: typing.Optional[str] = None
-    mask: typing.Optional[typing.Optional[typing.Any]] = None
+    mask: typing.Optional[typing.Any] = None
     privacy: typing.Optional[Privacy] = None
     search_indexes: typing.Optional[typing.List[str]] = None
     expires_at: typing.Optional[dt.datetime] = None
     containers: typing.Optional[typing.List[str]] = None
     aliases: typing.Optional[typing.List[str]] = None
-    authentication: typing.Optional[typing.Optional[typing.Any]] = None
-    extras: typing_extensions.Annotated[typing.Optional[TokenExtras], FieldMetadata(alias="_extras")] = None
+    authentication: typing.Optional[typing.Any] = None
+    extras: typing_extensions.Annotated[
+        typing.Optional[TokenExtras], FieldMetadata(alias="_extras"), pydantic.Field(alias="_extras")
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -7,6 +7,7 @@ from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.http_response import AsyncHttpResponse, HttpResponse
 from ...core.jsonable_encoder import jsonable_encoder
+from ...core.parse_error import ParsingError
 from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
 from ...core.serialization import convert_and_respect_annotation_metadata
@@ -27,6 +28,7 @@ from ...types.three_ds_purchase_info import ThreeDsPurchaseInfo
 from ...types.three_ds_requestor_info import ThreeDsRequestorInfo
 from ...types.three_ds_session import ThreeDsSession
 from ...types.validation_problem_details import ValidationProblemDetails
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -155,6 +157,10 @@ class RawSessionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def authenticate(
@@ -171,7 +177,7 @@ class RawSessionsClient:
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
         requestor_info: typing.Optional[ThreeDsRequestorInfo] = OMIT,
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
-        broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        broadcast_info: typing.Optional[typing.Any] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
@@ -202,7 +208,7 @@ class RawSessionsClient:
 
         cardholder_info : typing.Optional[ThreeDsCardholderInfo]
 
-        broadcast_info : typing.Optional[typing.Optional[typing.Any]]
+        broadcast_info : typing.Optional[typing.Any]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
 
@@ -289,9 +295,9 @@ class RawSessionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -299,6 +305,10 @@ class RawSessionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_challenge_result(
@@ -358,9 +368,9 @@ class RawSessionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -368,6 +378,10 @@ class RawSessionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[ThreeDsSession]:
@@ -414,9 +428,9 @@ class RawSessionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -424,6 +438,10 @@ class RawSessionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -550,6 +568,10 @@ class AsyncRawSessionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def authenticate(
@@ -566,7 +588,7 @@ class AsyncRawSessionsClient:
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
         requestor_info: typing.Optional[ThreeDsRequestorInfo] = OMIT,
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
-        broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        broadcast_info: typing.Optional[typing.Any] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
@@ -597,7 +619,7 @@ class AsyncRawSessionsClient:
 
         cardholder_info : typing.Optional[ThreeDsCardholderInfo]
 
-        broadcast_info : typing.Optional[typing.Optional[typing.Any]]
+        broadcast_info : typing.Optional[typing.Any]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
 
@@ -684,9 +706,9 @@ class AsyncRawSessionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -694,6 +716,10 @@ class AsyncRawSessionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_challenge_result(
@@ -753,9 +779,9 @@ class AsyncRawSessionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -763,6 +789,10 @@ class AsyncRawSessionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get(
@@ -811,9 +841,9 @@ class AsyncRawSessionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -821,4 +851,8 @@ class AsyncRawSessionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

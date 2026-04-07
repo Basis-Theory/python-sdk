@@ -7,7 +7,8 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pagination import AsyncPager, BaseHttpResponse, SyncPager
+from ..core.pagination import AsyncPager, SyncPager
+from ..core.parse_error import ParsingError
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -22,6 +23,7 @@ from ..types.token import Token
 from ..types.token_cursor_paginated_list import TokenCursorPaginatedList
 from ..types.update_privacy import UpdatePrivacy
 from ..types.validation_problem_details import ValidationProblemDetails
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -32,19 +34,19 @@ class RawTokensClient:
         self._client_wrapper = client_wrapper
 
     def detokenize(
-        self, *, request: typing.Optional[typing.Any] = None, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        self, *, request: typing.Any, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[typing.Any]:
         """
         Parameters
         ----------
-        request : typing.Optional[typing.Any]
+        request : typing.Any
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.Optional[typing.Any]]
+        HttpResponse[typing.Any]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -62,9 +64,9 @@ class RawTokensClient:
                 return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    typing.Any,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=typing.Any,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -116,19 +118,23 @@ class RawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def tokenize(
         self,
         *,
-        request: typing.Optional[typing.Any] = None,
+        request: typing.Any,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
+    ) -> HttpResponse[typing.Any]:
         """
         Parameters
         ----------
-        request : typing.Optional[typing.Any]
+        request : typing.Any
 
         idempotency_key : typing.Optional[str]
 
@@ -137,7 +143,7 @@ class RawTokensClient:
 
         Returns
         -------
-        HttpResponse[typing.Optional[typing.Any]]
+        HttpResponse[typing.Any]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -156,9 +162,9 @@ class RawTokensClient:
                 return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    typing.Any,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=typing.Any,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -210,6 +216,10 @@ class RawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[Token]:
@@ -267,9 +277,9 @@ class RawTokensClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -277,6 +287,10 @@ class RawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[None]:
@@ -337,9 +351,9 @@ class RawTokensClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -347,18 +361,22 @@ class RawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update(
         self,
         id: str,
         *,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         privacy: typing.Optional[UpdatePrivacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
         fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        mask: typing.Optional[typing.Any] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -370,7 +388,7 @@ class RawTokensClient:
         ----------
         id : str
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         privacy : typing.Optional[UpdatePrivacy]
 
@@ -380,7 +398,7 @@ class RawTokensClient:
 
         fingerprint_expression : typing.Optional[str]
 
-        mask : typing.Optional[typing.Optional[typing.Any]]
+        mask : typing.Optional[typing.Any]
 
         expires_at : typing.Optional[str]
 
@@ -468,9 +486,9 @@ class RawTokensClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -489,6 +507,10 @@ class RawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create(
@@ -496,13 +518,13 @@ class RawTokensClient:
         *,
         id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         encrypted: typing.Optional[str] = OMIT,
         privacy: typing.Optional[Privacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
         fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        mask: typing.Optional[typing.Any] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -517,7 +539,7 @@ class RawTokensClient:
 
         type : typing.Optional[str]
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         encrypted : typing.Optional[str]
 
@@ -529,7 +551,7 @@ class RawTokensClient:
 
         fingerprint_expression : typing.Optional[str]
 
-        mask : typing.Optional[typing.Optional[typing.Any]]
+        mask : typing.Optional[typing.Any]
 
         deduplicate_token : typing.Optional[bool]
 
@@ -633,6 +655,10 @@ class RawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def list_v2(
@@ -645,7 +671,7 @@ class RawTokensClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Token]:
+    ) -> SyncPager[Token, TokenCursorPaginatedList]:
         """
         Parameters
         ----------
@@ -666,7 +692,7 @@ class RawTokensClient:
 
         Returns
         -------
-        SyncPager[Token]
+        SyncPager[Token, TokenCursorPaginatedList]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -706,9 +732,7 @@ class RawTokensClient:
                         size=size,
                         request_options=request_options,
                     )
-                return SyncPager(
-                    has_next=_has_next, items=_items, get_next=_get_next, response=BaseHttpResponse(response=_response)
-                )
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -734,6 +758,10 @@ class RawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def search_v2(
@@ -744,7 +772,7 @@ class RawTokensClient:
         size: typing.Optional[int] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Token]:
+    ) -> SyncPager[Token, TokenCursorPaginatedList]:
         """
         Parameters
         ----------
@@ -761,7 +789,7 @@ class RawTokensClient:
 
         Returns
         -------
-        SyncPager[Token]
+        SyncPager[Token, TokenCursorPaginatedList]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -801,9 +829,7 @@ class RawTokensClient:
                         idempotency_key=idempotency_key,
                         request_options=request_options,
                     )
-                return SyncPager(
-                    has_next=_has_next, items=_items, get_next=_get_next, response=BaseHttpResponse(response=_response)
-                )
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 400:
                 raise BadRequestError(
                     headers=dict(_response.headers),
@@ -840,6 +866,10 @@ class RawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -848,19 +878,19 @@ class AsyncRawTokensClient:
         self._client_wrapper = client_wrapper
 
     async def detokenize(
-        self, *, request: typing.Optional[typing.Any] = None, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        self, *, request: typing.Any, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[typing.Any]:
         """
         Parameters
         ----------
-        request : typing.Optional[typing.Any]
+        request : typing.Any
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
+        AsyncHttpResponse[typing.Any]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -878,9 +908,9 @@ class AsyncRawTokensClient:
                 return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    typing.Any,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=typing.Any,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -932,19 +962,23 @@ class AsyncRawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def tokenize(
         self,
         *,
-        request: typing.Optional[typing.Any] = None,
+        request: typing.Any,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+    ) -> AsyncHttpResponse[typing.Any]:
         """
         Parameters
         ----------
-        request : typing.Optional[typing.Any]
+        request : typing.Any
 
         idempotency_key : typing.Optional[str]
 
@@ -953,7 +987,7 @@ class AsyncRawTokensClient:
 
         Returns
         -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
+        AsyncHttpResponse[typing.Any]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -972,9 +1006,9 @@ class AsyncRawTokensClient:
                 return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    typing.Any,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=typing.Any,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1026,6 +1060,10 @@ class AsyncRawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get(
@@ -1085,9 +1123,9 @@ class AsyncRawTokensClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1095,6 +1133,10 @@ class AsyncRawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete(
@@ -1157,9 +1199,9 @@ class AsyncRawTokensClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1167,18 +1209,22 @@ class AsyncRawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update(
         self,
         id: str,
         *,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         privacy: typing.Optional[UpdatePrivacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
         fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        mask: typing.Optional[typing.Any] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -1190,7 +1236,7 @@ class AsyncRawTokensClient:
         ----------
         id : str
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         privacy : typing.Optional[UpdatePrivacy]
 
@@ -1200,7 +1246,7 @@ class AsyncRawTokensClient:
 
         fingerprint_expression : typing.Optional[str]
 
-        mask : typing.Optional[typing.Optional[typing.Any]]
+        mask : typing.Optional[typing.Any]
 
         expires_at : typing.Optional[str]
 
@@ -1288,9 +1334,9 @@ class AsyncRawTokensClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1309,6 +1355,10 @@ class AsyncRawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create(
@@ -1316,13 +1366,13 @@ class AsyncRawTokensClient:
         *,
         id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         encrypted: typing.Optional[str] = OMIT,
         privacy: typing.Optional[Privacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
         fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        mask: typing.Optional[typing.Any] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -1337,7 +1387,7 @@ class AsyncRawTokensClient:
 
         type : typing.Optional[str]
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         encrypted : typing.Optional[str]
 
@@ -1349,7 +1399,7 @@ class AsyncRawTokensClient:
 
         fingerprint_expression : typing.Optional[str]
 
-        mask : typing.Optional[typing.Optional[typing.Any]]
+        mask : typing.Optional[typing.Any]
 
         deduplicate_token : typing.Optional[bool]
 
@@ -1453,6 +1503,10 @@ class AsyncRawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def list_v2(
@@ -1465,7 +1519,7 @@ class AsyncRawTokensClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Token]:
+    ) -> AsyncPager[Token, TokenCursorPaginatedList]:
         """
         Parameters
         ----------
@@ -1486,7 +1540,7 @@ class AsyncRawTokensClient:
 
         Returns
         -------
-        AsyncPager[Token]
+        AsyncPager[Token, TokenCursorPaginatedList]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -1529,9 +1583,7 @@ class AsyncRawTokensClient:
                             request_options=request_options,
                         )
 
-                return AsyncPager(
-                    has_next=_has_next, items=_items, get_next=_get_next, response=BaseHttpResponse(response=_response)
-                )
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -1557,6 +1609,10 @@ class AsyncRawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def search_v2(
@@ -1567,7 +1623,7 @@ class AsyncRawTokensClient:
         size: typing.Optional[int] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Token]:
+    ) -> AsyncPager[Token, TokenCursorPaginatedList]:
         """
         Parameters
         ----------
@@ -1584,7 +1640,7 @@ class AsyncRawTokensClient:
 
         Returns
         -------
-        AsyncPager[Token]
+        AsyncPager[Token, TokenCursorPaginatedList]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -1627,9 +1683,7 @@ class AsyncRawTokensClient:
                             request_options=request_options,
                         )
 
-                return AsyncPager(
-                    has_next=_has_next, items=_items, get_next=_get_next, response=BaseHttpResponse(response=_response)
-                )
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 400:
                 raise BadRequestError(
                     headers=dict(_response.headers),
@@ -1666,4 +1720,8 @@ class AsyncRawTokensClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

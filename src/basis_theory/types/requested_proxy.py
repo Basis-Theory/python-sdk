@@ -11,7 +11,7 @@ class RequestedProxy(UniversalBaseModel):
     proxy: typing.Optional[PendingProxy] = None
     error_code: typing.Optional[str] = None
     error_message: typing.Optional[str] = None
-    error_details: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
+    error_details: typing.Optional[typing.Dict[str, typing.Any]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

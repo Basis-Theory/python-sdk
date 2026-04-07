@@ -20,7 +20,7 @@ class GooglePayToken(UniversalBaseModel):
     modified_by: typing.Optional[str] = None
     modified_at: typing.Optional[dt.datetime] = None
     card: typing.Optional[CardDetails] = None
-    data: typing.Optional[typing.Optional[typing.Any]] = None
+    data: typing.Optional[typing.Any] = None
     authentication: typing.Optional[TokenAuthentication] = None
     details: typing.Optional[TokenServiceProviderDetails] = None
     fingerprint: typing.Optional[str] = None
