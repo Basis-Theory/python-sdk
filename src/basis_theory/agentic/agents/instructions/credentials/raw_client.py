@@ -3,116 +3,90 @@
 import typing
 from json.decoder import JSONDecodeError
 
-from ...core.api_error import ApiError
-from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from ...core.http_response import AsyncHttpResponse, HttpResponse
-from ...core.pydantic_utilities import parse_obj_as
-from ...core.request_options import RequestOptions
-from ...errors.bad_request_error import BadRequestError
-from ...errors.forbidden_error import ForbiddenError
-from ...errors.not_found_error import NotFoundError
-from ...errors.service_unavailable_error import ServiceUnavailableError
-from ...errors.unauthorized_error import UnauthorizedError
-from ...types.problem_details import ProblemDetails
-from ...types.security_contact_email_response import SecurityContactEmailResponse
-from ...types.validation_problem_details import ValidationProblemDetails
+from .....core.api_error import ApiError
+from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from .....core.http_response import AsyncHttpResponse, HttpResponse
+from .....core.jsonable_encoder import jsonable_encoder
+from .....core.pydantic_utilities import parse_obj_as
+from .....core.request_options import RequestOptions
+from .....core.serialization import convert_and_respect_annotation_metadata
+from .....errors.bad_request_error import BadRequestError
+from .....errors.forbidden_error import ForbiddenError
+from .....errors.internal_server_error import InternalServerError
+from .....errors.not_found_error import NotFoundError
+from .....errors.unauthorized_error import UnauthorizedError
+from .....errors.unprocessable_entity_error import UnprocessableEntityError
+from .....types.agentic_merchant import AgenticMerchant
+from .....types.amount import Amount
+from .....types.credentials import Credentials
+from .....types.delivery_method import DeliveryMethod
+from .....types.problem_details import ProblemDetails
+from .....types.product import Product
+from .....types.shipping_address import ShippingAddress
+from .....types.validation_problem_details import ValidationProblemDetails
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class RawSecurityContactClient:
+class RawCredentialsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[SecurityContactEmailResponse]:
+    def create(
+        self,
+        agent_id: str,
+        instruction_id: str,
+        *,
+        merchant: AgenticMerchant,
+        products: typing.Optional[typing.Sequence[Product]] = OMIT,
+        amount: typing.Optional[Amount] = OMIT,
+        delivery_method: typing.Optional[DeliveryMethod] = OMIT,
+        shipping_address: typing.Optional[ShippingAddress] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[Credentials]:
         """
+        Retrieve payment credentials (card number, expiration, CVC) for a purchase instruction.
+
         Parameters
         ----------
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
+        agent_id : str
 
-        Returns
-        -------
-        HttpResponse[SecurityContactEmailResponse]
-            Success
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "tenants/self/security-contact",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    SecurityContactEmailResponse,
-                    parse_obj_as(
-                        type_=SecurityContactEmailResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 503:
-                raise ServiceUnavailableError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+        instruction_id : str
 
-    def update(
-        self, *, email: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[SecurityContactEmailResponse]:
-        """
-        Parameters
-        ----------
-        email : str
+        merchant : AgenticMerchant
+
+        products : typing.Optional[typing.Sequence[Product]]
+
+        amount : typing.Optional[Amount]
+
+        delivery_method : typing.Optional[DeliveryMethod]
+
+        shipping_address : typing.Optional[ShippingAddress]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[SecurityContactEmailResponse]
-            Success
+        HttpResponse[Credentials]
+            Virtual card credentials
         """
         _response = self._client_wrapper.httpx_client.request(
-            "tenants/self/security-contact",
-            method="PUT",
+            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}/credentials",
+            method="POST",
             json={
-                "email": email,
+                "products": convert_and_respect_annotation_metadata(
+                    object_=products, annotation=typing.Sequence[Product], direction="write"
+                ),
+                "merchant": convert_and_respect_annotation_metadata(
+                    object_=merchant, annotation=AgenticMerchant, direction="write"
+                ),
+                "amount": convert_and_respect_annotation_metadata(object_=amount, annotation=Amount, direction="write"),
+                "delivery_method": delivery_method,
+                "shipping_address": convert_and_respect_annotation_metadata(
+                    object_=shipping_address, annotation=ShippingAddress, direction="write"
+                ),
             },
             headers={
                 "content-type": "application/json",
@@ -123,9 +97,9 @@ class RawSecurityContactClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SecurityContactEmailResponse,
+                    Credentials,
                     parse_obj_as(
-                        type_=SecurityContactEmailResponse,  # type: ignore
+                        type_=Credentials,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -174,104 +148,92 @@ class RawSecurityContactClient:
                         ),
                     ),
                 )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawSecurityContactClient:
+class AsyncRawCredentialsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[SecurityContactEmailResponse]:
+    async def create(
+        self,
+        agent_id: str,
+        instruction_id: str,
+        *,
+        merchant: AgenticMerchant,
+        products: typing.Optional[typing.Sequence[Product]] = OMIT,
+        amount: typing.Optional[Amount] = OMIT,
+        delivery_method: typing.Optional[DeliveryMethod] = OMIT,
+        shipping_address: typing.Optional[ShippingAddress] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[Credentials]:
         """
+        Retrieve payment credentials (card number, expiration, CVC) for a purchase instruction.
+
         Parameters
         ----------
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
+        agent_id : str
 
-        Returns
-        -------
-        AsyncHttpResponse[SecurityContactEmailResponse]
-            Success
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "tenants/self/security-contact",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    SecurityContactEmailResponse,
-                    parse_obj_as(
-                        type_=SecurityContactEmailResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 503:
-                raise ServiceUnavailableError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ProblemDetails,
-                        parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+        instruction_id : str
 
-    async def update(
-        self, *, email: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[SecurityContactEmailResponse]:
-        """
-        Parameters
-        ----------
-        email : str
+        merchant : AgenticMerchant
+
+        products : typing.Optional[typing.Sequence[Product]]
+
+        amount : typing.Optional[Amount]
+
+        delivery_method : typing.Optional[DeliveryMethod]
+
+        shipping_address : typing.Optional[ShippingAddress]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[SecurityContactEmailResponse]
-            Success
+        AsyncHttpResponse[Credentials]
+            Virtual card credentials
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "tenants/self/security-contact",
-            method="PUT",
+            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}/credentials",
+            method="POST",
             json={
-                "email": email,
+                "products": convert_and_respect_annotation_metadata(
+                    object_=products, annotation=typing.Sequence[Product], direction="write"
+                ),
+                "merchant": convert_and_respect_annotation_metadata(
+                    object_=merchant, annotation=AgenticMerchant, direction="write"
+                ),
+                "amount": convert_and_respect_annotation_metadata(object_=amount, annotation=Amount, direction="write"),
+                "delivery_method": delivery_method,
+                "shipping_address": convert_and_respect_annotation_metadata(
+                    object_=shipping_address, annotation=ShippingAddress, direction="write"
+                ),
             },
             headers={
                 "content-type": "application/json",
@@ -282,9 +244,9 @@ class AsyncRawSecurityContactClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SecurityContactEmailResponse,
+                    Credentials,
                     parse_obj_as(
-                        type_=SecurityContactEmailResponse,  # type: ignore
+                        type_=Credentials,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -329,6 +291,28 @@ class AsyncRawSecurityContactClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ProblemDetails,
+                        parse_obj_as(
+                            type_=ProblemDetails,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
