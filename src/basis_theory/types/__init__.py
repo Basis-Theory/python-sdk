@@ -11,6 +11,11 @@ from .account_updater_real_time_response import AccountUpdaterRealTimeResponse
 from .additional_card_detail import AdditionalCardDetail
 from .additional_card_details import AdditionalCardDetails
 from .address import Address
+from .agent import Agent
+from .agentic_card import AgenticCard
+from .agentic_card_brand import AgenticCardBrand
+from .agentic_merchant import AgenticMerchant
+from .amount import Amount
 from .apple_pay_create_response import ApplePayCreateResponse
 from .apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
 from .apple_pay_merchant import ApplePayMerchant
@@ -38,6 +43,7 @@ from .card import Card
 from .card_bin_range import CardBinRange
 from .card_details import CardDetails
 from .card_details_response import CardDetailsResponse
+from .card_display import CardDisplay
 from .card_issuer import CardIssuer
 from .card_issuer_country import CardIssuerCountry
 from .card_issuer_details import CardIssuerDetails
@@ -45,7 +51,10 @@ from .cardholder_info import CardholderInfo
 from .client_encryption_key_metadata_response import ClientEncryptionKeyMetadataResponse
 from .client_encryption_key_response import ClientEncryptionKeyResponse
 from .condition import Condition
+from .confirmation_entry import ConfirmationEntry
+from .consumer import Consumer
 from .create_account_updater_job_request import CreateAccountUpdaterJobRequest
+from .create_account_updater_job_request_result_version import CreateAccountUpdaterJobRequestResultVersion
 from .create_document_request import CreateDocumentRequest
 from .create_reactor_formula_request import CreateReactorFormulaRequest
 from .create_session_response import CreateSessionResponse
@@ -53,9 +62,22 @@ from .create_tenant_connection_response import CreateTenantConnectionResponse
 from .create_three_ds_session_response import CreateThreeDsSessionResponse
 from .create_token_intent_response import CreateTokenIntentResponse
 from .create_token_request import CreateTokenRequest
+from .credentials import Credentials
+from .credentials_card import CredentialsCard
 from .cursor_pagination import CursorPagination
+from .delivery_method import DeliveryMethod
+from .device_context import DeviceContext
+from .device_context_platform_type import DeviceContextPlatformType
+from .device_context_session_context import DeviceContextSessionContext
+from .device_type import DeviceType
 from .document import Document
 from .domain_registration_response import DomainRegistrationResponse
+from .encryption_jwk import EncryptionJwk
+from .enrollment import Enrollment
+from .enrollment_list import EnrollmentList
+from .enrollment_list_pagination import EnrollmentListPagination
+from .enrollment_provider import EnrollmentProvider
+from .enrollment_status import EnrollmentStatus
 from .event_types import EventTypes
 from .get_applications import GetApplications
 from .get_logs import GetLogs
@@ -74,10 +96,20 @@ from .google_pay_token import GooglePayToken
 from .google_pay_tokenize_request import GooglePayTokenizeRequest
 from .google_pay_tokenize_response import GooglePayTokenizeResponse
 from .header import Header
+from .instance_details import InstanceDetails
+from .instruction import Instruction
+from .instruction_list import InstructionList
+from .instruction_list_pagination import InstructionListPagination
+from .instruction_status import InstructionStatus
 from .intermediate_signing_key import IntermediateSigningKey
 from .log import Log
 from .log_entity_type import LogEntityType
 from .log_paginated_list import LogPaginatedList
+from .mpp_challenge import MppChallenge
+from .mpp_credentials_request import MppCredentialsRequest
+from .mpp_credentials_response import MppCredentialsResponse
+from .mpp_source import MppSource
+from .mpp_source_type import MppSourceType
 from .network_token import NetworkToken
 from .network_token_cryptogram import NetworkTokenCryptogram
 from .network_token_extras import NetworkTokenExtras
@@ -88,11 +120,13 @@ from .pending_reactor import PendingReactor
 from .permission import Permission
 from .privacy import Privacy
 from .problem_details import ProblemDetails
+from .product import Product
 from .proxy import Proxy
 from .proxy_paginated_list import ProxyPaginatedList
 from .proxy_transform import ProxyTransform
 from .proxy_transform_options import ProxyTransformOptions
 from .public_key import PublicKey
+from .publish_confirmation_request import PublishConfirmationRequest
 from .react_response import ReactResponse
 from .reactor import Reactor
 from .reactor_formula import ReactorFormula
@@ -100,11 +134,15 @@ from .reactor_formula_configuration import ReactorFormulaConfiguration
 from .reactor_formula_paginated_list import ReactorFormulaPaginatedList
 from .reactor_formula_request_parameter import ReactorFormulaRequestParameter
 from .reactor_paginated_list import ReactorPaginatedList
+from .recurring import Recurring
+from .recurring_frequency import RecurringFrequency
 from .requested_proxy import RequestedProxy
 from .requested_reactor import RequestedReactor
 from .role import Role
 from .runtime import Runtime
 from .security_contact_email_response import SecurityContactEmailResponse
+from .shipping_address import ShippingAddress
+from .start_verification_request import StartVerificationRequest
 from .string_string_key_value_pair import StringStringKeyValuePair
 from .submerchant_authentication_response import SubmerchantAuthenticationResponse
 from .tenant import Tenant
@@ -144,10 +182,21 @@ from .token_extras import TokenExtras
 from .token_intent import TokenIntent
 from .token_intent_extras import TokenIntentExtras
 from .token_service_provider_details import TokenServiceProviderDetails
+from .transaction_status import TransactionStatus
+from .transaction_type import TransactionType
 from .update_privacy import UpdatePrivacy
 from .update_reactor_formula_request import UpdateReactorFormulaRequest
 from .user import User
 from .validation_problem_details import ValidationProblemDetails
+from .verification_response import VerificationResponse
+from .verification_response_brand import VerificationResponseBrand
+from .verification_response_methods_item import VerificationResponseMethodsItem
+from .verification_response_passkey_context import VerificationResponsePasskeyContext
+from .verification_response_passkey_context_action import VerificationResponsePasskeyContextAction
+from .verification_response_passkey_context_auth_preferences import VerificationResponsePasskeyContextAuthPreferences
+from .verification_response_passkey_context_display_context import VerificationResponsePasskeyContextDisplayContext
+from .verification_response_passkey_context_platform_type import VerificationResponsePasskeyContextPlatformType
+from .verification_response_status import VerificationResponseStatus
 from .webhook import Webhook
 from .webhook_list import WebhookList
 from .webhook_list_pagination import WebhookListPagination
@@ -163,6 +212,11 @@ __all__ = [
     "AdditionalCardDetail",
     "AdditionalCardDetails",
     "Address",
+    "Agent",
+    "AgenticCard",
+    "AgenticCardBrand",
+    "AgenticMerchant",
+    "Amount",
     "ApplePayCreateResponse",
     "ApplePayDomainRegistrationResponse",
     "ApplePayMerchant",
@@ -190,6 +244,7 @@ __all__ = [
     "CardBinRange",
     "CardDetails",
     "CardDetailsResponse",
+    "CardDisplay",
     "CardIssuer",
     "CardIssuerCountry",
     "CardIssuerDetails",
@@ -197,7 +252,10 @@ __all__ = [
     "ClientEncryptionKeyMetadataResponse",
     "ClientEncryptionKeyResponse",
     "Condition",
+    "ConfirmationEntry",
+    "Consumer",
     "CreateAccountUpdaterJobRequest",
+    "CreateAccountUpdaterJobRequestResultVersion",
     "CreateDocumentRequest",
     "CreateReactorFormulaRequest",
     "CreateSessionResponse",
@@ -205,9 +263,22 @@ __all__ = [
     "CreateThreeDsSessionResponse",
     "CreateTokenIntentResponse",
     "CreateTokenRequest",
+    "Credentials",
+    "CredentialsCard",
     "CursorPagination",
+    "DeliveryMethod",
+    "DeviceContext",
+    "DeviceContextPlatformType",
+    "DeviceContextSessionContext",
+    "DeviceType",
     "Document",
     "DomainRegistrationResponse",
+    "EncryptionJwk",
+    "Enrollment",
+    "EnrollmentList",
+    "EnrollmentListPagination",
+    "EnrollmentProvider",
+    "EnrollmentStatus",
     "EventTypes",
     "GetApplications",
     "GetLogs",
@@ -226,10 +297,20 @@ __all__ = [
     "GooglePayTokenizeRequest",
     "GooglePayTokenizeResponse",
     "Header",
+    "InstanceDetails",
+    "Instruction",
+    "InstructionList",
+    "InstructionListPagination",
+    "InstructionStatus",
     "IntermediateSigningKey",
     "Log",
     "LogEntityType",
     "LogPaginatedList",
+    "MppChallenge",
+    "MppCredentialsRequest",
+    "MppCredentialsResponse",
+    "MppSource",
+    "MppSourceType",
     "NetworkToken",
     "NetworkTokenCryptogram",
     "NetworkTokenExtras",
@@ -240,11 +321,13 @@ __all__ = [
     "Permission",
     "Privacy",
     "ProblemDetails",
+    "Product",
     "Proxy",
     "ProxyPaginatedList",
     "ProxyTransform",
     "ProxyTransformOptions",
     "PublicKey",
+    "PublishConfirmationRequest",
     "ReactResponse",
     "Reactor",
     "ReactorFormula",
@@ -252,11 +335,15 @@ __all__ = [
     "ReactorFormulaPaginatedList",
     "ReactorFormulaRequestParameter",
     "ReactorPaginatedList",
+    "Recurring",
+    "RecurringFrequency",
     "RequestedProxy",
     "RequestedReactor",
     "Role",
     "Runtime",
     "SecurityContactEmailResponse",
+    "ShippingAddress",
+    "StartVerificationRequest",
     "StringStringKeyValuePair",
     "SubmerchantAuthenticationResponse",
     "Tenant",
@@ -296,10 +383,21 @@ __all__ = [
     "TokenIntent",
     "TokenIntentExtras",
     "TokenServiceProviderDetails",
+    "TransactionStatus",
+    "TransactionType",
     "UpdatePrivacy",
     "UpdateReactorFormulaRequest",
     "User",
     "ValidationProblemDetails",
+    "VerificationResponse",
+    "VerificationResponseBrand",
+    "VerificationResponseMethodsItem",
+    "VerificationResponsePasskeyContext",
+    "VerificationResponsePasskeyContextAction",
+    "VerificationResponsePasskeyContextAuthPreferences",
+    "VerificationResponsePasskeyContextDisplayContext",
+    "VerificationResponsePasskeyContextPlatformType",
+    "VerificationResponseStatus",
     "Webhook",
     "WebhookList",
     "WebhookListPagination",
