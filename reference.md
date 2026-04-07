@@ -1,6 +1,6 @@
 # Reference
 ## Applications
-<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">list</a>(...) -> ApplicationPaginatedList</code></summary>
 <dl>
 <dd>
 
@@ -14,17 +14,18 @@
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-response = client.applications.list()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
+
+client.applications.list(
+    page=1,
+    start="start",
+    size=1,
+)
 
 ```
 </dd>
@@ -92,7 +93,7 @@ for page in response.iter_pages():
 </dl>
 </details>
 
-<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">create</a>(...) -> Application</code></summary>
 <dl>
 <dd>
 
@@ -106,11 +107,13 @@ for page in response.iter_pages():
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.applications.create(
     name="name",
     type="type",
@@ -146,7 +149,7 @@ client.applications.create(
 <dl>
 <dd>
 
-**permissions:** `typing.Optional[typing.Sequence[str]]` 
+**permissions:** `typing.Optional[typing.List[str]]` 
     
 </dd>
 </dl>
@@ -154,7 +157,7 @@ client.applications.create(
 <dl>
 <dd>
 
-**rules:** `typing.Optional[typing.Sequence[AccessRule]]` 
+**rules:** `typing.Optional[typing.List[AccessRule]]` 
     
 </dd>
 </dl>
@@ -163,14 +166,6 @@ client.applications.create(
 <dd>
 
 **create_key:** `typing.Optional[bool]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -190,7 +185,7 @@ client.applications.create(
 </dl>
 </details>
 
-<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">get</a>(...) -> Application</code></summary>
 <dl>
 <dd>
 
@@ -204,11 +199,13 @@ client.applications.create(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.applications.get(
     id="id",
 )
@@ -247,7 +244,7 @@ client.applications.get(
 </dl>
 </details>
 
-<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">update</a>(...) -> Application</code></summary>
 <dl>
 <dd>
 
@@ -261,11 +258,13 @@ client.applications.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.applications.update(
     id="id",
     name="name",
@@ -301,7 +300,7 @@ client.applications.update(
 <dl>
 <dd>
 
-**permissions:** `typing.Optional[typing.Sequence[str]]` 
+**permissions:** `typing.Optional[typing.List[str]]` 
     
 </dd>
 </dl>
@@ -309,15 +308,7 @@ client.applications.update(
 <dl>
 <dd>
 
-**rules:** `typing.Optional[typing.Sequence[AccessRule]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
+**rules:** `typing.Optional[typing.List[AccessRule]]` 
     
 </dd>
 </dl>
@@ -351,11 +342,13 @@ client.applications.update(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.applications.delete(
     id="id",
 )
@@ -394,7 +387,7 @@ client.applications.delete(
 </dl>
 </details>
 
-<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">get_by_key</a>()</code></summary>
+<details><summary><code>client.applications.<a href="src/basis_theory/applications/client.py">get_by_key</a>() -> Application</code></summary>
 <dl>
 <dd>
 
@@ -408,11 +401,13 @@ client.applications.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.applications.get_by_key()
 
 ```
@@ -442,7 +437,7 @@ client.applications.get_by_key()
 </details>
 
 ## ApplicationKeys
-<details><summary><code>client.application_keys.<a href="src/basis_theory/application_keys/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.application_keys.<a href="src/basis_theory/application_keys/client.py">list</a>(...) -> typing.List[ApplicationKey]</code></summary>
 <dl>
 <dd>
 
@@ -456,13 +451,15 @@ client.applications.get_by_key()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.application_keys.list(
-    id_="id",
+    id="id",
 )
 
 ```
@@ -479,7 +476,7 @@ client.application_keys.list(
 <dl>
 <dd>
 
-**id_:** `str` 
+**id:** `str` 
     
 </dd>
 </dl>
@@ -515,7 +512,7 @@ client.application_keys.list(
 </dl>
 </details>
 
-<details><summary><code>client.application_keys.<a href="src/basis_theory/application_keys/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.application_keys.<a href="src/basis_theory/application_keys/client.py">create</a>(...) -> ApplicationKey</code></summary>
 <dl>
 <dd>
 
@@ -529,11 +526,13 @@ client.application_keys.list(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.application_keys.create(
     id="id",
 )
@@ -560,14 +559,6 @@ client.application_keys.create(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -580,7 +571,7 @@ client.application_keys.create(
 </dl>
 </details>
 
-<details><summary><code>client.application_keys.<a href="src/basis_theory/application_keys/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.application_keys.<a href="src/basis_theory/application_keys/client.py">get</a>(...) -> ApplicationKey</code></summary>
 <dl>
 <dd>
 
@@ -594,11 +585,13 @@ client.application_keys.create(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.application_keys.get(
     id="id",
     key_id="keyId",
@@ -660,11 +653,13 @@ client.application_keys.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.application_keys.delete(
     id="id",
     key_id="keyId",
@@ -713,7 +708,7 @@ client.application_keys.delete(
 </details>
 
 ## ApplicationTemplates
-<details><summary><code>client.application_templates.<a href="src/basis_theory/application_templates/client.py">list</a>()</code></summary>
+<details><summary><code>client.application_templates.<a href="src/basis_theory/application_templates/client.py">list</a>() -> typing.List[ApplicationTemplate]</code></summary>
 <dl>
 <dd>
 
@@ -727,11 +722,13 @@ client.application_keys.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.application_templates.list()
 
 ```
@@ -760,7 +757,7 @@ client.application_templates.list()
 </dl>
 </details>
 
-<details><summary><code>client.application_templates.<a href="src/basis_theory/application_templates/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.application_templates.<a href="src/basis_theory/application_templates/client.py">get</a>(...) -> ApplicationTemplate</code></summary>
 <dl>
 <dd>
 
@@ -774,11 +771,13 @@ client.application_templates.list()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.application_templates.get(
     id="id",
 )
@@ -818,7 +817,7 @@ client.application_templates.get(
 </details>
 
 ## ApplePay
-<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">create</a>(...) -> ApplePayCreateResponse</code></summary>
 <dl>
 <dd>
 
@@ -832,11 +831,13 @@ client.application_templates.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.create()
 
 ```
@@ -889,7 +890,7 @@ client.apple_pay.create()
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">get</a>(...) -> ApplePayToken</code></summary>
 <dl>
 <dd>
 
@@ -903,11 +904,13 @@ client.apple_pay.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.get(
     id="id",
 )
@@ -946,7 +949,7 @@ client.apple_pay.get(
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">delete</a>(...) -> str</code></summary>
 <dl>
 <dd>
 
@@ -960,11 +963,13 @@ client.apple_pay.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.delete(
     id="id",
 )
@@ -1004,7 +1009,7 @@ client.apple_pay.delete(
 </details>
 
 ## GooglePay
-<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">create</a>(...) -> GooglePayCreateResponse</code></summary>
 <dl>
 <dd>
 
@@ -1018,11 +1023,13 @@ client.apple_pay.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.create()
 
 ```
@@ -1075,7 +1082,7 @@ client.google_pay.create()
 </dl>
 </details>
 
-<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">get</a>(...) -> GooglePayToken</code></summary>
 <dl>
 <dd>
 
@@ -1089,11 +1096,13 @@ client.google_pay.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.get(
     id="id",
 )
@@ -1132,7 +1141,7 @@ client.google_pay.get(
 </dl>
 </details>
 
-<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">delete</a>(...) -> str</code></summary>
 <dl>
 <dd>
 
@@ -1146,11 +1155,13 @@ client.google_pay.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.delete(
     id="id",
 )
@@ -1190,7 +1201,7 @@ client.google_pay.delete(
 </details>
 
 ## Documents
-<details><summary><code>client.documents.<a href="src/basis_theory/documents/client.py">upload</a>(...)</code></summary>
+<details><summary><code>client.documents.<a href="src/basis_theory/documents/client.py">upload</a>(...) -> Document</code></summary>
 <dl>
 <dd>
 
@@ -1204,12 +1215,16 @@ client.google_pay.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-client.documents.upload()
+
+client.documents.upload(
+    document="example_document",
+)
 
 ```
 </dd>
@@ -1225,9 +1240,7 @@ client.documents.upload()
 <dl>
 <dd>
 
-**document:** `from __future__ import annotations
-
-typing.Optional[core.File]` — See core.File for more documentation
+**document:** `typing.Optional[core.File]` 
     
 </dd>
 </dl>
@@ -1255,7 +1268,7 @@ typing.Optional[core.File]` — See core.File for more documentation
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="src/basis_theory/documents/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.documents.<a href="src/basis_theory/documents/client.py">get</a>(...) -> Document</code></summary>
 <dl>
 <dd>
 
@@ -1269,11 +1282,13 @@ typing.Optional[core.File]` — See core.File for more documentation
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.documents.get(
     id="id",
 )
@@ -1326,11 +1341,13 @@ client.documents.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.documents.delete(
     id="id",
 )
@@ -1370,7 +1387,7 @@ client.documents.delete(
 </details>
 
 ## Tokens
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">detokenize</a>(...)</code></summary>
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">detokenize</a>(...) -> typing.Any</code></summary>
 <dl>
 <dd>
 
@@ -1384,11 +1401,13 @@ client.documents.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tokens.detokenize(
     request={"key": "value"},
 )
@@ -1407,7 +1426,7 @@ client.tokens.detokenize(
 <dl>
 <dd>
 
-**request:** `typing.Optional[typing.Any]` 
+**request:** `typing.Any` 
     
 </dd>
 </dl>
@@ -1427,7 +1446,7 @@ client.tokens.detokenize(
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">tokenize</a>(...)</code></summary>
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">tokenize</a>(...) -> typing.Any</code></summary>
 <dl>
 <dd>
 
@@ -1441,11 +1460,13 @@ client.tokens.detokenize(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tokens.tokenize(
     request={"key": "value"},
 )
@@ -1464,15 +1485,7 @@ client.tokens.tokenize(
 <dl>
 <dd>
 
-**request:** `typing.Optional[typing.Any]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
+**request:** `typing.Any` 
     
 </dd>
 </dl>
@@ -1492,7 +1505,7 @@ client.tokens.tokenize(
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">get</a>(...) -> Token</code></summary>
 <dl>
 <dd>
 
@@ -1506,11 +1519,13 @@ client.tokens.tokenize(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tokens.get(
     id="id",
 )
@@ -1563,11 +1578,13 @@ client.tokens.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tokens.delete(
     id="id",
 )
@@ -1606,7 +1623,7 @@ client.tokens.delete(
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">update</a>(...) -> Token</code></summary>
 <dl>
 <dd>
 
@@ -1620,11 +1637,13 @@ client.tokens.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tokens.update(
     id="id",
 )
@@ -1651,7 +1670,7 @@ client.tokens.update(
 <dl>
 <dd>
 
-**data:** `typing.Optional[typing.Optional[typing.Any]]` 
+**data:** `typing.Optional[typing.Any]` 
     
 </dd>
 </dl>
@@ -1675,7 +1694,7 @@ client.tokens.update(
 <dl>
 <dd>
 
-**search_indexes:** `typing.Optional[typing.Sequence[str]]` 
+**search_indexes:** `typing.Optional[typing.List[str]]` 
     
 </dd>
 </dl>
@@ -1691,7 +1710,7 @@ client.tokens.update(
 <dl>
 <dd>
 
-**mask:** `typing.Optional[typing.Optional[typing.Any]]` 
+**mask:** `typing.Optional[typing.Any]` 
     
 </dd>
 </dl>
@@ -1715,15 +1734,7 @@ client.tokens.update(
 <dl>
 <dd>
 
-**containers:** `typing.Optional[typing.Sequence[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
+**containers:** `typing.Optional[typing.List[str]]` 
     
 </dd>
 </dl>
@@ -1743,7 +1754,7 @@ client.tokens.update(
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">create</a>(...) -> Token</code></summary>
 <dl>
 <dd>
 
@@ -1757,11 +1768,13 @@ client.tokens.update(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tokens.create()
 
 ```
@@ -1778,111 +1791,7 @@ client.tokens.create()
 <dl>
 <dd>
 
-**id:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**type:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**data:** `typing.Optional[typing.Optional[typing.Any]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**encrypted:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**privacy:** `typing.Optional[Privacy]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**search_indexes:** `typing.Optional[typing.Sequence[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**fingerprint_expression:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**mask:** `typing.Optional[typing.Optional[typing.Any]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**deduplicate_token:** `typing.Optional[bool]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**expires_at:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**containers:** `typing.Optional[typing.Sequence[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**token_intent_id:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
+**request:** `CreateTokenRequest` 
     
 </dd>
 </dl>
@@ -1902,7 +1811,7 @@ client.tokens.create()
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">list_v2</a>(...)</code></summary>
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">list_v2</a>(...) -> TokenCursorPaginatedList</code></summary>
 <dl>
 <dd>
 
@@ -1916,17 +1825,20 @@ client.tokens.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-response = client.tokens.list_v2()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
+
+client.tokens.list_v2(
+    type="type",
+    container="container",
+    fingerprint="fingerprint",
+    start="start",
+    size=1,
+)
 
 ```
 </dd>
@@ -2002,7 +1914,7 @@ for page in response.iter_pages():
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">search_v2</a>(...)</code></summary>
+<details><summary><code>client.tokens.<a href="src/basis_theory/tokens/client.py">search_v2</a>(...) -> TokenCursorPaginatedList</code></summary>
 <dl>
 <dd>
 
@@ -2016,17 +1928,14 @@ for page in response.iter_pages():
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-response = client.tokens.search_v2()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
+
+client.tokens.search_v2()
 
 ```
 </dd>
@@ -2066,14 +1975,6 @@ for page in response.iter_pages():
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -2087,7 +1988,7 @@ for page in response.iter_pages():
 </details>
 
 ## Enrichments
-<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">bank_account_verify</a>(...)</code></summary>
+<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">bank_account_verify</a>(...) -> BankVerificationResponse</code></summary>
 <dl>
 <dd>
 
@@ -2101,11 +2002,13 @@ for page in response.iter_pages():
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.enrichments.bank_account_verify(
     token_id="token_id",
 )
@@ -2160,7 +2063,7 @@ client.enrichments.bank_account_verify(
 </dl>
 </details>
 
-<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">getcarddetails</a>(...)</code></summary>
+<details><summary><code>client.enrichments.<a href="src/basis_theory/enrichments/client.py">getcarddetails</a>(...) -> CardDetailsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2174,11 +2077,13 @@ client.enrichments.bank_account_verify(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.enrichments.getcarddetails(
     bin="bin",
 )
@@ -2218,7 +2123,7 @@ client.enrichments.getcarddetails(
 </details>
 
 ## Keys
-<details><summary><code>client.keys.<a href="src/basis_theory/keys/client.py">list</a>()</code></summary>
+<details><summary><code>client.keys.<a href="src/basis_theory/keys/client.py">list</a>() -> typing.List[ClientEncryptionKeyMetadataResponse]</code></summary>
 <dl>
 <dd>
 
@@ -2232,11 +2137,13 @@ client.enrichments.getcarddetails(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.keys.list()
 
 ```
@@ -2265,7 +2172,7 @@ client.keys.list()
 </dl>
 </details>
 
-<details><summary><code>client.keys.<a href="src/basis_theory/keys/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.keys.<a href="src/basis_theory/keys/client.py">create</a>(...) -> ClientEncryptionKeyResponse</code></summary>
 <dl>
 <dd>
 
@@ -2279,11 +2186,13 @@ client.keys.list()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.keys.create()
 
 ```
@@ -2300,7 +2209,7 @@ client.keys.create()
 <dl>
 <dd>
 
-**expires_at:** `typing.Optional[dt.datetime]` 
+**expires_at:** `typing.Optional[datetime.datetime]` 
     
 </dd>
 </dl>
@@ -2320,7 +2229,7 @@ client.keys.create()
 </dl>
 </details>
 
-<details><summary><code>client.keys.<a href="src/basis_theory/keys/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.keys.<a href="src/basis_theory/keys/client.py">get</a>(...) -> ClientEncryptionKeyMetadataResponse</code></summary>
 <dl>
 <dd>
 
@@ -2334,11 +2243,13 @@ client.keys.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.keys.get(
     id="id",
 )
@@ -2391,11 +2302,13 @@ client.keys.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.keys.delete(
     id="id",
 )
@@ -2435,7 +2348,7 @@ client.keys.delete(
 </details>
 
 ## Logs
-<details><summary><code>client.logs.<a href="src/basis_theory/logs/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.logs.<a href="src/basis_theory/logs/client.py">list</a>(...) -> LogPaginatedList</code></summary>
 <dl>
 <dd>
 
@@ -2449,17 +2362,23 @@ client.keys.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+import datetime
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-response = client.logs.list()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
+
+client.logs.list(
+    entity_type="entity_type",
+    entity_id="entity_id",
+    start_date=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+    end_date=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+    page=1,
+    start="start",
+    size=1,
+)
 
 ```
 </dd>
@@ -2491,7 +2410,7 @@ for page in response.iter_pages():
 <dl>
 <dd>
 
-**start_date:** `typing.Optional[dt.datetime]` 
+**start_date:** `typing.Optional[datetime.datetime]` 
     
 </dd>
 </dl>
@@ -2499,7 +2418,7 @@ for page in response.iter_pages():
 <dl>
 <dd>
 
-**end_date:** `typing.Optional[dt.datetime]` 
+**end_date:** `typing.Optional[datetime.datetime]` 
     
 </dd>
 </dl>
@@ -2543,7 +2462,7 @@ for page in response.iter_pages():
 </dl>
 </details>
 
-<details><summary><code>client.logs.<a href="src/basis_theory/logs/client.py">get_entity_types</a>()</code></summary>
+<details><summary><code>client.logs.<a href="src/basis_theory/logs/client.py">get_entity_types</a>() -> typing.List[LogEntityType]</code></summary>
 <dl>
 <dd>
 
@@ -2557,11 +2476,13 @@ for page in response.iter_pages():
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.logs.get_entity_types()
 
 ```
@@ -2591,7 +2512,7 @@ client.logs.get_entity_types()
 </details>
 
 ## NetworkTokens
-<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">create</a>(...) -> NetworkToken</code></summary>
 <dl>
 <dd>
 
@@ -2605,11 +2526,13 @@ client.logs.get_entity_types()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.network_tokens.create()
 
 ```
@@ -2678,7 +2601,7 @@ client.network_tokens.create()
 </dl>
 </details>
 
-<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">cryptogram</a>(...)</code></summary>
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">cryptogram</a>(...) -> NetworkTokenCryptogram</code></summary>
 <dl>
 <dd>
 
@@ -2692,11 +2615,13 @@ client.network_tokens.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.network_tokens.cryptogram(
     id="id",
 )
@@ -2735,7 +2660,7 @@ client.network_tokens.cryptogram(
 </dl>
 </details>
 
-<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">get</a>(...) -> NetworkToken</code></summary>
 <dl>
 <dd>
 
@@ -2749,11 +2674,13 @@ client.network_tokens.cryptogram(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.network_tokens.get(
     id="id",
 )
@@ -2806,11 +2733,13 @@ client.network_tokens.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.network_tokens.delete(
     id="id",
 )
@@ -2849,7 +2778,7 @@ client.network_tokens.delete(
 </dl>
 </details>
 
-<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">suspend</a>(...)</code></summary>
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">suspend</a>(...) -> NetworkToken</code></summary>
 <dl>
 <dd>
 
@@ -2863,11 +2792,13 @@ client.network_tokens.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.network_tokens.suspend(
     id="id",
 )
@@ -2906,7 +2837,7 @@ client.network_tokens.suspend(
 </dl>
 </details>
 
-<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">resume</a>(...)</code></summary>
+<details><summary><code>client.network_tokens.<a href="src/basis_theory/network_tokens/client.py">resume</a>(...) -> NetworkToken</code></summary>
 <dl>
 <dd>
 
@@ -2920,11 +2851,13 @@ client.network_tokens.suspend(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.network_tokens.resume(
     id="id",
 )
@@ -2964,7 +2897,7 @@ client.network_tokens.resume(
 </details>
 
 ## Permissions
-<details><summary><code>client.permissions.<a href="src/basis_theory/permissions/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.permissions.<a href="src/basis_theory/permissions/client.py">list</a>(...) -> typing.List[Permission]</code></summary>
 <dl>
 <dd>
 
@@ -2978,12 +2911,16 @@ client.network_tokens.resume(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-client.permissions.list()
+
+client.permissions.list(
+    application_type="application_type",
+)
 
 ```
 </dd>
@@ -3020,7 +2957,7 @@ client.permissions.list()
 </details>
 
 ## Proxies
-<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">list</a>(...) -> ProxyPaginatedList</code></summary>
 <dl>
 <dd>
 
@@ -3034,17 +2971,19 @@ client.permissions.list()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-response = client.proxies.list()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
+
+client.proxies.list(
+    name="name",
+    page=1,
+    start="start",
+    size=1,
+)
 
 ```
 </dd>
@@ -3112,7 +3051,7 @@ for page in response.iter_pages():
 </dl>
 </details>
 
-<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">create</a>(...) -> Proxy</code></summary>
 <dl>
 <dd>
 
@@ -3126,11 +3065,13 @@ for page in response.iter_pages():
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.proxies.create(
     name="name",
     destination_url="destination_url",
@@ -3198,7 +3139,7 @@ client.proxies.create(
 <dl>
 <dd>
 
-**request_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+**request_transforms:** `typing.Optional[typing.List[ProxyTransform]]` 
     
 </dd>
 </dl>
@@ -3206,7 +3147,7 @@ client.proxies.create(
 <dl>
 <dd>
 
-**response_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+**response_transforms:** `typing.Optional[typing.List[ProxyTransform]]` 
     
 </dd>
 </dl>
@@ -3246,14 +3187,6 @@ client.proxies.create(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3266,7 +3199,7 @@ client.proxies.create(
 </dl>
 </details>
 
-<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">get</a>(...) -> Proxy</code></summary>
 <dl>
 <dd>
 
@@ -3280,11 +3213,13 @@ client.proxies.create(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.proxies.get(
     id="id",
 )
@@ -3323,7 +3258,7 @@ client.proxies.get(
 </dl>
 </details>
 
-<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">update</a>(...) -> Proxy</code></summary>
 <dl>
 <dd>
 
@@ -3337,11 +3272,13 @@ client.proxies.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.proxies.update(
     id="id",
     name="name",
@@ -3418,7 +3355,7 @@ client.proxies.update(
 <dl>
 <dd>
 
-**request_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+**request_transforms:** `typing.Optional[typing.List[ProxyTransform]]` 
     
 </dd>
 </dl>
@@ -3426,7 +3363,7 @@ client.proxies.update(
 <dl>
 <dd>
 
-**response_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+**response_transforms:** `typing.Optional[typing.List[ProxyTransform]]` 
     
 </dd>
 </dl>
@@ -3466,14 +3403,6 @@ client.proxies.update(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3500,11 +3429,13 @@ client.proxies.update(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.proxies.delete(
     id="id",
 )
@@ -3557,11 +3488,13 @@ client.proxies.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.proxies.patch(
     id="id",
 )
@@ -3620,7 +3553,7 @@ client.proxies.patch(
 <dl>
 <dd>
 
-**request_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+**request_transforms:** `typing.Optional[typing.List[ProxyTransform]]` 
     
 </dd>
 </dl>
@@ -3628,7 +3561,7 @@ client.proxies.patch(
 <dl>
 <dd>
 
-**response_transforms:** `typing.Optional[typing.Sequence[ProxyTransform]]` 
+**response_transforms:** `typing.Optional[typing.List[ProxyTransform]]` 
     
 </dd>
 </dl>
@@ -3668,14 +3601,6 @@ client.proxies.patch(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3689,7 +3614,7 @@ client.proxies.patch(
 </details>
 
 ## Reactors
-<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">list</a>(...) -> ReactorPaginatedList</code></summary>
 <dl>
 <dd>
 
@@ -3703,17 +3628,19 @@ client.proxies.patch(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-response = client.reactors.list()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
+
+client.reactors.list(
+    name="name",
+    page=1,
+    start="start",
+    size=1,
+)
 
 ```
 </dd>
@@ -3781,7 +3708,7 @@ for page in response.iter_pages():
 </dl>
 </details>
 
-<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">create</a>(...) -> Reactor</code></summary>
 <dl>
 <dd>
 
@@ -3795,11 +3722,13 @@ for page in response.iter_pages():
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.reactors.create(
     name="name",
     code="code",
@@ -3859,14 +3788,6 @@ client.reactors.create(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3879,7 +3800,7 @@ client.reactors.create(
 </dl>
 </details>
 
-<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">get</a>(...) -> Reactor</code></summary>
 <dl>
 <dd>
 
@@ -3893,11 +3814,13 @@ client.reactors.create(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.reactors.get(
     id="id",
 )
@@ -3936,7 +3859,7 @@ client.reactors.get(
 </dl>
 </details>
 
-<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">update</a>(...) -> Reactor</code></summary>
 <dl>
 <dd>
 
@@ -3950,11 +3873,13 @@ client.reactors.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.reactors.update(
     id="id",
     name="name",
@@ -4023,14 +3948,6 @@ client.reactors.update(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -4057,11 +3974,13 @@ client.reactors.update(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.reactors.delete(
     id="id",
 )
@@ -4114,11 +4033,13 @@ client.reactors.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.reactors.patch(
     id="id",
 )
@@ -4185,14 +4106,6 @@ client.reactors.patch(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -4205,7 +4118,7 @@ client.reactors.patch(
 </dl>
 </details>
 
-<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">react</a>(...)</code></summary>
+<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">react</a>(...) -> ReactResponse</code></summary>
 <dl>
 <dd>
 
@@ -4219,11 +4132,13 @@ client.reactors.patch(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.reactors.react(
     id="id",
     request={"key": "value"},
@@ -4251,7 +4166,7 @@ client.reactors.react(
 <dl>
 <dd>
 
-**request:** `typing.Optional[typing.Any]` 
+**request:** `typing.Any` 
     
 </dd>
 </dl>
@@ -4271,7 +4186,7 @@ client.reactors.react(
 </dl>
 </details>
 
-<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">react_async</a>(...)</code></summary>
+<details><summary><code>client.reactors.<a href="src/basis_theory/reactors/client.py">react_async</a>(...) -> AsyncReactResponse</code></summary>
 <dl>
 <dd>
 
@@ -4285,11 +4200,13 @@ client.reactors.react(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.reactors.react_async(
     id="id",
     request={"key": "value"},
@@ -4317,7 +4234,7 @@ client.reactors.react_async(
 <dl>
 <dd>
 
-**request:** `typing.Optional[typing.Any]` 
+**request:** `typing.Any` 
     
 </dd>
 </dl>
@@ -4338,7 +4255,7 @@ client.reactors.react_async(
 </details>
 
 ## Roles
-<details><summary><code>client.roles.<a href="src/basis_theory/roles/client.py">list</a>()</code></summary>
+<details><summary><code>client.roles.<a href="src/basis_theory/roles/client.py">list</a>() -> typing.List[Role]</code></summary>
 <dl>
 <dd>
 
@@ -4352,11 +4269,13 @@ client.reactors.react_async(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.roles.list()
 
 ```
@@ -4386,7 +4305,7 @@ client.roles.list()
 </details>
 
 ## Sessions
-<details><summary><code>client.sessions.<a href="src/basis_theory/sessions/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.sessions.<a href="src/basis_theory/sessions/client.py">create</a>() -> CreateSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -4400,11 +4319,13 @@ client.roles.list()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.sessions.create()
 
 ```
@@ -4417,14 +4338,6 @@ client.sessions.create()
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -4455,11 +4368,13 @@ client.sessions.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.sessions.authorize(
     nonce="nonce",
 )
@@ -4494,7 +4409,7 @@ client.sessions.authorize(
 <dl>
 <dd>
 
-**permissions:** `typing.Optional[typing.Sequence[str]]` 
+**permissions:** `typing.Optional[typing.List[str]]` 
     
 </dd>
 </dl>
@@ -4502,15 +4417,7 @@ client.sessions.authorize(
 <dl>
 <dd>
 
-**rules:** `typing.Optional[typing.Sequence[AccessRule]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
+**rules:** `typing.Optional[typing.List[AccessRule]]` 
     
 </dd>
 </dl>
@@ -4531,7 +4438,7 @@ client.sessions.authorize(
 </details>
 
 ## TokenIntents
-<details><summary><code>client.token_intents.<a href="src/basis_theory/token_intents/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.token_intents.<a href="src/basis_theory/token_intents/client.py">get</a>(...) -> TokenIntent</code></summary>
 <dl>
 <dd>
 
@@ -4545,11 +4452,13 @@ client.sessions.authorize(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.token_intents.get(
     id="id",
 )
@@ -4602,11 +4511,13 @@ client.token_intents.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.token_intents.delete(
     id="id",
 )
@@ -4645,7 +4556,7 @@ client.token_intents.delete(
 </dl>
 </details>
 
-<details><summary><code>client.token_intents.<a href="src/basis_theory/token_intents/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.token_intents.<a href="src/basis_theory/token_intents/client.py">create</a>(...) -> CreateTokenIntentResponse</code></summary>
 <dl>
 <dd>
 
@@ -4659,11 +4570,13 @@ client.token_intents.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.token_intents.create(
     type="x",
     data={"key": "value"},
@@ -4691,7 +4604,7 @@ client.token_intents.create(
 <dl>
 <dd>
 
-**data:** `typing.Optional[typing.Any]` 
+**data:** `typing.Any` 
     
 </dd>
 </dl>
@@ -4740,11 +4653,13 @@ Simple endpoint that can be utilized to verify the application is running
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.webhooks.ping()
 
 ```
@@ -4773,7 +4688,7 @@ client.webhooks.ping()
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">get</a>(...) -> Webhook</code></summary>
 <dl>
 <dd>
 
@@ -4801,11 +4716,13 @@ Returns the webhook
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.webhooks.get(
     id="id",
 )
@@ -4844,7 +4761,7 @@ client.webhooks.get(
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">update</a>(...) -> Webhook</code></summary>
 <dl>
 <dd>
 
@@ -4872,16 +4789,20 @@ Update a new webhook
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.webhooks.update(
     id="id",
     name="webhook-update",
     url="http://www.example.com",
-    events=["token:created"],
+    events=[
+        "token:created"
+    ],
 )
 
 ```
@@ -4922,7 +4843,7 @@ client.webhooks.update(
 <dl>
 <dd>
 
-**events:** `typing.Sequence[str]` — An array of event types that the webhook will listen for
+**events:** `typing.List[str]` — An array of event types that the webhook will listen for
     
 </dd>
 </dl>
@@ -4978,11 +4899,13 @@ Delete a new webhook
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.webhooks.delete(
     id="id",
 )
@@ -5021,7 +4944,7 @@ client.webhooks.delete(
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">list</a>()</code></summary>
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">list</a>() -> WebhookList</code></summary>
 <dl>
 <dd>
 
@@ -5049,11 +4972,13 @@ Returns the configured webhooks
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.webhooks.list()
 
 ```
@@ -5082,7 +5007,7 @@ client.webhooks.list()
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.webhooks.<a href="src/basis_theory/webhooks/client.py">create</a>(...) -> Webhook</code></summary>
 <dl>
 <dd>
 
@@ -5110,15 +5035,19 @@ Create a new webhook
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.webhooks.create(
     name="webhook-create",
     url="http://www.example.com",
-    events=["token:created"],
+    events=[
+        "token:created"
+    ],
 )
 
 ```
@@ -5151,7 +5080,7 @@ client.webhooks.create(
 <dl>
 <dd>
 
-**events:** `typing.Sequence[str]` — An array of event types that the webhook will listen for
+**events:** `typing.List[str]` — An array of event types that the webhook will listen for
     
 </dd>
 </dl>
@@ -5180,7 +5109,7 @@ client.webhooks.create(
 </details>
 
 ## AccountUpdater Jobs
-<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">get</a>(...) -> AccountUpdaterJob</code></summary>
 <dl>
 <dd>
 
@@ -5208,11 +5137,13 @@ Returns the account updater batch job
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.account_updater.jobs.get(
     id="id",
 )
@@ -5251,7 +5182,7 @@ client.account_updater.jobs.get(
 </dl>
 </details>
 
-<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">list</a>(...) -> AccountUpdaterJobList</code></summary>
 <dl>
 <dd>
 
@@ -5279,12 +5210,17 @@ Returns a list of account updater batch jobs
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-client.account_updater.jobs.list()
+
+client.account_updater.jobs.list(
+    size=1,
+    start="start",
+)
 
 ```
 </dd>
@@ -5328,7 +5264,7 @@ client.account_updater.jobs.list()
 </dl>
 </details>
 
-<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">create</a>()</code></summary>
+<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">create</a>() -> AccountUpdaterJob</code></summary>
 <dl>
 <dd>
 
@@ -5356,11 +5292,13 @@ Returns the created account updater batch job
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.account_updater.jobs.create()
 
 ```
@@ -5390,7 +5328,7 @@ client.account_updater.jobs.create()
 </details>
 
 ## AccountUpdater RealTime
-<details><summary><code>client.account_updater.real_time.<a href="src/basis_theory/account_updater/real_time/client.py">invoke</a>(...)</code></summary>
+<details><summary><code>client.account_updater.real_time.<a href="src/basis_theory/account_updater/real_time/client.py">invoke</a>(...) -> AccountUpdaterRealTimeResponse</code></summary>
 <dl>
 <dd>
 
@@ -5418,11 +5356,13 @@ Returns the update result
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.account_updater.real_time.invoke(
     token_id="9a420b15-ddfe-4793-9466-48f53520e47c",
 )
@@ -5494,7 +5434,7 @@ client.account_updater.real_time.invoke(
 </details>
 
 ## ApplePay Merchant
-<details><summary><code>client.apple_pay.merchant.<a href="src/basis_theory/apple_pay/merchant/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.merchant.<a href="src/basis_theory/apple_pay/merchant/client.py">get</a>(...) -> ApplePayMerchant</code></summary>
 <dl>
 <dd>
 
@@ -5508,11 +5448,13 @@ client.account_updater.real_time.invoke(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.merchant.get(
     id="id",
 )
@@ -5565,11 +5507,13 @@ client.apple_pay.merchant.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.merchant.delete(
     id="id",
 )
@@ -5608,7 +5552,7 @@ client.apple_pay.merchant.delete(
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.merchant.<a href="src/basis_theory/apple_pay/merchant/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.merchant.<a href="src/basis_theory/apple_pay/merchant/client.py">create</a>(...) -> ApplePayMerchant</code></summary>
 <dl>
 <dd>
 
@@ -5622,11 +5566,13 @@ client.apple_pay.merchant.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.merchant.create()
 
 ```
@@ -5678,11 +5624,13 @@ client.apple_pay.merchant.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.domain.deregister(
     domain="domain",
 )
@@ -5721,7 +5669,7 @@ client.apple_pay.domain.deregister(
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.domain.<a href="src/basis_theory/apple_pay/domain/client.py">get</a>()</code></summary>
+<details><summary><code>client.apple_pay.domain.<a href="src/basis_theory/apple_pay/domain/client.py">get</a>() -> ApplePayDomainRegistrationResponse</code></summary>
 <dl>
 <dd>
 
@@ -5735,11 +5683,13 @@ client.apple_pay.domain.deregister(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.domain.get()
 
 ```
@@ -5768,7 +5718,7 @@ client.apple_pay.domain.get()
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.domain.<a href="src/basis_theory/apple_pay/domain/client.py">register</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.domain.<a href="src/basis_theory/apple_pay/domain/client.py">register</a>(...) -> ApplePayDomainRegistrationResponse</code></summary>
 <dl>
 <dd>
 
@@ -5782,11 +5732,13 @@ client.apple_pay.domain.get()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.domain.register(
     domain="domain",
 )
@@ -5825,7 +5777,7 @@ client.apple_pay.domain.register(
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.domain.<a href="src/basis_theory/apple_pay/domain/client.py">register_all</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.domain.<a href="src/basis_theory/apple_pay/domain/client.py">register_all</a>(...) -> ApplePayDomainRegistrationResponse</code></summary>
 <dl>
 <dd>
 
@@ -5839,11 +5791,13 @@ client.apple_pay.domain.register(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.domain.register_all()
 
 ```
@@ -5860,7 +5814,7 @@ client.apple_pay.domain.register_all()
 <dl>
 <dd>
 
-**domains:** `typing.Optional[typing.Sequence[str]]` 
+**domains:** `typing.Optional[typing.List[str]]` 
     
 </dd>
 </dl>
@@ -5881,7 +5835,7 @@ client.apple_pay.domain.register_all()
 </details>
 
 ## ApplePay Session
-<details><summary><code>client.apple_pay.session.<a href="src/basis_theory/apple_pay/session/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.session.<a href="src/basis_theory/apple_pay/session/client.py">create</a>(...) -> str</code></summary>
 <dl>
 <dd>
 
@@ -5895,11 +5849,13 @@ client.apple_pay.domain.register_all()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.session.create()
 
 ```
@@ -5961,7 +5917,7 @@ client.apple_pay.session.create()
 </details>
 
 ## ApplePay Merchant Certificates
-<details><summary><code>client.apple_pay.merchant.certificates.<a href="src/basis_theory/apple_pay/merchant/certificates/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.merchant.certificates.<a href="src/basis_theory/apple_pay/merchant/certificates/client.py">get</a>(...) -> ApplePayMerchantCertificates</code></summary>
 <dl>
 <dd>
 
@@ -5975,11 +5931,13 @@ client.apple_pay.session.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.merchant.certificates.get(
     merchant_id="merchantId",
     id="id",
@@ -6041,11 +5999,13 @@ client.apple_pay.merchant.certificates.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.merchant.certificates.delete(
     merchant_id="merchantId",
     id="id",
@@ -6093,7 +6053,7 @@ client.apple_pay.merchant.certificates.delete(
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.merchant.certificates.<a href="src/basis_theory/apple_pay/merchant/certificates/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.apple_pay.merchant.certificates.<a href="src/basis_theory/apple_pay/merchant/certificates/client.py">create</a>(...) -> ApplePayMerchantCertificates</code></summary>
 <dl>
 <dd>
 
@@ -6107,11 +6067,13 @@ client.apple_pay.merchant.certificates.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.apple_pay.merchant.certificates.create(
     merchant_id="merchantId",
 )
@@ -6191,7 +6153,7 @@ client.apple_pay.merchant.certificates.create(
 </details>
 
 ## Documents Data
-<details><summary><code>client.documents.data.<a href="src/basis_theory/documents/data/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.documents.data.<a href="src/basis_theory/documents/data/client.py">get</a>(...) -> typing.Iterator[bytes]</code></summary>
 <dl>
 <dd>
 
@@ -6205,11 +6167,13 @@ client.apple_pay.merchant.certificates.create(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.documents.data.get(
     document_id="documentId",
 )
@@ -6236,7 +6200,7 @@ client.documents.data.get(
 <dl>
 <dd>
 
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
 </dl>
@@ -6249,7 +6213,7 @@ client.documents.data.get(
 </details>
 
 ## GooglePay Merchant
-<details><summary><code>client.google_pay.merchant.<a href="src/basis_theory/google_pay/merchant/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.google_pay.merchant.<a href="src/basis_theory/google_pay/merchant/client.py">get</a>(...) -> GooglePayMerchant</code></summary>
 <dl>
 <dd>
 
@@ -6263,11 +6227,13 @@ client.documents.data.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.merchant.get(
     id="id",
 )
@@ -6320,11 +6286,13 @@ client.google_pay.merchant.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.merchant.delete(
     id="id",
 )
@@ -6363,7 +6331,7 @@ client.google_pay.merchant.delete(
 </dl>
 </details>
 
-<details><summary><code>client.google_pay.merchant.<a href="src/basis_theory/google_pay/merchant/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.google_pay.merchant.<a href="src/basis_theory/google_pay/merchant/client.py">create</a>(...) -> GooglePayMerchant</code></summary>
 <dl>
 <dd>
 
@@ -6377,11 +6345,13 @@ client.google_pay.merchant.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.merchant.create()
 
 ```
@@ -6419,7 +6389,7 @@ client.google_pay.merchant.create()
 </details>
 
 ## GooglePay Merchant Certificates
-<details><summary><code>client.google_pay.merchant.certificates.<a href="src/basis_theory/google_pay/merchant/certificates/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.google_pay.merchant.certificates.<a href="src/basis_theory/google_pay/merchant/certificates/client.py">get</a>(...) -> GooglePayMerchantCertificates</code></summary>
 <dl>
 <dd>
 
@@ -6433,11 +6403,13 @@ client.google_pay.merchant.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.merchant.certificates.get(
     merchant_id="merchantId",
     id="id",
@@ -6499,11 +6471,13 @@ client.google_pay.merchant.certificates.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.merchant.certificates.delete(
     merchant_id="merchantId",
     id="id",
@@ -6551,7 +6525,7 @@ client.google_pay.merchant.certificates.delete(
 </dl>
 </details>
 
-<details><summary><code>client.google_pay.merchant.certificates.<a href="src/basis_theory/google_pay/merchant/certificates/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.google_pay.merchant.certificates.<a href="src/basis_theory/google_pay/merchant/certificates/client.py">create</a>(...) -> GooglePayMerchantCertificates</code></summary>
 <dl>
 <dd>
 
@@ -6565,11 +6539,13 @@ client.google_pay.merchant.certificates.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.google_pay.merchant.certificates.create(
     merchant_id="merchantId",
 )
@@ -6625,7 +6601,7 @@ client.google_pay.merchant.certificates.create(
 </details>
 
 ## Reactors Results
-<details><summary><code>client.reactors.results.<a href="src/basis_theory/reactors/results/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.reactors.results.<a href="src/basis_theory/reactors/results/client.py">get</a>(...) -> typing.Any</code></summary>
 <dl>
 <dd>
 
@@ -6639,11 +6615,13 @@ client.google_pay.merchant.certificates.create(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.reactors.results.get(
     id="id",
     request_id="requestId",
@@ -6692,7 +6670,7 @@ client.reactors.results.get(
 </details>
 
 ## Tenants SecurityContact
-<details><summary><code>client.tenants.security_contact.<a href="src/basis_theory/tenants/security_contact/client.py">get</a>()</code></summary>
+<details><summary><code>client.tenants.security_contact.<a href="src/basis_theory/tenants/security_contact/client.py">get</a>() -> SecurityContactEmailResponse</code></summary>
 <dl>
 <dd>
 
@@ -6706,11 +6684,13 @@ client.reactors.results.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.security_contact.get()
 
 ```
@@ -6739,7 +6719,7 @@ client.tenants.security_contact.get()
 </dl>
 </details>
 
-<details><summary><code>client.tenants.security_contact.<a href="src/basis_theory/tenants/security_contact/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.tenants.security_contact.<a href="src/basis_theory/tenants/security_contact/client.py">update</a>(...) -> SecurityContactEmailResponse</code></summary>
 <dl>
 <dd>
 
@@ -6753,11 +6733,13 @@ client.tenants.security_contact.get()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.security_contact.update(
     email="email",
 )
@@ -6797,7 +6779,7 @@ client.tenants.security_contact.update(
 </details>
 
 ## Tenants Connections
-<details><summary><code>client.tenants.connections.<a href="src/basis_theory/tenants/connections/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.tenants.connections.<a href="src/basis_theory/tenants/connections/client.py">create</a>(...) -> CreateTenantConnectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -6811,11 +6793,13 @@ client.tenants.security_contact.update(
 
 ```python
 from basis_theory import BasisTheory, TenantConnectionOptions
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.connections.create(
     strategy="strategy",
     options=TenantConnectionOptions(),
@@ -6851,14 +6835,6 @@ client.tenants.connections.create(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -6871,7 +6847,7 @@ client.tenants.connections.create(
 </dl>
 </details>
 
-<details><summary><code>client.tenants.connections.<a href="src/basis_theory/tenants/connections/client.py">delete</a>()</code></summary>
+<details><summary><code>client.tenants.connections.<a href="src/basis_theory/tenants/connections/client.py">delete</a>() -> CreateTenantConnectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -6885,11 +6861,13 @@ client.tenants.connections.create(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.connections.delete()
 
 ```
@@ -6919,7 +6897,7 @@ client.tenants.connections.delete()
 </details>
 
 ## Tenants Invitations
-<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">list</a>(...) -> TenantInvitationResponsePaginatedList</code></summary>
 <dl>
 <dd>
 
@@ -6933,17 +6911,19 @@ client.tenants.connections.delete()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-response = client.tenants.invitations.list()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
+
+client.tenants.invitations.list(
+    status="PENDING",
+    page=1,
+    start="start",
+    size=1,
+)
 
 ```
 </dd>
@@ -7003,7 +6983,7 @@ for page in response.iter_pages():
 </dl>
 </details>
 
-<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">create</a>(...) -> TenantInvitationResponse</code></summary>
 <dl>
 <dd>
 
@@ -7017,11 +6997,13 @@ for page in response.iter_pages():
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.invitations.create(
     email="email",
 )
@@ -7056,14 +7038,6 @@ client.tenants.invitations.create(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -7076,7 +7050,7 @@ client.tenants.invitations.create(
 </dl>
 </details>
 
-<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">resend</a>(...)</code></summary>
+<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">resend</a>(...) -> TenantInvitationResponse</code></summary>
 <dl>
 <dd>
 
@@ -7090,11 +7064,13 @@ client.tenants.invitations.create(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.invitations.resend(
     invitation_id="invitationId",
 )
@@ -7121,14 +7097,6 @@ client.tenants.invitations.resend(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -7141,7 +7109,7 @@ client.tenants.invitations.resend(
 </dl>
 </details>
 
-<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.tenants.invitations.<a href="src/basis_theory/tenants/invitations/client.py">get</a>(...) -> TenantInvitationResponse</code></summary>
 <dl>
 <dd>
 
@@ -7155,11 +7123,13 @@ client.tenants.invitations.resend(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.invitations.get(
     invitation_id="invitationId",
 )
@@ -7212,11 +7182,13 @@ client.tenants.invitations.get(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.invitations.delete(
     invitation_id="invitationId",
 )
@@ -7256,7 +7228,7 @@ client.tenants.invitations.delete(
 </details>
 
 ## Tenants Members
-<details><summary><code>client.tenants.members.<a href="src/basis_theory/tenants/members/client.py">list</a>(...)</code></summary>
+<details><summary><code>client.tenants.members.<a href="src/basis_theory/tenants/members/client.py">list</a>(...) -> TenantMemberResponsePaginatedList</code></summary>
 <dl>
 <dd>
 
@@ -7270,12 +7242,18 @@ client.tenants.invitations.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
-client.tenants.members.list()
+
+client.tenants.members.list(
+    page=1,
+    start="start",
+    size=1,
+)
 
 ```
 </dd>
@@ -7335,7 +7313,7 @@ client.tenants.members.list()
 </dl>
 </details>
 
-<details><summary><code>client.tenants.members.<a href="src/basis_theory/tenants/members/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.tenants.members.<a href="src/basis_theory/tenants/members/client.py">update</a>(...) -> TenantMemberResponse</code></summary>
 <dl>
 <dd>
 
@@ -7349,11 +7327,13 @@ client.tenants.members.list()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.members.update(
     member_id="memberId",
     role="role",
@@ -7389,14 +7369,6 @@ client.tenants.members.update(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -7423,11 +7395,13 @@ client.tenants.members.update(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.members.delete(
     member_id="memberId",
 )
@@ -7467,7 +7441,7 @@ client.tenants.members.delete(
 </details>
 
 ## Tenants Owner
-<details><summary><code>client.tenants.owner.<a href="src/basis_theory/tenants/owner/client.py">get</a>()</code></summary>
+<details><summary><code>client.tenants.owner.<a href="src/basis_theory/tenants/owner/client.py">get</a>() -> TenantMemberResponse</code></summary>
 <dl>
 <dd>
 
@@ -7481,11 +7455,13 @@ client.tenants.members.delete(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.owner.get()
 
 ```
@@ -7515,7 +7491,7 @@ client.tenants.owner.get()
 </details>
 
 ## Tenants Self
-<details><summary><code>client.tenants.self_.<a href="src/basis_theory/tenants/self_/client.py">get_usage_reports</a>()</code></summary>
+<details><summary><code>client.tenants.self_.<a href="src/basis_theory/tenants/self_/client.py">get_usage_reports</a>() -> TenantUsageReport</code></summary>
 <dl>
 <dd>
 
@@ -7529,11 +7505,13 @@ client.tenants.owner.get()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.self_.get_usage_reports()
 
 ```
@@ -7562,7 +7540,7 @@ client.tenants.self_.get_usage_reports()
 </dl>
 </details>
 
-<details><summary><code>client.tenants.self_.<a href="src/basis_theory/tenants/self_/client.py">get</a>()</code></summary>
+<details><summary><code>client.tenants.self_.<a href="src/basis_theory/tenants/self_/client.py">get</a>() -> Tenant</code></summary>
 <dl>
 <dd>
 
@@ -7576,11 +7554,13 @@ client.tenants.self_.get_usage_reports()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.self_.get()
 
 ```
@@ -7609,7 +7589,7 @@ client.tenants.self_.get()
 </dl>
 </details>
 
-<details><summary><code>client.tenants.self_.<a href="src/basis_theory/tenants/self_/client.py">update</a>(...)</code></summary>
+<details><summary><code>client.tenants.self_.<a href="src/basis_theory/tenants/self_/client.py">update</a>(...) -> Tenant</code></summary>
 <dl>
 <dd>
 
@@ -7623,11 +7603,13 @@ client.tenants.self_.get()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.self_.update(
     name="name",
 )
@@ -7662,14 +7644,6 @@ client.tenants.self_.update(
 <dl>
 <dd>
 
-**idempotency_key:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -7696,11 +7670,13 @@ client.tenants.self_.update(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.tenants.self_.delete()
 
 ```
@@ -7730,7 +7706,7 @@ client.tenants.self_.delete()
 </details>
 
 ## Threeds Sessions
-<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">create</a>(...) -> CreateThreeDsSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -7744,11 +7720,13 @@ client.tenants.self_.delete()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.threeds.sessions.create()
 
 ```
@@ -7857,7 +7835,7 @@ client.threeds.sessions.create()
 </dl>
 </details>
 
-<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">authenticate</a>(...)</code></summary>
+<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">authenticate</a>(...) -> ThreeDsAuthentication</code></summary>
 <dl>
 <dd>
 
@@ -7871,11 +7849,13 @@ client.threeds.sessions.create()
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.threeds.sessions.authenticate(
     session_id="sessionId",
     authentication_category="authentication_category",
@@ -7904,111 +7884,7 @@ client.threeds.sessions.authenticate(
 <dl>
 <dd>
 
-**authentication_category:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**authentication_type:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**card_brand:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**challenge_preference:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_decoupled_challenge:** `typing.Optional[bool]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**decoupled_challenge_max_time:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**purchase_info:** `typing.Optional[ThreeDsPurchaseInfo]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**merchant_info:** `typing.Optional[ThreeDsMerchantInfo]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestor_info:** `typing.Optional[ThreeDsRequestorInfo]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**cardholder_info:** `typing.Optional[ThreeDsCardholderInfo]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**broadcast_info:** `typing.Optional[typing.Optional[typing.Any]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**message_extensions:** `typing.Optional[typing.Sequence[ThreeDsMessageExtension]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**metadata:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `typing.Optional[str]` 
+**request:** `AuthenticateThreeDsSessionRequest` 
     
 </dd>
 </dl>
@@ -8028,7 +7904,7 @@ client.threeds.sessions.authenticate(
 </dl>
 </details>
 
-<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">get_challenge_result</a>(...)</code></summary>
+<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">get_challenge_result</a>(...) -> ThreeDsAuthentication</code></summary>
 <dl>
 <dd>
 
@@ -8042,11 +7918,13 @@ client.threeds.sessions.authenticate(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.threeds.sessions.get_challenge_result(
     session_id="sessionId",
 )
@@ -8085,7 +7963,7 @@ client.threeds.sessions.get_challenge_result(
 </dl>
 </details>
 
-<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.threeds.sessions.<a href="src/basis_theory/threeds/sessions/client.py">get</a>(...) -> ThreeDsSession</code></summary>
 <dl>
 <dd>
 
@@ -8099,11 +7977,13 @@ client.threeds.sessions.get_challenge_result(
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.threeds.sessions.get(
     id="id",
 )
@@ -8143,7 +8023,7 @@ client.threeds.sessions.get(
 </details>
 
 ## Webhooks Events
-<details><summary><code>client.webhooks.events.<a href="src/basis_theory/webhooks/events/client.py">list</a>()</code></summary>
+<details><summary><code>client.webhooks.events.<a href="src/basis_theory/webhooks/events/client.py">list</a>() -> EventTypes</code></summary>
 <dl>
 <dd>
 
@@ -8171,11 +8051,13 @@ Return a list of available event types
 
 ```python
 from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
 )
+
 client.webhooks.events.list()
 
 ```

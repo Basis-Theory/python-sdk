@@ -89,7 +89,10 @@ class JobsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.account_updater.jobs.list()
+        client.account_updater.jobs.list(
+            size=1,
+            start="start",
+        )
         """
         _response = self._raw_client.list(size=size, start=start, request_options=request_options)
         return _response.data
@@ -215,7 +218,10 @@ class AsyncJobsClient:
 
 
         async def main() -> None:
-            await client.account_updater.jobs.list()
+            await client.account_updater.jobs.list(
+                size=1,
+                start="start",
+            )
 
 
         asyncio.run(main())

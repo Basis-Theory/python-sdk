@@ -9,8 +9,12 @@ from ..core.serialization import FieldMetadata
 
 
 class CardBinRange(UniversalBaseModel):
-    bin_min: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="binMin")] = None
-    bin_max: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="binMax")] = None
+    bin_min: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="binMin"), pydantic.Field(alias="binMin")
+    ] = None
+    bin_max: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="binMax"), pydantic.Field(alias="binMax")
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -10,6 +10,7 @@ The BasisTheory Python library provides convenient access to the BasisTheory API
 - [Documentation](#documentation)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Environments](#environments)
 - [Async Client](#async-client)
 - [Exception Handling](#exception-handling)
 - [Pagination](#pagination)
@@ -39,15 +40,28 @@ Instantiate and use the client with the following:
 from basis_theory import BasisTheory
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
 )
+
 client.tenants.self_.get()
+```
+
+## Environments
+
+This SDK allows you to configure different environments for API requests.
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
 ```
 
 ## Async Client
 
-The SDK also exports an `async` client so that you can make non-blocking calls to our API.
+The SDK also exports an `async` client so that you can make non-blocking calls to our API. Note that if you are constructing an Async httpx client class to pass into this client, use `httpx.AsyncClient()` instead of `httpx.Client()` (e.g. for the `httpx_client` parameter of this client).
 
 ```python
 import asyncio
@@ -55,8 +69,7 @@ import asyncio
 from basis_theory import AsyncBasisTheory
 
 client = AsyncBasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
 )
 
 
@@ -76,7 +89,7 @@ will be thrown.
 from basis_theory.core.api_error import ApiError
 
 try:
-    client.tenants.self_.get(...)
+    client.tenants.self_.get()
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -90,15 +103,23 @@ Paginated requests will return a `SyncPager` or `AsyncPager`, which can be used 
 from basis_theory import BasisTheory
 
 client = BasisTheory(
-    correlation_id="YOUR_CORRELATION_ID",
-    api_key="YOUR_API_KEY",
+    api_key="<value>",
 )
-response = client.applications.list()
-for item in response:
-    yield item
-# alternatively, you can paginate page-by-page
-for page in response.iter_pages():
-    yield page
+
+client.applications.list(
+    page=1,
+    start="start",
+    size=1,
+)
+```
+
+```python
+# You can also iterate through pages and access the typed response per page
+pager = client.applications.list(...)
+for page in pager.iter_pages():
+    print(page.response)  # access the typed response for each page
+    for item in page:
+        print(item)
 ```
 
 ## Advanced
@@ -111,20 +132,11 @@ The `.with_raw_response` property returns a "raw" client that can be used to acc
 ```python
 from basis_theory import BasisTheory
 
-client = BasisTheory(
-    ...,
-)
-response = client.tenants.self_.with_raw_response.get(...)
+client = BasisTheory(...)
+response = client.tenants.self_.with_raw_response.get()
 print(response.headers)  # access the response headers
+print(response.status_code)  # access the response status code
 print(response.data)  # access the underlying object
-pager = client.applications.list(...)
-print(pager.response.headers)  # access the response headers for the first page
-for item in pager:
-    print(item)  # access the underlying object(s)
-for page in pager.iter_pages():
-    print(page.response.headers)  # access the response headers for each page
-    for item in page:
-        print(item)  # access the underlying object(s)
 ```
 
 ### Retries
@@ -142,7 +154,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.tenants.self_.get(..., request_options={
+client.tenants.self_.get(request_options={
     "max_retries": 1
 })
 ```
@@ -152,17 +164,12 @@ client.tenants.self_.get(..., request_options={
 The SDK defaults to a 60 second timeout. You can configure this with a timeout option at the client or request level.
 
 ```python
-
 from basis_theory import BasisTheory
 
-client = BasisTheory(
-    ...,
-    timeout=20.0,
-)
-
+client = BasisTheory(..., timeout=20.0)
 
 # Override timeout for a specific method
-client.tenants.self_.get(..., request_options={
+client.tenants.self_.get(request_options={
     "timeout_in_seconds": 1
 })
 ```
@@ -179,7 +186,7 @@ from basis_theory import BasisTheory
 client = BasisTheory(
     ...,
     httpx_client=httpx.Client(
-        proxies="http://my.test.proxy.example.com",
+        proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
 )

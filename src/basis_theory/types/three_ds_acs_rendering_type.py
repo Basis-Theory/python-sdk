@@ -9,8 +9,12 @@ from ..core.serialization import FieldMetadata
 
 
 class ThreeDsAcsRenderingType(UniversalBaseModel):
-    acs_interface: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="acsInterface")] = None
-    acs_ui_template: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="acsUiTemplate")] = None
+    acs_interface: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="acsInterface"), pydantic.Field(alias="acsInterface")
+    ] = None
+    acs_ui_template: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="acsUiTemplate"), pydantic.Field(alias="acsUiTemplate")
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

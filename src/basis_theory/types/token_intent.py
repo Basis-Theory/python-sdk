@@ -23,8 +23,10 @@ class TokenIntent(UniversalBaseModel):
     card: typing.Optional[CardDetails] = None
     bank: typing.Optional[BankDetails] = None
     network_token: typing.Optional[CardDetails] = None
-    authentication: typing.Optional[typing.Optional[typing.Any]] = None
-    extras: typing_extensions.Annotated[typing.Optional[TokenIntentExtras], FieldMetadata(alias="_extras")] = None
+    authentication: typing.Optional[typing.Any] = None
+    extras: typing_extensions.Annotated[
+        typing.Optional[TokenIntentExtras], FieldMetadata(alias="_extras"), pydantic.Field(alias="_extras")
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

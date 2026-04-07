@@ -7,6 +7,7 @@ from ..core.pagination import AsyncPager, SyncPager
 from ..core.request_options import RequestOptions
 from ..types.application import Application
 from ..types.proxy import Proxy
+from ..types.proxy_paginated_list import ProxyPaginatedList
 from ..types.proxy_transform import ProxyTransform
 from .raw_client import AsyncRawProxiesClient, RawProxiesClient
 
@@ -38,7 +39,7 @@ class ProxiesClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Proxy]:
+    ) -> SyncPager[Proxy, ProxyPaginatedList]:
         """
         Parameters
         ----------
@@ -57,7 +58,7 @@ class ProxiesClient:
 
         Returns
         -------
-        SyncPager[Proxy]
+        SyncPager[Proxy, ProxyPaginatedList]
             Success
 
         Examples
@@ -68,7 +69,12 @@ class ProxiesClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.proxies.list()
+        response = client.proxies.list(
+            name="name",
+            page=1,
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -418,7 +424,7 @@ class AsyncProxiesClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Proxy]:
+    ) -> AsyncPager[Proxy, ProxyPaginatedList]:
         """
         Parameters
         ----------
@@ -437,7 +443,7 @@ class AsyncProxiesClient:
 
         Returns
         -------
-        AsyncPager[Proxy]
+        AsyncPager[Proxy, ProxyPaginatedList]
             Success
 
         Examples
@@ -453,7 +459,12 @@ class AsyncProxiesClient:
 
 
         async def main() -> None:
-            response = await client.proxies.list()
+            response = await client.proxies.list(
+                name="name",
+                page=1,
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 

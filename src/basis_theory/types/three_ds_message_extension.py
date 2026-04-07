@@ -10,7 +10,7 @@ class ThreeDsMessageExtension(UniversalBaseModel):
     id: typing.Optional[str] = None
     name: typing.Optional[str] = None
     critical: typing.Optional[bool] = None
-    data: typing.Optional[typing.Optional[typing.Any]] = None
+    data: typing.Optional[typing.Any] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -7,10 +7,10 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
 class ReactResponse(UniversalBaseModel):
-    tokens: typing.Optional[typing.Optional[typing.Any]] = None
-    raw: typing.Optional[typing.Optional[typing.Any]] = None
-    body: typing.Optional[typing.Optional[typing.Any]] = None
-    headers: typing.Optional[typing.Optional[typing.Any]] = None
+    tokens: typing.Optional[typing.Any] = None
+    raw: typing.Optional[typing.Any] = None
+    body: typing.Optional[typing.Any] = None
+    headers: typing.Optional[typing.Any] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
