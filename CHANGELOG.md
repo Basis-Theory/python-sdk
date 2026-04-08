@@ -1,3 +1,10 @@
+# [5.5.0](https://github.com/Basis-Theory/python-sdk/compare/v5.4.0...v5.5.0) (2026-04-08)
+
+
+### Features
+
+* Add Agentic ([#110](https://github.com/Basis-Theory/python-sdk/issues/110)) ([bcb33cf](https://github.com/Basis-Theory/python-sdk/commit/bcb33cfb4039f11e2b2d0c5767036863d4f02f98))
+
 # [5.4.0](https://github.com/Basis-Theory/python-sdk/compare/v5.3.0...v5.4.0) (2026-03-31)
 
 
