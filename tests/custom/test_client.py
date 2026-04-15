@@ -190,6 +190,21 @@ def test_should_create_update_patch_reactors() -> None:
     )
     assert react_async_response.async_reactor_request_id is not None
 
+    timeout = 30
+    poll_interval = 1
+    deadline = time.time() + timeout
+    async_result = None
+    while time.time() < deadline:
+        try:
+            async_result = client.reactors.results.get(
+                id=reactor_id,
+                request_id=react_async_response.async_reactor_request_id
+            )
+            break
+        except NotFoundError:
+            time.sleep(poll_interval)
+    assert async_result is not None, "Async reactor invocation did not complete within 30 seconds"
+
     management_client.reactors.delete(id=reactor_id)
     management_client.applications.delete(id=application_id)
 
