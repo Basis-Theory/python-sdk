@@ -18,7 +18,6 @@ from ..types.log import Log
 from ..types.log_entity_type import LogEntityType
 from ..types.log_paginated_list import LogPaginatedList
 from ..types.problem_details import ProblemDetails
-from ..types.validation_problem_details import ValidationProblemDetails
 
 
 class RawLogsClient:
@@ -106,9 +105,9 @@ class RawLogsClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -285,9 +284,9 @@ class AsyncRawLogsClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

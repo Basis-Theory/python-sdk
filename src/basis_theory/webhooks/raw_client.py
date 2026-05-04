@@ -15,7 +15,6 @@ from ..errors.not_found_error import NotFoundError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.problem_details import ProblemDetails
-from ..types.validation_problem_details import ValidationProblemDetails
 from ..types.webhook import Webhook
 from ..types.webhook_list import WebhookList
 
@@ -188,9 +187,9 @@ class RawWebhooksClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -260,9 +259,9 @@ class RawWebhooksClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -338,9 +337,9 @@ class RawWebhooksClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -435,9 +434,9 @@ class RawWebhooksClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -648,9 +647,9 @@ class AsyncRawWebhooksClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -722,9 +721,9 @@ class AsyncRawWebhooksClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -800,9 +799,9 @@ class AsyncRawWebhooksClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -897,9 +896,9 @@ class AsyncRawWebhooksClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

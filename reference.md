@@ -4530,6 +4530,64 @@ client.sessions.authorize(
 </dl>
 </details>
 
+## Tenants
+<details><summary><code>client.tenants.<a href="src/basis_theory/tenants/client.py">owner_transfer</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.tenants.owner_transfer(
+    member_id="member_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**member_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## TokenIntents
 <details><summary><code>client.token_intents.<a href="src/basis_theory/token_intents/client.py">get</a>(...)</code></summary>
 <dl>
@@ -7892,6 +7950,8 @@ client = BasisTheory(
 )
 client.apple_pay.merchant.certificates.create(
     merchant_id="merchantId",
+    payment_processor_certificate_data="payment_processor_certificate_data",
+    payment_processor_certificate_password="payment_processor_certificate_password",
 )
 
 ```
@@ -7916,6 +7976,22 @@ client.apple_pay.merchant.certificates.create(
 <dl>
 <dd>
 
+**payment_processor_certificate_data:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payment_processor_certificate_password:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **merchant_certificate_data:** `typing.Optional[str]` 
     
 </dd>
@@ -7925,22 +8001,6 @@ client.apple_pay.merchant.certificates.create(
 <dd>
 
 **merchant_certificate_password:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**payment_processor_certificate_data:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**payment_processor_certificate_password:** `typing.Optional[str]` 
     
 </dd>
 </dl>

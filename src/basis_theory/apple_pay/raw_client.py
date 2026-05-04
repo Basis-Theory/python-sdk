@@ -19,7 +19,6 @@ from ..types.apple_pay_create_response import ApplePayCreateResponse
 from ..types.apple_pay_method_token import ApplePayMethodToken
 from ..types.apple_pay_token import ApplePayToken
 from ..types.problem_details import ProblemDetails
-from ..types.validation_problem_details import ValidationProblemDetails
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -84,9 +83,9 @@ class RawApplePayClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -323,9 +322,9 @@ class AsyncRawApplePayClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
