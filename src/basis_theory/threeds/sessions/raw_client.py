@@ -26,7 +26,6 @@ from ...types.three_ds_message_extension import ThreeDsMessageExtension
 from ...types.three_ds_purchase_info import ThreeDsPurchaseInfo
 from ...types.three_ds_requestor_info import ThreeDsRequestorInfo
 from ...types.three_ds_session import ThreeDsSession
-from ...types.validation_problem_details import ValidationProblemDetails
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -123,9 +122,9 @@ class RawSessionsClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -518,9 +517,9 @@ class AsyncRawSessionsClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
