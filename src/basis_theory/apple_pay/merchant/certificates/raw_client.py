@@ -161,10 +161,10 @@ class RawCertificatesClient:
         self,
         merchant_id: str,
         *,
+        payment_processor_certificate_data: str,
+        payment_processor_certificate_password: str,
         merchant_certificate_data: typing.Optional[str] = OMIT,
         merchant_certificate_password: typing.Optional[str] = OMIT,
-        payment_processor_certificate_data: typing.Optional[str] = OMIT,
-        payment_processor_certificate_password: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[ApplePayMerchantCertificates]:
@@ -173,13 +173,13 @@ class RawCertificatesClient:
         ----------
         merchant_id : str
 
+        payment_processor_certificate_data : str
+
+        payment_processor_certificate_password : str
+
         merchant_certificate_data : typing.Optional[str]
 
         merchant_certificate_password : typing.Optional[str]
-
-        payment_processor_certificate_data : typing.Optional[str]
-
-        payment_processor_certificate_password : typing.Optional[str]
 
         domain : typing.Optional[str]
 
@@ -398,10 +398,10 @@ class AsyncRawCertificatesClient:
         self,
         merchant_id: str,
         *,
+        payment_processor_certificate_data: str,
+        payment_processor_certificate_password: str,
         merchant_certificate_data: typing.Optional[str] = OMIT,
         merchant_certificate_password: typing.Optional[str] = OMIT,
-        payment_processor_certificate_data: typing.Optional[str] = OMIT,
-        payment_processor_certificate_password: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[ApplePayMerchantCertificates]:
@@ -410,13 +410,13 @@ class AsyncRawCertificatesClient:
         ----------
         merchant_id : str
 
+        payment_processor_certificate_data : str
+
+        payment_processor_certificate_password : str
+
         merchant_certificate_data : typing.Optional[str]
 
         merchant_certificate_password : typing.Optional[str]
-
-        payment_processor_certificate_data : typing.Optional[str]
-
-        payment_processor_certificate_password : typing.Optional[str]
 
         domain : typing.Optional[str]
 

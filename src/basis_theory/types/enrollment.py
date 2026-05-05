@@ -12,6 +12,11 @@ from .enrollment_status import EnrollmentStatus
 
 class Enrollment(UniversalBaseModel):
     id: typing.Optional[str] = None
+    token_id: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Basis Theory card token ID used for enrollment
+    """
+
     provider: typing.Optional[EnrollmentProvider] = None
     status: typing.Optional[EnrollmentStatus] = None
     card: typing.Optional[AgenticCard] = None

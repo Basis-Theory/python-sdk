@@ -5,6 +5,8 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .agentic_card_brand import AgenticCardBrand
+from .agentic_card_issuer import AgenticCardIssuer
+from .agentic_card_issuer_country import AgenticCardIssuerCountry
 from .card_display import CardDisplay
 
 
@@ -14,6 +16,31 @@ class AgenticCard(UniversalBaseModel):
     last4: typing.Optional[str] = None
     expiration_month: typing.Optional[int] = None
     expiration_year: typing.Optional[int] = None
+    funding: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Card funding type (e.g. credit, debit, prepaid)
+    """
+
+    issuer: typing.Optional[AgenticCardIssuer] = pydantic.Field(default=None)
+    """
+    Card issuer information
+    """
+
+    issuer_country: typing.Optional[AgenticCardIssuerCountry] = pydantic.Field(default=None)
+    """
+    Card issuer country details
+    """
+
+    segment: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Card segment (e.g. consumer, commercial)
+    """
+
+    type: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Card type
+    """
+
     display: typing.Optional[CardDisplay] = None
 
     if IS_PYDANTIC_V2:
