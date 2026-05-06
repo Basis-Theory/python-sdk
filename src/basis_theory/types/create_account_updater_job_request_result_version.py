@@ -2,4 +2,4 @@
 
 import typing
 
-CreateAccountUpdaterJobRequestResultVersion = typing.Union[typing.Literal["1", "1.1"], typing.Any]
+CreateAccountUpdaterJobRequestResultVersion = typing.Union[typing.Literal["1", "1.1", "1.2"], typing.Any]

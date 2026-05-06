@@ -15,6 +15,15 @@ class ConfirmationEntry(UniversalBaseModel):
     transaction_type: TransactionType
     transaction_timestamp: typing.Optional[dt.datetime] = None
     mandates_completed: typing.Optional[bool] = None
+    amount: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Transaction amount for Visa confirmation
+    """
+
+    currency_code: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    ISO 4217 currency code (e.g. USD)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
