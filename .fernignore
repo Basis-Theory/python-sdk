@@ -7,8 +7,8 @@
 .releaserc.json
 CHANGELOG.md
 package.json
-pyproject.toml
-README.md
 yarn.lock
 
+tests/custom/**/*.py
+tests/custom/test_agentic.py
 tests/custom/test_client.py

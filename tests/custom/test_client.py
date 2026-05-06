@@ -1,9 +1,6 @@
-import json
 import os
 import time
 import uuid
-
-import pytest
 
 from basis_theory import BasisTheory, NotFoundError, UnprocessableEntityError
 
@@ -101,6 +98,7 @@ def test_proxy_lifecycle() -> None:
     )
 
     client.proxies.delete(id=proxy_id)
+    client.applications.delete(id=application_id)
 
 def test_should_create_token_intent() -> None:
     client = new_private_client()
@@ -174,21 +172,41 @@ def test_should_create_update_patch_reactors() -> None:
     client = new_private_client()
     react_response = client.reactors.react(
         id=reactor_id,
-        args={
-            "foo": "bar"
+        request={
+            "args": {
+                "foo": "bar"
+            }
         }
     )
     assert react_response.raw['foo'] == "bar"
 
     react_async_response = client.reactors.react_async(
         id=reactor_id,
-        args={
-            "foo": "bar"
+        request={
+            "args": {
+                "foo": "bar"
+            }
         }
     )
     assert react_async_response.async_reactor_request_id is not None
 
+    timeout = 30
+    poll_interval = 1
+    deadline = time.time() + timeout
+    async_result = None
+    while time.time() < deadline:
+        try:
+            async_result = client.reactors.results.get(
+                id=reactor_id,
+                request_id=react_async_response.async_reactor_request_id
+            )
+            break
+        except NotFoundError:
+            time.sleep(poll_interval)
+    assert async_result is not None, "Async reactor invocation did not complete within 30 seconds"
+
     management_client.reactors.delete(id=reactor_id)
+    management_client.applications.delete(id=application_id)
 
 
 def test_tokenize_basic() -> None:
@@ -420,12 +438,45 @@ def test_should_support_google_pay() -> None:
     client = new_private_test_tenant_client()
 
     try:
-        client.googlepay.tokenize(
-            google_payment_method_token={"signature":"MEQCIBnz8wKrUi3qrLSn6KSrTcNIo6YcOzrfre7X49S27MrKAiBMF70q7EHe0Bw8uva77pclggSiPMRTFRFl7TZILyACOQ\u003d\u003d","intermediateSigningKey":{"signedKey":"{\"keyValue\":\"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEnK9rrDl5FJalSwcoZD3qB5EYcA/sYVTH2Nbh6y/EZArFvvBRQA1eI3BIv1iZeCkBLd/A2nU1ve7xENoPOfp7+Q\\u003d\\u003d\",\"keyExpiration\":\"1737724267469\"}","signatures":["MEQCIHugFzQtVBVNizwkMhG/POcZAmRRXyeiZpt3aFwBzt5cAiBSOY4pfT4tQGWzZjkldbYkpBwWGpSasxRmlt7XPNOaLQ\u003d\u003d"]},"protocolVersion":"ECv2","signedMessage":"{\"encryptedMessage\":\"XURDnvPAIhAKT9rARBV9RT0/yVTesT/w0UniXCJflwu2TkE54UnP7ZmWBo0gKjTJIU3j8D1Rntw2Ywr2UDLbZor+UoeZltzZOAv6iAR4MfvCLSzlh3HcjechwqZM8oxSF2iZoD2XrNqOgaYbOY1EaYoLx1JpftZDuTqSDLYa+szsoPjAUgzBO5TJZTDIa3zDNAdK3UtAPwutL1M4pTyuFhUKOC12J3RzZdaGFANbKSc8vdfqnR1hqsvsEt1sWPf2O3yty91klSA7FDckvwlKfRoNyQMDhaDkEvYUi75uxcjCRHE0Jjbj61bZriSTXiG2KWNF2OKpz7l61kgPJxCpK7A7TV3P4pBLwW7DYbRusO6FupLehxOZl9nBpVfApytCZGjaSXT7QfPpxdBv8j2VfKsodOf/dwv2Thrra9a6ZzFWsUz4l7Jbr4MCBLhXH4lSuxKrlA2Rf/CVPTgz8b88cYpEDZyqLJxDstwy74/Nl7Mjc4V7thzmdskAeYSuZXKXyyeo3BHqkguRkeagEwuHiZoem2V4W2qWOF8hYn14KY3cXXNcVA\\u003d\\u003d\",\"ephemeralPublicKey\":\"BHBDKlM3tik4o9leEkHu+875bHbORaCK7dDeXFCRmv4bzWJw/4bsvtBtaBH3SW5JXkE/6pkRYAtjFzQmHMRQYvc\\u003d\",\"tag\":\"Hle3Oafx5sfUc3U3sCQgV0tRPhCAvPlVLYiqvbPyTYY\\u003d\"}"}
+        client.google_pay.create(
+            google_payment_data={"signature":"MEQCIBnz8wKrUi3qrLSn6KSrTcNIo6YcOzrfre7X49S27MrKAiBMF70q7EHe0Bw8uva77pclggSiPMRTFRFl7TZILyACOQ\u003d\u003d","intermediateSigningKey":{"signedKey":"{\"keyValue\":\"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEnK9rrDl5FJalSwcoZD3qB5EYcA/sYVTH2Nbh6y/EZArFvvBRQA1eI3BIv1iZeCkBLd/A2nU1ve7xENoPOfp7+Q\\u003d\\u003d\",\"keyExpiration\":\"1737724267469\"}","signatures":["MEQCIHugFzQtVBVNizwkMhG/POcZAmRRXyeiZpt3aFwBzt5cAiBSOY4pfT4tQGWzZjkldbYkpBwWGpSasxRmlt7XPNOaLQ\u003d\u003d"]},"protocolVersion":"ECv2","signedMessage":"{\"encryptedMessage\":\"XURDnvPAIhAKT9rARBV9RT0/yVTesT/w0UniXCJflwu2TkE54UnP7ZmWBo0gKjTJIU3j8D1Rntw2Ywr2UDLbZor+UoeZltzZOAv6iAR4MfvCLSzlh3HcjechwqZM8oxSF2iZoD2XrNqOgaYbOY1EaYoLx1JpftZDuTqSDLYa+szsoPjAUgzBO5TJZTDIa3zDNAdK3UtAPwutL1M4pTyuFhUKOC12J3RzZdaGFANbKSc8vdfqnR1hqsvsEt1sWPf2O3yty91klSA7FDckvwlKfRoNyQMDhaDkEvYUi75uxcjCRHE0Jjbj61bZriSTXiG2KWNF2OKpz7l61kgPJxCpK7A7TV3P4pBLwW7DYbRusO6FupLehxOZl9nBpVfApytCZGjaSXT7QfPpxdBv8j2VfKsodOf/dwv2Thrra9a6ZzFWsUz4l7Jbr4MCBLhXH4lSuxKrlA2Rf/CVPTgz8b88cYpEDZyqLJxDstwy74/Nl7Mjc4V7thzmdskAeYSuZXKXyyeo3BHqkguRkeagEwuHiZoem2V4W2qWOF8hYn14KY3cXXNcVA\\u003d\\u003d\",\"ephemeralPublicKey\":\"BHBDKlM3tik4o9leEkHu+875bHbORaCK7dDeXFCRmv4bzWJw/4bsvtBtaBH3SW5JXkE/6pkRYAtjFzQmHMRQYvc\\u003d\",\"tag\":\"Hle3Oafx5sfUc3U3sCQgV0tRPhCAvPlVLYiqvbPyTYY\\u003d\"}"}
         )
         assert False, "Should have thrown an error"
     except UnprocessableEntityError as e:
-        assert "Failed to decrypt token" in e.body.detail, "The error detail does not contain the expected message."
+        assert "Failed to decrypt Google payment request" in e.body.detail, "The error detail does not contain the expected message."
+
+
+def test_documents_lifecycle() -> None:
+    client = new_private_client()
+
+    # Upload
+    document_content = "This is a test document"
+    document1 = client.documents.upload(
+        document=("test_document.txt", document_content, "text/plain"),
+        request={
+            "metadata": {
+                "description": "Test document",
+                "source": "Python SDK test"
+            }
+        }
+    )
+    document_id = document1.id
+
+    # GET info
+    document = client.documents.get(id=document_id)
+    assert document.id == document_id
+    assert document.metadata is not None
+    assert document.metadata.get("description") == "Test document"
+    assert document.metadata.get("source") == "Python SDK test"
+    assert document.content_type == "text/plain"
+
+    # GET data
+    get_and_validate_document_data(client, document_id, document_content)
+
+    # DELETE
+    client.documents.delete(id=document_id)
+    ensure_document_removed(client, document_id)
+
 
 
 def ensure_webhook_removed(client, webhook_id):
@@ -467,7 +518,7 @@ def react(management_client, reactor_id):
     }
     x = management_client.reactors.react(
         id=reactor_id,
-        args=expected)
+        request={"args": expected})
     assert x.raw['key1'] == expected['key1']
     assert x.raw['key2'] == expected['key2']
 
@@ -572,20 +623,40 @@ def test_should_support_client_encryption_key_lifecycle() -> None:
 
     # Create a new key
     key = client.keys.create()
-    assert key.id is not None
+    assert key.key_id is not None
     assert key.public_key_pem is not None
 
     # Retrieve the key
-    retrieved_key = client.keys.get(id=key.id)
-    assert retrieved_key.id == key.id
+    retrieved_key = client.keys.get(id=key.key_id)
+    assert retrieved_key.key_id == key.key_id
     assert retrieved_key.expires_at is not None
 
     # Delete the key
-    client.keys.delete(id=key.id)
+    client.keys.delete(id=key.key_id)
 
     # Verify key is deleted
     try:
-        client.keys.get(id=key.id)
+        client.keys.get(id=key.key_id)
         assert False, "Should have raised a 404 for key not found"
+    except NotFoundError:
+        pass
+
+
+def get_and_validate_document_data(client, document_id, expected_content):
+    """Gets document data and validates its content."""
+    data_bytes = b""
+    for chunk in client.documents.data.get(document_id=document_id):
+        data_bytes += chunk
+    
+    # Convert bytes to string for comparison
+    data_content = data_bytes.decode('utf-8')
+    assert data_content == expected_content
+
+
+def ensure_document_removed(client, document_id):
+    """Verifies that a document is deleted."""
+    try:
+        client.documents.get(id=document_id)
+        assert False, "Document should no longer be retrievable"
     except NotFoundError:
         pass

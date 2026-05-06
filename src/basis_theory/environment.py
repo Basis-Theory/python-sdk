@@ -5,3 +5,6 @@ import enum
 
 class BasisTheoryEnvironment(enum.Enum):
     DEFAULT = "https://api.basistheory.com"
+    US = "https://api.basistheory.com"
+    EU = "https://api.basistheory.com"
+    TEST = "https://api.test.basistheory.com"

@@ -3,7 +3,23 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2FBasis-Theory%2Fpython-sdk)
 [![pypi](https://img.shields.io/pypi/v/BasisTheoryClient)](https://pypi.python.org/pypi/BasisTheoryClient)
 
-The BasisTheory Python library provides convenient access to the BasisTheory API from Python.
+The BasisTheory Python library provides convenient access to the BasisTheory APIs from Python.
+
+## Table of Contents
+
+- [Documentation](#documentation)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Async Client](#async-client)
+- [Exception Handling](#exception-handling)
+- [Pagination](#pagination)
+- [Advanced](#advanced)
+  - [Access Raw Response Data](#access-raw-response-data)
+  - [Retries](#retries)
+  - [Timeouts](#timeouts)
+  - [Custom Client](#custom-client)
+- [Contributing](#contributing)
+- [Reference](#reference)
 
 ## Documentation
 
@@ -23,6 +39,7 @@ Instantiate and use the client with the following:
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 client.tenants.self_.get()
@@ -38,6 +55,7 @@ import asyncio
 from basis_theory import AsyncBasisTheory
 
 client = AsyncBasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 
@@ -72,6 +90,7 @@ Paginated requests will return a `SyncPager` or `AsyncPager`, which can be used 
 from basis_theory import BasisTheory
 
 client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
 response = client.applications.list()
@@ -84,13 +103,37 @@ for page in response.iter_pages():
 
 ## Advanced
 
+### Access Raw Response Data
+
+The SDK provides access to raw response data, including headers, through the `.with_raw_response` property.
+The `.with_raw_response` property returns a "raw" client that can be used to access the `.headers` and `.data` attributes.
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    ...,
+)
+response = client.tenants.self_.with_raw_response.get(...)
+print(response.headers)  # access the response headers
+print(response.data)  # access the underlying object
+pager = client.applications.list(...)
+print(pager.response.headers)  # access the response headers for the first page
+for item in pager:
+    print(item)  # access the underlying object(s)
+for page in pager.iter_pages():
+    print(page.response.headers)  # access the response headers for each page
+    for item in page:
+        print(item)  # access the underlying object(s)
+```
+
 ### Retries
 
 The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
-as the request is deemed retriable and the number of retry attempts has not grown larger than the configured
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
 retry limit (default: 2).
 
-A request is deemed retriable when any of the following HTTP status codes is returned:
+A request is deemed retryable when any of the following HTTP status codes is returned:
 
 - [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
 - [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
@@ -99,7 +142,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.tenants.self_.get(..., {
+client.tenants.self_.get(..., request_options={
     "max_retries": 1
 })
 ```
@@ -119,7 +162,7 @@ client = BasisTheory(
 
 
 # Override timeout for a specific method
-client.tenants.self_.get(..., {
+client.tenants.self_.get(..., request_options={
     "timeout_in_seconds": 1
 })
 ```
@@ -128,6 +171,7 @@ client.tenants.self_.get(..., {
 
 You can override the `httpx` client to customize it for your use-case. Some common use-cases include support for proxies
 and transports.
+
 ```python
 import httpx
 from basis_theory import BasisTheory
@@ -150,3 +194,7 @@ a proof of concept, but know that we will not be able to merge it as-is. We sugg
 an issue first to discuss with us!
 
 On the other hand, contributions to the README are always very welcome!
+## Reference
+
+A full reference for this library is available [here](https://github.com/Basis-Theory/python-sdk/blob/HEAD/./reference.md).
+
