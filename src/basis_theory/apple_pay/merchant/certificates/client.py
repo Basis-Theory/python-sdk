@@ -95,10 +95,10 @@ class CertificatesClient:
         self,
         merchant_id: str,
         *,
+        payment_processor_certificate_data: str,
+        payment_processor_certificate_password: str,
         merchant_certificate_data: typing.Optional[str] = OMIT,
         merchant_certificate_password: typing.Optional[str] = OMIT,
-        payment_processor_certificate_data: typing.Optional[str] = OMIT,
-        payment_processor_certificate_password: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ApplePayMerchantCertificates:
@@ -107,13 +107,13 @@ class CertificatesClient:
         ----------
         merchant_id : str
 
+        payment_processor_certificate_data : str
+
+        payment_processor_certificate_password : str
+
         merchant_certificate_data : typing.Optional[str]
 
         merchant_certificate_password : typing.Optional[str]
-
-        payment_processor_certificate_data : typing.Optional[str]
-
-        payment_processor_certificate_password : typing.Optional[str]
 
         domain : typing.Optional[str]
 
@@ -135,14 +135,16 @@ class CertificatesClient:
         )
         client.apple_pay.merchant.certificates.create(
             merchant_id="merchantId",
+            payment_processor_certificate_data="payment_processor_certificate_data",
+            payment_processor_certificate_password="payment_processor_certificate_password",
         )
         """
         _response = self._raw_client.create(
             merchant_id,
-            merchant_certificate_data=merchant_certificate_data,
-            merchant_certificate_password=merchant_certificate_password,
             payment_processor_certificate_data=payment_processor_certificate_data,
             payment_processor_certificate_password=payment_processor_certificate_password,
+            merchant_certificate_data=merchant_certificate_data,
+            merchant_certificate_password=merchant_certificate_password,
             domain=domain,
             request_options=request_options,
         )
@@ -251,10 +253,10 @@ class AsyncCertificatesClient:
         self,
         merchant_id: str,
         *,
+        payment_processor_certificate_data: str,
+        payment_processor_certificate_password: str,
         merchant_certificate_data: typing.Optional[str] = OMIT,
         merchant_certificate_password: typing.Optional[str] = OMIT,
-        payment_processor_certificate_data: typing.Optional[str] = OMIT,
-        payment_processor_certificate_password: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ApplePayMerchantCertificates:
@@ -263,13 +265,13 @@ class AsyncCertificatesClient:
         ----------
         merchant_id : str
 
+        payment_processor_certificate_data : str
+
+        payment_processor_certificate_password : str
+
         merchant_certificate_data : typing.Optional[str]
 
         merchant_certificate_password : typing.Optional[str]
-
-        payment_processor_certificate_data : typing.Optional[str]
-
-        payment_processor_certificate_password : typing.Optional[str]
 
         domain : typing.Optional[str]
 
@@ -296,6 +298,8 @@ class AsyncCertificatesClient:
         async def main() -> None:
             await client.apple_pay.merchant.certificates.create(
                 merchant_id="merchantId",
+                payment_processor_certificate_data="payment_processor_certificate_data",
+                payment_processor_certificate_password="payment_processor_certificate_password",
             )
 
 
@@ -303,10 +307,10 @@ class AsyncCertificatesClient:
         """
         _response = await self._raw_client.create(
             merchant_id,
-            merchant_certificate_data=merchant_certificate_data,
-            merchant_certificate_password=merchant_certificate_password,
             payment_processor_certificate_data=payment_processor_certificate_data,
             payment_processor_certificate_password=payment_processor_certificate_password,
+            merchant_certificate_data=merchant_certificate_data,
+            merchant_certificate_password=merchant_certificate_password,
             domain=domain,
             request_options=request_options,
         )

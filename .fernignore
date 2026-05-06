@@ -9,4 +9,6 @@ CHANGELOG.md
 package.json
 yarn.lock
 
+tests/custom/**/*.py
+tests/custom/test_agentic.py
 tests/custom/test_client.py

@@ -40,6 +40,7 @@ class RawNetworkTokensClient:
         token_id: typing.Optional[str] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[NetworkToken]:
         """
@@ -52,6 +53,8 @@ class RawNetworkTokensClient:
         token_intent_id : typing.Optional[str]
 
         cardholder_info : typing.Optional[CardholderInfo]
+
+        merchant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -71,6 +74,7 @@ class RawNetworkTokensClient:
                 "cardholder_info": convert_and_respect_annotation_metadata(
                     object_=cardholder_info, annotation=CardholderInfo, direction="write"
                 ),
+                "merchant_id": merchant_id,
             },
             headers={
                 "content-type": "application/json",
@@ -579,6 +583,7 @@ class AsyncRawNetworkTokensClient:
         token_id: typing.Optional[str] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[NetworkToken]:
         """
@@ -591,6 +596,8 @@ class AsyncRawNetworkTokensClient:
         token_intent_id : typing.Optional[str]
 
         cardholder_info : typing.Optional[CardholderInfo]
+
+        merchant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -610,6 +617,7 @@ class AsyncRawNetworkTokensClient:
                 "cardholder_info": convert_and_respect_annotation_metadata(
                     object_=cardholder_info, annotation=CardholderInfo, direction="write"
                 ),
+                "merchant_id": merchant_id,
             },
             headers={
                 "content-type": "application/json",

@@ -48,6 +48,7 @@ class SessionsClient:
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
         callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateThreeDsSessionResponse:
         """
@@ -70,6 +71,8 @@ class SessionsClient:
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
 
         callback_urls : typing.Optional[ThreeDsCallbackUrls]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -99,6 +102,7 @@ class SessionsClient:
             device_info=device_info,
             authentication_request=authentication_request,
             callback_urls=callback_urls,
+            metadata=metadata,
             request_options=request_options,
         )
         return _response.data
@@ -119,6 +123,7 @@ class SessionsClient:
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
         broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ThreeDsAuthentication:
@@ -150,6 +155,8 @@ class SessionsClient:
         broadcast_info : typing.Optional[typing.Optional[typing.Any]]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         idempotency_key : typing.Optional[str]
 
@@ -189,6 +196,7 @@ class SessionsClient:
             cardholder_info=cardholder_info,
             broadcast_info=broadcast_info,
             message_extensions=message_extensions,
+            metadata=metadata,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -282,6 +290,7 @@ class AsyncSessionsClient:
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
         callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateThreeDsSessionResponse:
         """
@@ -304,6 +313,8 @@ class AsyncSessionsClient:
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
 
         callback_urls : typing.Optional[ThreeDsCallbackUrls]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -341,6 +352,7 @@ class AsyncSessionsClient:
             device_info=device_info,
             authentication_request=authentication_request,
             callback_urls=callback_urls,
+            metadata=metadata,
             request_options=request_options,
         )
         return _response.data
@@ -361,6 +373,7 @@ class AsyncSessionsClient:
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
         broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ThreeDsAuthentication:
@@ -392,6 +405,8 @@ class AsyncSessionsClient:
         broadcast_info : typing.Optional[typing.Optional[typing.Any]]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         idempotency_key : typing.Optional[str]
 
@@ -439,6 +454,7 @@ class AsyncSessionsClient:
             cardholder_info=cardholder_info,
             broadcast_info=broadcast_info,
             message_extensions=message_extensions,
+            metadata=metadata,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )

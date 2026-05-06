@@ -19,6 +19,9 @@ class ApplePayToken(UniversalBaseModel):
     created_at: typing.Optional[dt.datetime] = None
     modified_by: typing.Optional[str] = None
     modified_at: typing.Optional[dt.datetime] = None
+    transaction_id: typing.Optional[str] = None
+    payment_data_type: typing.Optional[str] = None
+    device_manufacturer_identifier: typing.Optional[str] = None
     card: typing.Optional[CardDetails] = None
     data: typing.Optional[typing.Optional[typing.Any]] = None
     authentication: typing.Optional[Authentication] = None
