@@ -35,6 +35,7 @@ class RawGooglePayClient:
         *,
         expires_at: typing.Optional[str] = OMIT,
         google_payment_data: typing.Optional[GooglePayMethodToken] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GooglePayCreateResponse]:
         """
@@ -43,6 +44,8 @@ class RawGooglePayClient:
         expires_at : typing.Optional[str]
 
         google_payment_data : typing.Optional[GooglePayMethodToken]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -60,6 +63,7 @@ class RawGooglePayClient:
                 "google_payment_data": convert_and_respect_annotation_metadata(
                     object_=google_payment_data, annotation=GooglePayMethodToken, direction="write"
                 ),
+                "merchant_registration_id": merchant_registration_id,
             },
             headers={
                 "content-type": "application/json",
@@ -281,6 +285,7 @@ class AsyncRawGooglePayClient:
         *,
         expires_at: typing.Optional[str] = OMIT,
         google_payment_data: typing.Optional[GooglePayMethodToken] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GooglePayCreateResponse]:
         """
@@ -289,6 +294,8 @@ class AsyncRawGooglePayClient:
         expires_at : typing.Optional[str]
 
         google_payment_data : typing.Optional[GooglePayMethodToken]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -306,6 +313,7 @@ class AsyncRawGooglePayClient:
                 "google_payment_data": convert_and_respect_annotation_metadata(
                     object_=google_payment_data, annotation=GooglePayMethodToken, direction="write"
                 ),
+                "merchant_registration_id": merchant_registration_id,
             },
             headers={
                 "content-type": "application/json",

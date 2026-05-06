@@ -172,19 +172,38 @@ def test_should_create_update_patch_reactors() -> None:
     client = new_private_client()
     react_response = client.reactors.react(
         id=reactor_id,
-        args={
-            "foo": "bar"
+        request={
+            "args": {
+                "foo": "bar"
+            }
         }
     )
     assert react_response.raw['foo'] == "bar"
 
     react_async_response = client.reactors.react_async(
         id=reactor_id,
-        args={
-            "foo": "bar"
+        request={
+            "args": {
+                "foo": "bar"
+            }
         }
     )
     assert react_async_response.async_reactor_request_id is not None
+
+    timeout = 30
+    poll_interval = 1
+    deadline = time.time() + timeout
+    async_result = None
+    while time.time() < deadline:
+        try:
+            async_result = client.reactors.results.get(
+                id=reactor_id,
+                request_id=react_async_response.async_reactor_request_id
+            )
+            break
+        except NotFoundError:
+            time.sleep(poll_interval)
+    assert async_result is not None, "Async reactor invocation did not complete within 30 seconds"
 
     management_client.reactors.delete(id=reactor_id)
     management_client.applications.delete(id=application_id)
@@ -424,7 +443,7 @@ def test_should_support_google_pay() -> None:
         )
         assert False, "Should have thrown an error"
     except UnprocessableEntityError as e:
-        assert "Failed to decrypt token" in e.body.detail, "The error detail does not contain the expected message."
+        assert "Failed to decrypt Google payment request" in e.body.detail, "The error detail does not contain the expected message."
 
 
 def test_documents_lifecycle() -> None:
@@ -499,7 +518,7 @@ def react(management_client, reactor_id):
     }
     x = management_client.reactors.react(
         id=reactor_id,
-        args=expected)
+        request={"args": expected})
     assert x.raw['key1'] == expected['key1']
     assert x.raw['key2'] == expected['key2']
 

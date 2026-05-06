@@ -5,6 +5,22 @@
 
 The BasisTheory Python library provides convenient access to the BasisTheory APIs from Python.
 
+## Table of Contents
+
+- [Documentation](#documentation)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Async Client](#async-client)
+- [Exception Handling](#exception-handling)
+- [Pagination](#pagination)
+- [Advanced](#advanced)
+  - [Access Raw Response Data](#access-raw-response-data)
+  - [Retries](#retries)
+  - [Timeouts](#timeouts)
+  - [Custom Client](#custom-client)
+- [Contributing](#contributing)
+- [Reference](#reference)
+
 ## Documentation
 
 API reference documentation is available [here](https://api.basistheory.com).

@@ -4,11 +4,13 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .three_ds_branding_options import ThreeDsBrandingOptions
 
 
 class ThreeDsCallbackUrls(UniversalBaseModel):
     success: typing.Optional[str] = None
     failure: typing.Optional[str] = None
+    branding: typing.Optional[ThreeDsBrandingOptions] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

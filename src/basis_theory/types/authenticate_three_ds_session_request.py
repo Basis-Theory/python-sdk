@@ -24,6 +24,7 @@ class AuthenticateThreeDsSessionRequest(UniversalBaseModel):
     cardholder_info: typing.Optional[ThreeDsCardholderInfo] = None
     broadcast_info: typing.Optional[typing.Optional[typing.Any]] = None
     message_extensions: typing.Optional[typing.List[ThreeDsMessageExtension]] = None
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
