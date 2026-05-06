@@ -5,23 +5,20 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .agentic_card import AgenticCard
-from .enrollment_provider import EnrollmentProvider
-from .enrollment_status import EnrollmentStatus
+from .merchant_details import MerchantDetails
+from .merchant_services import MerchantServices
 
 
-class Enrollment(UniversalBaseModel):
+class TenantMerchant(UniversalBaseModel):
     id: typing.Optional[str] = None
-    token_id: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Basis Theory card token ID used for enrollment
-    """
-
-    provider: typing.Optional[EnrollmentProvider] = None
-    status: typing.Optional[EnrollmentStatus] = None
-    card: typing.Optional[AgenticCard] = None
-    agent_ids: typing.Optional[typing.List[str]] = None
+    tenant_id: typing.Optional[str] = None
+    name: typing.Optional[str] = None
+    details: typing.Optional[MerchantDetails] = None
+    services: typing.Optional[MerchantServices] = None
+    created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
+    modified_by: typing.Optional[str] = None
+    modified_at: typing.Optional[dt.datetime] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
