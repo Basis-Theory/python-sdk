@@ -93,6 +93,7 @@ class ProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Proxy:
@@ -120,6 +121,8 @@ class ProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -156,6 +159,7 @@ class ProxiesClient:
             application=application,
             configuration=configuration,
             require_auth=require_auth,
+            disable_detokenization=disable_detokenization,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -205,6 +209,7 @@ class ProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Proxy:
@@ -234,6 +239,8 @@ class ProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -272,6 +279,7 @@ class ProxiesClient:
             application=application,
             configuration=configuration,
             require_auth=require_auth,
+            disable_detokenization=disable_detokenization,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -318,6 +326,7 @@ class ProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
@@ -343,6 +352,8 @@ class ProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -376,6 +387,7 @@ class ProxiesClient:
             application=application,
             configuration=configuration,
             require_auth=require_auth,
+            disable_detokenization=disable_detokenization,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -470,6 +482,7 @@ class AsyncProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Proxy:
@@ -497,6 +510,8 @@ class AsyncProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -541,6 +556,7 @@ class AsyncProxiesClient:
             application=application,
             configuration=configuration,
             require_auth=require_auth,
+            disable_detokenization=disable_detokenization,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -598,6 +614,7 @@ class AsyncProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Proxy:
@@ -627,6 +644,8 @@ class AsyncProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -673,6 +692,7 @@ class AsyncProxiesClient:
             application=application,
             configuration=configuration,
             require_auth=require_auth,
+            disable_detokenization=disable_detokenization,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -727,6 +747,7 @@ class AsyncProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
@@ -752,6 +773,8 @@ class AsyncProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -793,6 +816,7 @@ class AsyncProxiesClient:
             application=application,
             configuration=configuration,
             require_auth=require_auth,
+            disable_detokenization=disable_detokenization,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )

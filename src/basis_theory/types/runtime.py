@@ -9,6 +9,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 class Runtime(UniversalBaseModel):
     image: typing.Optional[str] = None
     dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
+    resolutions: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
     warm_concurrency: typing.Optional[int] = None
     timeout: typing.Optional[int] = None
     resources: typing.Optional[str] = None

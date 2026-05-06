@@ -27,6 +27,7 @@ class Proxy(UniversalBaseModel):
     configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
     proxy_host: typing.Optional[str] = None
     timeout: typing.Optional[int] = None
+    disable_detokenization: typing.Optional[bool] = None
     client_certificate: typing.Optional[str] = None
     requested: typing.Optional[RequestedProxy] = None
     created_by: typing.Optional[str] = None
