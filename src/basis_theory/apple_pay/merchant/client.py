@@ -5,7 +5,7 @@ import typing
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
 from ...types.apple_pay_merchant import ApplePayMerchant
-from ...types.apple_pay_token import ApplePayToken
+from .certificates.client import AsyncCertificatesClient, CertificatesClient
 from .raw_client import AsyncRawMerchantClient, RawMerchantClient
 
 # this is used as the default value for optional parameters
@@ -15,6 +15,7 @@ OMIT = typing.cast(typing.Any, ...)
 class MerchantClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._raw_client = RawMerchantClient(client_wrapper=client_wrapper)
+        self.certificates = CertificatesClient(client_wrapper=client_wrapper)
 
     @property
     def with_raw_response(self) -> RawMerchantClient:
@@ -27,7 +28,7 @@ class MerchantClient:
         """
         return self._raw_client
 
-    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayToken:
+    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayMerchant:
         """
         Parameters
         ----------
@@ -38,7 +39,7 @@ class MerchantClient:
 
         Returns
         -------
-        ApplePayToken
+        ApplePayMerchant
             Success
 
         Examples
@@ -120,6 +121,7 @@ class MerchantClient:
 class AsyncMerchantClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._raw_client = AsyncRawMerchantClient(client_wrapper=client_wrapper)
+        self.certificates = AsyncCertificatesClient(client_wrapper=client_wrapper)
 
     @property
     def with_raw_response(self) -> AsyncRawMerchantClient:
@@ -132,7 +134,7 @@ class AsyncMerchantClient:
         """
         return self._raw_client
 
-    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayToken:
+    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayMerchant:
         """
         Parameters
         ----------
@@ -143,7 +145,7 @@ class AsyncMerchantClient:
 
         Returns
         -------
-        ApplePayToken
+        ApplePayMerchant
             Success
 
         Examples

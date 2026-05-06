@@ -36,6 +36,7 @@ class NetworkTokensClient:
         token_id: typing.Optional[str] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> NetworkToken:
         """
@@ -48,6 +49,8 @@ class NetworkTokensClient:
         token_intent_id : typing.Optional[str]
 
         cardholder_info : typing.Optional[CardholderInfo]
+
+        merchant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -72,6 +75,7 @@ class NetworkTokensClient:
             token_id=token_id,
             token_intent_id=token_intent_id,
             cardholder_info=cardholder_info,
+            merchant_id=merchant_id,
             request_options=request_options,
         )
         return _response.data
@@ -243,6 +247,7 @@ class AsyncNetworkTokensClient:
         token_id: typing.Optional[str] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> NetworkToken:
         """
@@ -255,6 +260,8 @@ class AsyncNetworkTokensClient:
         token_intent_id : typing.Optional[str]
 
         cardholder_info : typing.Optional[CardholderInfo]
+
+        merchant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -287,6 +294,7 @@ class AsyncNetworkTokensClient:
             token_id=token_id,
             token_intent_id=token_intent_id,
             cardholder_info=cardholder_info,
+            merchant_id=merchant_id,
             request_options=request_options,
         )
         return _response.data

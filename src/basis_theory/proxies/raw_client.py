@@ -149,6 +149,7 @@ class RawProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Proxy]:
@@ -176,6 +177,8 @@ class RawProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -212,6 +215,7 @@ class RawProxiesClient:
                 ),
                 "configuration": configuration,
                 "require_auth": require_auth,
+                "disable_detokenization": disable_detokenization,
             },
             headers={
                 "content-type": "application/json",
@@ -350,6 +354,7 @@ class RawProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Proxy]:
@@ -379,6 +384,8 @@ class RawProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -415,6 +422,7 @@ class RawProxiesClient:
                 ),
                 "configuration": configuration,
                 "require_auth": require_auth,
+                "disable_detokenization": disable_detokenization,
             },
             headers={
                 "content-type": "application/json",
@@ -554,6 +562,7 @@ class RawProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[None]:
@@ -579,6 +588,8 @@ class RawProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -612,6 +623,7 @@ class RawProxiesClient:
                 ),
                 "configuration": configuration,
                 "require_auth": require_auth,
+                "disable_detokenization": disable_detokenization,
             },
             headers={
                 "content-type": "application/merge-patch+json",
@@ -799,6 +811,7 @@ class AsyncRawProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Proxy]:
@@ -826,6 +839,8 @@ class AsyncRawProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -862,6 +877,7 @@ class AsyncRawProxiesClient:
                 ),
                 "configuration": configuration,
                 "require_auth": require_auth,
+                "disable_detokenization": disable_detokenization,
             },
             headers={
                 "content-type": "application/json",
@@ -1002,6 +1018,7 @@ class AsyncRawProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Proxy]:
@@ -1031,6 +1048,8 @@ class AsyncRawProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -1067,6 +1086,7 @@ class AsyncRawProxiesClient:
                 ),
                 "configuration": configuration,
                 "require_auth": require_auth,
+                "disable_detokenization": disable_detokenization,
             },
             headers={
                 "content-type": "application/json",
@@ -1208,6 +1228,7 @@ class AsyncRawProxiesClient:
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         require_auth: typing.Optional[bool] = OMIT,
+        disable_detokenization: typing.Optional[bool] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[None]:
@@ -1233,6 +1254,8 @@ class AsyncRawProxiesClient:
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         require_auth : typing.Optional[bool]
+
+        disable_detokenization : typing.Optional[bool]
 
         idempotency_key : typing.Optional[str]
 
@@ -1266,6 +1289,7 @@ class AsyncRawProxiesClient:
                 ),
                 "configuration": configuration,
                 "require_auth": require_auth,
+                "disable_detokenization": disable_detokenization,
             },
             headers={
                 "content-type": "application/merge-patch+json",

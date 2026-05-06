@@ -48,6 +48,7 @@ class RawSessionsClient:
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
         callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateThreeDsSessionResponse]:
         """
@@ -70,6 +71,8 @@ class RawSessionsClient:
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
 
         callback_urls : typing.Optional[ThreeDsCallbackUrls]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -98,6 +101,7 @@ class RawSessionsClient:
                 "callback_urls": convert_and_respect_annotation_metadata(
                     object_=callback_urls, annotation=ThreeDsCallbackUrls, direction="write"
                 ),
+                "metadata": metadata,
             },
             headers={
                 "content-type": "application/json",
@@ -169,6 +173,7 @@ class RawSessionsClient:
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
         broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[ThreeDsAuthentication]:
@@ -200,6 +205,8 @@ class RawSessionsClient:
         broadcast_info : typing.Optional[typing.Optional[typing.Any]]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         idempotency_key : typing.Optional[str]
 
@@ -237,6 +244,7 @@ class RawSessionsClient:
                 "message_extensions": convert_and_respect_annotation_metadata(
                     object_=message_extensions, annotation=typing.Sequence[ThreeDsMessageExtension], direction="write"
                 ),
+                "metadata": metadata,
             },
             headers={
                 "content-type": "application/json",
@@ -435,6 +443,7 @@ class AsyncRawSessionsClient:
         device_info: typing.Optional[ThreeDsDeviceInfo] = OMIT,
         authentication_request: typing.Optional[AuthenticateThreeDsSessionRequest] = OMIT,
         callback_urls: typing.Optional[ThreeDsCallbackUrls] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateThreeDsSessionResponse]:
         """
@@ -457,6 +466,8 @@ class AsyncRawSessionsClient:
         authentication_request : typing.Optional[AuthenticateThreeDsSessionRequest]
 
         callback_urls : typing.Optional[ThreeDsCallbackUrls]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -485,6 +496,7 @@ class AsyncRawSessionsClient:
                 "callback_urls": convert_and_respect_annotation_metadata(
                     object_=callback_urls, annotation=ThreeDsCallbackUrls, direction="write"
                 ),
+                "metadata": metadata,
             },
             headers={
                 "content-type": "application/json",
@@ -556,6 +568,7 @@ class AsyncRawSessionsClient:
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
         broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[ThreeDsAuthentication]:
@@ -587,6 +600,8 @@ class AsyncRawSessionsClient:
         broadcast_info : typing.Optional[typing.Optional[typing.Any]]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
         idempotency_key : typing.Optional[str]
 
@@ -624,6 +639,7 @@ class AsyncRawSessionsClient:
                 "message_extensions": convert_and_respect_annotation_metadata(
                     object_=message_extensions, annotation=typing.Sequence[ThreeDsMessageExtension], direction="write"
                 ),
+                "metadata": metadata,
             },
             headers={
                 "content-type": "application/json",

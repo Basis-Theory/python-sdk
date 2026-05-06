@@ -55,6 +55,13 @@ class AccountUpdaterJob(UniversalBaseModel):
     Summary count breakdown by result code for all processed rows
     """
 
+    download_url: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="downloadUrl")] = (
+        pydantic.Field(default=None)
+    )
+    """
+    Pre-signed URL for downloading the job results CSV. Only present on completed jobs.
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

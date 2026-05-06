@@ -5,6 +5,7 @@ import typing
 
 import httpx
 from .account_updater.client import AccountUpdaterClient, AsyncAccountUpdaterClient
+from .agentic.client import AgenticClient, AsyncAgenticClient
 from .apple_pay.client import ApplePayClient, AsyncApplePayClient
 from .application_keys.client import ApplicationKeysClient, AsyncApplicationKeysClient
 from .application_templates.client import ApplicationTemplatesClient, AsyncApplicationTemplatesClient
@@ -117,10 +118,11 @@ class BasisTheory:
         self.reactors = ReactorsClient(client_wrapper=self._client_wrapper)
         self.roles = RolesClient(client_wrapper=self._client_wrapper)
         self.sessions = SessionsClient(client_wrapper=self._client_wrapper)
+        self.tenants = TenantsClient(client_wrapper=self._client_wrapper)
         self.token_intents = TokenIntentsClient(client_wrapper=self._client_wrapper)
         self.webhooks = WebhooksClient(client_wrapper=self._client_wrapper)
         self.account_updater = AccountUpdaterClient(client_wrapper=self._client_wrapper)
-        self.tenants = TenantsClient(client_wrapper=self._client_wrapper)
+        self.agentic = AgenticClient(client_wrapper=self._client_wrapper)
         self.threeds = ThreedsClient(client_wrapper=self._client_wrapper)
 
 
@@ -211,10 +213,11 @@ class AsyncBasisTheory:
         self.reactors = AsyncReactorsClient(client_wrapper=self._client_wrapper)
         self.roles = AsyncRolesClient(client_wrapper=self._client_wrapper)
         self.sessions = AsyncSessionsClient(client_wrapper=self._client_wrapper)
+        self.tenants = AsyncTenantsClient(client_wrapper=self._client_wrapper)
         self.token_intents = AsyncTokenIntentsClient(client_wrapper=self._client_wrapper)
         self.webhooks = AsyncWebhooksClient(client_wrapper=self._client_wrapper)
         self.account_updater = AsyncAccountUpdaterClient(client_wrapper=self._client_wrapper)
-        self.tenants = AsyncTenantsClient(client_wrapper=self._client_wrapper)
+        self.agentic = AsyncAgenticClient(client_wrapper=self._client_wrapper)
         self.threeds = AsyncThreedsClient(client_wrapper=self._client_wrapper)
 
 

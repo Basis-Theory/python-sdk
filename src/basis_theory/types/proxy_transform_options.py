@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .create_token_request import CreateTokenRequest
+from .runtime import Runtime
 
 
 class ProxyTransformOptions(UniversalBaseModel):
@@ -12,8 +13,7 @@ class ProxyTransformOptions(UniversalBaseModel):
     identifier: typing.Optional[str] = None
     value: typing.Optional[str] = None
     location: typing.Optional[str] = None
-    runtime: typing.Optional[str] = None
-    dependencies: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
+    runtime: typing.Optional[Runtime] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

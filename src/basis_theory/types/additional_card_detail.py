@@ -3,7 +3,10 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.serialization import FieldMetadata
+from .card_bin_range import CardBinRange
 from .card_issuer_details import CardIssuerDetails
 
 
@@ -12,6 +15,9 @@ class AdditionalCardDetail(UniversalBaseModel):
     funding: typing.Optional[str] = None
     segment: typing.Optional[str] = None
     issuer: typing.Optional[CardIssuerDetails] = None
+    bin_range: typing_extensions.Annotated[
+        typing.Optional[typing.List[CardBinRange]], FieldMetadata(alias="binRange")
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

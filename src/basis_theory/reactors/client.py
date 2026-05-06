@@ -9,7 +9,7 @@ from ..types.application import Application
 from ..types.async_react_response import AsyncReactResponse
 from ..types.react_response import ReactResponse
 from ..types.reactor import Reactor
-from ..types.runtime_options import RuntimeOptions
+from ..types.runtime import Runtime
 from .raw_client import AsyncRawReactorsClient, RawReactorsClient
 from .results.client import AsyncResultsClient, ResultsClient
 
@@ -90,8 +90,7 @@ class ReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Reactor:
@@ -106,9 +105,7 @@ class ReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -139,7 +136,6 @@ class ReactorsClient:
             application=application,
             configuration=configuration,
             runtime=runtime,
-            options=options,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -182,8 +178,7 @@ class ReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Reactor:
@@ -200,9 +195,7 @@ class ReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -235,7 +228,6 @@ class ReactorsClient:
             application=application,
             configuration=configuration,
             runtime=runtime,
-            options=options,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -277,8 +269,7 @@ class ReactorsClient:
         application: typing.Optional[Application] = OMIT,
         code: typing.Optional[str] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
@@ -295,9 +286,7 @@ class ReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -327,7 +316,6 @@ class ReactorsClient:
             code=code,
             configuration=configuration,
             runtime=runtime,
-            options=options,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -337,8 +325,7 @@ class ReactorsClient:
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        callback_url: typing.Optional[str] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ReactResponse:
         """
@@ -346,9 +333,7 @@ class ReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
-
-        callback_url : typing.Optional[str]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -368,16 +353,17 @@ class ReactorsClient:
         )
         client.reactors.react(
             id="id",
+            request={"key": "value"},
         )
         """
-        _response = self._raw_client.react(id, args=args, callback_url=callback_url, request_options=request_options)
+        _response = self._raw_client.react(id, request=request, request_options=request_options)
         return _response.data
 
     def react_async(
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncReactResponse:
         """
@@ -385,7 +371,7 @@ class ReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -405,9 +391,10 @@ class ReactorsClient:
         )
         client.reactors.react_async(
             id="id",
+            request={"key": "value"},
         )
         """
-        _response = self._raw_client.react_async(id, args=args, request_options=request_options)
+        _response = self._raw_client.react_async(id, request=request, request_options=request_options)
         return _response.data
 
 
@@ -493,8 +480,7 @@ class AsyncReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Reactor:
@@ -509,9 +495,7 @@ class AsyncReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -550,7 +534,6 @@ class AsyncReactorsClient:
             application=application,
             configuration=configuration,
             runtime=runtime,
-            options=options,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -601,8 +584,7 @@ class AsyncReactorsClient:
         code: str,
         application: typing.Optional[Application] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Reactor:
@@ -619,9 +601,7 @@ class AsyncReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -662,7 +642,6 @@ class AsyncReactorsClient:
             application=application,
             configuration=configuration,
             runtime=runtime,
-            options=options,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -712,8 +691,7 @@ class AsyncReactorsClient:
         application: typing.Optional[Application] = OMIT,
         code: typing.Optional[str] = OMIT,
         configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
-        runtime: typing.Optional[str] = OMIT,
-        options: typing.Optional[RuntimeOptions] = OMIT,
+        runtime: typing.Optional[Runtime] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
@@ -730,9 +708,7 @@ class AsyncReactorsClient:
 
         configuration : typing.Optional[typing.Dict[str, typing.Optional[str]]]
 
-        runtime : typing.Optional[str]
-
-        options : typing.Optional[RuntimeOptions]
+        runtime : typing.Optional[Runtime]
 
         idempotency_key : typing.Optional[str]
 
@@ -770,7 +746,6 @@ class AsyncReactorsClient:
             code=code,
             configuration=configuration,
             runtime=runtime,
-            options=options,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -780,8 +755,7 @@ class AsyncReactorsClient:
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
-        callback_url: typing.Optional[str] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ReactResponse:
         """
@@ -789,9 +763,7 @@ class AsyncReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
-
-        callback_url : typing.Optional[str]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -816,21 +788,20 @@ class AsyncReactorsClient:
         async def main() -> None:
             await client.reactors.react(
                 id="id",
+                request={"key": "value"},
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.react(
-            id, args=args, callback_url=callback_url, request_options=request_options
-        )
+        _response = await self._raw_client.react(id, request=request, request_options=request_options)
         return _response.data
 
     async def react_async(
         self,
         id: str,
         *,
-        args: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncReactResponse:
         """
@@ -838,7 +809,7 @@ class AsyncReactorsClient:
         ----------
         id : str
 
-        args : typing.Optional[typing.Optional[typing.Any]]
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -863,10 +834,11 @@ class AsyncReactorsClient:
         async def main() -> None:
             await client.reactors.react_async(
                 id="id",
+                request={"key": "value"},
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.react_async(id, args=args, request_options=request_options)
+        _response = await self._raw_client.react_async(id, request=request, request_options=request_options)
         return _response.data

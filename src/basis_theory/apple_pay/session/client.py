@@ -31,6 +31,7 @@ class SessionClient:
         validation_url: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> str:
         """
@@ -41,6 +42,8 @@ class SessionClient:
         display_name : typing.Optional[str]
 
         domain : typing.Optional[str]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -61,7 +64,11 @@ class SessionClient:
         client.apple_pay.session.create()
         """
         _response = self._raw_client.create(
-            validation_url=validation_url, display_name=display_name, domain=domain, request_options=request_options
+            validation_url=validation_url,
+            display_name=display_name,
+            domain=domain,
+            merchant_registration_id=merchant_registration_id,
+            request_options=request_options,
         )
         return _response.data
 
@@ -87,6 +94,7 @@ class AsyncSessionClient:
         validation_url: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> str:
         """
@@ -97,6 +105,8 @@ class AsyncSessionClient:
         display_name : typing.Optional[str]
 
         domain : typing.Optional[str]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -125,6 +135,10 @@ class AsyncSessionClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.create(
-            validation_url=validation_url, display_name=display_name, domain=domain, request_options=request_options
+            validation_url=validation_url,
+            display_name=display_name,
+            domain=domain,
+            merchant_registration_id=merchant_registration_id,
+            request_options=request_options,
         )
         return _response.data

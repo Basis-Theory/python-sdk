@@ -33,6 +33,7 @@ class RealTimeClient:
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AccountUpdaterRealTimeResponse:
         """
@@ -51,6 +52,9 @@ class RealTimeClient:
 
         deduplicate_token : typing.Optional[bool]
             Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
+
+        merchant_id : typing.Optional[str]
+            Tenant merchant identifier
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -77,6 +81,7 @@ class RealTimeClient:
             expiration_year=expiration_year,
             expiration_month=expiration_month,
             deduplicate_token=deduplicate_token,
+            merchant_id=merchant_id,
             request_options=request_options,
         )
         return _response.data
@@ -104,6 +109,7 @@ class AsyncRealTimeClient:
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AccountUpdaterRealTimeResponse:
         """
@@ -122,6 +128,9 @@ class AsyncRealTimeClient:
 
         deduplicate_token : typing.Optional[bool]
             Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
+
+        merchant_id : typing.Optional[str]
+            Tenant merchant identifier
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -156,6 +165,7 @@ class AsyncRealTimeClient:
             expiration_year=expiration_year,
             expiration_month=expiration_month,
             deduplicate_token=deduplicate_token,
+            merchant_id=merchant_id,
             request_options=request_options,
         )
         return _response.data

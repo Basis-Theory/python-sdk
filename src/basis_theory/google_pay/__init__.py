@@ -2,3 +2,6 @@
 
 # isort: skip_file
 
+from . import merchant
+
+__all__ = ["merchant"]

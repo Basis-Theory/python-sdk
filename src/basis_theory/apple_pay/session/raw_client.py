@@ -29,6 +29,7 @@ class RawSessionClient:
         validation_url: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[str]:
         """
@@ -39,6 +40,8 @@ class RawSessionClient:
         display_name : typing.Optional[str]
 
         domain : typing.Optional[str]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -55,6 +58,7 @@ class RawSessionClient:
                 "validation_url": validation_url,
                 "display_name": display_name,
                 "domain": domain,
+                "merchant_registration_id": merchant_registration_id,
             },
             headers={
                 "content-type": "application/json",
@@ -132,6 +136,7 @@ class AsyncRawSessionClient:
         validation_url: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         domain: typing.Optional[str] = OMIT,
+        merchant_registration_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[str]:
         """
@@ -142,6 +147,8 @@ class AsyncRawSessionClient:
         display_name : typing.Optional[str]
 
         domain : typing.Optional[str]
+
+        merchant_registration_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -158,6 +165,7 @@ class AsyncRawSessionClient:
                 "validation_url": validation_url,
                 "display_name": display_name,
                 "domain": domain,
+                "merchant_registration_id": merchant_registration_id,
             },
             headers={
                 "content-type": "application/json",

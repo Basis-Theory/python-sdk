@@ -1,3 +1,64 @@
+# [5.5.0](https://github.com/Basis-Theory/python-sdk/compare/v5.4.0...v5.5.0) (2026-04-08)
+
+
+### Features
+
+* Add Agentic ([#110](https://github.com/Basis-Theory/python-sdk/issues/110)) ([bcb33cf](https://github.com/Basis-Theory/python-sdk/commit/bcb33cfb4039f11e2b2d0c5767036863d4f02f98))
+
+# [5.4.0](https://github.com/Basis-Theory/python-sdk/compare/v5.3.0...v5.4.0) (2026-03-31)
+
+
+### Features
+
+* Add metatdata to 3DS authenticate session ([b177b04](https://github.com/Basis-Theory/python-sdk/commit/b177b040d5c4bc8c5779fb13e84a6fb3453b1784))
+
+# [5.3.0](https://github.com/Basis-Theory/python-sdk/compare/v5.2.0...v5.3.0) (2026-02-24)
+
+
+### Features
+
+* Updating API contracts ([#104](https://github.com/Basis-Theory/python-sdk/issues/104)) ([bc77d1a](https://github.com/Basis-Theory/python-sdk/commit/bc77d1a3dc493c13bdb3553b6676ddd8b351e507))
+
+# [5.2.0](https://github.com/Basis-Theory/python-sdk/compare/v5.1.0...v5.2.0) (2026-02-04)
+
+
+### Features
+
+* Adding 3DS metadata attributes ([#102](https://github.com/Basis-Theory/python-sdk/issues/102)) ([8b92ca1](https://github.com/Basis-Theory/python-sdk/commit/8b92ca19011794e372113e4898d275ce003bbae7))
+
+# [5.1.0](https://github.com/Basis-Theory/python-sdk/compare/v5.0.0...v5.1.0) (2026-01-27)
+
+
+### Features
+
+* add disable_detokenization to proxy configuration  ([a51a494](https://github.com/Basis-Theory/python-sdk/commit/a51a4948fd091f1771e86e70cd02217fe7feaad9))
+
+# [5.0.0](https://github.com/Basis-Theory/python-sdk/compare/v4.2.0...v5.0.0) (2026-01-22)
+
+
+### Features
+
+* Updating Reactor Request objects ([4c4cee2](https://github.com/Basis-Theory/python-sdk/commit/4c4cee2d7d484a8fefcd68f1d5878723db985b3f))
+
+
+### BREAKING CHANGES
+
+* This version removes the existing Reactors Request objects for Reactors and Reactors Async, allowing the use of dynamic objects
+
+# [4.2.0](https://github.com/Basis-Theory/python-sdk/compare/v4.1.0...v4.2.0) (2025-12-09)
+
+
+### Features
+
+* Change Reactor Runtime to object ([424a212](https://github.com/Basis-Theory/python-sdk/commit/424a212474e2fdfa3ed7edd7a17a9f7969681a38))
+
+# [4.1.0](https://github.com/Basis-Theory/python-sdk/compare/v4.0.0...v4.1.0) (2025-12-02)
+
+
+### Features
+
+* supporting new environments ([8ee5248](https://github.com/Basis-Theory/python-sdk/commit/8ee5248f7bcf56a76be7c0eb1a57acb54bdb3412))
+
 # [4.0.0](https://github.com/Basis-Theory/python-sdk/compare/v3.1.0...v4.0.0) (2025-10-30)
 
 
