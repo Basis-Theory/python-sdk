@@ -58,8 +58,6 @@ from .client_encryption_key_response import ClientEncryptionKeyResponse
 from .condition import Condition
 from .confirmation_entry import ConfirmationEntry
 from .consumer import Consumer
-from .create_account_updater_job_request import CreateAccountUpdaterJobRequest
-from .create_account_updater_job_request_result_version import CreateAccountUpdaterJobRequestResultVersion
 from .create_document_request import CreateDocumentRequest
 from .create_reactor_formula_request import CreateReactorFormulaRequest
 from .create_session_response import CreateSessionResponse
@@ -278,8 +276,6 @@ __all__ = [
     "Condition",
     "ConfirmationEntry",
     "Consumer",
-    "CreateAccountUpdaterJobRequest",
-    "CreateAccountUpdaterJobRequestResultVersion",
     "CreateDocumentRequest",
     "CreateReactorFormulaRequest",
     "CreateSessionResponse",

@@ -16,6 +16,10 @@ from ...errors.unprocessable_entity_error import UnprocessableEntityError
 from ...types.account_updater_job import AccountUpdaterJob
 from ...types.account_updater_job_list import AccountUpdaterJobList
 from ...types.problem_details import ProblemDetails
+from .types.create_account_updater_job_request_result_version import CreateAccountUpdaterJobRequestResultVersion
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class RawJobsClient:
@@ -165,12 +169,28 @@ class RawJobsClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def create(self, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[AccountUpdaterJob]:
+    def create(
+        self,
+        *,
+        deduplicate_tokens: typing.Optional[bool] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
+        result_version: typing.Optional[CreateAccountUpdaterJobRequestResultVersion] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[AccountUpdaterJob]:
         """
         Returns the created account updater batch job
 
         Parameters
         ----------
+        deduplicate_tokens : typing.Optional[bool]
+            Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
+
+        merchant_id : typing.Optional[str]
+            Tenant merchant identifier
+
+        result_version : typing.Optional[CreateAccountUpdaterJobRequestResultVersion]
+            Version of the result CSV format. Version '1' returns base columns. Version '1.1' adds new_fingerprint and new_brand columns. Version '1.2' adds the new_last4 column on top of 1.1.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -182,7 +202,16 @@ class RawJobsClient:
         _response = self._client_wrapper.httpx_client.request(
             "account-updater/jobs",
             method="POST",
+            json={
+                "deduplicate_tokens": deduplicate_tokens,
+                "merchant_id": merchant_id,
+                "result_version": result_version,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -381,13 +410,27 @@ class AsyncRawJobsClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create(
-        self, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        deduplicate_tokens: typing.Optional[bool] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
+        result_version: typing.Optional[CreateAccountUpdaterJobRequestResultVersion] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[AccountUpdaterJob]:
         """
         Returns the created account updater batch job
 
         Parameters
         ----------
+        deduplicate_tokens : typing.Optional[bool]
+            Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
+
+        merchant_id : typing.Optional[str]
+            Tenant merchant identifier
+
+        result_version : typing.Optional[CreateAccountUpdaterJobRequestResultVersion]
+            Version of the result CSV format. Version '1' returns base columns. Version '1.1' adds new_fingerprint and new_brand columns. Version '1.2' adds the new_last4 column on top of 1.1.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -399,7 +442,16 @@ class AsyncRawJobsClient:
         _response = await self._client_wrapper.httpx_client.request(
             "account-updater/jobs",
             method="POST",
+            json={
+                "deduplicate_tokens": deduplicate_tokens,
+                "merchant_id": merchant_id,
+                "result_version": result_version,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
