@@ -22,6 +22,7 @@ from ...types.enrollment import Enrollment
 from ...types.enrollment_list import EnrollmentList
 from ...types.problem_details import ProblemDetails
 from ...types.validation_problem_details import ValidationProblemDetails
+from .types.create_enrollment_request_type import CreateEnrollmentRequestType
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -133,6 +134,8 @@ class RawEnrollmentsClient:
         consumer: Consumer,
         agent_id: typing.Optional[str] = OMIT,
         agent_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        wallet_name: typing.Optional[str] = OMIT,
+        type: typing.Optional[CreateEnrollmentRequestType] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Enrollment]:
         """
@@ -149,6 +152,14 @@ class RawEnrollmentsClient:
 
         agent_ids : typing.Optional[typing.Sequence[str]]
             Multiple agent IDs (mutually exclusive with agent_id)
+
+        wallet_name : typing.Optional[str]
+            Display label shown to the cardholder during Mastercard managed-authentication challenges. Defaults to "Agent Wallet" when not provided.
+
+        type : typing.Optional[CreateEnrollmentRequestType]
+            Enrollment type. `agentic` (default) enrolls the card for agent-driven payments and requires verification.
+            `autofill` enrolls the card for direct autofill credential retrieval, skips verification, and is currently
+            available to test tenants only.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -168,6 +179,8 @@ class RawEnrollmentsClient:
                 ),
                 "agent_id": agent_id,
                 "agent_ids": agent_ids,
+                "wallet_name": wallet_name,
+                "type": type,
             },
             headers={
                 "content-type": "application/json",
@@ -613,6 +626,8 @@ class AsyncRawEnrollmentsClient:
         consumer: Consumer,
         agent_id: typing.Optional[str] = OMIT,
         agent_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        wallet_name: typing.Optional[str] = OMIT,
+        type: typing.Optional[CreateEnrollmentRequestType] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Enrollment]:
         """
@@ -629,6 +644,14 @@ class AsyncRawEnrollmentsClient:
 
         agent_ids : typing.Optional[typing.Sequence[str]]
             Multiple agent IDs (mutually exclusive with agent_id)
+
+        wallet_name : typing.Optional[str]
+            Display label shown to the cardholder during Mastercard managed-authentication challenges. Defaults to "Agent Wallet" when not provided.
+
+        type : typing.Optional[CreateEnrollmentRequestType]
+            Enrollment type. `agentic` (default) enrolls the card for agent-driven payments and requires verification.
+            `autofill` enrolls the card for direct autofill credential retrieval, skips verification, and is currently
+            available to test tenants only.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -648,6 +671,8 @@ class AsyncRawEnrollmentsClient:
                 ),
                 "agent_id": agent_id,
                 "agent_ids": agent_ids,
+                "wallet_name": wallet_name,
+                "type": type,
             },
             headers={
                 "content-type": "application/json",

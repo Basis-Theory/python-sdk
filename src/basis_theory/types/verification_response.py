@@ -7,11 +7,17 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .verification_response_brand import VerificationResponseBrand
 from .verification_response_methods_item import VerificationResponseMethodsItem
 from .verification_response_passkey_context import VerificationResponsePasskeyContext
+from .verification_response_redirect import VerificationResponseRedirect
 from .verification_response_status import VerificationResponseStatus
 
 
 class VerificationResponse(UniversalBaseModel):
     status: typing.Optional[VerificationResponseStatus] = None
+    redirect: typing.Optional[VerificationResponseRedirect] = pydantic.Field(default=None)
+    """
+    Present when status is redirect_required (Mastercard Managed Authentication). The cardholder must be redirected to `redirect.uri` to complete authentication; once they return via the hosted callback the SDK can call `/verify/complete` (enrollment) or `/verify/passkey` (instruction) to finalise.
+    """
+
     methods: typing.Optional[typing.List[VerificationResponseMethodsItem]] = None
     passkey_context: typing.Optional[VerificationResponsePasskeyContext] = pydantic.Field(default=None)
     """

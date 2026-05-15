@@ -82,6 +82,7 @@ from .enrollment_list import EnrollmentList
 from .enrollment_list_pagination import EnrollmentListPagination
 from .enrollment_provider import EnrollmentProvider
 from .enrollment_status import EnrollmentStatus
+from .enrollment_type import EnrollmentType
 from .event_types import EventTypes
 from .get_applications import GetApplications
 from .get_logs import GetLogs
@@ -105,6 +106,7 @@ from .instruction import Instruction
 from .instruction_list import InstructionList
 from .instruction_list_pagination import InstructionListPagination
 from .instruction_status import InstructionStatus
+from .instruction_type import InstructionType
 from .intermediate_signing_key import IntermediateSigningKey
 from .log import Log
 from .log_entity_type import LogEntityType
@@ -212,6 +214,8 @@ from .verification_response_passkey_context_action import VerificationResponsePa
 from .verification_response_passkey_context_auth_preferences import VerificationResponsePasskeyContextAuthPreferences
 from .verification_response_passkey_context_display_context import VerificationResponsePasskeyContextDisplayContext
 from .verification_response_passkey_context_platform_type import VerificationResponsePasskeyContextPlatformType
+from .verification_response_redirect import VerificationResponseRedirect
+from .verification_response_redirect_uri_type import VerificationResponseRedirectUriType
 from .verification_response_status import VerificationResponseStatus
 from .visa_config import VisaConfig
 from .webhook import Webhook
@@ -300,6 +304,7 @@ __all__ = [
     "EnrollmentListPagination",
     "EnrollmentProvider",
     "EnrollmentStatus",
+    "EnrollmentType",
     "EventTypes",
     "GetApplications",
     "GetLogs",
@@ -323,6 +328,7 @@ __all__ = [
     "InstructionList",
     "InstructionListPagination",
     "InstructionStatus",
+    "InstructionType",
     "IntermediateSigningKey",
     "Log",
     "LogEntityType",
@@ -430,6 +436,8 @@ __all__ = [
     "VerificationResponsePasskeyContextAuthPreferences",
     "VerificationResponsePasskeyContextDisplayContext",
     "VerificationResponsePasskeyContextPlatformType",
+    "VerificationResponseRedirect",
+    "VerificationResponseRedirectUriType",
     "VerificationResponseStatus",
     "VisaConfig",
     "Webhook",

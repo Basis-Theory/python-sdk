@@ -2,6 +2,7 @@
 
 # isort: skip_file
 
+from .types import CreateEnrollmentRequestType
 from . import verify
 
-__all__ = ["verify"]
+__all__ = ["CreateEnrollmentRequestType", "verify"]

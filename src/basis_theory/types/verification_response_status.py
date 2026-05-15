@@ -3,5 +3,8 @@
 import typing
 
 VerificationResponseStatus = typing.Union[
-    typing.Literal["approved", "challenge", "otp_sent", "device_bound", "passkey_required", "verified"], typing.Any
+    typing.Literal[
+        "approved", "challenge", "otp_sent", "device_bound", "passkey_required", "redirect_required", "verified"
+    ],
+    typing.Any,
 ]
