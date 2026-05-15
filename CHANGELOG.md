@@ -1,3 +1,10 @@
+# [5.7.0](https://github.com/Basis-Theory/python-sdk/compare/v5.6.0...v5.7.0) (2026-05-15)
+
+
+### Features
+
+* **SDK:** update accountUpdatedJob request ([bd8da65](https://github.com/Basis-Theory/python-sdk/commit/bd8da65a06f3277067017d100bbb1bf91cdbb93f))
+
 # [5.6.0](https://github.com/Basis-Theory/python-sdk/compare/v5.5.0...v5.6.0) (2026-05-06)
 
 
