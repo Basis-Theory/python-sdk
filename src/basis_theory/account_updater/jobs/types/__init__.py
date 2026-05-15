@@ -2,6 +2,6 @@
 
 # isort: skip_file
 
-from .types import CreateAccountUpdaterJobRequestResultVersion
+from .create_account_updater_job_request_result_version import CreateAccountUpdaterJobRequestResultVersion
 
 __all__ = ["CreateAccountUpdaterJobRequestResultVersion"]
