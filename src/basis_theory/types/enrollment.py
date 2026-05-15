@@ -8,6 +8,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .agentic_card import AgenticCard
 from .enrollment_provider import EnrollmentProvider
 from .enrollment_status import EnrollmentStatus
+from .enrollment_type import EnrollmentType
 
 
 class Enrollment(UniversalBaseModel):
@@ -21,6 +22,16 @@ class Enrollment(UniversalBaseModel):
     status: typing.Optional[EnrollmentStatus] = None
     card: typing.Optional[AgenticCard] = None
     agent_ids: typing.Optional[typing.List[str]] = None
+    wallet_name: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Display label shown to the cardholder during Mastercard managed-authentication challenges.
+    """
+
+    type: typing.Optional[EnrollmentType] = pydantic.Field(default=None)
+    """
+    Enrollment type — `agentic` (default) for agent-driven payments, `autofill` for direct credential autofill.
+    """
+
     created_at: typing.Optional[dt.datetime] = None
 
     if IS_PYDANTIC_V2:

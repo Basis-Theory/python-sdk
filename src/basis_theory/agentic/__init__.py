@@ -3,5 +3,6 @@
 # isort: skip_file
 
 from . import agents, enrollments
+from .enrollments import CreateEnrollmentRequestType
 
-__all__ = ["agents", "enrollments"]
+__all__ = ["CreateEnrollmentRequestType", "agents", "enrollments"]

@@ -7,6 +7,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .amount import Amount
 from .instruction_status import InstructionStatus
+from .instruction_type import InstructionType
 from .recurring import Recurring
 
 
@@ -14,6 +15,13 @@ class Instruction(UniversalBaseModel):
     id: typing.Optional[str] = None
     enrollment_id: typing.Optional[str] = None
     status: typing.Optional[InstructionStatus] = None
+    type: typing.Optional[InstructionType] = pydantic.Field(default=None)
+    """
+    Inherited from the parent enrollment. `agentic` instructions require cardholder
+    verification before credentials can be retrieved; `autofill` instructions are
+    auto-approved on creation and credentials can be retrieved immediately.
+    """
+
     amount: typing.Optional[Amount] = None
     description: typing.Optional[str] = None
     expires_at: typing.Optional[dt.datetime] = None
