@@ -7,6 +7,10 @@ from ...core.request_options import RequestOptions
 from ...types.account_updater_job import AccountUpdaterJob
 from ...types.account_updater_job_list import AccountUpdaterJobList
 from .raw_client import AsyncRawJobsClient, RawJobsClient
+from .types.create_account_updater_job_request_result_version import CreateAccountUpdaterJobRequestResultVersion
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class JobsClient:
@@ -94,12 +98,28 @@ class JobsClient:
         _response = self._raw_client.list(size=size, start=start, request_options=request_options)
         return _response.data
 
-    def create(self, *, request_options: typing.Optional[RequestOptions] = None) -> AccountUpdaterJob:
+    def create(
+        self,
+        *,
+        deduplicate_tokens: typing.Optional[bool] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
+        result_version: typing.Optional[CreateAccountUpdaterJobRequestResultVersion] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AccountUpdaterJob:
         """
         Returns the created account updater batch job
 
         Parameters
         ----------
+        deduplicate_tokens : typing.Optional[bool]
+            Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
+
+        merchant_id : typing.Optional[str]
+            Tenant merchant identifier
+
+        result_version : typing.Optional[CreateAccountUpdaterJobRequestResultVersion]
+            Version of the result CSV format. Version '1' returns base columns. Version '1.1' adds new_fingerprint and new_brand columns. Version '1.2' adds the new_last4 column on top of 1.1.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -118,7 +138,12 @@ class JobsClient:
         )
         client.account_updater.jobs.create()
         """
-        _response = self._raw_client.create(request_options=request_options)
+        _response = self._raw_client.create(
+            deduplicate_tokens=deduplicate_tokens,
+            merchant_id=merchant_id,
+            result_version=result_version,
+            request_options=request_options,
+        )
         return _response.data
 
 
@@ -223,12 +248,28 @@ class AsyncJobsClient:
         _response = await self._raw_client.list(size=size, start=start, request_options=request_options)
         return _response.data
 
-    async def create(self, *, request_options: typing.Optional[RequestOptions] = None) -> AccountUpdaterJob:
+    async def create(
+        self,
+        *,
+        deduplicate_tokens: typing.Optional[bool] = OMIT,
+        merchant_id: typing.Optional[str] = OMIT,
+        result_version: typing.Optional[CreateAccountUpdaterJobRequestResultVersion] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AccountUpdaterJob:
         """
         Returns the created account updater batch job
 
         Parameters
         ----------
+        deduplicate_tokens : typing.Optional[bool]
+            Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
+
+        merchant_id : typing.Optional[str]
+            Tenant merchant identifier
+
+        result_version : typing.Optional[CreateAccountUpdaterJobRequestResultVersion]
+            Version of the result CSV format. Version '1' returns base columns. Version '1.1' adds new_fingerprint and new_brand columns. Version '1.2' adds the new_last4 column on top of 1.1.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -255,5 +296,10 @@ class AsyncJobsClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.create(request_options=request_options)
+        _response = await self._raw_client.create(
+            deduplicate_tokens=deduplicate_tokens,
+            merchant_id=merchant_id,
+            result_version=result_version,
+            request_options=request_options,
+        )
         return _response.data

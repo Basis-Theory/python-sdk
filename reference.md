@@ -5386,7 +5386,7 @@ client.account_updater.jobs.list()
 </dl>
 </details>
 
-<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">create</a>()</code></summary>
+<details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">create</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5431,6 +5431,30 @@ client.account_updater.jobs.create()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**deduplicate_tokens:** `typing.Optional[bool]` — Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_id:** `typing.Optional[str]` — Tenant merchant identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**result_version:** `typing.Optional[CreateAccountUpdaterJobRequestResultVersion]` — Version of the result CSV format. Version '1' returns base columns. Version '1.1' adds new_fingerprint and new_brand columns. Version '1.2' adds the new_last4 column on top of 1.1.
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
