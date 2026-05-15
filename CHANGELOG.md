@@ -1,3 +1,10 @@
+# [5.8.0](https://github.com/Basis-Theory/python-sdk/compare/v5.7.0...v5.8.0) (2026-05-15)
+
+
+### Features
+
+* **SDK:** remove additionalProperties on AgenticCard ([4439b0e](https://github.com/Basis-Theory/python-sdk/commit/4439b0ecdcfdf9d57dc51171cbb9dd5c54171b76))
+
 # [5.7.0](https://github.com/Basis-Theory/python-sdk/compare/v5.6.0...v5.7.0) (2026-05-15)
 
 
