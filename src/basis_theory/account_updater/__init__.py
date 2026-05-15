@@ -3,5 +3,6 @@
 # isort: skip_file
 
 from . import jobs, real_time
+from .jobs import CreateAccountUpdaterJobRequestResultVersion
 
-__all__ = ["jobs", "real_time"]
+__all__ = ["CreateAccountUpdaterJobRequestResultVersion", "jobs", "real_time"]
