@@ -39,6 +39,8 @@ class RawNetworkTokensClient:
         data: typing.Optional[Card] = OMIT,
         token_id: typing.Optional[str] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
+        expiration_month: typing.Optional[int] = OMIT,
+        expiration_year: typing.Optional[int] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -51,6 +53,10 @@ class RawNetworkTokensClient:
         token_id : typing.Optional[str]
 
         token_intent_id : typing.Optional[str]
+
+        expiration_month : typing.Optional[int]
+
+        expiration_year : typing.Optional[int]
 
         cardholder_info : typing.Optional[CardholderInfo]
 
@@ -71,6 +77,8 @@ class RawNetworkTokensClient:
                 "data": convert_and_respect_annotation_metadata(object_=data, annotation=Card, direction="write"),
                 "token_id": token_id,
                 "token_intent_id": token_intent_id,
+                "expiration_month": expiration_month,
+                "expiration_year": expiration_year,
                 "cardholder_info": convert_and_respect_annotation_metadata(
                     object_=cardholder_info, annotation=CardholderInfo, direction="write"
                 ),
@@ -582,6 +590,8 @@ class AsyncRawNetworkTokensClient:
         data: typing.Optional[Card] = OMIT,
         token_id: typing.Optional[str] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
+        expiration_month: typing.Optional[int] = OMIT,
+        expiration_year: typing.Optional[int] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -594,6 +604,10 @@ class AsyncRawNetworkTokensClient:
         token_id : typing.Optional[str]
 
         token_intent_id : typing.Optional[str]
+
+        expiration_month : typing.Optional[int]
+
+        expiration_year : typing.Optional[int]
 
         cardholder_info : typing.Optional[CardholderInfo]
 
@@ -614,6 +628,8 @@ class AsyncRawNetworkTokensClient:
                 "data": convert_and_respect_annotation_metadata(object_=data, annotation=Card, direction="write"),
                 "token_id": token_id,
                 "token_intent_id": token_intent_id,
+                "expiration_month": expiration_month,
+                "expiration_year": expiration_year,
                 "cardholder_info": convert_and_respect_annotation_metadata(
                     object_=cardholder_info, annotation=CardholderInfo, direction="write"
                 ),
