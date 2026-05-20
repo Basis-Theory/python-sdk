@@ -2650,6 +2650,22 @@ client.network_tokens.create()
 <dl>
 <dd>
 
+**expiration_month:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiration_year:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **cardholder_info:** `typing.Optional[CardholderInfo]` 
     
 </dd>
@@ -4723,8 +4739,7 @@ client = BasisTheory(
     api_key="YOUR_API_KEY",
 )
 client.token_intents.create(
-    type="x",
-    data={"key": "value"},
+    type="type",
 )
 
 ```
@@ -4749,7 +4764,15 @@ client.token_intents.create(
 <dl>
 <dd>
 
-**data:** `typing.Optional[typing.Any]` 
+**data:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**encrypted:** `typing.Optional[str]` 
     
 </dd>
 </dl>

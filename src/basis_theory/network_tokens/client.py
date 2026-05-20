@@ -35,6 +35,8 @@ class NetworkTokensClient:
         data: typing.Optional[Card] = OMIT,
         token_id: typing.Optional[str] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
+        expiration_month: typing.Optional[int] = OMIT,
+        expiration_year: typing.Optional[int] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -47,6 +49,10 @@ class NetworkTokensClient:
         token_id : typing.Optional[str]
 
         token_intent_id : typing.Optional[str]
+
+        expiration_month : typing.Optional[int]
+
+        expiration_year : typing.Optional[int]
 
         cardholder_info : typing.Optional[CardholderInfo]
 
@@ -74,6 +80,8 @@ class NetworkTokensClient:
             data=data,
             token_id=token_id,
             token_intent_id=token_intent_id,
+            expiration_month=expiration_month,
+            expiration_year=expiration_year,
             cardholder_info=cardholder_info,
             merchant_id=merchant_id,
             request_options=request_options,
@@ -246,6 +254,8 @@ class AsyncNetworkTokensClient:
         data: typing.Optional[Card] = OMIT,
         token_id: typing.Optional[str] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
+        expiration_month: typing.Optional[int] = OMIT,
+        expiration_year: typing.Optional[int] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -258,6 +268,10 @@ class AsyncNetworkTokensClient:
         token_id : typing.Optional[str]
 
         token_intent_id : typing.Optional[str]
+
+        expiration_month : typing.Optional[int]
+
+        expiration_year : typing.Optional[int]
 
         cardholder_info : typing.Optional[CardholderInfo]
 
@@ -293,6 +307,8 @@ class AsyncNetworkTokensClient:
             data=data,
             token_id=token_id,
             token_intent_id=token_intent_id,
+            expiration_month=expiration_month,
+            expiration_year=expiration_year,
             cardholder_info=cardholder_info,
             merchant_id=merchant_id,
             request_options=request_options,

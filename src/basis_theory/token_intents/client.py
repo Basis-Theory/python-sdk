@@ -88,7 +88,8 @@ class TokenIntentsClient:
         self,
         *,
         type: str,
-        data: typing.Optional[typing.Any] = OMIT,
+        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        encrypted: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateTokenIntentResponse:
         """
@@ -96,7 +97,9 @@ class TokenIntentsClient:
         ----------
         type : str
 
-        data : typing.Optional[typing.Any]
+        data : typing.Optional[typing.Optional[typing.Any]]
+
+        encrypted : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -115,11 +118,10 @@ class TokenIntentsClient:
             api_key="YOUR_API_KEY",
         )
         client.token_intents.create(
-            type="x",
-            data={"key": "value"},
+            type="type",
         )
         """
-        _response = self._raw_client.create(type=type, data=data, request_options=request_options)
+        _response = self._raw_client.create(type=type, data=data, encrypted=encrypted, request_options=request_options)
         return _response.data
 
 
@@ -215,7 +217,8 @@ class AsyncTokenIntentsClient:
         self,
         *,
         type: str,
-        data: typing.Optional[typing.Any] = OMIT,
+        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        encrypted: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateTokenIntentResponse:
         """
@@ -223,7 +226,9 @@ class AsyncTokenIntentsClient:
         ----------
         type : str
 
-        data : typing.Optional[typing.Any]
+        data : typing.Optional[typing.Optional[typing.Any]]
+
+        encrypted : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -247,12 +252,13 @@ class AsyncTokenIntentsClient:
 
         async def main() -> None:
             await client.token_intents.create(
-                type="x",
-                data={"key": "value"},
+                type="type",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.create(type=type, data=data, request_options=request_options)
+        _response = await self._raw_client.create(
+            type=type, data=data, encrypted=encrypted, request_options=request_options
+        )
         return _response.data
