@@ -1,3 +1,10 @@
+# [5.9.0](https://github.com/Basis-Theory/python-sdk/compare/v5.8.0...v5.9.0) (2026-05-20)
+
+
+### Features
+
+* update Vault API spec ([2d419ed](https://github.com/Basis-Theory/python-sdk/commit/2d419edb6b1ea31f6f4285651ee41bcd1a95908d))
+
 # [5.8.0](https://github.com/Basis-Theory/python-sdk/compare/v5.7.0...v5.8.0) (2026-05-15)
 
 
