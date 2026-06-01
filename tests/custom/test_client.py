@@ -2,7 +2,36 @@ import os
 import time
 import uuid
 
+import pytest
+
 from basis_theory import BasisTheory, NotFoundError, UnprocessableEntityError
+
+
+def safe_delete(delete_fn, resource_id):
+    try:
+        delete_fn(id=resource_id)
+    except Exception as e:
+        print(f"Best-effort cleanup failed for {resource_id}: {e}")
+
+
+@pytest.fixture
+def cleanup():
+    """Tracks created resources and deletes them after the test, even on failure.
+
+    Resources are torn down in reverse registration order, so a proxy or reactor
+    registered after its backing application is deleted before that application.
+    Each delete is best-effort: a failure neither blocks the other deletes nor
+    masks the test's original error.
+    """
+    registered = []
+
+    def register(delete_fn, resource_id):
+        registered.append((delete_fn, resource_id))
+
+    yield register
+
+    for delete_fn, resource_id in reversed(registered):
+        safe_delete(delete_fn, resource_id)
 
 
 def test_should_get_self() -> None:
@@ -10,9 +39,10 @@ def test_should_get_self() -> None:
     actual = client.tenants.self_.get()
     assert actual.name == 'SDK Integration Tests'
 
-def test_proxy_lifecycle() -> None:
+def test_proxy_lifecycle(cleanup) -> None:
     client = new_management_client()
     application_id = create_application(client)
+    cleanup(client.applications.delete, application_id)
     proxy = client.proxies.create(
         name="(Deletable) python-SDK-" + str(uuid.uuid4()),
         destination_url = "https://example.com/api",
@@ -49,6 +79,7 @@ def test_proxy_lifecycle() -> None:
         require_auth = True
     )
     proxy_id = proxy.id;
+    cleanup(client.proxies.delete, proxy_id)
 
     updated_proxy = client.proxies.update(
         id=proxy_id,
@@ -97,9 +128,6 @@ def test_proxy_lifecycle() -> None:
         }
     )
 
-    client.proxies.delete(id=proxy_id)
-    client.applications.delete(id=application_id)
-
 def test_should_create_token_intent() -> None:
     client = new_private_client()
     tokenIntent = client.token_intents.create(
@@ -114,9 +142,10 @@ def test_should_create_token_intent() -> None:
     assert is_guid(tokenIntent.id)
 
 
-def test_should_create_update_patch_reactors() -> None:
+def test_should_create_update_patch_reactors(cleanup) -> None:
     management_client = new_management_client()
     application_id = create_application(management_client)
+    cleanup(management_client.applications.delete, application_id)
     reactor = management_client.reactors.create(
         name='(Deletable) python-SDK-' + str(uuid.uuid4()),
         code="""module.exports = async function (req) {
@@ -136,6 +165,7 @@ def test_should_create_update_patch_reactors() -> None:
     )
     reactor_id = reactor.id
     assert reactor_id is not None
+    cleanup(management_client.reactors.delete, reactor_id)
 
     reactor_update = management_client.reactors.update(
         id = reactor_id,
@@ -204,9 +234,6 @@ def test_should_create_update_patch_reactors() -> None:
         except NotFoundError:
             time.sleep(poll_interval)
     assert async_result is not None, "Async reactor invocation did not complete within 30 seconds"
-
-    management_client.reactors.delete(id=reactor_id)
-    management_client.applications.delete(id=application_id)
 
 
 def test_tokenize_basic() -> None:
@@ -353,12 +380,13 @@ def test_bank_account_verify() -> None:
     )
     assert actual.status == "enabled"
 
-def test_should_support_token_lifecycle() -> None:
+def test_should_support_token_lifecycle(cleanup) -> None:
     client = new_private_client()
     management_client = new_management_client()
 
     cardNumber = '6011000990139424'
     token_id = create_token(cardNumber, client)
+    cleanup(client.tokens.delete, token_id)
     get_and_validate_card_number(cardNumber, client, token_id)
 
     updatedCardNumber = '4242424242424242'
@@ -366,17 +394,16 @@ def test_should_support_token_lifecycle() -> None:
     get_and_validate_card_number(updatedCardNumber, client, token_id)
 
     application_id = create_application(management_client)
+    cleanup(management_client.applications.delete, application_id)
 
     # Proxies
     proxy_id = create_proxy(application_id, management_client)
-    management_client.proxies.delete(id=proxy_id)
+    cleanup(management_client.proxies.delete, proxy_id)
 
     # Reactors
     reactor_id = create_reactor(application_id, management_client)
+    cleanup(management_client.reactors.delete, reactor_id)
     react(client, reactor_id)
-    management_client.reactors.delete(id=reactor_id)
-
-    management_client.applications.delete(id=application_id)
 
     client.tokens.delete(id=token_id)
     try:
