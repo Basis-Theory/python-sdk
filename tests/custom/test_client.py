@@ -10,6 +10,8 @@ from basis_theory import BasisTheory, NotFoundError, UnprocessableEntityError
 def safe_delete(delete_fn, resource_id):
     try:
         delete_fn(id=resource_id)
+    except NotFoundError:
+        pass
     except Exception as e:
         print(f"Best-effort cleanup failed for {resource_id}: {e}")
 
