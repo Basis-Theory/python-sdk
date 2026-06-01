@@ -8,6 +8,7 @@ from ..types.card import Card
 from ..types.cardholder_info import CardholderInfo
 from ..types.network_token import NetworkToken
 from ..types.network_token_cryptogram import NetworkTokenCryptogram
+from .account.client import AccountClient, AsyncAccountClient
 from .raw_client import AsyncRawNetworkTokensClient, RawNetworkTokensClient
 
 # this is used as the default value for optional parameters
@@ -17,6 +18,7 @@ OMIT = typing.cast(typing.Any, ...)
 class NetworkTokensClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._raw_client = RawNetworkTokensClient(client_wrapper=client_wrapper)
+        self.account = AccountClient(client_wrapper=client_wrapper)
 
     @property
     def with_raw_response(self) -> RawNetworkTokensClient:
@@ -236,6 +238,7 @@ class NetworkTokensClient:
 class AsyncNetworkTokensClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._raw_client = AsyncRawNetworkTokensClient(client_wrapper=client_wrapper)
+        self.account = AsyncAccountClient(client_wrapper=client_wrapper)
 
     @property
     def with_raw_response(self) -> AsyncRawNetworkTokensClient:
