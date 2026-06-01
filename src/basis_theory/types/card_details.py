@@ -7,6 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .additional_card_details import AdditionalCardDetails
 from .card_issuer import CardIssuer
 from .card_issuer_country import CardIssuerCountry
+from .card_product import CardProduct
 
 
 class CardDetails(UniversalBaseModel):
@@ -20,6 +21,7 @@ class CardDetails(UniversalBaseModel):
     issuer: typing.Optional[CardIssuer] = None
     issuer_country: typing.Optional[CardIssuerCountry] = None
     segment: typing.Optional[str] = None
+    product: typing.Optional[CardProduct] = None
     additional: typing.Optional[typing.List[AdditionalCardDetails]] = None
 
     if IS_PYDANTIC_V2:

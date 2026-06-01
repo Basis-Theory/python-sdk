@@ -2,41 +2,39 @@
 
 import typing
 
-from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from ..core.request_options import RequestOptions
-from ..types.permission import Permission
-from .raw_client import AsyncRawPermissionsClient, RawPermissionsClient
+from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ...core.request_options import RequestOptions
+from ...types.network_token_account import NetworkTokenAccount
+from .raw_client import AsyncRawAccountClient, RawAccountClient
 
 
-class PermissionsClient:
+class AccountClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
-        self._raw_client = RawPermissionsClient(client_wrapper=client_wrapper)
+        self._raw_client = RawAccountClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> RawPermissionsClient:
+    def with_raw_response(self) -> RawAccountClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        RawPermissionsClient
+        RawAccountClient
         """
         return self._raw_client
 
-    def list(
-        self, *, application_type: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.List[Permission]:
+    def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> NetworkTokenAccount:
         """
         Parameters
         ----------
-        application_type : typing.Optional[str]
+        id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.List[Permission]
+        NetworkTokenAccount
             Success
 
         Examples
@@ -47,43 +45,41 @@ class PermissionsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.permissions.list(
-            application_type="application_type",
+        client.network_tokens.account.get(
+            id="id",
         )
         """
-        _response = self._raw_client.list(application_type=application_type, request_options=request_options)
+        _response = self._raw_client.get(id, request_options=request_options)
         return _response.data
 
 
-class AsyncPermissionsClient:
+class AsyncAccountClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._raw_client = AsyncRawPermissionsClient(client_wrapper=client_wrapper)
+        self._raw_client = AsyncRawAccountClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> AsyncRawPermissionsClient:
+    def with_raw_response(self) -> AsyncRawAccountClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        AsyncRawPermissionsClient
+        AsyncRawAccountClient
         """
         return self._raw_client
 
-    async def list(
-        self, *, application_type: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.List[Permission]:
+    async def get(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> NetworkTokenAccount:
         """
         Parameters
         ----------
-        application_type : typing.Optional[str]
+        id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.List[Permission]
+        NetworkTokenAccount
             Success
 
         Examples
@@ -99,12 +95,12 @@ class AsyncPermissionsClient:
 
 
         async def main() -> None:
-            await client.permissions.list(
-                application_type="application_type",
+            await client.network_tokens.account.get(
+                id="id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list(application_type=application_type, request_options=request_options)
+        _response = await self._raw_client.get(id, request_options=request_options)
         return _response.data

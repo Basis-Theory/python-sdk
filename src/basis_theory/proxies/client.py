@@ -68,7 +68,13 @@ class ProxiesClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.proxies.list()
+        response = client.proxies.list(
+            id=["id"],
+            name="name",
+            page=1,
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -453,7 +459,13 @@ class AsyncProxiesClient:
 
 
         async def main() -> None:
-            response = await client.proxies.list()
+            response = await client.proxies.list(
+                id=["id"],
+                name="name",
+                page=1,
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 

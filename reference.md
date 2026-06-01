@@ -19,7 +19,13 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-response = client.applications.list()
+response = client.applications.list(
+    id=["id"],
+    type=["type"],
+    page=1,
+    start="start",
+    size=1,
+)
 for item in response:
     yield item
 # alternatively, you can paginate page-by-page
@@ -463,6 +469,8 @@ client = BasisTheory(
 )
 client.application_keys.list(
     id_="id",
+    id=["id"],
+    type=["type"],
 )
 
 ```
@@ -1921,7 +1929,13 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-response = client.tokens.list_v2()
+response = client.tokens.list_v2(
+    type="type",
+    container="container",
+    fingerprint="fingerprint",
+    start="start",
+    size=1,
+)
 for item in response:
     yield item
 # alternatively, you can paginate page-by-page
@@ -2448,13 +2462,27 @@ client.keys.delete(
 <dd>
 
 ```python
+import datetime
+
 from basis_theory import BasisTheory
 
 client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-response = client.logs.list()
+response = client.logs.list(
+    entity_type="entity_type",
+    entity_id="entity_id",
+    start_date=datetime.datetime.fromisoformat(
+        "2024-01-15 09:30:00+00:00",
+    ),
+    end_date=datetime.datetime.fromisoformat(
+        "2024-01-15 09:30:00+00:00",
+    ),
+    page=1,
+    start="start",
+    size=1,
+)
 for item in response:
     yield item
 # alternatively, you can paginate page-by-page
@@ -2999,7 +3027,9 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.permissions.list()
+client.permissions.list(
+    application_type="application_type",
+)
 
 ```
 </dd>
@@ -3055,7 +3085,13 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-response = client.proxies.list()
+response = client.proxies.list(
+    id=["id"],
+    name="name",
+    page=1,
+    start="start",
+    size=1,
+)
 for item in response:
     yield item
 # alternatively, you can paginate page-by-page
@@ -3724,7 +3760,13 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-response = client.reactors.list()
+response = client.reactors.list(
+    id=["id"],
+    name="name",
+    page=1,
+    start="start",
+    size=1,
+)
 for item in response:
     yield item
 # alternatively, you can paginate page-by-page
@@ -5365,7 +5407,10 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.account_updater.jobs.list()
+client.account_updater.jobs.list(
+    size=1,
+    start="start",
+)
 
 ```
 </dd>
@@ -5901,7 +5946,10 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-response = client.agentic.enrollments.list()
+response = client.agentic.enrollments.list(
+    limit=1,
+    cursor="cursor",
+)
 for item in response:
     yield item
 # alternatively, you can paginate page-by-page
@@ -6303,6 +6351,9 @@ client = BasisTheory(
 )
 response = client.agentic.agents.instructions.list(
     agent_id="agent_id",
+    enrollment_id="enrollment_id",
+    limit=1,
+    cursor="cursor",
 )
 for item in response:
     yield item
@@ -8529,6 +8580,64 @@ client.google_pay.merchant.certificates.create(
 </dl>
 </details>
 
+## NetworkTokens Account
+<details><summary><code>client.network_tokens.account.<a href="src/basis_theory/network_tokens/account/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+
+client = BasisTheory(
+    correlation_id="YOUR_CORRELATION_ID",
+    api_key="YOUR_API_KEY",
+)
+client.network_tokens.account.get(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Reactors Results
 <details><summary><code>client.reactors.results.<a href="src/basis_theory/reactors/results/client.py">get</a>(...)</code></summary>
 <dl>
@@ -8843,7 +8952,12 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-response = client.tenants.invitations.list()
+response = client.tenants.invitations.list(
+    status="PENDING",
+    page=1,
+    start="start",
+    size=1,
+)
 for item in response:
     yield item
 # alternatively, you can paginate page-by-page
@@ -9180,7 +9294,12 @@ client = BasisTheory(
     correlation_id="YOUR_CORRELATION_ID",
     api_key="YOUR_API_KEY",
 )
-client.tenants.members.list()
+client.tenants.members.list(
+    user_id=["user_id"],
+    page=1,
+    start="start",
+    size=1,
+)
 
 ```
 </dd>
@@ -9393,6 +9512,9 @@ client = BasisTheory(
 )
 response = client.tenants.merchants.list(
     tenant_id="tenantId",
+    page=1,
+    start="start",
+    size=1,
 )
 for item in response:
     yield item

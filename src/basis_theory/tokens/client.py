@@ -362,7 +362,13 @@ class TokensClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.tokens.list_v2()
+        response = client.tokens.list_v2(
+            type="type",
+            container="container",
+            fingerprint="fingerprint",
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -828,7 +834,13 @@ class AsyncTokensClient:
 
 
         async def main() -> None:
-            response = await client.tokens.list_v2()
+            response = await client.tokens.list_v2(
+                type="type",
+                container="container",
+                fingerprint="fingerprint",
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 

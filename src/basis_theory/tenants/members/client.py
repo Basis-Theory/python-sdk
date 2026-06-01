@@ -63,7 +63,12 @@ class MembersClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.tenants.members.list()
+        client.tenants.members.list(
+            user_id=["user_id"],
+            page=1,
+            start="start",
+            size=1,
+        )
         """
         _response = self._raw_client.list(
             user_id=user_id, page=page, start=start, size=size, request_options=request_options
@@ -198,7 +203,12 @@ class AsyncMembersClient:
 
 
         async def main() -> None:
-            await client.tenants.members.list()
+            await client.tenants.members.list(
+                user_id=["user_id"],
+                page=1,
+                start="start",
+                size=1,
+            )
 
 
         asyncio.run(main())

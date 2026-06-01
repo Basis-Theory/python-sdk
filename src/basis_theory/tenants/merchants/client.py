@@ -67,6 +67,9 @@ class MerchantsClient:
         )
         response = client.tenants.merchants.list(
             tenant_id="tenantId",
+            page=1,
+            start="start",
+            size=1,
         )
         for item in response:
             yield item
@@ -351,6 +354,9 @@ class AsyncMerchantsClient:
         async def main() -> None:
             response = await client.tenants.merchants.list(
                 tenant_id="tenantId",
+                page=1,
+                start="start",
+                size=1,
             )
             async for item in response:
                 yield item
