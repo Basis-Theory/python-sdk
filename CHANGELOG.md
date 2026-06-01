@@ -1,3 +1,10 @@
+# [5.10.0](https://github.com/Basis-Theory/python-sdk/compare/v5.9.0...v5.10.0) (2026-06-01)
+
+
+### Features
+
+* Add network token account endpoint ([c40e4d9](https://github.com/Basis-Theory/python-sdk/commit/c40e4d9a69a0c34b258269ada470e18624345478))
+
 # [5.9.0](https://github.com/Basis-Theory/python-sdk/compare/v5.8.0...v5.9.0) (2026-05-20)
 
 
