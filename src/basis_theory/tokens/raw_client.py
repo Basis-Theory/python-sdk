@@ -51,9 +51,6 @@ class RawTokensClient:
             "detokenize",
             method="POST",
             json=request,
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -145,7 +142,6 @@ class RawTokensClient:
             method="POST",
             json=request,
             headers={
-                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -570,7 +566,6 @@ class RawTokensClient:
                 "token_intent_id": token_intent_id,
             },
             headers={
-                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -867,9 +862,6 @@ class AsyncRawTokensClient:
             "detokenize",
             method="POST",
             json=request,
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -961,7 +953,6 @@ class AsyncRawTokensClient:
             method="POST",
             json=request,
             headers={
-                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,
@@ -1390,7 +1381,6 @@ class AsyncRawTokensClient:
                 "token_intent_id": token_intent_id,
             },
             headers={
-                "content-type": "application/json",
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
             },
             request_options=request_options,

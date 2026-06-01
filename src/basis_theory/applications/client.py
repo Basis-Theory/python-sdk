@@ -67,7 +67,13 @@ class ApplicationsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.applications.list()
+        response = client.applications.list(
+            id=["id"],
+            type=["type"],
+            page=1,
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -332,7 +338,13 @@ class AsyncApplicationsClient:
 
 
         async def main() -> None:
-            response = await client.applications.list()
+            response = await client.applications.list(
+                id=["id"],
+                type=["type"],
+                page=1,
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 

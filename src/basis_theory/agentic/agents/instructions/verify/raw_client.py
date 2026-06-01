@@ -65,9 +65,6 @@ class RawVerifyClient:
                     object_=device_context, annotation=DeviceContext, direction="write"
                 ),
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -320,9 +317,6 @@ class AsyncRawVerifyClient:
                 "device_context": convert_and_respect_annotation_metadata(
                     object_=device_context, annotation=DeviceContext, direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,

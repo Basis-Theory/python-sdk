@@ -64,7 +64,10 @@ class EnrollmentsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.agentic.enrollments.list()
+        response = client.agentic.enrollments.list(
+            limit=1,
+            cursor="cursor",
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -286,7 +289,10 @@ class AsyncEnrollmentsClient:
 
 
         async def main() -> None:
-            response = await client.agentic.enrollments.list()
+            response = await client.agentic.enrollments.list(
+                limit=1,
+                cursor="cursor",
+            )
             async for item in response:
                 yield item
 
