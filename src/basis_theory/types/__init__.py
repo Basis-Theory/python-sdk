@@ -52,6 +52,7 @@ from .card_issuer_country import CardIssuerCountry
 from .card_issuer_details import CardIssuerDetails
 from .card_network_info import CardNetworkInfo
 from .card_network_status import CardNetworkStatus
+from .card_product import CardProduct
 from .cardholder_info import CardholderInfo
 from .client_encryption_key_metadata_response import ClientEncryptionKeyMetadataResponse
 from .client_encryption_key_response import ClientEncryptionKeyResponse
@@ -274,6 +275,7 @@ __all__ = [
     "CardIssuerDetails",
     "CardNetworkInfo",
     "CardNetworkStatus",
+    "CardProduct",
     "CardholderInfo",
     "ClientEncryptionKeyMetadataResponse",
     "ClientEncryptionKeyResponse",
