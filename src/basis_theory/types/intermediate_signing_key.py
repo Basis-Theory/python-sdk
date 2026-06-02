@@ -9,7 +9,9 @@ from ..core.serialization import FieldMetadata
 
 
 class IntermediateSigningKey(UniversalBaseModel):
-    signed_key: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="signedKey")] = None
+    signed_key: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="signedKey"), pydantic.Field(alias="signedKey")
+    ] = None
     signatures: typing.Optional[typing.List[str]] = None
 
     if IS_PYDANTIC_V2:

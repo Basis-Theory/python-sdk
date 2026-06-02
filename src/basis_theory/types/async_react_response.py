@@ -10,7 +10,9 @@ from ..core.serialization import FieldMetadata
 
 class AsyncReactResponse(UniversalBaseModel):
     async_reactor_request_id: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="asyncReactorRequestId")
+        typing.Optional[str],
+        FieldMetadata(alias="asyncReactorRequestId"),
+        pydantic.Field(alias="asyncReactorRequestId"),
     ] = None
 
     if IS_PYDANTIC_V2:

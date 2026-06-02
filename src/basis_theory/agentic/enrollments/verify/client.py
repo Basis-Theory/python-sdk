@@ -155,7 +155,7 @@ class VerifyClient:
         self,
         enrollment_id: str,
         *,
-        assurance_data: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        assurance_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         src_correlation_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> VerificationResponse:
@@ -166,7 +166,7 @@ class VerifyClient:
         ----------
         enrollment_id : str
 
-        assurance_data : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+        assurance_data : typing.Optional[typing.Dict[str, typing.Any]]
 
         src_correlation_id : typing.Optional[str]
 
@@ -366,7 +366,7 @@ class AsyncVerifyClient:
         self,
         enrollment_id: str,
         *,
-        assurance_data: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        assurance_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         src_correlation_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> VerificationResponse:
@@ -377,7 +377,7 @@ class AsyncVerifyClient:
         ----------
         enrollment_id : str
 
-        assurance_data : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+        assurance_data : typing.Optional[typing.Dict[str, typing.Any]]
 
         src_correlation_id : typing.Optional[str]
 

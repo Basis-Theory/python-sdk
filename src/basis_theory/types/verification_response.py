@@ -29,7 +29,7 @@ class VerificationResponse(UniversalBaseModel):
     Card network brand (present in Mastercard responses)
     """
 
-    auth_context: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    auth_context: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
     """
     Mastercard authentication context
     """

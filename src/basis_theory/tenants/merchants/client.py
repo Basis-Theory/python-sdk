@@ -8,6 +8,7 @@ from ...core.request_options import RequestOptions
 from ...types.card_network_info import CardNetworkInfo
 from ...types.merchant_details import MerchantDetails
 from ...types.tenant_merchant import TenantMerchant
+from ...types.tenant_merchant_paginated_list import TenantMerchantPaginatedList
 from .raw_client import AsyncRawMerchantsClient, RawMerchantsClient
 
 # this is used as the default value for optional parameters
@@ -37,7 +38,7 @@ class MerchantsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[TenantMerchant]:
+    ) -> SyncPager[TenantMerchant, TenantMerchantPaginatedList]:
         """
         Parameters
         ----------
@@ -54,7 +55,7 @@ class MerchantsClient:
 
         Returns
         -------
-        SyncPager[TenantMerchant]
+        SyncPager[TenantMerchant, TenantMerchantPaginatedList]
             Success
 
         Examples
@@ -67,6 +68,9 @@ class MerchantsClient:
         )
         response = client.tenants.merchants.list(
             tenant_id="tenantId",
+            page=1,
+            start="start",
+            size=1,
         )
         for item in response:
             yield item
@@ -316,7 +320,7 @@ class AsyncMerchantsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[TenantMerchant]:
+    ) -> AsyncPager[TenantMerchant, TenantMerchantPaginatedList]:
         """
         Parameters
         ----------
@@ -333,7 +337,7 @@ class AsyncMerchantsClient:
 
         Returns
         -------
-        AsyncPager[TenantMerchant]
+        AsyncPager[TenantMerchant, TenantMerchantPaginatedList]
             Success
 
         Examples
@@ -351,6 +355,9 @@ class AsyncMerchantsClient:
         async def main() -> None:
             response = await client.tenants.merchants.list(
                 tenant_id="tenantId",
+                page=1,
+                start="start",
+                size=1,
             )
             async for item in response:
                 yield item

@@ -11,7 +11,9 @@ from ..core.serialization import FieldMetadata
 class CreateThreeDsSessionResponse(UniversalBaseModel):
     id: typing.Optional[str] = None
     type: typing.Optional[str] = None
-    card_brand: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardBrand")] = None
+    card_brand: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="cardBrand"), pydantic.Field(alias="cardBrand")
+    ] = None
     additional_card_brands: typing.Optional[typing.List[str]] = None
     method_url: typing.Optional[str] = None
     method_notification_url: typing.Optional[str] = None

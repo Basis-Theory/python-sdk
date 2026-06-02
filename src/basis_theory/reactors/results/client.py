@@ -22,9 +22,7 @@ class ResultsClient:
         """
         return self._raw_client
 
-    def get(
-        self, id: str, request_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    def get(self, id: str, request_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> typing.Any:
         """
         Parameters
         ----------
@@ -37,7 +35,7 @@ class ResultsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.Any
             Success
 
         Examples
@@ -74,7 +72,7 @@ class AsyncResultsClient:
 
     async def get(
         self, id: str, request_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    ) -> typing.Any:
         """
         Parameters
         ----------
@@ -87,7 +85,7 @@ class AsyncResultsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.Any
             Success
 
         Examples

@@ -47,7 +47,9 @@ class PermissionsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.permissions.list()
+        client.permissions.list(
+            application_type="application_type",
+        )
         """
         _response = self._raw_client.list(application_type=application_type, request_options=request_options)
         return _response.data
@@ -97,7 +99,9 @@ class AsyncPermissionsClient:
 
 
         async def main() -> None:
-            await client.permissions.list()
+            await client.permissions.list(
+                application_type="application_type",
+            )
 
 
         asyncio.run(main())

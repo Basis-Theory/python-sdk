@@ -6,7 +6,8 @@ from json.decoder import JSONDecodeError
 from .....core.api_error import ApiError
 from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .....core.http_response import AsyncHttpResponse, HttpResponse
-from .....core.jsonable_encoder import jsonable_encoder
+from .....core.jsonable_encoder import encode_path_param
+from .....core.parse_error import ParsingError
 from .....core.pydantic_utilities import parse_obj_as
 from .....core.request_options import RequestOptions
 from .....core.serialization import convert_and_respect_annotation_metadata
@@ -21,6 +22,7 @@ from .....types.instruction import Instruction
 from .....types.problem_details import ProblemDetails
 from .....types.validation_problem_details import ValidationProblemDetails
 from .....types.verification_response import VerificationResponse
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -58,15 +60,12 @@ class RawVerifyClient:
             Verification started — returns passkey options or next step
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}/verify",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}/verify",
             method="POST",
             json={
                 "device_context": convert_and_respect_annotation_metadata(
                     object_=device_context, annotation=DeviceContext, direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -118,9 +117,9 @@ class RawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -150,6 +149,10 @@ class RawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def passkey(
@@ -157,7 +160,7 @@ class RawVerifyClient:
         agent_id: str,
         instruction_id: str,
         *,
-        assurance_data: typing.Dict[str, typing.Optional[typing.Any]],
+        assurance_data: typing.Dict[str, typing.Any],
         src_correlation_id: typing.Optional[str] = OMIT,
         flow_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -171,7 +174,7 @@ class RawVerifyClient:
 
         instruction_id : str
 
-        assurance_data : typing.Dict[str, typing.Optional[typing.Any]]
+        assurance_data : typing.Dict[str, typing.Any]
             Visa format (identifier, dfp_session_id, fido_assertion_data) or Mastercard format (flexible object)
 
         src_correlation_id : typing.Optional[str]
@@ -187,7 +190,7 @@ class RawVerifyClient:
             Passkey accepted — instruction verified
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}/verify/passkey",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}/verify/passkey",
             method="POST",
             json={
                 "assurance_data": assurance_data,
@@ -247,9 +250,9 @@ class RawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -279,6 +282,10 @@ class RawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -314,15 +321,12 @@ class AsyncRawVerifyClient:
             Verification started — returns passkey options or next step
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}/verify",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}/verify",
             method="POST",
             json={
                 "device_context": convert_and_respect_annotation_metadata(
                     object_=device_context, annotation=DeviceContext, direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -374,9 +378,9 @@ class AsyncRawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -406,6 +410,10 @@ class AsyncRawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def passkey(
@@ -413,7 +421,7 @@ class AsyncRawVerifyClient:
         agent_id: str,
         instruction_id: str,
         *,
-        assurance_data: typing.Dict[str, typing.Optional[typing.Any]],
+        assurance_data: typing.Dict[str, typing.Any],
         src_correlation_id: typing.Optional[str] = OMIT,
         flow_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -427,7 +435,7 @@ class AsyncRawVerifyClient:
 
         instruction_id : str
 
-        assurance_data : typing.Dict[str, typing.Optional[typing.Any]]
+        assurance_data : typing.Dict[str, typing.Any]
             Visa format (identifier, dfp_session_id, fido_assertion_data) or Mastercard format (flexible object)
 
         src_correlation_id : typing.Optional[str]
@@ -443,7 +451,7 @@ class AsyncRawVerifyClient:
             Passkey accepted — instruction verified
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}/verify/passkey",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}/verify/passkey",
             method="POST",
             json={
                 "assurance_data": assurance_data,
@@ -503,9 +511,9 @@ class AsyncRawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -535,4 +543,8 @@ class AsyncRawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
