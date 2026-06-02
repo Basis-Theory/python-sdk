@@ -78,6 +78,9 @@ class InstructionsClient:
         )
         response = client.agentic.agents.instructions.list(
             agent_id="agent_id",
+            enrollment_id="enrollment_id",
+            limit=1,
+            cursor="cursor",
         )
         for item in response:
             yield item
@@ -353,6 +356,9 @@ class AsyncInstructionsClient:
         async def main() -> None:
             response = await client.agentic.agents.instructions.list(
                 agent_id="agent_id",
+                enrollment_id="enrollment_id",
+                limit=1,
+                cursor="cursor",
             )
             async for item in response:
                 yield item

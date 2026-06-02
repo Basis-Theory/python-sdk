@@ -153,9 +153,6 @@ class RawMerchantsClient:
                     object_=details, annotation=MerchantDetails, direction="write"
                 ),
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -374,9 +371,6 @@ class RawMerchantsClient:
                 "details": convert_and_respect_annotation_metadata(
                     object_=details, annotation=MerchantDetails, direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -680,9 +674,6 @@ class AsyncRawMerchantsClient:
                     object_=details, annotation=MerchantDetails, direction="write"
                 ),
             },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -901,9 +892,6 @@ class AsyncRawMerchantsClient:
                 "details": convert_and_respect_annotation_metadata(
                     object_=details, annotation=MerchantDetails, direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,

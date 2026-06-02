@@ -619,9 +619,6 @@ class RawReactorsClient:
             f"reactors/{jsonable_encoder(id)}/react",
             method="POST",
             json=request,
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -721,9 +718,6 @@ class RawReactorsClient:
             f"reactors/{jsonable_encoder(id)}/react-async",
             method="POST",
             json=request,
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -1395,9 +1389,6 @@ class AsyncRawReactorsClient:
             f"reactors/{jsonable_encoder(id)}/react",
             method="POST",
             json=request,
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )
@@ -1497,9 +1488,6 @@ class AsyncRawReactorsClient:
             f"reactors/{jsonable_encoder(id)}/react-async",
             method="POST",
             json=request,
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
             omit=OMIT,
         )

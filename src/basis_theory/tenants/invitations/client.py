@@ -64,7 +64,12 @@ class InvitationsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.tenants.invitations.list()
+        response = client.tenants.invitations.list(
+            status="PENDING",
+            page=1,
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -270,7 +275,12 @@ class AsyncInvitationsClient:
 
 
         async def main() -> None:
-            response = await client.tenants.invitations.list()
+            response = await client.tenants.invitations.list(
+                status="PENDING",
+                page=1,
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 
