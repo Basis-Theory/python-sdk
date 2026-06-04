@@ -23,7 +23,7 @@ class ApplePayToken(UniversalBaseModel):
     payment_data_type: typing.Optional[str] = None
     device_manufacturer_identifier: typing.Optional[str] = None
     card: typing.Optional[CardDetails] = None
-    data: typing.Optional[typing.Optional[typing.Any]] = None
+    data: typing.Optional[typing.Any] = None
     authentication: typing.Optional[Authentication] = None
     fingerprint: typing.Optional[str] = None
     ingest_source: typing.Optional[str] = None

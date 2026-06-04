@@ -16,7 +16,7 @@ class AdditionalCardDetail(UniversalBaseModel):
     segment: typing.Optional[str] = None
     issuer: typing.Optional[CardIssuerDetails] = None
     bin_range: typing_extensions.Annotated[
-        typing.Optional[typing.List[CardBinRange]], FieldMetadata(alias="binRange")
+        typing.Optional[typing.List[CardBinRange]], FieldMetadata(alias="binRange"), pydantic.Field(alias="binRange")
     ] = None
 
     if IS_PYDANTIC_V2:

@@ -6,7 +6,8 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
+from ..core.parse_error import ParsingError
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.bad_request_error import BadRequestError
@@ -18,6 +19,7 @@ from ..types.create_token_intent_response import CreateTokenIntentResponse
 from ..types.problem_details import ProblemDetails
 from ..types.token_intent import TokenIntent
 from ..types.validation_problem_details import ValidationProblemDetails
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -42,7 +44,7 @@ class RawTokenIntentsClient:
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"token-intents/{jsonable_encoder(id)}",
+            f"token-intents/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -82,9 +84,9 @@ class RawTokenIntentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -92,6 +94,10 @@ class RawTokenIntentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[None]:
@@ -108,7 +114,7 @@ class RawTokenIntentsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"token-intents/{jsonable_encoder(id)}",
+            f"token-intents/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -141,9 +147,9 @@ class RawTokenIntentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -151,13 +157,17 @@ class RawTokenIntentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create(
         self,
         *,
         type: str,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         encrypted: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateTokenIntentResponse]:
@@ -166,7 +176,7 @@ class RawTokenIntentsClient:
         ----------
         type : str
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         encrypted : typing.Optional[str]
 
@@ -249,6 +259,10 @@ class RawTokenIntentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -273,7 +287,7 @@ class AsyncRawTokenIntentsClient:
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"token-intents/{jsonable_encoder(id)}",
+            f"token-intents/{encode_path_param(id)}",
             method="GET",
             request_options=request_options,
         )
@@ -313,9 +327,9 @@ class AsyncRawTokenIntentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -323,6 +337,10 @@ class AsyncRawTokenIntentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete(
@@ -341,7 +359,7 @@ class AsyncRawTokenIntentsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"token-intents/{jsonable_encoder(id)}",
+            f"token-intents/{encode_path_param(id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -374,9 +392,9 @@ class AsyncRawTokenIntentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -384,13 +402,17 @@ class AsyncRawTokenIntentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create(
         self,
         *,
         type: str,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         encrypted: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateTokenIntentResponse]:
@@ -399,7 +421,7 @@ class AsyncRawTokenIntentsClient:
         ----------
         type : str
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         encrypted : typing.Optional[str]
 
@@ -482,4 +504,8 @@ class AsyncRawTokenIntentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

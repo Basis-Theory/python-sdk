@@ -58,6 +58,8 @@ class ApplicationKeysClient:
         )
         client.application_keys.list(
             id_="id",
+            id=["id"],
+            type=["type"],
         )
         """
         _response = self._raw_client.list(id_, id=id, type=type, request_options=request_options)
@@ -219,6 +221,8 @@ class AsyncApplicationKeysClient:
         async def main() -> None:
             await client.application_keys.list(
                 id_="id",
+                id=["id"],
+                type=["type"],
             )
 
 

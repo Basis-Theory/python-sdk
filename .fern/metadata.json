@@ -1,0 +1,17 @@
+{
+  "cliVersion": "5.43.0",
+  "generatorName": "fernapi/fern-python-sdk",
+  "generatorVersion": "5.12.11",
+  "generatorConfig": {
+    "client_class_name": "BasisTheory",
+    "pydantic_config": {
+      "union_naming": "v1"
+    }
+  },
+  "originGitCommit": "29803ccfeeb413b833881a525c6c82ad45933b99",
+  "originGitCommitIsDirty": false,
+  "invokedBy": "ci",
+  "requestedVersion": "0.0.1",
+  "ciProvider": "github",
+  "sdkVersion": "0.0.1"
+}

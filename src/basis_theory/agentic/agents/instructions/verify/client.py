@@ -89,7 +89,7 @@ class VerifyClient:
         agent_id: str,
         instruction_id: str,
         *,
-        assurance_data: typing.Dict[str, typing.Optional[typing.Any]],
+        assurance_data: typing.Dict[str, typing.Any],
         src_correlation_id: typing.Optional[str] = OMIT,
         flow_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -103,7 +103,7 @@ class VerifyClient:
 
         instruction_id : str
 
-        assurance_data : typing.Dict[str, typing.Optional[typing.Any]]
+        assurance_data : typing.Dict[str, typing.Any]
             Visa format (identifier, dfp_session_id, fido_assertion_data) or Mastercard format (flexible object)
 
         src_correlation_id : typing.Optional[str]
@@ -227,7 +227,7 @@ class AsyncVerifyClient:
         agent_id: str,
         instruction_id: str,
         *,
-        assurance_data: typing.Dict[str, typing.Optional[typing.Any]],
+        assurance_data: typing.Dict[str, typing.Any],
         src_correlation_id: typing.Optional[str] = OMIT,
         flow_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -241,7 +241,7 @@ class AsyncVerifyClient:
 
         instruction_id : str
 
-        assurance_data : typing.Dict[str, typing.Optional[typing.Any]]
+        assurance_data : typing.Dict[str, typing.Any]
             Visa format (identifier, dfp_session_id, fido_assertion_data) or Mastercard format (flexible object)
 
         src_correlation_id : typing.Optional[str]

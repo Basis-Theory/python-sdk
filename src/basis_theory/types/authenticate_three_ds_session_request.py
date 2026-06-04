@@ -22,7 +22,7 @@ class AuthenticateThreeDsSessionRequest(UniversalBaseModel):
     merchant_info: typing.Optional[ThreeDsMerchantInfo] = None
     requestor_info: typing.Optional[ThreeDsRequestorInfo] = None
     cardholder_info: typing.Optional[ThreeDsCardholderInfo] = None
-    broadcast_info: typing.Optional[typing.Optional[typing.Any]] = None
+    broadcast_info: typing.Optional[typing.Any] = None
     message_extensions: typing.Optional[typing.List[ThreeDsMessageExtension]] = None
     metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
 

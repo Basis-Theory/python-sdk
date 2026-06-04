@@ -26,7 +26,9 @@ class NetworkToken(UniversalBaseModel):
     modified_at: typing.Optional[dt.datetime] = None
     token_id: typing.Optional[str] = None
     token_intent_id: typing.Optional[str] = None
-    extras: typing_extensions.Annotated[typing.Optional[NetworkTokenExtras], FieldMetadata(alias="_extras")] = None
+    extras: typing_extensions.Annotated[
+        typing.Optional[NetworkTokenExtras], FieldMetadata(alias="_extras"), pydantic.Field(alias="_extras")
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

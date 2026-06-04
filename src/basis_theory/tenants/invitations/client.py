@@ -6,6 +6,7 @@ from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.pagination import AsyncPager, SyncPager
 from ...core.request_options import RequestOptions
 from ...types.tenant_invitation_response import TenantInvitationResponse
+from ...types.tenant_invitation_response_paginated_list import TenantInvitationResponsePaginatedList
 from ...types.tenant_invitation_status import TenantInvitationStatus
 from .raw_client import AsyncRawInvitationsClient, RawInvitationsClient
 
@@ -36,7 +37,7 @@ class InvitationsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[TenantInvitationResponse]:
+    ) -> SyncPager[TenantInvitationResponse, TenantInvitationResponsePaginatedList]:
         """
         Parameters
         ----------
@@ -53,7 +54,7 @@ class InvitationsClient:
 
         Returns
         -------
-        SyncPager[TenantInvitationResponse]
+        SyncPager[TenantInvitationResponse, TenantInvitationResponsePaginatedList]
             Success
 
         Examples
@@ -64,7 +65,12 @@ class InvitationsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.tenants.invitations.list()
+        response = client.tenants.invitations.list(
+            status="PENDING",
+            page=1,
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -237,7 +243,7 @@ class AsyncInvitationsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[TenantInvitationResponse]:
+    ) -> AsyncPager[TenantInvitationResponse, TenantInvitationResponsePaginatedList]:
         """
         Parameters
         ----------
@@ -254,7 +260,7 @@ class AsyncInvitationsClient:
 
         Returns
         -------
-        AsyncPager[TenantInvitationResponse]
+        AsyncPager[TenantInvitationResponse, TenantInvitationResponsePaginatedList]
             Success
 
         Examples
@@ -270,7 +276,12 @@ class AsyncInvitationsClient:
 
 
         async def main() -> None:
-            response = await client.tenants.invitations.list()
+            response = await client.tenants.invitations.list(
+                status="PENDING",
+                page=1,
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 

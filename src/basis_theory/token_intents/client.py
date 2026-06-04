@@ -88,7 +88,7 @@ class TokenIntentsClient:
         self,
         *,
         type: str,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         encrypted: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateTokenIntentResponse:
@@ -97,7 +97,7 @@ class TokenIntentsClient:
         ----------
         type : str
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         encrypted : typing.Optional[str]
 
@@ -217,7 +217,7 @@ class AsyncTokenIntentsClient:
         self,
         *,
         type: str,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         encrypted: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateTokenIntentResponse:
@@ -226,7 +226,7 @@ class AsyncTokenIntentsClient:
         ----------
         type : str
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         encrypted : typing.Optional[str]
 

@@ -10,9 +10,13 @@ from .payment_data import PaymentData
 
 
 class ApplePayMethodToken(UniversalBaseModel):
-    payment_data: typing_extensions.Annotated[typing.Optional[PaymentData], FieldMetadata(alias="paymentData")] = None
+    payment_data: typing_extensions.Annotated[
+        typing.Optional[PaymentData], FieldMetadata(alias="paymentData"), pydantic.Field(alias="paymentData")
+    ] = None
     transaction_identifier: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="transactionIdentifier")
+        typing.Optional[str],
+        FieldMetadata(alias="transactionIdentifier"),
+        pydantic.Field(alias="transactionIdentifier"),
     ] = None
 
     if IS_PYDANTIC_V2:

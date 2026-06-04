@@ -7,8 +7,9 @@ from json.decoder import JSONDecodeError
 from ....core.api_error import ApiError
 from ....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ....core.http_response import AsyncHttpResponse, HttpResponse
-from ....core.jsonable_encoder import jsonable_encoder
-from ....core.pagination import AsyncPager, BaseHttpResponse, SyncPager
+from ....core.jsonable_encoder import encode_path_param
+from ....core.pagination import AsyncPager, SyncPager
+from ....core.parse_error import ParsingError
 from ....core.pydantic_utilities import parse_obj_as
 from ....core.request_options import RequestOptions
 from ....core.serialization import convert_and_respect_annotation_metadata
@@ -25,6 +26,7 @@ from ....types.instruction_list import InstructionList
 from ....types.problem_details import ProblemDetails
 from ....types.recurring import Recurring
 from ....types.validation_problem_details import ValidationProblemDetails
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -42,7 +44,7 @@ class RawInstructionsClient:
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Instruction]:
+    ) -> SyncPager[Instruction, InstructionList]:
         """
         List all purchase instructions for an agent with cursor-based pagination and optional enrollment filter.
 
@@ -63,11 +65,11 @@ class RawInstructionsClient:
 
         Returns
         -------
-        SyncPager[Instruction]
+        SyncPager[Instruction, InstructionList]
             Paginated list of instructions
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions",
             method="GET",
             params={
                 "enrollment_id": enrollment_id,
@@ -98,9 +100,7 @@ class RawInstructionsClient:
                         cursor=_parsed_next,
                         request_options=request_options,
                     )
-                return SyncPager(
-                    has_next=_has_next, items=_items, get_next=_get_next, response=BaseHttpResponse(response=_response)
-                )
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -127,9 +127,9 @@ class RawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -148,6 +148,10 @@ class RawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create(
@@ -158,7 +162,7 @@ class RawInstructionsClient:
         amount: Amount,
         description: str,
         expires_at: dt.datetime,
-        assurance_data: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        assurance_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         recurring: typing.Optional[Recurring] = OMIT,
         instance_details: typing.Optional[InstanceDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -178,7 +182,7 @@ class RawInstructionsClient:
 
         expires_at : dt.datetime
 
-        assurance_data : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+        assurance_data : typing.Optional[typing.Dict[str, typing.Any]]
 
         recurring : typing.Optional[Recurring]
 
@@ -193,7 +197,7 @@ class RawInstructionsClient:
             Instruction created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions",
             method="POST",
             json={
                 "enrollment_id": enrollment_id,
@@ -261,9 +265,9 @@ class RawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -293,6 +297,10 @@ class RawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get(
@@ -314,7 +322,7 @@ class RawInstructionsClient:
             Instruction found
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -354,9 +362,9 @@ class RawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -375,6 +383,10 @@ class RawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete(
@@ -395,7 +407,7 @@ class RawInstructionsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -428,9 +440,9 @@ class RawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -449,6 +461,10 @@ class RawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update(
@@ -483,7 +499,7 @@ class RawInstructionsClient:
             Instruction updated
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}",
             method="PATCH",
             json={
                 "amount": convert_and_respect_annotation_metadata(object_=amount, annotation=Amount, direction="write"),
@@ -543,9 +559,9 @@ class RawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -575,6 +591,10 @@ class RawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -590,7 +610,7 @@ class AsyncRawInstructionsClient:
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Instruction]:
+    ) -> AsyncPager[Instruction, InstructionList]:
         """
         List all purchase instructions for an agent with cursor-based pagination and optional enrollment filter.
 
@@ -611,11 +631,11 @@ class AsyncRawInstructionsClient:
 
         Returns
         -------
-        AsyncPager[Instruction]
+        AsyncPager[Instruction, InstructionList]
             Paginated list of instructions
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions",
             method="GET",
             params={
                 "enrollment_id": enrollment_id,
@@ -649,9 +669,7 @@ class AsyncRawInstructionsClient:
                             request_options=request_options,
                         )
 
-                return AsyncPager(
-                    has_next=_has_next, items=_items, get_next=_get_next, response=BaseHttpResponse(response=_response)
-                )
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -678,9 +696,9 @@ class AsyncRawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -699,6 +717,10 @@ class AsyncRawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create(
@@ -709,7 +731,7 @@ class AsyncRawInstructionsClient:
         amount: Amount,
         description: str,
         expires_at: dt.datetime,
-        assurance_data: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        assurance_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         recurring: typing.Optional[Recurring] = OMIT,
         instance_details: typing.Optional[InstanceDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -729,7 +751,7 @@ class AsyncRawInstructionsClient:
 
         expires_at : dt.datetime
 
-        assurance_data : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+        assurance_data : typing.Optional[typing.Dict[str, typing.Any]]
 
         recurring : typing.Optional[Recurring]
 
@@ -744,7 +766,7 @@ class AsyncRawInstructionsClient:
             Instruction created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions",
             method="POST",
             json={
                 "enrollment_id": enrollment_id,
@@ -812,9 +834,9 @@ class AsyncRawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -844,6 +866,10 @@ class AsyncRawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get(
@@ -865,7 +891,7 @@ class AsyncRawInstructionsClient:
             Instruction found
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -905,9 +931,9 @@ class AsyncRawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -926,6 +952,10 @@ class AsyncRawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete(
@@ -946,7 +976,7 @@ class AsyncRawInstructionsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -979,9 +1009,9 @@ class AsyncRawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1000,6 +1030,10 @@ class AsyncRawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update(
@@ -1034,7 +1068,7 @@ class AsyncRawInstructionsClient:
             Instruction updated
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/agents/{jsonable_encoder(agent_id)}/instructions/{jsonable_encoder(instruction_id)}",
+            f"agentic/agents/{encode_path_param(agent_id)}/instructions/{encode_path_param(instruction_id)}",
             method="PATCH",
             json={
                 "amount": convert_and_respect_annotation_metadata(object_=amount, annotation=Amount, direction="write"),
@@ -1094,9 +1128,9 @@ class AsyncRawInstructionsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1126,4 +1160,8 @@ class AsyncRawInstructionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
