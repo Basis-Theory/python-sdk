@@ -10,13 +10,13 @@ from .privacy import Privacy
 class CreateTokenRequest(UniversalBaseModel):
     id: typing.Optional[str] = None
     type: typing.Optional[str] = None
-    data: typing.Optional[typing.Optional[typing.Any]] = None
+    data: typing.Optional[typing.Any] = None
     encrypted: typing.Optional[str] = None
     privacy: typing.Optional[Privacy] = None
     metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
     search_indexes: typing.Optional[typing.List[str]] = None
     fingerprint_expression: typing.Optional[str] = None
-    mask: typing.Optional[typing.Optional[typing.Any]] = None
+    mask: typing.Optional[typing.Any] = None
     deduplicate_token: typing.Optional[bool] = None
     expires_at: typing.Optional[str] = None
     containers: typing.Optional[typing.List[str]] = None

@@ -121,7 +121,7 @@ class SessionsClient:
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
         requestor_info: typing.Optional[ThreeDsRequestorInfo] = OMIT,
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
-        broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        broadcast_info: typing.Optional[typing.Any] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
@@ -152,7 +152,7 @@ class SessionsClient:
 
         cardholder_info : typing.Optional[ThreeDsCardholderInfo]
 
-        broadcast_info : typing.Optional[typing.Optional[typing.Any]]
+        broadcast_info : typing.Optional[typing.Any]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
 
@@ -371,7 +371,7 @@ class AsyncSessionsClient:
         merchant_info: typing.Optional[ThreeDsMerchantInfo] = OMIT,
         requestor_info: typing.Optional[ThreeDsRequestorInfo] = OMIT,
         cardholder_info: typing.Optional[ThreeDsCardholderInfo] = OMIT,
-        broadcast_info: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        broadcast_info: typing.Optional[typing.Any] = OMIT,
         message_extensions: typing.Optional[typing.Sequence[ThreeDsMessageExtension]] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         idempotency_key: typing.Optional[str] = None,
@@ -402,7 +402,7 @@ class AsyncSessionsClient:
 
         cardholder_info : typing.Optional[ThreeDsCardholderInfo]
 
-        broadcast_info : typing.Optional[typing.Optional[typing.Any]]
+        broadcast_info : typing.Optional[typing.Any]
 
         message_extensions : typing.Optional[typing.Sequence[ThreeDsMessageExtension]]
 

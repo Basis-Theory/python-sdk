@@ -70,7 +70,7 @@ class ConnectionsClient:
         )
         return _response.data
 
-    def delete(self, *, request_options: typing.Optional[RequestOptions] = None) -> CreateTenantConnectionResponse:
+    def delete(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
         Parameters
         ----------
@@ -79,8 +79,7 @@ class ConnectionsClient:
 
         Returns
         -------
-        CreateTenantConnectionResponse
-            No Content
+        None
 
         Examples
         --------
@@ -162,9 +161,7 @@ class AsyncConnectionsClient:
         )
         return _response.data
 
-    async def delete(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CreateTenantConnectionResponse:
+    async def delete(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
         Parameters
         ----------
@@ -173,8 +170,7 @@ class AsyncConnectionsClient:
 
         Returns
         -------
-        CreateTenantConnectionResponse
-            No Content
+        None
 
         Examples
         --------

@@ -2,4 +2,7 @@
 
 import typing
 
-MppCredentialsResponse = typing.Dict[str, typing.Optional[typing.Any]]
+MppCredentialsResponse = typing.Dict[str, typing.Any]
+"""
+Encrypted payment credentials response
+"""

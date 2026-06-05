@@ -3,6 +3,7 @@
 import typing
 
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ...core.pagination import AsyncPager, SyncPager
 from ...core.request_options import RequestOptions
 from ...types.tenant_member_response import TenantMemberResponse
 from ...types.tenant_member_response_paginated_list import TenantMemberResponsePaginatedList
@@ -35,7 +36,7 @@ class MembersClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TenantMemberResponsePaginatedList:
+    ) -> SyncPager[TenantMemberResponse, TenantMemberResponsePaginatedList]:
         """
         Parameters
         ----------
@@ -52,7 +53,7 @@ class MembersClient:
 
         Returns
         -------
-        TenantMemberResponsePaginatedList
+        SyncPager[TenantMemberResponse, TenantMemberResponsePaginatedList]
             Success
 
         Examples
@@ -63,12 +64,21 @@ class MembersClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.tenants.members.list()
+        response = client.tenants.members.list(
+            user_id=["user_id"],
+            page=1,
+            start="start",
+            size=1,
+        )
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
         """
-        _response = self._raw_client.list(
+        return self._raw_client.list(
             user_id=user_id, page=page, start=start, size=size, request_options=request_options
         )
-        return _response.data
 
     def update(
         self,
@@ -165,7 +175,7 @@ class AsyncMembersClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> TenantMemberResponsePaginatedList:
+    ) -> AsyncPager[TenantMemberResponse, TenantMemberResponsePaginatedList]:
         """
         Parameters
         ----------
@@ -182,7 +192,7 @@ class AsyncMembersClient:
 
         Returns
         -------
-        TenantMemberResponsePaginatedList
+        AsyncPager[TenantMemberResponse, TenantMemberResponsePaginatedList]
             Success
 
         Examples
@@ -198,15 +208,25 @@ class AsyncMembersClient:
 
 
         async def main() -> None:
-            await client.tenants.members.list()
+            response = await client.tenants.members.list(
+                user_id=["user_id"],
+                page=1,
+                start="start",
+                size=1,
+            )
+            async for item in response:
+                yield item
+
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list(
+        return await self._raw_client.list(
             user_id=user_id, page=page, start=start, size=size, request_options=request_options
         )
-        return _response.data
 
     async def update(
         self,

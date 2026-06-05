@@ -6,8 +6,9 @@ from json.decoder import JSONDecodeError
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.http_response import AsyncHttpResponse, HttpResponse
-from ...core.jsonable_encoder import jsonable_encoder
-from ...core.pagination import AsyncPager, BaseHttpResponse, SyncPager
+from ...core.jsonable_encoder import encode_path_param
+from ...core.pagination import AsyncPager, SyncPager
+from ...core.parse_error import ParsingError
 from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
 from ...core.serialization import convert_and_respect_annotation_metadata
@@ -23,6 +24,7 @@ from ...types.enrollment_list import EnrollmentList
 from ...types.problem_details import ProblemDetails
 from ...types.validation_problem_details import ValidationProblemDetails
 from .types.create_enrollment_request_type import CreateEnrollmentRequestType
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -38,7 +40,7 @@ class RawEnrollmentsClient:
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Enrollment]:
+    ) -> SyncPager[Enrollment, EnrollmentList]:
         """
         List all enrollments for the current tenant with cursor-based pagination.
 
@@ -54,7 +56,7 @@ class RawEnrollmentsClient:
 
         Returns
         -------
-        SyncPager[Enrollment]
+        SyncPager[Enrollment, EnrollmentList]
             Paginated list of enrollments
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -86,9 +88,7 @@ class RawEnrollmentsClient:
                         cursor=_parsed_next,
                         request_options=request_options,
                     )
-                return SyncPager(
-                    has_next=_has_next, items=_items, get_next=_get_next, response=BaseHttpResponse(response=_response)
-                )
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -125,6 +125,10 @@ class RawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create(
@@ -256,6 +260,10 @@ class RawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get(
@@ -275,7 +283,7 @@ class RawEnrollmentsClient:
             Enrollment found
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -315,9 +323,9 @@ class RawEnrollmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -336,6 +344,10 @@ class RawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete(
@@ -356,7 +368,7 @@ class RawEnrollmentsClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -389,9 +401,9 @@ class RawEnrollmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -410,6 +422,10 @@ class RawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def retry(
@@ -431,7 +447,7 @@ class RawEnrollmentsClient:
             Enrollment retried successfully
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/retry",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/retry",
             method="POST",
             request_options=request_options,
         )
@@ -482,9 +498,9 @@ class RawEnrollmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -514,6 +530,10 @@ class RawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -527,7 +547,7 @@ class AsyncRawEnrollmentsClient:
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Enrollment]:
+    ) -> AsyncPager[Enrollment, EnrollmentList]:
         """
         List all enrollments for the current tenant with cursor-based pagination.
 
@@ -543,7 +563,7 @@ class AsyncRawEnrollmentsClient:
 
         Returns
         -------
-        AsyncPager[Enrollment]
+        AsyncPager[Enrollment, EnrollmentList]
             Paginated list of enrollments
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -578,9 +598,7 @@ class AsyncRawEnrollmentsClient:
                             request_options=request_options,
                         )
 
-                return AsyncPager(
-                    has_next=_has_next, items=_items, get_next=_get_next, response=BaseHttpResponse(response=_response)
-                )
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -617,6 +635,10 @@ class AsyncRawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create(
@@ -748,6 +770,10 @@ class AsyncRawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get(
@@ -767,7 +793,7 @@ class AsyncRawEnrollmentsClient:
             Enrollment found
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -807,9 +833,9 @@ class AsyncRawEnrollmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -828,6 +854,10 @@ class AsyncRawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete(
@@ -848,7 +878,7 @@ class AsyncRawEnrollmentsClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -881,9 +911,9 @@ class AsyncRawEnrollmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -902,6 +932,10 @@ class AsyncRawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def retry(
@@ -923,7 +957,7 @@ class AsyncRawEnrollmentsClient:
             Enrollment retried successfully
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/retry",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/retry",
             method="POST",
             request_options=request_options,
         )
@@ -974,9 +1008,9 @@ class AsyncRawEnrollmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1006,4 +1040,8 @@ class AsyncRawEnrollmentsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

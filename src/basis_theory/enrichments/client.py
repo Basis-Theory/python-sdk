@@ -69,9 +69,7 @@ class EnrichmentsClient:
         )
         return _response.data
 
-    def getcarddetails(
-        self, *, bin: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> CardDetailsResponse:
+    def card_details(self, *, bin: str, request_options: typing.Optional[RequestOptions] = None) -> CardDetailsResponse:
         """
         Parameters
         ----------
@@ -93,11 +91,11 @@ class EnrichmentsClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        client.enrichments.getcarddetails(
+        client.enrichments.card_details(
             bin="bin",
         )
         """
-        _response = self._raw_client.getcarddetails(bin=bin, request_options=request_options)
+        _response = self._raw_client.card_details(bin=bin, request_options=request_options)
         return _response.data
 
 
@@ -166,7 +164,7 @@ class AsyncEnrichmentsClient:
         )
         return _response.data
 
-    async def getcarddetails(
+    async def card_details(
         self, *, bin: str, request_options: typing.Optional[RequestOptions] = None
     ) -> CardDetailsResponse:
         """
@@ -195,12 +193,12 @@ class AsyncEnrichmentsClient:
 
 
         async def main() -> None:
-            await client.enrichments.getcarddetails(
+            await client.enrichments.card_details(
                 bin="bin",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.getcarddetails(bin=bin, request_options=request_options)
+        _response = await self._raw_client.card_details(bin=bin, request_options=request_options)
         return _response.data

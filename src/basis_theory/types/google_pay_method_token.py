@@ -10,12 +10,18 @@ from .intermediate_signing_key import IntermediateSigningKey
 
 
 class GooglePayMethodToken(UniversalBaseModel):
-    protocol_version: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="protocolVersion")] = None
+    protocol_version: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="protocolVersion"), pydantic.Field(alias="protocolVersion")
+    ] = None
     signature: typing.Optional[str] = None
     intermediate_signing_key: typing_extensions.Annotated[
-        typing.Optional[IntermediateSigningKey], FieldMetadata(alias="intermediateSigningKey")
+        typing.Optional[IntermediateSigningKey],
+        FieldMetadata(alias="intermediateSigningKey"),
+        pydantic.Field(alias="intermediateSigningKey"),
     ] = None
-    signed_message: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="signedMessage")] = None
+    signed_message: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="signedMessage"), pydantic.Field(alias="signedMessage")
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -6,7 +6,8 @@ from json.decoder import JSONDecodeError
 from ....core.api_error import ApiError
 from ....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ....core.http_response import AsyncHttpResponse, HttpResponse
-from ....core.jsonable_encoder import jsonable_encoder
+from ....core.jsonable_encoder import encode_path_param
+from ....core.parse_error import ParsingError
 from ....core.pydantic_utilities import parse_obj_as
 from ....core.request_options import RequestOptions
 from ....core.serialization import convert_and_respect_annotation_metadata
@@ -21,6 +22,7 @@ from ....types.device_context import DeviceContext
 from ....types.problem_details import ProblemDetails
 from ....types.validation_problem_details import ValidationProblemDetails
 from ....types.verification_response import VerificationResponse
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -55,15 +57,12 @@ class RawVerifyClient:
             Verification started — returns available methods or passkey options
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/verify",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/verify",
             method="POST",
             json={
                 "device_context": convert_and_respect_annotation_metadata(
                     object_=device_context, annotation=DeviceContext, direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -115,9 +114,9 @@ class RawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -158,6 +157,10 @@ class RawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def method(
@@ -181,7 +184,7 @@ class RawVerifyClient:
             OTP method selected — OTP sent to cardholder
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/verify/method",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/verify/method",
             method="POST",
             json={
                 "method_id": method_id,
@@ -239,9 +242,9 @@ class RawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -271,6 +274,10 @@ class RawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def otp(
@@ -294,7 +301,7 @@ class RawVerifyClient:
             OTP accepted — enrollment verified or next step returned
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/verify/otp",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/verify/otp",
             method="POST",
             json={
                 "otp_code": otp_code,
@@ -352,9 +359,9 @@ class RawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -384,13 +391,17 @@ class RawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def complete(
         self,
         enrollment_id: str,
         *,
-        assurance_data: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        assurance_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         src_correlation_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[VerificationResponse]:
@@ -401,7 +412,7 @@ class RawVerifyClient:
         ----------
         enrollment_id : str
 
-        assurance_data : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+        assurance_data : typing.Optional[typing.Dict[str, typing.Any]]
 
         src_correlation_id : typing.Optional[str]
 
@@ -414,7 +425,7 @@ class RawVerifyClient:
             Verification completed — enrollment is now active
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/verify/complete",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/verify/complete",
             method="POST",
             json={
                 "assurance_data": assurance_data,
@@ -473,9 +484,9 @@ class RawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -505,6 +516,10 @@ class RawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -537,15 +552,12 @@ class AsyncRawVerifyClient:
             Verification started — returns available methods or passkey options
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/verify",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/verify",
             method="POST",
             json={
                 "device_context": convert_and_respect_annotation_metadata(
                     object_=device_context, annotation=DeviceContext, direction="write"
                 ),
-            },
-            headers={
-                "content-type": "application/json",
             },
             request_options=request_options,
             omit=OMIT,
@@ -597,9 +609,9 @@ class AsyncRawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -640,6 +652,10 @@ class AsyncRawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def method(
@@ -663,7 +679,7 @@ class AsyncRawVerifyClient:
             OTP method selected — OTP sent to cardholder
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/verify/method",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/verify/method",
             method="POST",
             json={
                 "method_id": method_id,
@@ -721,9 +737,9 @@ class AsyncRawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -753,6 +769,10 @@ class AsyncRawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def otp(
@@ -776,7 +796,7 @@ class AsyncRawVerifyClient:
             OTP accepted — enrollment verified or next step returned
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/verify/otp",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/verify/otp",
             method="POST",
             json={
                 "otp_code": otp_code,
@@ -834,9 +854,9 @@ class AsyncRawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -866,13 +886,17 @@ class AsyncRawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def complete(
         self,
         enrollment_id: str,
         *,
-        assurance_data: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        assurance_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         src_correlation_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[VerificationResponse]:
@@ -883,7 +907,7 @@ class AsyncRawVerifyClient:
         ----------
         enrollment_id : str
 
-        assurance_data : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+        assurance_data : typing.Optional[typing.Dict[str, typing.Any]]
 
         src_correlation_id : typing.Optional[str]
 
@@ -896,7 +920,7 @@ class AsyncRawVerifyClient:
             Verification completed — enrollment is now active
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"agentic/enrollments/{jsonable_encoder(enrollment_id)}/verify/complete",
+            f"agentic/enrollments/{encode_path_param(enrollment_id)}/verify/complete",
             method="POST",
             json={
                 "assurance_data": assurance_data,
@@ -955,9 +979,9 @@ class AsyncRawVerifyClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -987,4 +1011,8 @@ class AsyncRawVerifyClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
