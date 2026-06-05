@@ -25,18 +25,18 @@ class ApplicationKeysClient:
 
     def list(
         self,
-        id_: str,
+        id: str,
         *,
-        id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        key_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[ApplicationKey]:
         """
         Parameters
         ----------
-        id_ : str
+        id : str
 
-        id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        key_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
 
         type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
 
@@ -57,10 +57,12 @@ class ApplicationKeysClient:
             api_key="YOUR_API_KEY",
         )
         client.application_keys.list(
-            id_="id",
+            id="id",
+            key_id=["id"],
+            type=["type"],
         )
         """
-        _response = self._raw_client.list(id_, id=id, type=type, request_options=request_options)
+        _response = self._raw_client.list(id, key_id=key_id, type=type, request_options=request_options)
         return _response.data
 
     def create(
@@ -181,18 +183,18 @@ class AsyncApplicationKeysClient:
 
     async def list(
         self,
-        id_: str,
+        id: str,
         *,
-        id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        key_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[ApplicationKey]:
         """
         Parameters
         ----------
-        id_ : str
+        id : str
 
-        id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        key_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
 
         type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
 
@@ -218,13 +220,15 @@ class AsyncApplicationKeysClient:
 
         async def main() -> None:
             await client.application_keys.list(
-                id_="id",
+                id="id",
+                key_id=["id"],
+                type=["type"],
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list(id_, id=id, type=type, request_options=request_options)
+        _response = await self._raw_client.list(id, key_id=key_id, type=type, request_options=request_options)
         return _response.data
 
     async def create(

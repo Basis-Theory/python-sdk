@@ -9,8 +9,12 @@ from ..core.serialization import FieldMetadata
 
 
 class MerchantAddress(UniversalBaseModel):
-    street1: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="street_1")] = None
-    street2: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="street_2")] = None
+    street1: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="street_1"), pydantic.Field(alias="street_1")
+    ] = None
+    street2: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="street_2"), pydantic.Field(alias="street_2")
+    ] = None
     city: typing.Optional[str] = None
     state_province: typing.Optional[str] = None
     postal_code: typing.Optional[str] = None

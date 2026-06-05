@@ -6,7 +6,8 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
+from ..core.parse_error import ParsingError
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.forbidden_error import ForbiddenError
@@ -15,6 +16,7 @@ from ..errors.unauthorized_error import UnauthorizedError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.application_key import ApplicationKey
 from ..types.problem_details import ProblemDetails
+from pydantic import ValidationError
 
 
 class RawApplicationKeysClient:
@@ -23,18 +25,18 @@ class RawApplicationKeysClient:
 
     def list(
         self,
-        id_: str,
+        id: str,
         *,
-        id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        key_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.List[ApplicationKey]]:
         """
         Parameters
         ----------
-        id_ : str
+        id : str
 
-        id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        key_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
 
         type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
 
@@ -47,10 +49,10 @@ class RawApplicationKeysClient:
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"applications/{jsonable_encoder(id_)}/keys",
+            f"applications/{encode_path_param(id)}/keys",
             method="GET",
             params={
-                "id": id,
+                "id": key_id,
                 "type": type,
             },
             request_options=request_options,
@@ -91,9 +93,9 @@ class RawApplicationKeysClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -101,6 +103,10 @@ class RawApplicationKeysClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create(
@@ -126,7 +132,7 @@ class RawApplicationKeysClient:
             Created
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"applications/{jsonable_encoder(id)}/keys",
+            f"applications/{encode_path_param(id)}/keys",
             method="POST",
             headers={
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
@@ -179,6 +185,10 @@ class RawApplicationKeysClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get(
@@ -200,7 +210,7 @@ class RawApplicationKeysClient:
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"applications/{jsonable_encoder(id)}/keys/{jsonable_encoder(key_id)}",
+            f"applications/{encode_path_param(id)}/keys/{encode_path_param(key_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -240,9 +250,9 @@ class RawApplicationKeysClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -250,6 +260,10 @@ class RawApplicationKeysClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete(
@@ -270,7 +284,7 @@ class RawApplicationKeysClient:
         HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"applications/{jsonable_encoder(id)}/keys/{jsonable_encoder(key_id)}",
+            f"applications/{encode_path_param(id)}/keys/{encode_path_param(key_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -303,9 +317,9 @@ class RawApplicationKeysClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -313,6 +327,10 @@ class RawApplicationKeysClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -322,18 +340,18 @@ class AsyncRawApplicationKeysClient:
 
     async def list(
         self,
-        id_: str,
+        id: str,
         *,
-        id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        key_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         type: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.List[ApplicationKey]]:
         """
         Parameters
         ----------
-        id_ : str
+        id : str
 
-        id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+        key_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
 
         type : typing.Optional[typing.Union[str, typing.Sequence[str]]]
 
@@ -346,10 +364,10 @@ class AsyncRawApplicationKeysClient:
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"applications/{jsonable_encoder(id_)}/keys",
+            f"applications/{encode_path_param(id)}/keys",
             method="GET",
             params={
-                "id": id,
+                "id": key_id,
                 "type": type,
             },
             request_options=request_options,
@@ -390,9 +408,9 @@ class AsyncRawApplicationKeysClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -400,6 +418,10 @@ class AsyncRawApplicationKeysClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create(
@@ -425,7 +447,7 @@ class AsyncRawApplicationKeysClient:
             Created
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"applications/{jsonable_encoder(id)}/keys",
+            f"applications/{encode_path_param(id)}/keys",
             method="POST",
             headers={
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
@@ -478,6 +500,10 @@ class AsyncRawApplicationKeysClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get(
@@ -499,7 +525,7 @@ class AsyncRawApplicationKeysClient:
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"applications/{jsonable_encoder(id)}/keys/{jsonable_encoder(key_id)}",
+            f"applications/{encode_path_param(id)}/keys/{encode_path_param(key_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -539,9 +565,9 @@ class AsyncRawApplicationKeysClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -549,6 +575,10 @@ class AsyncRawApplicationKeysClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete(
@@ -569,7 +599,7 @@ class AsyncRawApplicationKeysClient:
         AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"applications/{jsonable_encoder(id)}/keys/{jsonable_encoder(key_id)}",
+            f"applications/{encode_path_param(id)}/keys/{encode_path_param(key_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -602,9 +632,9 @@ class AsyncRawApplicationKeysClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        typing.Any,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -612,4 +642,8 @@ class AsyncRawApplicationKeysClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

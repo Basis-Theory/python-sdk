@@ -8,6 +8,7 @@ from ..core.pagination import AsyncPager, SyncPager
 from ..core.request_options import RequestOptions
 from ..types.log import Log
 from ..types.log_entity_type import LogEntityType
+from ..types.log_paginated_list import LogPaginatedList
 from .raw_client import AsyncRawLogsClient, RawLogsClient
 
 
@@ -37,7 +38,7 @@ class LogsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Log]:
+    ) -> SyncPager[Log, LogPaginatedList]:
         """
         Parameters
         ----------
@@ -60,18 +61,32 @@ class LogsClient:
 
         Returns
         -------
-        SyncPager[Log]
+        SyncPager[Log, LogPaginatedList]
             Success
 
         Examples
         --------
+        import datetime
+
         from basis_theory import BasisTheory
 
         client = BasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.logs.list()
+        response = client.logs.list(
+            entity_type="entity_type",
+            entity_id="entity_id",
+            start_date=datetime.datetime.fromisoformat(
+                "2024-01-15 09:30:00+00:00",
+            ),
+            end_date=datetime.datetime.fromisoformat(
+                "2024-01-15 09:30:00+00:00",
+            ),
+            page=1,
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -143,7 +158,7 @@ class AsyncLogsClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Log]:
+    ) -> AsyncPager[Log, LogPaginatedList]:
         """
         Parameters
         ----------
@@ -166,12 +181,13 @@ class AsyncLogsClient:
 
         Returns
         -------
-        AsyncPager[Log]
+        AsyncPager[Log, LogPaginatedList]
             Success
 
         Examples
         --------
         import asyncio
+        import datetime
 
         from basis_theory import AsyncBasisTheory
 
@@ -182,7 +198,19 @@ class AsyncLogsClient:
 
 
         async def main() -> None:
-            response = await client.logs.list()
+            response = await client.logs.list(
+                entity_type="entity_type",
+                entity_id="entity_id",
+                start_date=datetime.datetime.fromisoformat(
+                    "2024-01-15 09:30:00+00:00",
+                ),
+                end_date=datetime.datetime.fromisoformat(
+                    "2024-01-15 09:30:00+00:00",
+                ),
+                page=1,
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 

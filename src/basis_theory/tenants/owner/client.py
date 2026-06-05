@@ -7,6 +7,9 @@ from ...core.request_options import RequestOptions
 from ...types.tenant_member_response import TenantMemberResponse
 from .raw_client import AsyncRawOwnerClient, RawOwnerClient
 
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
 
 class OwnerClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
@@ -46,6 +49,45 @@ class OwnerClient:
         client.tenants.owner.get()
         """
         _response = self._raw_client.get(request_options=request_options)
+        return _response.data
+
+    def transfer(
+        self,
+        *,
+        member_id: str,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> TenantMemberResponse:
+        """
+        Parameters
+        ----------
+        member_id : str
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        TenantMemberResponse
+            Success
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+        client.tenants.owner.transfer(
+            member_id="member_id",
+        )
+        """
+        _response = self._raw_client.transfer(
+            member_id=member_id, idempotency_key=idempotency_key, request_options=request_options
+        )
         return _response.data
 
 
@@ -95,4 +137,51 @@ class AsyncOwnerClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.get(request_options=request_options)
+        return _response.data
+
+    async def transfer(
+        self,
+        *,
+        member_id: str,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> TenantMemberResponse:
+        """
+        Parameters
+        ----------
+        member_id : str
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        TenantMemberResponse
+            Success
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.tenants.owner.transfer(
+                member_id="member_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.transfer(
+            member_id=member_id, idempotency_key=idempotency_key, request_options=request_options
+        )
         return _response.data

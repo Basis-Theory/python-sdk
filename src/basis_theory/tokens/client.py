@@ -7,6 +7,7 @@ from ..core.pagination import AsyncPager, SyncPager
 from ..core.request_options import RequestOptions
 from ..types.privacy import Privacy
 from ..types.token import Token
+from ..types.token_cursor_paginated_list import TokenCursorPaginatedList
 from ..types.update_privacy import UpdatePrivacy
 from .raw_client import AsyncRawTokensClient, RawTokensClient
 
@@ -29,20 +30,18 @@ class TokensClient:
         """
         return self._raw_client
 
-    def detokenize(
-        self, *, request: typing.Optional[typing.Any] = None, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    def detokenize(self, *, request: typing.Any, request_options: typing.Optional[RequestOptions] = None) -> typing.Any:
         """
         Parameters
         ----------
-        request : typing.Optional[typing.Any]
+        request : typing.Any
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.Any
             Success
 
         Examples
@@ -63,14 +62,14 @@ class TokensClient:
     def tokenize(
         self,
         *,
-        request: typing.Optional[typing.Any] = None,
+        request: typing.Any,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
+    ) -> typing.Any:
         """
         Parameters
         ----------
-        request : typing.Optional[typing.Any]
+        request : typing.Any
 
         idempotency_key : typing.Optional[str]
 
@@ -79,7 +78,7 @@ class TokensClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.Any
             Success
 
         Examples
@@ -160,12 +159,12 @@ class TokensClient:
         self,
         id: str,
         *,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         privacy: typing.Optional[UpdatePrivacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
         fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        mask: typing.Optional[typing.Any] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -177,7 +176,7 @@ class TokensClient:
         ----------
         id : str
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         privacy : typing.Optional[UpdatePrivacy]
 
@@ -187,7 +186,7 @@ class TokensClient:
 
         fingerprint_expression : typing.Optional[str]
 
-        mask : typing.Optional[typing.Optional[typing.Any]]
+        mask : typing.Optional[typing.Any]
 
         expires_at : typing.Optional[str]
 
@@ -238,13 +237,13 @@ class TokensClient:
         *,
         id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         encrypted: typing.Optional[str] = OMIT,
         privacy: typing.Optional[Privacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
         fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        mask: typing.Optional[typing.Any] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -259,7 +258,7 @@ class TokensClient:
 
         type : typing.Optional[str]
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         encrypted : typing.Optional[str]
 
@@ -271,7 +270,7 @@ class TokensClient:
 
         fingerprint_expression : typing.Optional[str]
 
-        mask : typing.Optional[typing.Optional[typing.Any]]
+        mask : typing.Optional[typing.Any]
 
         deduplicate_token : typing.Optional[bool]
 
@@ -330,7 +329,7 @@ class TokensClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Token]:
+    ) -> SyncPager[Token, TokenCursorPaginatedList]:
         """
         Parameters
         ----------
@@ -351,7 +350,7 @@ class TokensClient:
 
         Returns
         -------
-        SyncPager[Token]
+        SyncPager[Token, TokenCursorPaginatedList]
             Success
 
         Examples
@@ -362,7 +361,13 @@ class TokensClient:
             correlation_id="YOUR_CORRELATION_ID",
             api_key="YOUR_API_KEY",
         )
-        response = client.tokens.list_v2()
+        response = client.tokens.list_v2(
+            type="type",
+            container="container",
+            fingerprint="fingerprint",
+            start="start",
+            size=1,
+        )
         for item in response:
             yield item
         # alternatively, you can paginate page-by-page
@@ -387,7 +392,7 @@ class TokensClient:
         size: typing.Optional[int] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SyncPager[Token]:
+    ) -> SyncPager[Token, TokenCursorPaginatedList]:
         """
         Parameters
         ----------
@@ -404,7 +409,7 @@ class TokensClient:
 
         Returns
         -------
-        SyncPager[Token]
+        SyncPager[Token, TokenCursorPaginatedList]
             Success
 
         Examples
@@ -443,19 +448,19 @@ class AsyncTokensClient:
         return self._raw_client
 
     async def detokenize(
-        self, *, request: typing.Optional[typing.Any] = None, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self, *, request: typing.Any, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Any:
         """
         Parameters
         ----------
-        request : typing.Optional[typing.Any]
+        request : typing.Any
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.Any
             Success
 
         Examples
@@ -484,14 +489,14 @@ class AsyncTokensClient:
     async def tokenize(
         self,
         *,
-        request: typing.Optional[typing.Any] = None,
+        request: typing.Any,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
+    ) -> typing.Any:
         """
         Parameters
         ----------
-        request : typing.Optional[typing.Any]
+        request : typing.Any
 
         idempotency_key : typing.Optional[str]
 
@@ -500,7 +505,7 @@ class AsyncTokensClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.Any
             Success
 
         Examples
@@ -605,12 +610,12 @@ class AsyncTokensClient:
         self,
         id: str,
         *,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         privacy: typing.Optional[UpdatePrivacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
         fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        mask: typing.Optional[typing.Any] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -622,7 +627,7 @@ class AsyncTokensClient:
         ----------
         id : str
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         privacy : typing.Optional[UpdatePrivacy]
 
@@ -632,7 +637,7 @@ class AsyncTokensClient:
 
         fingerprint_expression : typing.Optional[str]
 
-        mask : typing.Optional[typing.Optional[typing.Any]]
+        mask : typing.Optional[typing.Any]
 
         expires_at : typing.Optional[str]
 
@@ -691,13 +696,13 @@ class AsyncTokensClient:
         *,
         id: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
-        data: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        data: typing.Optional[typing.Any] = OMIT,
         encrypted: typing.Optional[str] = OMIT,
         privacy: typing.Optional[Privacy] = OMIT,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         search_indexes: typing.Optional[typing.Sequence[str]] = OMIT,
         fingerprint_expression: typing.Optional[str] = OMIT,
-        mask: typing.Optional[typing.Optional[typing.Any]] = OMIT,
+        mask: typing.Optional[typing.Any] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -712,7 +717,7 @@ class AsyncTokensClient:
 
         type : typing.Optional[str]
 
-        data : typing.Optional[typing.Optional[typing.Any]]
+        data : typing.Optional[typing.Any]
 
         encrypted : typing.Optional[str]
 
@@ -724,7 +729,7 @@ class AsyncTokensClient:
 
         fingerprint_expression : typing.Optional[str]
 
-        mask : typing.Optional[typing.Optional[typing.Any]]
+        mask : typing.Optional[typing.Any]
 
         deduplicate_token : typing.Optional[bool]
 
@@ -791,7 +796,7 @@ class AsyncTokensClient:
         start: typing.Optional[str] = None,
         size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Token]:
+    ) -> AsyncPager[Token, TokenCursorPaginatedList]:
         """
         Parameters
         ----------
@@ -812,7 +817,7 @@ class AsyncTokensClient:
 
         Returns
         -------
-        AsyncPager[Token]
+        AsyncPager[Token, TokenCursorPaginatedList]
             Success
 
         Examples
@@ -828,7 +833,13 @@ class AsyncTokensClient:
 
 
         async def main() -> None:
-            response = await client.tokens.list_v2()
+            response = await client.tokens.list_v2(
+                type="type",
+                container="container",
+                fingerprint="fingerprint",
+                start="start",
+                size=1,
+            )
             async for item in response:
                 yield item
 
@@ -857,7 +868,7 @@ class AsyncTokensClient:
         size: typing.Optional[int] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncPager[Token]:
+    ) -> AsyncPager[Token, TokenCursorPaginatedList]:
         """
         Parameters
         ----------
@@ -874,7 +885,7 @@ class AsyncTokensClient:
 
         Returns
         -------
-        AsyncPager[Token]
+        AsyncPager[Token, TokenCursorPaginatedList]
             Success
 
         Examples

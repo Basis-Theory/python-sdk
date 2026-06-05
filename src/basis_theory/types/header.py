@@ -9,12 +9,18 @@ from ..core.serialization import FieldMetadata
 
 
 class Header(UniversalBaseModel):
-    public_key_hash: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="publicKeyHash")] = None
-    ephemeral_public_key: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="ephemeralPublicKey")
+    public_key_hash: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="publicKeyHash"), pydantic.Field(alias="publicKeyHash")
     ] = None
-    transaction_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="transactionId")] = None
-    application_data: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="applicationData")] = None
+    ephemeral_public_key: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="ephemeralPublicKey"), pydantic.Field(alias="ephemeralPublicKey")
+    ] = None
+    transaction_id: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="transactionId"), pydantic.Field(alias="transactionId")
+    ] = None
+    application_data: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="applicationData"), pydantic.Field(alias="applicationData")
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
