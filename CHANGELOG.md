@@ -1,3 +1,53 @@
+# [6.0.0](https://github.com/Basis-Theory/python-sdk/compare/v5.10.0...v6.0.0) (2026-06-05)
+
+
+* feat!: Major updates ([#131](https://github.com/Basis-Theory/python-sdk/issues/131)) ([3cb347a](https://github.com/Basis-Theory/python-sdk/commit/3cb347ac4a95b0e0dedaf55da33881f46d49006c))
+
+
+### BREAKING CHANGES
+
+* See below
+
+#### Environment
+
+- **Minimum Python is now 3.10** (was 3.8). Python 3.8 (EOL Oct 2024) and 3.9 (EOL Oct 2025) are no longer supported. This is a toolchain change, not a code change.
+- `pydantic-core` is now upper-bounded to `>=2.18.2,<3.0.0`. Only affects consumers who explicitly pin `pydantic-core` 3.x (which does not yet exist).
+
+#### Behavioral change — automatic retries now default to 2
+
+The client previously performed effectively **0** automatic retries by default; it now defaults to **2**. Retries also now fire on connection errors (`httpx.ConnectError` / `RemoteProtocolError`) in addition to `408/409/429/5xx`. You will see automatic retries — and retried side effects — where there previously were none. To restore the old behavior, pass `max_retries=0` to the client constructor:
+
+```python
+client = BasisTheory(api_key=..., max_retries=0)
+```
+
+#### Generator breaking changes
+
+1. **Pagination types gained a second type parameter.** `SyncPager[T]` / `AsyncPager[T]` are now `SyncPager[T, R]` / `AsyncPager[T, R]` (where `R` is the parsed paginated-list response model), and the `.response` attribute changed type from `Optional[BaseHttpResponse]` to `R`. Runtime iteration is **unchanged** — `for x in pager`, `pager.next_page()`, `pager.iter_items()`, `.items`, `.has_next` all behave identically. This only breaks consumers who name `SyncPager[...]` / `AsyncPager[...]` explicitly in a type annotation, or who read `pager.response` for its old type. Fix: add the second type argument, or drop the explicit annotation (inference still works).
+
+2. **`tokens.detokenize(request=...)` is now required.** The `request` parameter lost its `= None` default. Calling `detokenize()` with no body no longer type-checks — but that call already returned a 400 at runtime, so real callers are unaffected.
+
+#### API definition changes (apply to all Basis Theory SDKs)
+
+These come from changes to the API definition and alter the generated SDK surface in this language:
+
+1. **`application_keys.list` — parameters renamed.** The application-id path parameter and the key-id query filter previously both generated as `id` (the path arg was emitted as `id_` to avoid the collision); the upgraded generator rejects the collision. The path argument is now `id` and the key-id filter is now `key_id`:
+
+   ```python
+   # before
+   client.application_keys.list(id_="app_id", id=["key_id"])
+   # after
+   client.application_keys.list(id="app_id", key_id=["key_id"])
+   ```
+
+2. **`tenants.connections.delete` no longer returns a body.** The `204` success response previously deserialized to `CreateTenantConnectionResponse`; it now returns `None`. Remove any code reading a return value from this call.
+
+3. **`tenants.members.list` is now paginated.** Its return type changed from `TenantMemberResponsePaginatedList` to `SyncPager[TenantMemberResponse, ...]` (async: `AsyncPager`). Iterate the result (`for member in client.tenants.members.list(...)`) instead of reading a `.data` list off a single response object.
+
+4. **`enrichments` card-details method renamed.** `client.enrichments.getcarddetails(...)` is now `client.enrichments.card_details(...)` (signature otherwise unchanged — still takes `bin`).
+
+5. **Tenant owner-transfer method moved and renamed.** `client.tenants.owner_transfer(member_id=...)` is now `client.tenants.owner.transfer(member_id=...)` and accepts an optional `idempotency_key`. The old `client.tenants.owner_transfer(...)` path has been removed.
+
 # [5.10.0](https://github.com/Basis-Theory/python-sdk/compare/v5.9.0...v5.10.0) (2026-06-01)
 
 
