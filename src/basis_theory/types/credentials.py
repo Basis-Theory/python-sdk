@@ -6,10 +6,28 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .credentials_card import CredentialsCard
+from .credentials_mpp import CredentialsMpp
+from .credentials_spt import CredentialsSpt
 
 
 class Credentials(UniversalBaseModel):
+    """
+    Credential payload for the instruction. Exactly one of `card`, `spt`, or `mpp` is present:
+    `card` for Visa/Mastercard virtual card credentials, `spt` for Stripe shared payment token
+    instructions (raw mode), `mpp` for Stripe instructions created with an MPP challenge.
+    """
+
     card: typing.Optional[CredentialsCard] = None
+    spt: typing.Optional[CredentialsSpt] = pydantic.Field(default=None)
+    """
+    Stripe shared payment token (raw mode)
+    """
+
+    mpp: typing.Optional[CredentialsMpp] = pydantic.Field(default=None)
+    """
+    MPP credential (MPP mode)
+    """
+
     expires_at: typing.Optional[dt.datetime] = None
 
     if IS_PYDANTIC_V2:

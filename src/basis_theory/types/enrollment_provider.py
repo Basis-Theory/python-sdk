@@ -2,4 +2,6 @@
 
 import typing
 
-EnrollmentProvider = typing.Union[typing.Literal["visa", "mastercard", "visa-mock", "mastercard-mock"], typing.Any]
+EnrollmentProvider = typing.Union[
+    typing.Literal["visa", "mastercard", "stripe", "visa-mock", "mastercard-mock", "stripe-mock"], typing.Any
+]

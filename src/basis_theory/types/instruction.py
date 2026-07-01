@@ -6,6 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .amount import Amount
+from .instruction_credential_type import InstructionCredentialType
 from .instruction_status import InstructionStatus
 from .instruction_type import InstructionType
 from .recurring import Recurring
@@ -19,7 +20,15 @@ class Instruction(UniversalBaseModel):
     """
     Inherited from the parent enrollment. `agentic` instructions require cardholder
     verification before credentials can be retrieved; `autofill` instructions are
-    auto-approved on creation and credentials can be retrieved immediately.
+    auto-approved on creation and credentials can be retrieved immediately; `spt`
+    instructions create a shared payment token that is approved on creation.
+    """
+
+    credential_type: typing.Optional[InstructionCredentialType] = pydantic.Field(default=None)
+    """
+    Indicates the shape the credentials endpoint returns for this instruction:
+    `card` (Visa/Mastercard virtual card credentials), `spt` (Stripe shared payment
+    token ID), or `mpp` (MPP credential built from the challenge provided at creation).
     """
 
     amount: typing.Optional[Amount] = None

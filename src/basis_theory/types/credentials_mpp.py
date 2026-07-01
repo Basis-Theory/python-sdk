@@ -4,11 +4,17 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .create_token_intent_response import CreateTokenIntentResponse
 
 
-class GooglePayTokenizeResponse(UniversalBaseModel):
-    token_intent: typing.Optional[CreateTokenIntentResponse] = None
+class CredentialsMpp(UniversalBaseModel):
+    """
+    MPP credential (MPP mode)
+    """
+
+    credential: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    base64url-encoded MPP credential for the merchant's Stripe charge endpoint
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
