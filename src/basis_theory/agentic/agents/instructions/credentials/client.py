@@ -36,8 +36,8 @@ class CredentialsClient:
         agent_id: str,
         instruction_id: str,
         *,
-        merchant: AgenticMerchant,
         products: typing.Optional[typing.Sequence[Product]] = OMIT,
+        merchant: typing.Optional[AgenticMerchant] = OMIT,
         amount: typing.Optional[Amount] = OMIT,
         delivery_method: typing.Optional[DeliveryMethod] = OMIT,
         shipping_address: typing.Optional[ShippingAddress] = OMIT,
@@ -52,9 +52,11 @@ class CredentialsClient:
 
         instruction_id : str
 
-        merchant : AgenticMerchant
-
         products : typing.Optional[typing.Sequence[Product]]
+
+        merchant : typing.Optional[AgenticMerchant]
+            Required for card (Visa/Mastercard) instructions unless provided at instruction
+            creation. Not used for `spt` instructions.
 
         amount : typing.Optional[Amount]
 
@@ -72,7 +74,7 @@ class CredentialsClient:
 
         Examples
         --------
-        from basis_theory import AgenticMerchant, BasisTheory
+        from basis_theory import BasisTheory
 
         client = BasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
@@ -81,18 +83,13 @@ class CredentialsClient:
         client.agentic.agents.instructions.credentials.create(
             agent_id="agent_id",
             instruction_id="instruction_id",
-            merchant=AgenticMerchant(
-                name="name",
-                url="url",
-                country_code="country_code",
-            ),
         )
         """
         _response = self._raw_client.create(
             agent_id,
             instruction_id,
-            merchant=merchant,
             products=products,
+            merchant=merchant,
             amount=amount,
             delivery_method=delivery_method,
             shipping_address=shipping_address,
@@ -121,8 +118,8 @@ class AsyncCredentialsClient:
         agent_id: str,
         instruction_id: str,
         *,
-        merchant: AgenticMerchant,
         products: typing.Optional[typing.Sequence[Product]] = OMIT,
+        merchant: typing.Optional[AgenticMerchant] = OMIT,
         amount: typing.Optional[Amount] = OMIT,
         delivery_method: typing.Optional[DeliveryMethod] = OMIT,
         shipping_address: typing.Optional[ShippingAddress] = OMIT,
@@ -137,9 +134,11 @@ class AsyncCredentialsClient:
 
         instruction_id : str
 
-        merchant : AgenticMerchant
-
         products : typing.Optional[typing.Sequence[Product]]
+
+        merchant : typing.Optional[AgenticMerchant]
+            Required for card (Visa/Mastercard) instructions unless provided at instruction
+            creation. Not used for `spt` instructions.
 
         amount : typing.Optional[Amount]
 
@@ -159,7 +158,7 @@ class AsyncCredentialsClient:
         --------
         import asyncio
 
-        from basis_theory import AgenticMerchant, AsyncBasisTheory
+        from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
@@ -171,11 +170,6 @@ class AsyncCredentialsClient:
             await client.agentic.agents.instructions.credentials.create(
                 agent_id="agent_id",
                 instruction_id="instruction_id",
-                merchant=AgenticMerchant(
-                    name="name",
-                    url="url",
-                    country_code="country_code",
-                ),
             )
 
 
@@ -184,8 +178,8 @@ class AsyncCredentialsClient:
         _response = await self._raw_client.create(
             agent_id,
             instruction_id,
-            merchant=merchant,
             products=products,
+            merchant=merchant,
             amount=amount,
             delivery_method=delivery_method,
             shipping_address=shipping_address,

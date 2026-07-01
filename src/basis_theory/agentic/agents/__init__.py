@@ -7,7 +7,11 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from . import instructions
-_dynamic_imports: typing.Dict[str, str] = {"instructions": ".instructions"}
+    from .instructions import CreateInstructionRequestMpp
+_dynamic_imports: typing.Dict[str, str] = {
+    "CreateInstructionRequestMpp": ".instructions",
+    "instructions": ".instructions",
+}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -31,4 +35,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["instructions"]
+__all__ = ["CreateInstructionRequestMpp", "instructions"]

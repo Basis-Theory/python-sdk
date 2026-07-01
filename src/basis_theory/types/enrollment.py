@@ -29,7 +29,7 @@ class Enrollment(UniversalBaseModel):
 
     type: typing.Optional[EnrollmentType] = pydantic.Field(default=None)
     """
-    Enrollment type — `agentic` (default) for agent-driven payments, `autofill` for direct credential autofill.
+    Enrollment type — `agentic` (default) for agent-driven payments, `autofill` for direct credential autofill, `spt` for shared payment tokens.
     """
 
     created_at: typing.Optional[dt.datetime] = None

@@ -26,6 +26,7 @@ from ....types.instruction_list import InstructionList
 from ....types.problem_details import ProblemDetails
 from ....types.recurring import Recurring
 from ....types.validation_problem_details import ValidationProblemDetails
+from .types.create_instruction_request_mpp import CreateInstructionRequestMpp
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -165,6 +166,8 @@ class RawInstructionsClient:
         assurance_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         recurring: typing.Optional[Recurring] = OMIT,
         instance_details: typing.Optional[InstanceDetails] = OMIT,
+        network_business_profile: typing.Optional[str] = OMIT,
+        mpp: typing.Optional[CreateInstructionRequestMpp] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Instruction]:
         """
@@ -188,6 +191,17 @@ class RawInstructionsClient:
 
         instance_details : typing.Optional[InstanceDetails]
 
+        network_business_profile : typing.Optional[str]
+            Stripe network business profile identifier (`profile_...`) of the seller allowed to use the
+            shared payment token. Maps to Stripe's `seller_details[network_business_profile]`.
+            Only valid for `spt` (Stripe) enrollments; required unless an MPP challenge with Stripe
+            network details is provided.
+
+        mpp : typing.Optional[CreateInstructionRequestMpp]
+            MPP mode — provide the merchant's MPP challenge to receive an MPP credential from the
+            credentials endpoint instead of a raw shared payment token ID. The challenge must carry
+            Stripe values (`method: stripe`). Only valid for `spt` (Stripe) enrollments.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -210,6 +224,10 @@ class RawInstructionsClient:
                 ),
                 "instance_details": convert_and_respect_annotation_metadata(
                     object_=instance_details, annotation=InstanceDetails, direction="write"
+                ),
+                "network_business_profile": network_business_profile,
+                "mpp": convert_and_respect_annotation_metadata(
+                    object_=mpp, annotation=CreateInstructionRequestMpp, direction="write"
                 ),
             },
             headers={
@@ -734,6 +752,8 @@ class AsyncRawInstructionsClient:
         assurance_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         recurring: typing.Optional[Recurring] = OMIT,
         instance_details: typing.Optional[InstanceDetails] = OMIT,
+        network_business_profile: typing.Optional[str] = OMIT,
+        mpp: typing.Optional[CreateInstructionRequestMpp] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Instruction]:
         """
@@ -757,6 +777,17 @@ class AsyncRawInstructionsClient:
 
         instance_details : typing.Optional[InstanceDetails]
 
+        network_business_profile : typing.Optional[str]
+            Stripe network business profile identifier (`profile_...`) of the seller allowed to use the
+            shared payment token. Maps to Stripe's `seller_details[network_business_profile]`.
+            Only valid for `spt` (Stripe) enrollments; required unless an MPP challenge with Stripe
+            network details is provided.
+
+        mpp : typing.Optional[CreateInstructionRequestMpp]
+            MPP mode — provide the merchant's MPP challenge to receive an MPP credential from the
+            credentials endpoint instead of a raw shared payment token ID. The challenge must carry
+            Stripe values (`method: stripe`). Only valid for `spt` (Stripe) enrollments.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -779,6 +810,10 @@ class AsyncRawInstructionsClient:
                 ),
                 "instance_details": convert_and_respect_annotation_metadata(
                     object_=instance_details, annotation=InstanceDetails, direction="write"
+                ),
+                "network_business_profile": network_business_profile,
+                "mpp": convert_and_respect_annotation_metadata(
+                    object_=mpp, annotation=CreateInstructionRequestMpp, direction="write"
                 ),
             },
             headers={

@@ -2,4 +2,4 @@
 
 import typing
 
-EnrollmentType = typing.Union[typing.Literal["agentic", "autofill"], typing.Any]
+EnrollmentType = typing.Union[typing.Literal["agentic", "autofill", "spt"], typing.Any]

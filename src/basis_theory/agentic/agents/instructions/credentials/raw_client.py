@@ -40,8 +40,8 @@ class RawCredentialsClient:
         agent_id: str,
         instruction_id: str,
         *,
-        merchant: AgenticMerchant,
         products: typing.Optional[typing.Sequence[Product]] = OMIT,
+        merchant: typing.Optional[AgenticMerchant] = OMIT,
         amount: typing.Optional[Amount] = OMIT,
         delivery_method: typing.Optional[DeliveryMethod] = OMIT,
         shipping_address: typing.Optional[ShippingAddress] = OMIT,
@@ -56,9 +56,11 @@ class RawCredentialsClient:
 
         instruction_id : str
 
-        merchant : AgenticMerchant
-
         products : typing.Optional[typing.Sequence[Product]]
+
+        merchant : typing.Optional[AgenticMerchant]
+            Required for card (Visa/Mastercard) instructions unless provided at instruction
+            creation. Not used for `spt` instructions.
 
         amount : typing.Optional[Amount]
 
@@ -191,8 +193,8 @@ class AsyncRawCredentialsClient:
         agent_id: str,
         instruction_id: str,
         *,
-        merchant: AgenticMerchant,
         products: typing.Optional[typing.Sequence[Product]] = OMIT,
+        merchant: typing.Optional[AgenticMerchant] = OMIT,
         amount: typing.Optional[Amount] = OMIT,
         delivery_method: typing.Optional[DeliveryMethod] = OMIT,
         shipping_address: typing.Optional[ShippingAddress] = OMIT,
@@ -207,9 +209,11 @@ class AsyncRawCredentialsClient:
 
         instruction_id : str
 
-        merchant : AgenticMerchant
-
         products : typing.Optional[typing.Sequence[Product]]
+
+        merchant : typing.Optional[AgenticMerchant]
+            Required for card (Visa/Mastercard) instructions unless provided at instruction
+            creation. Not used for `spt` instructions.
 
         amount : typing.Optional[Amount]
 

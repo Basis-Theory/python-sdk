@@ -90,6 +90,7 @@ class EnrollmentsClient:
         agent_ids: typing.Optional[typing.Sequence[str]] = OMIT,
         wallet_name: typing.Optional[str] = OMIT,
         type: typing.Optional[CreateEnrollmentRequestType] = OMIT,
+        provider: typing.Optional[typing.Literal["stripe"]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Enrollment:
         """
@@ -114,6 +115,11 @@ class EnrollmentsClient:
             Enrollment type. `agentic` (default) enrolls the card for agent-driven payments and requires verification.
             `autofill` enrolls the card for direct autofill credential retrieval, skips verification, and is currently
             available to test tenants only.
+            `spt` enrolls the card for shared payment tokens, requires `provider` to be set, skips verification, and
+            activates immediately.
+
+        provider : typing.Optional[typing.Literal["stripe"]]
+            Token provider for `spt` enrollments. Required when `type` is `spt`; not allowed otherwise.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -145,6 +151,7 @@ class EnrollmentsClient:
             agent_ids=agent_ids,
             wallet_name=wallet_name,
             type=type,
+            provider=provider,
             request_options=request_options,
         )
         return _response.data
@@ -328,6 +335,7 @@ class AsyncEnrollmentsClient:
         agent_ids: typing.Optional[typing.Sequence[str]] = OMIT,
         wallet_name: typing.Optional[str] = OMIT,
         type: typing.Optional[CreateEnrollmentRequestType] = OMIT,
+        provider: typing.Optional[typing.Literal["stripe"]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Enrollment:
         """
@@ -352,6 +360,11 @@ class AsyncEnrollmentsClient:
             Enrollment type. `agentic` (default) enrolls the card for agent-driven payments and requires verification.
             `autofill` enrolls the card for direct autofill credential retrieval, skips verification, and is currently
             available to test tenants only.
+            `spt` enrolls the card for shared payment tokens, requires `provider` to be set, skips verification, and
+            activates immediately.
+
+        provider : typing.Optional[typing.Literal["stripe"]]
+            Token provider for `spt` enrollments. Required when `type` is `spt`; not allowed otherwise.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -391,6 +404,7 @@ class AsyncEnrollmentsClient:
             agent_ids=agent_ids,
             wallet_name=wallet_name,
             type=type,
+            provider=provider,
             request_options=request_options,
         )
         return _response.data

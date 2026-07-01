@@ -5959,6 +5959,16 @@ client.agentic.enrollments.create(
 Enrollment type. `agentic` (default) enrolls the card for agent-driven payments and requires verification.
 `autofill` enrolls the card for direct autofill credential retrieval, skips verification, and is currently
 available to test tenants only.
+`spt` enrolls the card for shared payment tokens, requires `provider` to be set, skips verification, and
+activates immediately.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider:** `typing.Optional[typing.Literal]` — Token provider for `spt` enrollments. Required when `type` is `spt`; not allowed otherwise.
     
 </dd>
 </dl>
@@ -6408,6 +6418,31 @@ client.agentic.agents.instructions.create(
 <dl>
 <dd>
 
+**network_business_profile:** `typing.Optional[str]` 
+
+Stripe network business profile identifier (`profile_...`) of the seller allowed to use the
+shared payment token. Maps to Stripe's `seller_details[network_business_profile]`.
+Only valid for `spt` (Stripe) enrollments; required unless an MPP challenge with Stripe
+network details is provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mpp:** `typing.Optional[CreateInstructionRequestMpp]` 
+
+MPP mode — provide the merchant's MPP challenge to receive an MPP credential from the
+credentials endpoint instead of a raw shared payment token ID. The challenge must carry
+Stripe values (`method: stripe`). Only valid for `spt` (Stripe) enrollments.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -6676,7 +6711,7 @@ Retrieve payment credentials (card number, expiration, CVC) for a purchase instr
 <dd>
 
 ```python
-from basis_theory import BasisTheory, AgenticMerchant
+from basis_theory import BasisTheory
 from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
@@ -6687,11 +6722,6 @@ client = BasisTheory(
 client.agentic.agents.instructions.credentials.create(
     agent_id="agent_id",
     instruction_id="instruction_id",
-    merchant=AgenticMerchant(
-        name="name",
-        url="url",
-        country_code="country_code",
-    ),
 )
 
 ```
@@ -6724,7 +6754,7 @@ client.agentic.agents.instructions.credentials.create(
 <dl>
 <dd>
 
-**merchant:** `AgenticMerchant` 
+**products:** `typing.Optional[typing.List[Product]]` 
     
 </dd>
 </dl>
@@ -6732,7 +6762,10 @@ client.agentic.agents.instructions.credentials.create(
 <dl>
 <dd>
 
-**products:** `typing.Optional[typing.List[Product]]` 
+**merchant:** `typing.Optional[AgenticMerchant]` 
+
+Required for card (Visa/Mastercard) instructions unless provided at instruction
+creation. Not used for `spt` instructions.
     
 </dd>
 </dl>

@@ -2,4 +2,4 @@
 
 import typing
 
-InstructionType = typing.Union[typing.Literal["agentic", "autofill"], typing.Any]
+InstructionType = typing.Union[typing.Literal["agentic", "autofill", "spt"], typing.Any]

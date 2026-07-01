@@ -29,8 +29,6 @@ if typing.TYPE_CHECKING:
     from .apple_pay_merchant_certificates import ApplePayMerchantCertificates
     from .apple_pay_method_token import ApplePayMethodToken
     from .apple_pay_token import ApplePayToken
-    from .apple_pay_tokenize_request import ApplePayTokenizeRequest
-    from .apple_pay_tokenize_response import ApplePayTokenizeResponse
     from .application import Application
     from .application_key import ApplicationKey
     from .application_paginated_list import ApplicationPaginatedList
@@ -74,6 +72,8 @@ if typing.TYPE_CHECKING:
     from .create_token_request import CreateTokenRequest
     from .credentials import Credentials
     from .credentials_card import CredentialsCard
+    from .credentials_mpp import CredentialsMpp
+    from .credentials_spt import CredentialsSpt
     from .cursor_pagination import CursorPagination
     from .delivery_method import DeliveryMethod
     from .device_context import DeviceContext
@@ -105,11 +105,10 @@ if typing.TYPE_CHECKING:
     from .google_pay_merchant_certificates import GooglePayMerchantCertificates
     from .google_pay_method_token import GooglePayMethodToken
     from .google_pay_token import GooglePayToken
-    from .google_pay_tokenize_request import GooglePayTokenizeRequest
-    from .google_pay_tokenize_response import GooglePayTokenizeResponse
     from .header import Header
     from .instance_details import InstanceDetails
     from .instruction import Instruction
+    from .instruction_credential_type import InstructionCredentialType
     from .instruction_list import InstructionList
     from .instruction_list_pagination import InstructionListPagination
     from .instruction_status import InstructionStatus
@@ -130,6 +129,7 @@ if typing.TYPE_CHECKING:
     from .mpp_credentials_response import MppCredentialsResponse
     from .mpp_source import MppSource
     from .mpp_source_type import MppSourceType
+    from .mpp_stripe_challenge import MppStripeChallenge
     from .network_status_detail import NetworkStatusDetail
     from .network_token import NetworkToken
     from .network_token_account import NetworkTokenAccount
@@ -256,8 +256,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ApplePayMerchantCertificates": ".apple_pay_merchant_certificates",
     "ApplePayMethodToken": ".apple_pay_method_token",
     "ApplePayToken": ".apple_pay_token",
-    "ApplePayTokenizeRequest": ".apple_pay_tokenize_request",
-    "ApplePayTokenizeResponse": ".apple_pay_tokenize_response",
     "Application": ".application",
     "ApplicationKey": ".application_key",
     "ApplicationPaginatedList": ".application_paginated_list",
@@ -301,6 +299,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateTokenRequest": ".create_token_request",
     "Credentials": ".credentials",
     "CredentialsCard": ".credentials_card",
+    "CredentialsMpp": ".credentials_mpp",
+    "CredentialsSpt": ".credentials_spt",
     "CursorPagination": ".cursor_pagination",
     "DeliveryMethod": ".delivery_method",
     "DeviceContext": ".device_context",
@@ -332,11 +332,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GooglePayMerchantCertificates": ".google_pay_merchant_certificates",
     "GooglePayMethodToken": ".google_pay_method_token",
     "GooglePayToken": ".google_pay_token",
-    "GooglePayTokenizeRequest": ".google_pay_tokenize_request",
-    "GooglePayTokenizeResponse": ".google_pay_tokenize_response",
     "Header": ".header",
     "InstanceDetails": ".instance_details",
     "Instruction": ".instruction",
+    "InstructionCredentialType": ".instruction_credential_type",
     "InstructionList": ".instruction_list",
     "InstructionListPagination": ".instruction_list_pagination",
     "InstructionStatus": ".instruction_status",
@@ -357,6 +356,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MppCredentialsResponse": ".mpp_credentials_response",
     "MppSource": ".mpp_source",
     "MppSourceType": ".mpp_source_type",
+    "MppStripeChallenge": ".mpp_stripe_challenge",
     "NetworkStatusDetail": ".network_status_detail",
     "NetworkToken": ".network_token",
     "NetworkTokenAccount": ".network_token_account",
@@ -505,8 +505,6 @@ __all__ = [
     "ApplePayMerchantCertificates",
     "ApplePayMethodToken",
     "ApplePayToken",
-    "ApplePayTokenizeRequest",
-    "ApplePayTokenizeResponse",
     "Application",
     "ApplicationKey",
     "ApplicationPaginatedList",
@@ -550,6 +548,8 @@ __all__ = [
     "CreateTokenRequest",
     "Credentials",
     "CredentialsCard",
+    "CredentialsMpp",
+    "CredentialsSpt",
     "CursorPagination",
     "DeliveryMethod",
     "DeviceContext",
@@ -581,11 +581,10 @@ __all__ = [
     "GooglePayMerchantCertificates",
     "GooglePayMethodToken",
     "GooglePayToken",
-    "GooglePayTokenizeRequest",
-    "GooglePayTokenizeResponse",
     "Header",
     "InstanceDetails",
     "Instruction",
+    "InstructionCredentialType",
     "InstructionList",
     "InstructionListPagination",
     "InstructionStatus",
@@ -606,6 +605,7 @@ __all__ = [
     "MppCredentialsResponse",
     "MppSource",
     "MppSourceType",
+    "MppStripeChallenge",
     "NetworkStatusDetail",
     "NetworkToken",
     "NetworkTokenAccount",
