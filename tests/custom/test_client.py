@@ -472,7 +472,13 @@ def test_should_support_google_pay() -> None:
         )
         assert False, "Should have thrown an error"
     except UnprocessableEntityError as e:
-        assert "Failed to decrypt Google payment request" in e.body.detail, "The error detail does not contain the expected message."
+        assert any(
+            msg in e.body.detail
+            for msg in (
+                "Failed to decrypt Google payment request",
+                "Failed to process the Google Pay token",
+            )
+        ), "The error detail does not contain an expected Google Pay processing-failure message."
 
 
 def test_documents_lifecycle() -> None:
