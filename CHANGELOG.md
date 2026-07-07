@@ -1,3 +1,10 @@
+## [6.0.1](https://github.com/Basis-Theory/python-sdk/compare/v6.0.0...v6.0.1) (2026-07-07)
+
+
+### Bug Fixes
+
+* keep persisted app-token creds so semantic-release can push write-back ([#138](https://github.com/Basis-Theory/python-sdk/issues/138)) ([b82a24e](https://github.com/Basis-Theory/python-sdk/commit/b82a24ee24b3728b39856f511821f5cb0a13632a))
+
 # [6.0.0](https://github.com/Basis-Theory/python-sdk/compare/v5.10.0...v6.0.0) (2026-06-05)
 
 
