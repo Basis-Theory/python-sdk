@@ -3814,7 +3814,7 @@ client.reactors.create(
 <dl>
 <dd>
 
-**runtime:** `typing.Optional[Runtime]` 
+**runtime:** `typing.Optional[ReactorRuntime]` 
     
 </dd>
 </dl>
@@ -3974,7 +3974,7 @@ client.reactors.update(
 <dl>
 <dd>
 
-**runtime:** `typing.Optional[Runtime]` 
+**runtime:** `typing.Optional[ReactorRuntime]` 
     
 </dd>
 </dl>
@@ -4132,7 +4132,7 @@ client.reactors.patch(
 <dl>
 <dd>
 
-**runtime:** `typing.Optional[Runtime]` 
+**runtime:** `typing.Optional[ReactorRuntime]` 
     
 </dd>
 </dl>
