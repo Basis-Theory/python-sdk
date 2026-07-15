@@ -4,13 +4,10 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .reactor_runtime import ReactorRuntime
 
 
-class PendingReactor(UniversalBaseModel):
-    code: typing.Optional[str] = None
-    runtime: typing.Optional[ReactorRuntime] = None
-    configuration: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
+class AsyncReactorPendingResult(UniversalBaseModel):
+    status: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
