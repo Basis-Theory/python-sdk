@@ -9,7 +9,7 @@ from .merchant_details import MerchantDetails
 
 class TenantMerchantRequest(UniversalBaseModel):
     name: str
-    details: MerchantDetails
+    details: typing.Optional[MerchantDetails] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

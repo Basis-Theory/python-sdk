@@ -9538,7 +9538,7 @@ client.tenants.merchants.list(
 <dd>
 
 ```python
-from basis_theory import BasisTheory, MerchantDetails
+from basis_theory import BasisTheory
 from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
@@ -9549,7 +9549,6 @@ client = BasisTheory(
 client.tenants.merchants.create(
     tenant_id="tenantId",
     name="name",
-    details=MerchantDetails(),
 )
 
 ```
@@ -9743,7 +9742,7 @@ client.tenants.merchants.delete(
 <dd>
 
 ```python
-from basis_theory import BasisTheory, MerchantDetails
+from basis_theory import BasisTheory
 from basis_theory.environment import BasisTheoryEnvironment
 
 client = BasisTheory(
@@ -9755,7 +9754,6 @@ client.tenants.merchants.update(
     tenant_id="tenantId",
     merchant_id="merchantId",
     name="name",
-    details=MerchantDetails(),
 )
 
 ```
