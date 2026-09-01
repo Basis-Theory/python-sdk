@@ -128,7 +128,7 @@ class RawMerchantsClient:
         tenant_id: str,
         *,
         name: str,
-        details: MerchantDetails,
+        details: typing.Optional[MerchantDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[TenantMerchant]:
         """
@@ -138,7 +138,7 @@ class RawMerchantsClient:
 
         name : str
 
-        details : MerchantDetails
+        details : typing.Optional[MerchantDetails]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -357,7 +357,7 @@ class RawMerchantsClient:
         merchant_id: str,
         *,
         name: str,
-        details: MerchantDetails,
+        details: typing.Optional[MerchantDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[TenantMerchant]:
         """
@@ -369,7 +369,7 @@ class RawMerchantsClient:
 
         name : str
 
-        details : MerchantDetails
+        details : typing.Optional[MerchantDetails]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -671,7 +671,7 @@ class AsyncRawMerchantsClient:
         tenant_id: str,
         *,
         name: str,
-        details: MerchantDetails,
+        details: typing.Optional[MerchantDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[TenantMerchant]:
         """
@@ -681,7 +681,7 @@ class AsyncRawMerchantsClient:
 
         name : str
 
-        details : MerchantDetails
+        details : typing.Optional[MerchantDetails]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -900,7 +900,7 @@ class AsyncRawMerchantsClient:
         merchant_id: str,
         *,
         name: str,
-        details: MerchantDetails,
+        details: typing.Optional[MerchantDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[TenantMerchant]:
         """
@@ -912,7 +912,7 @@ class AsyncRawMerchantsClient:
 
         name : str
 
-        details : MerchantDetails
+        details : typing.Optional[MerchantDetails]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

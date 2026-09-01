@@ -85,7 +85,7 @@ class MerchantsClient:
         tenant_id: str,
         *,
         name: str,
-        details: MerchantDetails,
+        details: typing.Optional[MerchantDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TenantMerchant:
         """
@@ -95,7 +95,7 @@ class MerchantsClient:
 
         name : str
 
-        details : MerchantDetails
+        details : typing.Optional[MerchantDetails]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -107,7 +107,7 @@ class MerchantsClient:
 
         Examples
         --------
-        from basis_theory import BasisTheory, MerchantDetails
+        from basis_theory import BasisTheory
 
         client = BasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
@@ -116,7 +116,6 @@ class MerchantsClient:
         client.tenants.merchants.create(
             tenant_id="tenantId",
             name="name",
-            details=MerchantDetails(),
         )
         """
         _response = self._raw_client.create(tenant_id, name=name, details=details, request_options=request_options)
@@ -196,7 +195,7 @@ class MerchantsClient:
         merchant_id: str,
         *,
         name: str,
-        details: MerchantDetails,
+        details: typing.Optional[MerchantDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TenantMerchant:
         """
@@ -208,7 +207,7 @@ class MerchantsClient:
 
         name : str
 
-        details : MerchantDetails
+        details : typing.Optional[MerchantDetails]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -220,7 +219,7 @@ class MerchantsClient:
 
         Examples
         --------
-        from basis_theory import BasisTheory, MerchantDetails
+        from basis_theory import BasisTheory
 
         client = BasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
@@ -230,7 +229,6 @@ class MerchantsClient:
             tenant_id="tenantId",
             merchant_id="merchantId",
             name="name",
-            details=MerchantDetails(),
         )
         """
         _response = self._raw_client.update(
@@ -378,7 +376,7 @@ class AsyncMerchantsClient:
         tenant_id: str,
         *,
         name: str,
-        details: MerchantDetails,
+        details: typing.Optional[MerchantDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TenantMerchant:
         """
@@ -388,7 +386,7 @@ class AsyncMerchantsClient:
 
         name : str
 
-        details : MerchantDetails
+        details : typing.Optional[MerchantDetails]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -402,7 +400,7 @@ class AsyncMerchantsClient:
         --------
         import asyncio
 
-        from basis_theory import AsyncBasisTheory, MerchantDetails
+        from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
@@ -414,7 +412,6 @@ class AsyncMerchantsClient:
             await client.tenants.merchants.create(
                 tenant_id="tenantId",
                 name="name",
-                details=MerchantDetails(),
             )
 
 
@@ -515,7 +512,7 @@ class AsyncMerchantsClient:
         merchant_id: str,
         *,
         name: str,
-        details: MerchantDetails,
+        details: typing.Optional[MerchantDetails] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TenantMerchant:
         """
@@ -527,7 +524,7 @@ class AsyncMerchantsClient:
 
         name : str
 
-        details : MerchantDetails
+        details : typing.Optional[MerchantDetails]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -541,7 +538,7 @@ class AsyncMerchantsClient:
         --------
         import asyncio
 
-        from basis_theory import AsyncBasisTheory, MerchantDetails
+        from basis_theory import AsyncBasisTheory
 
         client = AsyncBasisTheory(
             correlation_id="YOUR_CORRELATION_ID",
@@ -554,7 +551,6 @@ class AsyncMerchantsClient:
                 tenant_id="tenantId",
                 merchant_id="merchantId",
                 name="name",
-                details=MerchantDetails(),
             )
 
 
