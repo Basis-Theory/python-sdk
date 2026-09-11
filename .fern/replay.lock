@@ -30,14 +30,20 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-python-sdk: 5.12.11
-current_generation: f8c5a0ac5d7d91ad9b91abbc6ee788331443fa58
+  - commit_sha: 866bafe628c3b0489446a513e393244b12a6be32
+    tree_hash: 800afd8ced15b5ca249437a91b40fb86008dc332
+    timestamp: 2026-09-11T18:15:17.789Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-python-sdk: 5.12.11
+current_generation: 866bafe628c3b0489446a513e393244b12a6be32
 patches:
   - id: patch-d1f3f0bc
     content_hash: sha256:3e388e4d484aeee783bbeb363df664c9b5b38c4ddc02cbba061952c231574d35
     original_commit: d1f3f0bcff05acf4cb03b80acb6a5fb30fb49842
     original_message: "chore(release): 5.10.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: f8c5a0ac5d7d91ad9b91abbc6ee788331443fa58
+    base_generation: 866bafe628c3b0489446a513e393244b12a6be32
     files:
       - pyproject.toml
     patch_content: |
@@ -159,7 +165,7 @@ patches:
     original_commit: 757de01e71ac74b7ff88941ade1fbdd6566148ad
     original_message: "chore(release): 6.0.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: f8c5a0ac5d7d91ad9b91abbc6ee788331443fa58
+    base_generation: 866bafe628c3b0489446a513e393244b12a6be32
     files:
       - pyproject.toml
     patch_content: |
@@ -281,7 +287,7 @@ patches:
     original_commit: adf7dc21d734d0ca905cbc3905af0fa7568ccb36
     original_message: "chore(release): 6.0.1 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: f8c5a0ac5d7d91ad9b91abbc6ee788331443fa58
+    base_generation: 866bafe628c3b0489446a513e393244b12a6be32
     files:
       - pyproject.toml
     patch_content: |
@@ -403,7 +409,7 @@ patches:
     original_commit: 623d1c209c9d817ee710d8060d1244c0bc9fe55b
     original_message: "chore(release): 7.0.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: f8c5a0ac5d7d91ad9b91abbc6ee788331443fa58
+    base_generation: 866bafe628c3b0489446a513e393244b12a6be32
     files:
       - pyproject.toml
     patch_content: |
@@ -519,3 +525,4 @@ patches:
 
         [tool.poetry.extras]
         aiohttp=["aiohttp", "httpx-aiohttp"]
+    user_owned: true
