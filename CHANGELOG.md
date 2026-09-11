@@ -1,3 +1,10 @@
+# [7.1.0](https://github.com/Basis-Theory/python-sdk/compare/v7.0.0...v7.1.0) (2026-09-11)
+
+
+### Features
+
+* **ENG-11715:** resolve US and EU environments to regional hosts ([#142](https://github.com/Basis-Theory/python-sdk/issues/142)) ([5c1c6d8](https://github.com/Basis-Theory/python-sdk/commit/5c1c6d852618bffc25d2c307923505d4e724ee03))
+
 # [7.0.0](https://github.com/Basis-Theory/python-sdk/compare/v6.0.1...v7.0.0) (2026-07-15)
 
 
