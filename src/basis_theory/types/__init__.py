@@ -21,6 +21,36 @@ if typing.TYPE_CHECKING:
     from .agentic_card_issuer import AgenticCardIssuer
     from .agentic_card_issuer_country import AgenticCardIssuerCountry
     from .agentic_merchant import AgenticMerchant
+    from .allowance import Allowance
+    from .allowance_list import AllowanceList
+    from .allowance_list_pagination import AllowanceListPagination
+    from .allowance_rail import AllowanceRail
+    from .allowance_rail_credential_formats_item import AllowanceRailCredentialFormatsItem
+    from .allowance_rail_provider import AllowanceRailProvider
+    from .allowance_status import AllowanceStatus
+    from .allowance_verification_method import AllowanceVerificationMethod
+    from .allowance_verification_method_type import AllowanceVerificationMethodType
+    from .allowance_verification_next_action import (
+        AllowanceVerificationNextAction,
+        OtpAllowanceVerificationNextAction,
+        PasskeyAllowanceVerificationNextAction,
+        PasskeySessionAllowanceVerificationNextAction,
+        RedirectAllowanceVerificationNextAction,
+        SelectOtpMethodAllowanceVerificationNextAction,
+    )
+    from .allowance_verification_next_action_otp import AllowanceVerificationNextActionOtp
+    from .allowance_verification_next_action_passkey import AllowanceVerificationNextActionPasskey
+    from .allowance_verification_next_action_passkey_embed import AllowanceVerificationNextActionPasskeyEmbed
+    from .allowance_verification_next_action_passkey_session import AllowanceVerificationNextActionPasskeySession
+    from .allowance_verification_next_action_passkey_session_embed import (
+        AllowanceVerificationNextActionPasskeySessionEmbed,
+    )
+    from .allowance_verification_next_action_redirect import AllowanceVerificationNextActionRedirect
+    from .allowance_verification_next_action_select_otp_method import AllowanceVerificationNextActionSelectOtpMethod
+    from .allowance_verification_response import AllowanceVerificationResponse
+    from .allowance_verification_response_provider import AllowanceVerificationResponseProvider
+    from .allowance_verification_response_rail import AllowanceVerificationResponseRail
+    from .allowance_verification_response_status import AllowanceVerificationResponseStatus
     from .amex_config import AmexConfig
     from .amount import Amount
     from .apple_pay_create_response import ApplePayCreateResponse
@@ -39,6 +69,15 @@ if typing.TYPE_CHECKING:
     from .authenticate_three_ds_session_request import AuthenticateThreeDsSessionRequest
     from .authentication import Authentication
     from .authentication_response import AuthenticationResponse
+    from .authorize_connection_request import (
+        AuthorizeConnectionRequest,
+        PollAuthorizeConnectionRequest,
+        PresentAuthorizeConnectionRequest,
+        RestartAuthorizeConnectionRequest,
+    )
+    from .authorize_connection_request_poll import AuthorizeConnectionRequestPoll
+    from .authorize_connection_request_present import AuthorizeConnectionRequestPresent
+    from .authorize_connection_request_restart import AuthorizeConnectionRequestRestart
     from .bank_details import BankDetails
     from .bank_verification_response import BankVerificationResponse
     from .bin_details import BinDetails
@@ -63,7 +102,24 @@ if typing.TYPE_CHECKING:
     from .client_encryption_key_response import ClientEncryptionKeyResponse
     from .condition import Condition
     from .confirmation_entry import ConfirmationEntry
+    from .connection import Connection
+    from .connection_authorization_details_item import ConnectionAuthorizationDetailsItem
+    from .connection_instrument import ConnectionInstrument
+    from .connection_instrument_list import ConnectionInstrumentList
+    from .connection_instrument_list_pagination import ConnectionInstrumentListPagination
+    from .connection_instrument_type import ConnectionInstrumentType
+    from .connection_list import ConnectionList
+    from .connection_list_pagination import ConnectionListPagination
+    from .connection_next_action import ConnectionNextAction
+    from .connection_permissions import ConnectionPermissions
+    from .connection_principal import ConnectionPrincipal
+    from .connection_principal_type import ConnectionPrincipalType
+    from .connection_status import ConnectionStatus
+    from .connection_status_details import ConnectionStatusDetails
+    from .connection_status_details_action import ConnectionStatusDetailsAction
+    from .connection_status_details_actor import ConnectionStatusDetailsActor
     from .consumer import Consumer
+    from .create_connection_request import CreateConnectionRequest
     from .create_document_request import CreateDocumentRequest
     from .create_reactor_formula_request import CreateReactorFormulaRequest
     from .create_session_response import CreateSessionResponse
@@ -84,7 +140,6 @@ if typing.TYPE_CHECKING:
     from .discover_config import DiscoverConfig
     from .document import Document
     from .domain_registration_response import DomainRegistrationResponse
-    from .encryption_jwk import EncryptionJwk
     from .enrollment import Enrollment
     from .enrollment_list import EnrollmentList
     from .enrollment_list_pagination import EnrollmentListPagination
@@ -92,6 +147,8 @@ if typing.TYPE_CHECKING:
     from .enrollment_status import EnrollmentStatus
     from .enrollment_type import EnrollmentType
     from .event_types import EventTypes
+    from .function_source_detection import FunctionSourceDetection
+    from .function_source_validation import FunctionSourceValidation
     from .get_applications import GetApplications
     from .get_logs import GetLogs
     from .get_permissions import GetPermissions
@@ -125,11 +182,6 @@ if typing.TYPE_CHECKING:
     from .merchant_info import MerchantInfo
     from .merchant_registration import MerchantRegistration
     from .merchant_services import MerchantServices
-    from .mpp_challenge import MppChallenge
-    from .mpp_credentials_request import MppCredentialsRequest
-    from .mpp_credentials_response import MppCredentialsResponse
-    from .mpp_source import MppSource
-    from .mpp_source_type import MppSourceType
     from .mpp_stripe_challenge import MppStripeChallenge
     from .network_status_detail import NetworkStatusDetail
     from .network_token import NetworkToken
@@ -137,7 +189,33 @@ if typing.TYPE_CHECKING:
     from .network_token_cryptogram import NetworkTokenCryptogram
     from .network_token_extras import NetworkTokenExtras
     from .pagination import Pagination
+    from .payment_credential import PaymentCredential
+    from .payment_credential_credential import PaymentCredentialCredential
+    from .payment_credential_credential_format import PaymentCredentialCredentialFormat
+    from .payment_credential_credential_value import PaymentCredentialCredentialValue
+    from .payment_credential_list import PaymentCredentialList
+    from .payment_credential_list_pagination import PaymentCredentialListPagination
+    from .payment_credential_metadata import PaymentCredentialMetadata
+    from .payment_credential_metadata_format import PaymentCredentialMetadataFormat
+    from .payment_credential_metadata_provider import PaymentCredentialMetadataProvider
+    from .payment_credential_provider import PaymentCredentialProvider
     from .payment_data import PaymentData
+    from .payment_method import PaymentMethod
+    from .payment_method_instrument import PaymentMethodInstrument
+    from .payment_method_instrument_display import PaymentMethodInstrumentDisplay
+    from .payment_method_instrument_type import PaymentMethodInstrumentType
+    from .payment_method_list import PaymentMethodList
+    from .payment_method_list_pagination import PaymentMethodListPagination
+    from .payment_method_rail import PaymentMethodRail
+    from .payment_method_rail_provider import PaymentMethodRailProvider
+    from .payment_method_source import (
+        BasisTheoryCardTokenPaymentMethodSource,
+        ConnectionPaymentMethodSource,
+        PaymentMethodSource,
+    )
+    from .payment_method_source_basis_theory_card_token import PaymentMethodSourceBasisTheoryCardToken
+    from .payment_method_source_connection import PaymentMethodSourceConnection
+    from .payment_method_status import PaymentMethodStatus
     from .pending_proxy import PendingProxy
     from .pending_reactor import PendingReactor
     from .permission import Permission
@@ -149,7 +227,7 @@ if typing.TYPE_CHECKING:
     from .proxy_transform import ProxyTransform
     from .proxy_transform_options import ProxyTransformOptions
     from .public_key import PublicKey
-    from .publish_confirmation_request import PublishConfirmationRequest
+    from .publish_confirmation_response import PublishConfirmationResponse
     from .react_response import ReactResponse
     from .reactor import Reactor
     from .reactor_formula import ReactorFormula
@@ -164,8 +242,31 @@ if typing.TYPE_CHECKING:
     from .requested_reactor import RequestedReactor
     from .role import Role
     from .runtime import Runtime
+    from .runtime_log_options import RuntimeLogOptions
     from .security_contact_email_response import SecurityContactEmailResponse
     from .service_status import ServiceStatus
+    from .shared_payment_amount import SharedPaymentAmount
+    from .shared_payment_card import SharedPaymentCard
+    from .shared_payment_card_display import SharedPaymentCardDisplay
+    from .shared_payment_card_issuer import SharedPaymentCardIssuer
+    from .shared_payment_card_issuer_country import SharedPaymentCardIssuerCountry
+    from .shared_payment_consumer import SharedPaymentConsumer
+    from .shared_payment_merchant import SharedPaymentMerchant
+    from .shared_payment_provider_error import SharedPaymentProviderError
+    from .shared_payment_provider_error_list import SharedPaymentProviderErrorList
+    from .shared_payment_provider_error_list_pagination import SharedPaymentProviderErrorListPagination
+    from .shared_payment_provider_error_provider import SharedPaymentProviderErrorProvider
+    from .shared_payment_rail_base import (
+        AgenticTokenSharedPaymentRailBase,
+        SharedPaymentRailBase,
+        SptSharedPaymentRailBase,
+        VirtualCardSharedPaymentRailBase,
+    )
+    from .shared_payment_rail_base_agentic_token import SharedPaymentRailBaseAgenticToken
+    from .shared_payment_rail_base_agentic_token_provider import SharedPaymentRailBaseAgenticTokenProvider
+    from .shared_payment_rail_base_spt import SharedPaymentRailBaseSpt
+    from .shared_payment_rail_base_virtual_card import SharedPaymentRailBaseVirtualCard
+    from .shared_payment_rail_error import SharedPaymentRailError
     from .shipping_address import ShippingAddress
     from .start_verification_request import StartVerificationRequest
     from .string_string_key_value_pair import StringStringKeyValuePair
@@ -215,6 +316,7 @@ if typing.TYPE_CHECKING:
     from .update_privacy import UpdatePrivacy
     from .update_reactor_formula_request import UpdateReactorFormulaRequest
     from .user import User
+    from .validate_function_source_request import ValidateFunctionSourceRequest
     from .validation_problem_details import ValidationProblemDetails
     from .verification_response import VerificationResponse
     from .verification_response_brand import VerificationResponseBrand
@@ -229,6 +331,29 @@ if typing.TYPE_CHECKING:
     from .verification_response_redirect import VerificationResponseRedirect
     from .verification_response_redirect_uri_type import VerificationResponseRedirectUriType
     from .verification_response_status import VerificationResponseStatus
+    from .verify_allowance_request import (
+        CompleteVerifyAllowanceRequest,
+        SelectOtpMethodVerifyAllowanceRequest,
+        StartVerifyAllowanceRequest,
+        SubmitOtpVerifyAllowanceRequest,
+        SubmitPasskeyVerifyAllowanceRequest,
+        SubmitSessionVerifyAllowanceRequest,
+        VerifyAllowanceRequest,
+    )
+    from .verify_allowance_request_complete import VerifyAllowanceRequestComplete
+    from .verify_allowance_request_complete_provider import VerifyAllowanceRequestCompleteProvider
+    from .verify_allowance_request_complete_rail import VerifyAllowanceRequestCompleteRail
+    from .verify_allowance_request_select_otp_method import VerifyAllowanceRequestSelectOtpMethod
+    from .verify_allowance_request_start import VerifyAllowanceRequestStart
+    from .verify_allowance_request_start_device_context import VerifyAllowanceRequestStartDeviceContext
+    from .verify_allowance_request_start_provider import VerifyAllowanceRequestStartProvider
+    from .verify_allowance_request_start_rail import VerifyAllowanceRequestStartRail
+    from .verify_allowance_request_submit_otp import VerifyAllowanceRequestSubmitOtp
+    from .verify_allowance_request_submit_passkey import VerifyAllowanceRequestSubmitPasskey
+    from .verify_allowance_request_submit_session import VerifyAllowanceRequestSubmitSession
+    from .verify_allowance_request_submit_session_session_context import (
+        VerifyAllowanceRequestSubmitSessionSessionContext,
+    )
     from .visa_config import VisaConfig
     from .webhook import Webhook
     from .webhook_list import WebhookList
@@ -250,6 +375,28 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AgenticCardIssuer": ".agentic_card_issuer",
     "AgenticCardIssuerCountry": ".agentic_card_issuer_country",
     "AgenticMerchant": ".agentic_merchant",
+    "AgenticTokenSharedPaymentRailBase": ".shared_payment_rail_base",
+    "Allowance": ".allowance",
+    "AllowanceList": ".allowance_list",
+    "AllowanceListPagination": ".allowance_list_pagination",
+    "AllowanceRail": ".allowance_rail",
+    "AllowanceRailCredentialFormatsItem": ".allowance_rail_credential_formats_item",
+    "AllowanceRailProvider": ".allowance_rail_provider",
+    "AllowanceStatus": ".allowance_status",
+    "AllowanceVerificationMethod": ".allowance_verification_method",
+    "AllowanceVerificationMethodType": ".allowance_verification_method_type",
+    "AllowanceVerificationNextAction": ".allowance_verification_next_action",
+    "AllowanceVerificationNextActionOtp": ".allowance_verification_next_action_otp",
+    "AllowanceVerificationNextActionPasskey": ".allowance_verification_next_action_passkey",
+    "AllowanceVerificationNextActionPasskeyEmbed": ".allowance_verification_next_action_passkey_embed",
+    "AllowanceVerificationNextActionPasskeySession": ".allowance_verification_next_action_passkey_session",
+    "AllowanceVerificationNextActionPasskeySessionEmbed": ".allowance_verification_next_action_passkey_session_embed",
+    "AllowanceVerificationNextActionRedirect": ".allowance_verification_next_action_redirect",
+    "AllowanceVerificationNextActionSelectOtpMethod": ".allowance_verification_next_action_select_otp_method",
+    "AllowanceVerificationResponse": ".allowance_verification_response",
+    "AllowanceVerificationResponseProvider": ".allowance_verification_response_provider",
+    "AllowanceVerificationResponseRail": ".allowance_verification_response_rail",
+    "AllowanceVerificationResponseStatus": ".allowance_verification_response_status",
     "AmexConfig": ".amex_config",
     "Amount": ".amount",
     "ApplePayCreateResponse": ".apple_pay_create_response",
@@ -268,8 +415,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AuthenticateThreeDsSessionRequest": ".authenticate_three_ds_session_request",
     "Authentication": ".authentication",
     "AuthenticationResponse": ".authentication_response",
+    "AuthorizeConnectionRequest": ".authorize_connection_request",
+    "AuthorizeConnectionRequestPoll": ".authorize_connection_request_poll",
+    "AuthorizeConnectionRequestPresent": ".authorize_connection_request_present",
+    "AuthorizeConnectionRequestRestart": ".authorize_connection_request_restart",
     "BankDetails": ".bank_details",
     "BankVerificationResponse": ".bank_verification_response",
+    "BasisTheoryCardTokenPaymentMethodSource": ".payment_method_source",
     "BinDetails": ".bin_details",
     "BinDetailsBank": ".bin_details_bank",
     "BinDetailsCountry": ".bin_details_country",
@@ -290,9 +442,28 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CardholderInfo": ".cardholder_info",
     "ClientEncryptionKeyMetadataResponse": ".client_encryption_key_metadata_response",
     "ClientEncryptionKeyResponse": ".client_encryption_key_response",
+    "CompleteVerifyAllowanceRequest": ".verify_allowance_request",
     "Condition": ".condition",
     "ConfirmationEntry": ".confirmation_entry",
+    "Connection": ".connection",
+    "ConnectionAuthorizationDetailsItem": ".connection_authorization_details_item",
+    "ConnectionInstrument": ".connection_instrument",
+    "ConnectionInstrumentList": ".connection_instrument_list",
+    "ConnectionInstrumentListPagination": ".connection_instrument_list_pagination",
+    "ConnectionInstrumentType": ".connection_instrument_type",
+    "ConnectionList": ".connection_list",
+    "ConnectionListPagination": ".connection_list_pagination",
+    "ConnectionNextAction": ".connection_next_action",
+    "ConnectionPaymentMethodSource": ".payment_method_source",
+    "ConnectionPermissions": ".connection_permissions",
+    "ConnectionPrincipal": ".connection_principal",
+    "ConnectionPrincipalType": ".connection_principal_type",
+    "ConnectionStatus": ".connection_status",
+    "ConnectionStatusDetails": ".connection_status_details",
+    "ConnectionStatusDetailsAction": ".connection_status_details_action",
+    "ConnectionStatusDetailsActor": ".connection_status_details_actor",
     "Consumer": ".consumer",
+    "CreateConnectionRequest": ".create_connection_request",
     "CreateDocumentRequest": ".create_document_request",
     "CreateReactorFormulaRequest": ".create_reactor_formula_request",
     "CreateSessionResponse": ".create_session_response",
@@ -313,7 +484,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DiscoverConfig": ".discover_config",
     "Document": ".document",
     "DomainRegistrationResponse": ".domain_registration_response",
-    "EncryptionJwk": ".encryption_jwk",
     "Enrollment": ".enrollment",
     "EnrollmentList": ".enrollment_list",
     "EnrollmentListPagination": ".enrollment_list_pagination",
@@ -321,6 +491,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EnrollmentStatus": ".enrollment_status",
     "EnrollmentType": ".enrollment_type",
     "EventTypes": ".event_types",
+    "FunctionSourceDetection": ".function_source_detection",
+    "FunctionSourceValidation": ".function_source_validation",
     "GetApplications": ".get_applications",
     "GetLogs": ".get_logs",
     "GetPermissions": ".get_permissions",
@@ -354,22 +526,44 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MerchantInfo": ".merchant_info",
     "MerchantRegistration": ".merchant_registration",
     "MerchantServices": ".merchant_services",
-    "MppChallenge": ".mpp_challenge",
-    "MppCredentialsRequest": ".mpp_credentials_request",
-    "MppCredentialsResponse": ".mpp_credentials_response",
-    "MppSource": ".mpp_source",
-    "MppSourceType": ".mpp_source_type",
     "MppStripeChallenge": ".mpp_stripe_challenge",
     "NetworkStatusDetail": ".network_status_detail",
     "NetworkToken": ".network_token",
     "NetworkTokenAccount": ".network_token_account",
     "NetworkTokenCryptogram": ".network_token_cryptogram",
     "NetworkTokenExtras": ".network_token_extras",
+    "OtpAllowanceVerificationNextAction": ".allowance_verification_next_action",
     "Pagination": ".pagination",
+    "PasskeyAllowanceVerificationNextAction": ".allowance_verification_next_action",
+    "PasskeySessionAllowanceVerificationNextAction": ".allowance_verification_next_action",
+    "PaymentCredential": ".payment_credential",
+    "PaymentCredentialCredential": ".payment_credential_credential",
+    "PaymentCredentialCredentialFormat": ".payment_credential_credential_format",
+    "PaymentCredentialCredentialValue": ".payment_credential_credential_value",
+    "PaymentCredentialList": ".payment_credential_list",
+    "PaymentCredentialListPagination": ".payment_credential_list_pagination",
+    "PaymentCredentialMetadata": ".payment_credential_metadata",
+    "PaymentCredentialMetadataFormat": ".payment_credential_metadata_format",
+    "PaymentCredentialMetadataProvider": ".payment_credential_metadata_provider",
+    "PaymentCredentialProvider": ".payment_credential_provider",
     "PaymentData": ".payment_data",
+    "PaymentMethod": ".payment_method",
+    "PaymentMethodInstrument": ".payment_method_instrument",
+    "PaymentMethodInstrumentDisplay": ".payment_method_instrument_display",
+    "PaymentMethodInstrumentType": ".payment_method_instrument_type",
+    "PaymentMethodList": ".payment_method_list",
+    "PaymentMethodListPagination": ".payment_method_list_pagination",
+    "PaymentMethodRail": ".payment_method_rail",
+    "PaymentMethodRailProvider": ".payment_method_rail_provider",
+    "PaymentMethodSource": ".payment_method_source",
+    "PaymentMethodSourceBasisTheoryCardToken": ".payment_method_source_basis_theory_card_token",
+    "PaymentMethodSourceConnection": ".payment_method_source_connection",
+    "PaymentMethodStatus": ".payment_method_status",
     "PendingProxy": ".pending_proxy",
     "PendingReactor": ".pending_reactor",
     "Permission": ".permission",
+    "PollAuthorizeConnectionRequest": ".authorize_connection_request",
+    "PresentAuthorizeConnectionRequest": ".authorize_connection_request",
     "Privacy": ".privacy",
     "ProblemDetails": ".problem_details",
     "Product": ".product",
@@ -378,7 +572,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ProxyTransform": ".proxy_transform",
     "ProxyTransformOptions": ".proxy_transform_options",
     "PublicKey": ".public_key",
-    "PublishConfirmationRequest": ".publish_confirmation_request",
+    "PublishConfirmationResponse": ".publish_confirmation_response",
     "ReactResponse": ".react_response",
     "Reactor": ".reactor",
     "ReactorFormula": ".reactor_formula",
@@ -389,16 +583,43 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ReactorRuntime": ".reactor_runtime",
     "Recurring": ".recurring",
     "RecurringFrequency": ".recurring_frequency",
+    "RedirectAllowanceVerificationNextAction": ".allowance_verification_next_action",
     "RequestedProxy": ".requested_proxy",
     "RequestedReactor": ".requested_reactor",
+    "RestartAuthorizeConnectionRequest": ".authorize_connection_request",
     "Role": ".role",
     "Runtime": ".runtime",
+    "RuntimeLogOptions": ".runtime_log_options",
     "SecurityContactEmailResponse": ".security_contact_email_response",
+    "SelectOtpMethodAllowanceVerificationNextAction": ".allowance_verification_next_action",
+    "SelectOtpMethodVerifyAllowanceRequest": ".verify_allowance_request",
     "ServiceStatus": ".service_status",
+    "SharedPaymentAmount": ".shared_payment_amount",
+    "SharedPaymentCard": ".shared_payment_card",
+    "SharedPaymentCardDisplay": ".shared_payment_card_display",
+    "SharedPaymentCardIssuer": ".shared_payment_card_issuer",
+    "SharedPaymentCardIssuerCountry": ".shared_payment_card_issuer_country",
+    "SharedPaymentConsumer": ".shared_payment_consumer",
+    "SharedPaymentMerchant": ".shared_payment_merchant",
+    "SharedPaymentProviderError": ".shared_payment_provider_error",
+    "SharedPaymentProviderErrorList": ".shared_payment_provider_error_list",
+    "SharedPaymentProviderErrorListPagination": ".shared_payment_provider_error_list_pagination",
+    "SharedPaymentProviderErrorProvider": ".shared_payment_provider_error_provider",
+    "SharedPaymentRailBase": ".shared_payment_rail_base",
+    "SharedPaymentRailBaseAgenticToken": ".shared_payment_rail_base_agentic_token",
+    "SharedPaymentRailBaseAgenticTokenProvider": ".shared_payment_rail_base_agentic_token_provider",
+    "SharedPaymentRailBaseSpt": ".shared_payment_rail_base_spt",
+    "SharedPaymentRailBaseVirtualCard": ".shared_payment_rail_base_virtual_card",
+    "SharedPaymentRailError": ".shared_payment_rail_error",
     "ShippingAddress": ".shipping_address",
+    "SptSharedPaymentRailBase": ".shared_payment_rail_base",
     "StartVerificationRequest": ".start_verification_request",
+    "StartVerifyAllowanceRequest": ".verify_allowance_request",
     "StringStringKeyValuePair": ".string_string_key_value_pair",
     "SubmerchantAuthenticationResponse": ".submerchant_authentication_response",
+    "SubmitOtpVerifyAllowanceRequest": ".verify_allowance_request",
+    "SubmitPasskeyVerifyAllowanceRequest": ".verify_allowance_request",
+    "SubmitSessionVerifyAllowanceRequest": ".verify_allowance_request",
     "Tenant": ".tenant",
     "TenantConnectionOptions": ".tenant_connection_options",
     "TenantInvitationResponse": ".tenant_invitation_response",
@@ -444,6 +665,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdatePrivacy": ".update_privacy",
     "UpdateReactorFormulaRequest": ".update_reactor_formula_request",
     "User": ".user",
+    "ValidateFunctionSourceRequest": ".validate_function_source_request",
     "ValidationProblemDetails": ".validation_problem_details",
     "VerificationResponse": ".verification_response",
     "VerificationResponseBrand": ".verification_response_brand",
@@ -456,6 +678,20 @@ _dynamic_imports: typing.Dict[str, str] = {
     "VerificationResponseRedirect": ".verification_response_redirect",
     "VerificationResponseRedirectUriType": ".verification_response_redirect_uri_type",
     "VerificationResponseStatus": ".verification_response_status",
+    "VerifyAllowanceRequest": ".verify_allowance_request",
+    "VerifyAllowanceRequestComplete": ".verify_allowance_request_complete",
+    "VerifyAllowanceRequestCompleteProvider": ".verify_allowance_request_complete_provider",
+    "VerifyAllowanceRequestCompleteRail": ".verify_allowance_request_complete_rail",
+    "VerifyAllowanceRequestSelectOtpMethod": ".verify_allowance_request_select_otp_method",
+    "VerifyAllowanceRequestStart": ".verify_allowance_request_start",
+    "VerifyAllowanceRequestStartDeviceContext": ".verify_allowance_request_start_device_context",
+    "VerifyAllowanceRequestStartProvider": ".verify_allowance_request_start_provider",
+    "VerifyAllowanceRequestStartRail": ".verify_allowance_request_start_rail",
+    "VerifyAllowanceRequestSubmitOtp": ".verify_allowance_request_submit_otp",
+    "VerifyAllowanceRequestSubmitPasskey": ".verify_allowance_request_submit_passkey",
+    "VerifyAllowanceRequestSubmitSession": ".verify_allowance_request_submit_session",
+    "VerifyAllowanceRequestSubmitSessionSessionContext": ".verify_allowance_request_submit_session_session_context",
+    "VirtualCardSharedPaymentRailBase": ".shared_payment_rail_base",
     "VisaConfig": ".visa_config",
     "Webhook": ".webhook",
     "WebhookList": ".webhook_list",
@@ -501,6 +737,28 @@ __all__ = [
     "AgenticCardIssuer",
     "AgenticCardIssuerCountry",
     "AgenticMerchant",
+    "AgenticTokenSharedPaymentRailBase",
+    "Allowance",
+    "AllowanceList",
+    "AllowanceListPagination",
+    "AllowanceRail",
+    "AllowanceRailCredentialFormatsItem",
+    "AllowanceRailProvider",
+    "AllowanceStatus",
+    "AllowanceVerificationMethod",
+    "AllowanceVerificationMethodType",
+    "AllowanceVerificationNextAction",
+    "AllowanceVerificationNextActionOtp",
+    "AllowanceVerificationNextActionPasskey",
+    "AllowanceVerificationNextActionPasskeyEmbed",
+    "AllowanceVerificationNextActionPasskeySession",
+    "AllowanceVerificationNextActionPasskeySessionEmbed",
+    "AllowanceVerificationNextActionRedirect",
+    "AllowanceVerificationNextActionSelectOtpMethod",
+    "AllowanceVerificationResponse",
+    "AllowanceVerificationResponseProvider",
+    "AllowanceVerificationResponseRail",
+    "AllowanceVerificationResponseStatus",
     "AmexConfig",
     "Amount",
     "ApplePayCreateResponse",
@@ -519,8 +777,13 @@ __all__ = [
     "AuthenticateThreeDsSessionRequest",
     "Authentication",
     "AuthenticationResponse",
+    "AuthorizeConnectionRequest",
+    "AuthorizeConnectionRequestPoll",
+    "AuthorizeConnectionRequestPresent",
+    "AuthorizeConnectionRequestRestart",
     "BankDetails",
     "BankVerificationResponse",
+    "BasisTheoryCardTokenPaymentMethodSource",
     "BinDetails",
     "BinDetailsBank",
     "BinDetailsCountry",
@@ -541,9 +804,28 @@ __all__ = [
     "CardholderInfo",
     "ClientEncryptionKeyMetadataResponse",
     "ClientEncryptionKeyResponse",
+    "CompleteVerifyAllowanceRequest",
     "Condition",
     "ConfirmationEntry",
+    "Connection",
+    "ConnectionAuthorizationDetailsItem",
+    "ConnectionInstrument",
+    "ConnectionInstrumentList",
+    "ConnectionInstrumentListPagination",
+    "ConnectionInstrumentType",
+    "ConnectionList",
+    "ConnectionListPagination",
+    "ConnectionNextAction",
+    "ConnectionPaymentMethodSource",
+    "ConnectionPermissions",
+    "ConnectionPrincipal",
+    "ConnectionPrincipalType",
+    "ConnectionStatus",
+    "ConnectionStatusDetails",
+    "ConnectionStatusDetailsAction",
+    "ConnectionStatusDetailsActor",
     "Consumer",
+    "CreateConnectionRequest",
     "CreateDocumentRequest",
     "CreateReactorFormulaRequest",
     "CreateSessionResponse",
@@ -564,7 +846,6 @@ __all__ = [
     "DiscoverConfig",
     "Document",
     "DomainRegistrationResponse",
-    "EncryptionJwk",
     "Enrollment",
     "EnrollmentList",
     "EnrollmentListPagination",
@@ -572,6 +853,8 @@ __all__ = [
     "EnrollmentStatus",
     "EnrollmentType",
     "EventTypes",
+    "FunctionSourceDetection",
+    "FunctionSourceValidation",
     "GetApplications",
     "GetLogs",
     "GetPermissions",
@@ -605,22 +888,44 @@ __all__ = [
     "MerchantInfo",
     "MerchantRegistration",
     "MerchantServices",
-    "MppChallenge",
-    "MppCredentialsRequest",
-    "MppCredentialsResponse",
-    "MppSource",
-    "MppSourceType",
     "MppStripeChallenge",
     "NetworkStatusDetail",
     "NetworkToken",
     "NetworkTokenAccount",
     "NetworkTokenCryptogram",
     "NetworkTokenExtras",
+    "OtpAllowanceVerificationNextAction",
     "Pagination",
+    "PasskeyAllowanceVerificationNextAction",
+    "PasskeySessionAllowanceVerificationNextAction",
+    "PaymentCredential",
+    "PaymentCredentialCredential",
+    "PaymentCredentialCredentialFormat",
+    "PaymentCredentialCredentialValue",
+    "PaymentCredentialList",
+    "PaymentCredentialListPagination",
+    "PaymentCredentialMetadata",
+    "PaymentCredentialMetadataFormat",
+    "PaymentCredentialMetadataProvider",
+    "PaymentCredentialProvider",
     "PaymentData",
+    "PaymentMethod",
+    "PaymentMethodInstrument",
+    "PaymentMethodInstrumentDisplay",
+    "PaymentMethodInstrumentType",
+    "PaymentMethodList",
+    "PaymentMethodListPagination",
+    "PaymentMethodRail",
+    "PaymentMethodRailProvider",
+    "PaymentMethodSource",
+    "PaymentMethodSourceBasisTheoryCardToken",
+    "PaymentMethodSourceConnection",
+    "PaymentMethodStatus",
     "PendingProxy",
     "PendingReactor",
     "Permission",
+    "PollAuthorizeConnectionRequest",
+    "PresentAuthorizeConnectionRequest",
     "Privacy",
     "ProblemDetails",
     "Product",
@@ -629,7 +934,7 @@ __all__ = [
     "ProxyTransform",
     "ProxyTransformOptions",
     "PublicKey",
-    "PublishConfirmationRequest",
+    "PublishConfirmationResponse",
     "ReactResponse",
     "Reactor",
     "ReactorFormula",
@@ -640,16 +945,43 @@ __all__ = [
     "ReactorRuntime",
     "Recurring",
     "RecurringFrequency",
+    "RedirectAllowanceVerificationNextAction",
     "RequestedProxy",
     "RequestedReactor",
+    "RestartAuthorizeConnectionRequest",
     "Role",
     "Runtime",
+    "RuntimeLogOptions",
     "SecurityContactEmailResponse",
+    "SelectOtpMethodAllowanceVerificationNextAction",
+    "SelectOtpMethodVerifyAllowanceRequest",
     "ServiceStatus",
+    "SharedPaymentAmount",
+    "SharedPaymentCard",
+    "SharedPaymentCardDisplay",
+    "SharedPaymentCardIssuer",
+    "SharedPaymentCardIssuerCountry",
+    "SharedPaymentConsumer",
+    "SharedPaymentMerchant",
+    "SharedPaymentProviderError",
+    "SharedPaymentProviderErrorList",
+    "SharedPaymentProviderErrorListPagination",
+    "SharedPaymentProviderErrorProvider",
+    "SharedPaymentRailBase",
+    "SharedPaymentRailBaseAgenticToken",
+    "SharedPaymentRailBaseAgenticTokenProvider",
+    "SharedPaymentRailBaseSpt",
+    "SharedPaymentRailBaseVirtualCard",
+    "SharedPaymentRailError",
     "ShippingAddress",
+    "SptSharedPaymentRailBase",
     "StartVerificationRequest",
+    "StartVerifyAllowanceRequest",
     "StringStringKeyValuePair",
     "SubmerchantAuthenticationResponse",
+    "SubmitOtpVerifyAllowanceRequest",
+    "SubmitPasskeyVerifyAllowanceRequest",
+    "SubmitSessionVerifyAllowanceRequest",
     "Tenant",
     "TenantConnectionOptions",
     "TenantInvitationResponse",
@@ -695,6 +1027,7 @@ __all__ = [
     "UpdatePrivacy",
     "UpdateReactorFormulaRequest",
     "User",
+    "ValidateFunctionSourceRequest",
     "ValidationProblemDetails",
     "VerificationResponse",
     "VerificationResponseBrand",
@@ -707,6 +1040,20 @@ __all__ = [
     "VerificationResponseRedirect",
     "VerificationResponseRedirectUriType",
     "VerificationResponseStatus",
+    "VerifyAllowanceRequest",
+    "VerifyAllowanceRequestComplete",
+    "VerifyAllowanceRequestCompleteProvider",
+    "VerifyAllowanceRequestCompleteRail",
+    "VerifyAllowanceRequestSelectOtpMethod",
+    "VerifyAllowanceRequestStart",
+    "VerifyAllowanceRequestStartDeviceContext",
+    "VerifyAllowanceRequestStartProvider",
+    "VerifyAllowanceRequestStartRail",
+    "VerifyAllowanceRequestSubmitOtp",
+    "VerifyAllowanceRequestSubmitPasskey",
+    "VerifyAllowanceRequestSubmitSession",
+    "VerifyAllowanceRequestSubmitSessionSessionContext",
+    "VirtualCardSharedPaymentRailBase",
     "VisaConfig",
     "Webhook",
     "WebhookList",

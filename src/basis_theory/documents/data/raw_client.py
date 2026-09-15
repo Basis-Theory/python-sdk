@@ -14,7 +14,6 @@ from ...core.request_options import RequestOptions
 from ...errors.forbidden_error import ForbiddenError
 from ...errors.not_found_error import NotFoundError
 from ...errors.unauthorized_error import UnauthorizedError
-from ...types.problem_details import ProblemDetails
 from pydantic import ValidationError
 
 
@@ -57,9 +56,9 @@ class RawDataClient:
                         raise UnauthorizedError(
                             headers=dict(_response.headers),
                             body=typing.cast(
-                                ProblemDetails,
+                                typing.Any,
                                 parse_obj_as(
-                                    type_=ProblemDetails,  # type: ignore
+                                    type_=typing.Any,  # type: ignore
                                     object_=_response.json(),
                                 ),
                             ),
@@ -68,9 +67,9 @@ class RawDataClient:
                         raise ForbiddenError(
                             headers=dict(_response.headers),
                             body=typing.cast(
-                                ProblemDetails,
+                                typing.Any,
                                 parse_obj_as(
-                                    type_=ProblemDetails,  # type: ignore
+                                    type_=typing.Any,  # type: ignore
                                     object_=_response.json(),
                                 ),
                             ),
@@ -143,9 +142,9 @@ class AsyncRawDataClient:
                         raise UnauthorizedError(
                             headers=dict(_response.headers),
                             body=typing.cast(
-                                ProblemDetails,
+                                typing.Any,
                                 parse_obj_as(
-                                    type_=ProblemDetails,  # type: ignore
+                                    type_=typing.Any,  # type: ignore
                                     object_=_response.json(),
                                 ),
                             ),
@@ -154,9 +153,9 @@ class AsyncRawDataClient:
                         raise ForbiddenError(
                             headers=dict(_response.headers),
                             body=typing.cast(
-                                ProblemDetails,
+                                typing.Any,
                                 parse_obj_as(
-                                    type_=ProblemDetails,  # type: ignore
+                                    type_=typing.Any,  # type: ignore
                                     object_=_response.json(),
                                 ),
                             ),

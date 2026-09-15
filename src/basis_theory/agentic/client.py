@@ -9,15 +9,21 @@ from .raw_client import AsyncRawAgenticClient, RawAgenticClient
 
 if typing.TYPE_CHECKING:
     from .agents.client import AgentsClient, AsyncAgentsClient
+    from .allowances.client import AllowancesClient, AsyncAllowancesClient
     from .enrollments.client import AsyncEnrollmentsClient, EnrollmentsClient
+    from .payment_credentials.client import AsyncPaymentCredentialsClient, PaymentCredentialsClient
+    from .payment_methods.client import AsyncPaymentMethodsClient, PaymentMethodsClient
 
 
 class AgenticClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._raw_client = RawAgenticClient(client_wrapper=client_wrapper)
         self._client_wrapper = client_wrapper
-        self._agents: typing.Optional[AgentsClient] = None
         self._enrollments: typing.Optional[EnrollmentsClient] = None
+        self._agents: typing.Optional[AgentsClient] = None
+        self._payment_methods: typing.Optional[PaymentMethodsClient] = None
+        self._payment_credentials: typing.Optional[PaymentCredentialsClient] = None
+        self._allowances: typing.Optional[AllowancesClient] = None
 
     @property
     def with_raw_response(self) -> RawAgenticClient:
@@ -31,6 +37,14 @@ class AgenticClient:
         return self._raw_client
 
     @property
+    def enrollments(self):
+        if self._enrollments is None:
+            from .enrollments.client import EnrollmentsClient  # noqa: E402
+
+            self._enrollments = EnrollmentsClient(client_wrapper=self._client_wrapper)
+        return self._enrollments
+
+    @property
     def agents(self):
         if self._agents is None:
             from .agents.client import AgentsClient  # noqa: E402
@@ -39,20 +53,39 @@ class AgenticClient:
         return self._agents
 
     @property
-    def enrollments(self):
-        if self._enrollments is None:
-            from .enrollments.client import EnrollmentsClient  # noqa: E402
+    def payment_methods(self):
+        if self._payment_methods is None:
+            from .payment_methods.client import PaymentMethodsClient  # noqa: E402
 
-            self._enrollments = EnrollmentsClient(client_wrapper=self._client_wrapper)
-        return self._enrollments
+            self._payment_methods = PaymentMethodsClient(client_wrapper=self._client_wrapper)
+        return self._payment_methods
+
+    @property
+    def payment_credentials(self):
+        if self._payment_credentials is None:
+            from .payment_credentials.client import PaymentCredentialsClient  # noqa: E402
+
+            self._payment_credentials = PaymentCredentialsClient(client_wrapper=self._client_wrapper)
+        return self._payment_credentials
+
+    @property
+    def allowances(self):
+        if self._allowances is None:
+            from .allowances.client import AllowancesClient  # noqa: E402
+
+            self._allowances = AllowancesClient(client_wrapper=self._client_wrapper)
+        return self._allowances
 
 
 class AsyncAgenticClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._raw_client = AsyncRawAgenticClient(client_wrapper=client_wrapper)
         self._client_wrapper = client_wrapper
-        self._agents: typing.Optional[AsyncAgentsClient] = None
         self._enrollments: typing.Optional[AsyncEnrollmentsClient] = None
+        self._agents: typing.Optional[AsyncAgentsClient] = None
+        self._payment_methods: typing.Optional[AsyncPaymentMethodsClient] = None
+        self._payment_credentials: typing.Optional[AsyncPaymentCredentialsClient] = None
+        self._allowances: typing.Optional[AsyncAllowancesClient] = None
 
     @property
     def with_raw_response(self) -> AsyncRawAgenticClient:
@@ -66,6 +99,14 @@ class AsyncAgenticClient:
         return self._raw_client
 
     @property
+    def enrollments(self):
+        if self._enrollments is None:
+            from .enrollments.client import AsyncEnrollmentsClient  # noqa: E402
+
+            self._enrollments = AsyncEnrollmentsClient(client_wrapper=self._client_wrapper)
+        return self._enrollments
+
+    @property
     def agents(self):
         if self._agents is None:
             from .agents.client import AsyncAgentsClient  # noqa: E402
@@ -74,9 +115,25 @@ class AsyncAgenticClient:
         return self._agents
 
     @property
-    def enrollments(self):
-        if self._enrollments is None:
-            from .enrollments.client import AsyncEnrollmentsClient  # noqa: E402
+    def payment_methods(self):
+        if self._payment_methods is None:
+            from .payment_methods.client import AsyncPaymentMethodsClient  # noqa: E402
 
-            self._enrollments = AsyncEnrollmentsClient(client_wrapper=self._client_wrapper)
-        return self._enrollments
+            self._payment_methods = AsyncPaymentMethodsClient(client_wrapper=self._client_wrapper)
+        return self._payment_methods
+
+    @property
+    def payment_credentials(self):
+        if self._payment_credentials is None:
+            from .payment_credentials.client import AsyncPaymentCredentialsClient  # noqa: E402
+
+            self._payment_credentials = AsyncPaymentCredentialsClient(client_wrapper=self._client_wrapper)
+        return self._payment_credentials
+
+    @property
+    def allowances(self):
+        if self._allowances is None:
+            from .allowances.client import AsyncAllowancesClient  # noqa: E402
+
+            self._allowances = AsyncAllowancesClient(client_wrapper=self._client_wrapper)
+        return self._allowances

@@ -21,6 +21,7 @@ class CreateTokenRequest(UniversalBaseModel):
     expires_at: typing.Optional[str] = None
     containers: typing.Optional[typing.List[str]] = None
     token_intent_id: typing.Optional[str] = None
+    owner_merchant_id: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

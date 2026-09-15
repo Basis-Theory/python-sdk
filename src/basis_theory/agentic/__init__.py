@@ -6,12 +6,19 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from . import agents, enrollments
+    from . import agents, allowances, enrollments, payment_credentials, payment_methods
+    from .allowances import AllowancesListRequestStatus
     from .enrollments import CreateEnrollmentRequestType
+    from .payment_methods import PaymentMethodsListRequestStatus
 _dynamic_imports: typing.Dict[str, str] = {
+    "AllowancesListRequestStatus": ".allowances",
     "CreateEnrollmentRequestType": ".enrollments",
+    "PaymentMethodsListRequestStatus": ".payment_methods",
     "agents": ".agents",
+    "allowances": ".allowances",
     "enrollments": ".enrollments",
+    "payment_credentials": ".payment_credentials",
+    "payment_methods": ".payment_methods",
 }
 
 
@@ -36,4 +43,13 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["CreateEnrollmentRequestType", "agents", "enrollments"]
+__all__ = [
+    "AllowancesListRequestStatus",
+    "CreateEnrollmentRequestType",
+    "PaymentMethodsListRequestStatus",
+    "agents",
+    "allowances",
+    "enrollments",
+    "payment_credentials",
+    "payment_methods",
+]

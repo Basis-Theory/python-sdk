@@ -65,9 +65,9 @@ class RawJobsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -76,9 +76,9 @@ class RawJobsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -152,9 +152,9 @@ class RawJobsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -163,9 +163,9 @@ class RawJobsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -182,7 +182,9 @@ class RawJobsClient:
     def create(
         self,
         *,
+        bt_merchant_id: typing.Optional[str] = None,
         deduplicate_tokens: typing.Optional[bool] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         result_version: typing.Optional[CreateAccountUpdaterJobRequestResultVersion] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -192,11 +194,17 @@ class RawJobsClient:
 
         Parameters
         ----------
+        bt_merchant_id : typing.Optional[str]
+            Tenant merchant the job acts as. Tokens in the file are read within this merchant's scope and new tokens are associated with it. Responds 404 if the merchant does not exist in the tenant.
+
         deduplicate_tokens : typing.Optional[bool]
             Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
+        configuration_merchant_id : typing.Optional[str]
+            Tenant merchant whose provider configuration is used for this job. Selects configuration only; it does not scope token access or associate tokens with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+
         merchant_id : typing.Optional[str]
-            Tenant merchant identifier
+            Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
 
         result_version : typing.Optional[CreateAccountUpdaterJobRequestResultVersion]
             Version of the result CSV format. Version '1' returns base columns. Version '1.1' adds new_fingerprint and new_brand columns. Version '1.2' adds the new_last4 column on top of 1.1.
@@ -214,11 +222,13 @@ class RawJobsClient:
             method="POST",
             json={
                 "deduplicate_tokens": deduplicate_tokens,
+                "configuration_merchant_id": configuration_merchant_id,
                 "merchant_id": merchant_id,
                 "result_version": result_version,
             },
             headers={
                 "content-type": "application/json",
+                "BT-MERCHANT-ID": str(bt_merchant_id) if bt_merchant_id is not None else None,
             },
             request_options=request_options,
             omit=OMIT,
@@ -237,9 +247,9 @@ class RawJobsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -248,9 +258,20 @@ class RawJobsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -317,9 +338,9 @@ class AsyncRawJobsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -328,9 +349,9 @@ class AsyncRawJobsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -404,9 +425,9 @@ class AsyncRawJobsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -415,9 +436,9 @@ class AsyncRawJobsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -434,7 +455,9 @@ class AsyncRawJobsClient:
     async def create(
         self,
         *,
+        bt_merchant_id: typing.Optional[str] = None,
         deduplicate_tokens: typing.Optional[bool] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         result_version: typing.Optional[CreateAccountUpdaterJobRequestResultVersion] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -444,11 +467,17 @@ class AsyncRawJobsClient:
 
         Parameters
         ----------
+        bt_merchant_id : typing.Optional[str]
+            Tenant merchant the job acts as. Tokens in the file are read within this merchant's scope and new tokens are associated with it. Responds 404 if the merchant does not exist in the tenant.
+
         deduplicate_tokens : typing.Optional[bool]
             Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
+        configuration_merchant_id : typing.Optional[str]
+            Tenant merchant whose provider configuration is used for this job. Selects configuration only; it does not scope token access or associate tokens with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+
         merchant_id : typing.Optional[str]
-            Tenant merchant identifier
+            Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
 
         result_version : typing.Optional[CreateAccountUpdaterJobRequestResultVersion]
             Version of the result CSV format. Version '1' returns base columns. Version '1.1' adds new_fingerprint and new_brand columns. Version '1.2' adds the new_last4 column on top of 1.1.
@@ -466,11 +495,13 @@ class AsyncRawJobsClient:
             method="POST",
             json={
                 "deduplicate_tokens": deduplicate_tokens,
+                "configuration_merchant_id": configuration_merchant_id,
                 "merchant_id": merchant_id,
                 "result_version": result_version,
             },
             headers={
                 "content-type": "application/json",
+                "BT-MERCHANT-ID": str(bt_merchant_id) if bt_merchant_id is not None else None,
             },
             request_options=request_options,
             omit=OMIT,
@@ -489,9 +520,9 @@ class AsyncRawJobsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -500,9 +531,20 @@ class AsyncRawJobsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
