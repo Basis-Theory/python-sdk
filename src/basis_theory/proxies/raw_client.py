@@ -17,11 +17,9 @@ from ..errors.forbidden_error import ForbiddenError
 from ..errors.not_found_error import NotFoundError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.application import Application
-from ..types.problem_details import ProblemDetails
 from ..types.proxy import Proxy
 from ..types.proxy_paginated_list import ProxyPaginatedList
 from ..types.proxy_transform import ProxyTransform
-from ..types.validation_problem_details import ValidationProblemDetails
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -101,9 +99,9 @@ class RawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -112,9 +110,9 @@ class RawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -242,9 +240,9 @@ class RawProxiesClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -253,9 +251,9 @@ class RawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -264,9 +262,9 @@ class RawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -313,9 +311,9 @@ class RawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -324,9 +322,9 @@ class RawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -457,9 +455,9 @@ class RawProxiesClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -468,9 +466,9 @@ class RawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -479,9 +477,9 @@ class RawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -531,9 +529,9 @@ class RawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -542,9 +540,9 @@ class RawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -659,9 +657,9 @@ class RawProxiesClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -670,9 +668,9 @@ class RawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -681,9 +679,102 @@ class RawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def transfer_hostname(
+        self,
+        id: str,
+        *,
+        proxy_host: str,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[None]:
+        """
+        Parameters
+        ----------
+        id : str
+
+        proxy_host : str
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[None]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"proxies/{encode_path_param(id)}/hostname",
+            method="PUT",
+            json={
+                "proxy_host": proxy_host,
+            },
+            headers={
+                "content-type": "application/json",
+                "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return HttpResponse(response=_response, data=None)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -785,9 +876,9 @@ class AsyncRawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -796,9 +887,9 @@ class AsyncRawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -926,9 +1017,9 @@ class AsyncRawProxiesClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -937,9 +1028,9 @@ class AsyncRawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -948,9 +1039,9 @@ class AsyncRawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -999,9 +1090,9 @@ class AsyncRawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1010,9 +1101,9 @@ class AsyncRawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1143,9 +1234,9 @@ class AsyncRawProxiesClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1154,9 +1245,9 @@ class AsyncRawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1165,9 +1256,9 @@ class AsyncRawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1219,9 +1310,9 @@ class AsyncRawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1230,9 +1321,9 @@ class AsyncRawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1347,9 +1438,9 @@ class AsyncRawProxiesClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1358,9 +1449,9 @@ class AsyncRawProxiesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1369,9 +1460,102 @@ class AsyncRawProxiesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def transfer_hostname(
+        self,
+        id: str,
+        *,
+        proxy_host: str,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[None]:
+        """
+        Parameters
+        ----------
+        id : str
+
+        proxy_host : str
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[None]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"proxies/{encode_path_param(id)}/hostname",
+            method="PUT",
+            json={
+                "proxy_host": proxy_host,
+            },
+            headers={
+                "content-type": "application/json",
+                "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return AsyncHttpResponse(response=_response, data=None)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

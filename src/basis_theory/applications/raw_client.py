@@ -19,8 +19,6 @@ from ..errors.unauthorized_error import UnauthorizedError
 from ..types.access_rule import AccessRule
 from ..types.application import Application
 from ..types.application_paginated_list import ApplicationPaginatedList
-from ..types.problem_details import ProblemDetails
-from ..types.validation_problem_details import ValidationProblemDetails
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -100,9 +98,9 @@ class RawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -111,9 +109,9 @@ class RawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -205,9 +203,9 @@ class RawApplicationsClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -216,9 +214,9 @@ class RawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -227,9 +225,9 @@ class RawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -276,9 +274,9 @@ class RawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -287,9 +285,9 @@ class RawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -376,9 +374,9 @@ class RawApplicationsClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -387,9 +385,9 @@ class RawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -398,9 +396,9 @@ class RawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -450,9 +448,9 @@ class RawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -461,9 +459,9 @@ class RawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -519,9 +517,9 @@ class RawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -623,9 +621,9 @@ class AsyncRawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -634,9 +632,9 @@ class AsyncRawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -728,9 +726,9 @@ class AsyncRawApplicationsClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -739,9 +737,9 @@ class AsyncRawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -750,9 +748,9 @@ class AsyncRawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -801,9 +799,9 @@ class AsyncRawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -812,9 +810,9 @@ class AsyncRawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -901,9 +899,9 @@ class AsyncRawApplicationsClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -912,9 +910,9 @@ class AsyncRawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -923,9 +921,9 @@ class AsyncRawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -977,9 +975,9 @@ class AsyncRawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -988,9 +986,9 @@ class AsyncRawApplicationsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1048,9 +1046,9 @@ class AsyncRawApplicationsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

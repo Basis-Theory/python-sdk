@@ -61,9 +61,9 @@ class RawResultsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -72,9 +72,9 @@ class RawResultsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -154,9 +154,9 @@ class AsyncRawResultsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -165,9 +165,9 @@ class AsyncRawResultsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

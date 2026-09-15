@@ -16,7 +16,6 @@ from ...errors.service_unavailable_error import ServiceUnavailableError
 from ...errors.unauthorized_error import UnauthorizedError
 from ...types.problem_details import ProblemDetails
 from ...types.security_contact_email_response import SecurityContactEmailResponse
-from ...types.validation_problem_details import ValidationProblemDetails
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -60,9 +59,9 @@ class RawSecurityContactClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -71,9 +70,9 @@ class RawSecurityContactClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -140,9 +139,9 @@ class RawSecurityContactClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -151,9 +150,9 @@ class RawSecurityContactClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -162,9 +161,9 @@ class RawSecurityContactClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -227,9 +226,9 @@ class AsyncRawSecurityContactClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -238,9 +237,9 @@ class AsyncRawSecurityContactClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -307,9 +306,9 @@ class AsyncRawSecurityContactClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ValidationProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ValidationProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -318,9 +317,9 @@ class AsyncRawSecurityContactClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -329,9 +328,9 @@ class AsyncRawSecurityContactClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ProblemDetails,
+                        typing.Any,
                         parse_obj_as(
-                            type_=ProblemDetails,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

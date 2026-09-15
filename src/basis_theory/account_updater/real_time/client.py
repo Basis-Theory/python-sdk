@@ -30,9 +30,11 @@ class RealTimeClient:
         self,
         *,
         token_id: str,
+        bt_merchant_id: typing.Optional[str] = None,
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AccountUpdaterRealTimeResponse:
@@ -44,6 +46,9 @@ class RealTimeClient:
         token_id : str
             Card Token identifier
 
+        bt_merchant_id : typing.Optional[str]
+            Tenant merchant the request acts as. The card token is read within this merchant's scope and the updated token is associated with it. Responds 404 if the merchant does not exist in the tenant.
+
         expiration_year : typing.Optional[int]
             The 4-digit expiration year of the account number. Not required if the card token already stores this value.
 
@@ -53,8 +58,11 @@ class RealTimeClient:
         deduplicate_token : typing.Optional[bool]
             Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
+        configuration_merchant_id : typing.Optional[str]
+            Tenant merchant whose provider configuration is used for this request. Selects configuration only; it does not scope token access or associate the new token with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+
         merchant_id : typing.Optional[str]
-            Tenant merchant identifier
+            Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -78,9 +86,11 @@ class RealTimeClient:
         """
         _response = self._raw_client.invoke(
             token_id=token_id,
+            bt_merchant_id=bt_merchant_id,
             expiration_year=expiration_year,
             expiration_month=expiration_month,
             deduplicate_token=deduplicate_token,
+            configuration_merchant_id=configuration_merchant_id,
             merchant_id=merchant_id,
             request_options=request_options,
         )
@@ -106,9 +116,11 @@ class AsyncRealTimeClient:
         self,
         *,
         token_id: str,
+        bt_merchant_id: typing.Optional[str] = None,
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AccountUpdaterRealTimeResponse:
@@ -120,6 +132,9 @@ class AsyncRealTimeClient:
         token_id : str
             Card Token identifier
 
+        bt_merchant_id : typing.Optional[str]
+            Tenant merchant the request acts as. The card token is read within this merchant's scope and the updated token is associated with it. Responds 404 if the merchant does not exist in the tenant.
+
         expiration_year : typing.Optional[int]
             The 4-digit expiration year of the account number. Not required if the card token already stores this value.
 
@@ -129,8 +144,11 @@ class AsyncRealTimeClient:
         deduplicate_token : typing.Optional[bool]
             Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
+        configuration_merchant_id : typing.Optional[str]
+            Tenant merchant whose provider configuration is used for this request. Selects configuration only; it does not scope token access or associate the new token with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+
         merchant_id : typing.Optional[str]
-            Tenant merchant identifier
+            Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -162,9 +180,11 @@ class AsyncRealTimeClient:
         """
         _response = await self._raw_client.invoke(
             token_id=token_id,
+            bt_merchant_id=bt_merchant_id,
             expiration_year=expiration_year,
             expiration_month=expiration_month,
             deduplicate_token=deduplicate_token,
+            configuration_merchant_id=configuration_merchant_id,
             merchant_id=merchant_id,
             request_options=request_options,
         )

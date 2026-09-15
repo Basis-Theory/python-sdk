@@ -248,6 +248,7 @@ class TokensClient:
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
+        owner_merchant_id: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Token:
@@ -279,6 +280,8 @@ class TokensClient:
         containers : typing.Optional[typing.Sequence[str]]
 
         token_intent_id : typing.Optional[str]
+
+        owner_merchant_id : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -314,6 +317,7 @@ class TokensClient:
             expires_at=expires_at,
             containers=containers,
             token_intent_id=token_intent_id,
+            owner_merchant_id=owner_merchant_id,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )
@@ -707,6 +711,7 @@ class AsyncTokensClient:
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
+        owner_merchant_id: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Token:
@@ -738,6 +743,8 @@ class AsyncTokensClient:
         containers : typing.Optional[typing.Sequence[str]]
 
         token_intent_id : typing.Optional[str]
+
+        owner_merchant_id : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
 
@@ -781,6 +788,7 @@ class AsyncTokensClient:
             expires_at=expires_at,
             containers=containers,
             token_intent_id=token_intent_id,
+            owner_merchant_id=owner_merchant_id,
             idempotency_key=idempotency_key,
             request_options=request_options,
         )

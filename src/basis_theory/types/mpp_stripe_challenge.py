@@ -12,7 +12,7 @@ class MppStripeChallenge(UniversalBaseModel):
     Challenge identifier issued by the merchant
     """
 
-    method: typing.Literal["stripe"] = pydantic.Field(default="stripe")
+    method: str = pydantic.Field()
     """
     Payment method of the challenge — must be `stripe`
     """

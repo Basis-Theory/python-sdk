@@ -2617,6 +2617,22 @@ client.network_tokens.create()
 <dl>
 <dd>
 
+**configuration_merchant_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_merchant_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3625,6 +3641,74 @@ client.proxies.patch(
 <dd>
 
 **disable_detokenization:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">transfer_hostname</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.proxies.transfer_hostname(
+    id="id",
+    proxy_host="proxy_host",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**proxy_host:** `str` 
     
 </dd>
 </dl>
@@ -5356,6 +5440,14 @@ client.account_updater.jobs.create()
 <dl>
 <dd>
 
+**bt_merchant_id:** `typing.Optional[str]` — Tenant merchant the job acts as. Tokens in the file are read within this merchant's scope and new tokens are associated with it. Responds 404 if the merchant does not exist in the tenant.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **deduplicate_tokens:** `typing.Optional[bool]` — Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
     
 </dd>
@@ -5364,7 +5456,15 @@ client.account_updater.jobs.create()
 <dl>
 <dd>
 
-**merchant_id:** `typing.Optional[str]` — Tenant merchant identifier
+**configuration_merchant_id:** `typing.Optional[str]` — Tenant merchant whose provider configuration is used for this job. Selects configuration only; it does not scope token access or associate tokens with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_id:** `typing.Optional[str]` — Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
     
 </dd>
 </dl>
@@ -5454,6 +5554,14 @@ client.account_updater.real_time.invoke(
 <dl>
 <dd>
 
+**bt_merchant_id:** `typing.Optional[str]` — Tenant merchant the request acts as. The card token is read within this merchant's scope and the updated token is associated with it. Responds 404 if the merchant does not exist in the tenant.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **expiration_year:** `typing.Optional[int]` — The 4-digit expiration year of the account number. Not required if the card token already stores this value.
     
 </dd>
@@ -5478,7 +5586,7 @@ client.account_updater.real_time.invoke(
 <dl>
 <dd>
 
-**merchant_id:** `typing.Optional[str]` — Tenant merchant identifier
+**configuration_merchant_id:** `typing.Optional[str]` — Tenant merchant whose provider configuration is used for this request. Selects configuration only; it does not scope token access or associate the new token with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
     
 </dd>
 </dl>
@@ -5486,276 +5594,7 @@ client.account_updater.real_time.invoke(
 <dl>
 <dd>
 
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Agentic Agents
-<details><summary><code>client.agentic.agents.<a href="src/basis_theory/agentic/agents/client.py">create</a>(...) -> Agent</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-from basis_theory.environment import BasisTheoryEnvironment
-
-client = BasisTheory(
-    api_key="<value>",
-    environment=BasisTheoryEnvironment.DEFAULT,
-)
-
-client.agentic.agents.create(
-    name="name",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**name:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**enrollment_ids:** `typing.Optional[typing.List[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**instance_details:** `typing.Optional[InstanceDetails]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agentic.agents.<a href="src/basis_theory/agentic/agents/client.py">get</a>(...) -> Agent</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-from basis_theory.environment import BasisTheoryEnvironment
-
-client = BasisTheory(
-    api_key="<value>",
-    environment=BasisTheoryEnvironment.DEFAULT,
-)
-
-client.agentic.agents.get(
-    agent_id="agent_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agentic.agents.<a href="src/basis_theory/agentic/agents/client.py">delete</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-from basis_theory.environment import BasisTheoryEnvironment
-
-client = BasisTheory(
-    api_key="<value>",
-    environment=BasisTheoryEnvironment.DEFAULT,
-)
-
-client.agentic.agents.delete(
-    agent_id="agent_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agentic.agents.<a href="src/basis_theory/agentic/agents/client.py">update</a>(...) -> Agent</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from basis_theory import BasisTheory
-from basis_theory.environment import BasisTheoryEnvironment
-
-client = BasisTheory(
-    api_key="<value>",
-    environment=BasisTheoryEnvironment.DEFAULT,
-)
-
-client.agentic.agents.update(
-    agent_id="agent_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**agent_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**name:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**enrollment_ids:** `typing.Optional[typing.List[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**instance_details:** `typing.Optional[InstanceDetails]` 
+**merchant_id:** `typing.Optional[str]` — Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
     
 </dd>
 </dl>
@@ -6174,6 +6013,1434 @@ client.agentic.enrollments.retry(
 <dd>
 
 **enrollment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agentic Agents
+<details><summary><code>client.agentic.agents.<a href="src/basis_theory/agentic/agents/client.py">create</a>(...) -> Agent</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.agents.create(
+    name="name",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enrollment_ids:** `typing.Optional[typing.List[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**instance_details:** `typing.Optional[InstanceDetails]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.agents.<a href="src/basis_theory/agentic/agents/client.py">get</a>(...) -> Agent</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.agents.get(
+    agent_id="agent_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.agents.<a href="src/basis_theory/agentic/agents/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.agents.delete(
+    agent_id="agent_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.agents.<a href="src/basis_theory/agentic/agents/client.py">update</a>(...) -> Agent</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.agents.update(
+    agent_id="agent_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enrollment_ids:** `typing.Optional[typing.List[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**instance_details:** `typing.Optional[InstanceDetails]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agentic PaymentMethods
+<details><summary><code>client.agentic.payment_methods.<a href="src/basis_theory/agentic/payment_methods/client.py">list</a>(...) -> PaymentMethodList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists shared payment methods for the current tenant. Defaults to active resources; use `status=all` for a complete Portal history. Server-side page filling prevents sparse pages when filtering by status.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.payment_methods.list(
+    size=1,
+    start="start",
+    consumer_id="consumer_id",
+    status="active",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**consumer_id:** `typing.Optional[str]` — Optional consumer UUID to list payment methods for one customer.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[PaymentMethodsListRequestStatus]` — Resource status filter. Defaults to active.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.payment_methods.<a href="src/basis_theory/agentic/payment_methods/client.py">create</a>(...) -> PaymentMethod</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a shared payment method from a funding source — a Basis Theory card token, or an instrument reached through a source connection — and provision the rails that source is eligible for. Public and private applications may call this operation with `agentic:payment-method:create`. Supply BT-IDEMPOTENCY-KEY to make matching retries return the same resource. Without it, every request is a new create operation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory, BasisTheoryCardTokenPaymentMethodSource, SharedPaymentConsumer
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.payment_methods.create(
+    source=BasisTheoryCardTokenPaymentMethodSource(
+        token_id="token_id",
+    ),
+    consumer=SharedPaymentConsumer(
+        email="email",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**source:** `PaymentMethodSource` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**consumer:** `SharedPaymentConsumer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bt_idempotency_key:** `typing.Optional[str]` — Optional stable key for safely replaying this create request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.payment_methods.<a href="src/basis_theory/agentic/payment_methods/client.py">get</a>(...) -> PaymentMethod</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.payment_methods.get(
+    payment_method_id="payment_method_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payment_method_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.payment_methods.<a href="src/basis_theory/agentic/payment_methods/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a payment method and revoke everything downstream - every allowance backed by it is cancelled (including network-side purchase instructions) and no further verification or credential minting is possible.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.payment_methods.delete(
+    payment_method_id="payment_method_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payment_method_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.payment_methods.<a href="src/basis_theory/agentic/payment_methods/client.py">errors</a>(...) -> SharedPaymentProviderErrorList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists sanitized provider failures for a payment method and its downstream operations. Raw provider bodies and card data are never returned.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.payment_methods.errors(
+    payment_method_id="payment_method_id",
+    size=1,
+    start="start",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payment_method_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agentic PaymentCredentials
+<details><summary><code>client.agentic.payment_credentials.<a href="src/basis_theory/agentic/payment_credentials/client.py">list</a>(...) -> PaymentCredentialList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists credential metadata across the tenant for Portal history. Spendable card, SPT, and MPP payloads are never returned.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.payment_credentials.list(
+    size=1,
+    start="start",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agentic Allowances
+<details><summary><code>client.agentic.allowances.<a href="src/basis_theory/agentic/allowances/client.py">list</a>(...) -> AllowanceList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists allowances for the current tenant. Defaults to active, unexpired resources; use `status=all` for a complete Portal history. Results can be scoped to one payment method, and server-side page filling prevents sparse pages when filtering by status.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.list(
+    size=1,
+    start="start",
+    payment_method_id="payment_method_id",
+    status="active",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payment_method_id:** `typing.Optional[str]` — Optional payment method ID to list its allowances.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[AllowancesListRequestStatus]` — Derived resource status filter. Defaults to active.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.allowances.<a href="src/basis_theory/agentic/allowances/client.py">create</a>(...) -> Allowance</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a spending allowance from a payment method. Supply `merchant` to scope the mandate to one merchant, or omit it to leave the allowance open and name a merchant on each credential request instead. The payment method must have at least one enabled rail; otherwise the request returns `NO_ACTIVE_RAILS`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory, SharedPaymentAmount
+from basis_theory.environment import BasisTheoryEnvironment
+import datetime
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.create(
+    payment_method_id="payment_method_id",
+    amount=SharedPaymentAmount(
+        value="100.00",
+        currency="USD",
+    ),
+    description="description",
+    expires_at=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payment_method_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount:** `SharedPaymentAmount` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `str` — Customer-facing prompt describing what the allowance permits.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expires_at:** `datetime.datetime` — ISO 8601 timestamp when the allowance expires. Must be in the future.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bt_idempotency_key:** `typing.Optional[str]` — Optional stable key for safely replaying this create request. Without it, every request creates a new allowance.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `typing.Optional[str]` — Optional attribution to an agent owned by the tenant. This does not authorize the caller; tenant API-key permissions remain the authorization boundary.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant:** `typing.Optional[SharedPaymentMerchant]` — Optional merchant the allowance is scoped to. Omit it to leave the allowance open and supply `merchant` on each credential request instead. Once set it cannot be changed, and a credential request for a merchant-scoped allowance must not send its own `merchant`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata:** `typing.Optional[typing.Dict[str, typing.Any]]` — Public integration metadata. The JSON-encoded value must not exceed 32 KiB.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.allowances.<a href="src/basis_theory/agentic/allowances/client.py">get</a>(...) -> Allowance</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.get(
+    allowance_id="allowance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.allowances.<a href="src/basis_theory/agentic/allowances/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancel an allowance so new credentials cannot be created from it. Network-side purchase instructions held by its rails are cancelled with the provider.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.delete(
+    allowance_id="allowance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.allowances.<a href="src/basis_theory/agentic/allowances/client.py">update</a>(...) -> Allowance</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates one or more mutable fields by changing the provider-side mandate first, then committing the same amount, prompt, and expiry locally. Mints are blocked while the update is in flight, and an empty request body is rejected.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.update(
+    allowance_id="allowance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount:** `typing.Optional[SharedPaymentAmount]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Customer-facing prompt describing what the allowance permits.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expires_at:** `typing.Optional[datetime.datetime]` — ISO 8601 timestamp when the allowance expires. Must be in the future.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.allowances.<a href="src/basis_theory/agentic/allowances/client.py">errors</a>(...) -> SharedPaymentProviderErrorList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists sanitized provider failures for an allowance, including failed verification and credential attempts. Raw provider bodies and card data are never returned.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.errors(
+    allowance_id="allowance_id",
+    size=1,
+    start="start",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.allowances.<a href="src/basis_theory/agentic/allowances/client.py">verify</a>(...) -> AllowanceVerificationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start or continue self-served verification for a rail that requires it. Public and private applications may call this operation with `agentic:allowance:verify`; browser clients should use a public application key. Visa verification is advanced through explicit ceremony actions. Mastercard managed authentication is finalized with `complete` after the hosted ceremony; callback delivery is only a browser signal and is not required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory, StartVerifyAllowanceRequest
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.verify(
+    allowance_id="allowance_id",
+    request=StartVerifyAllowanceRequest(
+        rail="agentic-token",
+        provider="vic",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `VerifyAllowanceRequest` 
     
 </dd>
 </dl>
@@ -6683,6 +7950,102 @@ client.agentic.agents.instructions.update(
 </dl>
 </details>
 
+<details><summary><code>client.agentic.agents.instructions.<a href="src/basis_theory/agentic/agents/instructions/client.py">confirmations</a>(...) -> PublishConfirmationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Report the outcome of a transaction back to the card network.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory, ConfirmationEntry
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.agents.instructions.confirmations(
+    agent_id="agent_id",
+    instruction_id="instruction_id",
+    confirmation_data=[
+        ConfirmationEntry(
+            transaction_status="approved",
+            transaction_type="purchase",
+        )
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**instruction_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**confirmation_data:** `typing.List[ConfirmationEntry]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Agentic Agents Instructions Credentials
 <details><summary><code>client.agentic.agents.instructions.credentials.<a href="src/basis_theory/agentic/agents/instructions/credentials/client.py">create</a>(...) -> Credentials</code></summary>
 <dl>
@@ -7001,6 +8364,397 @@ client.agentic.agents.instructions.verify.passkey(
 <dd>
 
 **flow_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agentic Allowances Rails
+<details><summary><code>client.agentic.allowances.rails.<a href="src/basis_theory/agentic/allowances/rails/client.py">retry</a>(...) -> Allowance</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Re-run provider setup for one failed allowance rail. Allowance creation keeps rails that failed at the provider, so a transient outage does not require rebuilding the mandate. Only rails with status `error` can be retried, and the payment method's matching rail must still be `enabled`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.rails.retry(
+    allowance_id="allowance_id",
+    rail="agentic-token",
+    provider="vic",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rail:** `RailsRetryRequestRail` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider:** `RailsRetryRequestProvider` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agentic Allowances Credentials
+<details><summary><code>client.agentic.allowances.credentials.<a href="src/basis_theory/agentic/allowances/credentials/client.py">list</a>(...) -> PaymentCredentialList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List credential metadata for an allowance. Responses contain metadata only — never card numbers, SPT values, or MPP payloads.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.credentials.list(
+    allowance_id="allowance_id",
+    size=1,
+    start="start",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.allowances.credentials.<a href="src/basis_theory/agentic/allowances/credentials/client.py">create</a>(...) -> PaymentCredential</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a spend credential from an allowance. Supply BT-IDEMPOTENCY-KEY for retry protection. Without it, every request is a new mint and may spend the allowance again.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+from basis_theory.agentic.allowances.credentials import CardCreatePaymentCredentialRequestCredential
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.credentials.create(
+    allowance_id="allowance_id",
+    rail="agentic-token",
+    provider="vic",
+    credential=CardCreatePaymentCredentialRequestCredential(),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rail:** `CreatePaymentCredentialRequestRail` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider:** `CreatePaymentCredentialRequestProvider` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential:** `CreatePaymentCredentialRequestCredential` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bt_idempotency_key:** `typing.Optional[str]` — Optional stable key for detecting retries. A successful bearer credential cannot be replayed.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount:** `typing.Optional[SharedPaymentAmount]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant:** `typing.Optional[SharedPaymentMerchant]` — Merchant this credential is being minted for. Required when the allowance has no `merchant`, and rejected when it does — the allowance's merchant is the scope the cardholder verified against, so a mint can neither restate nor replace it. Required on every rail for consistency. At mint Visa (`vic`) forwards it to the network, and Stripe Link (`link`) names it on the spend request the consumer sees.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentic.allowances.credentials.<a href="src/basis_theory/agentic/allowances/credentials/client.py">get</a>(...) -> PaymentCredentialMetadata</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get credential metadata. The credential payload itself (card number, SPT, MPP token) is only ever returned by the create call.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.allowances.credentials.get(
+    allowance_id="allowance_id",
+    credential_id="credential_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**allowance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential_id:** `str` 
     
 </dd>
 </dl>
@@ -7347,6 +9101,98 @@ client.agentic.enrollments.verify.complete(
 <dd>
 
 **src_correlation_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agentic PaymentMethods Rails
+<details><summary><code>client.agentic.payment_methods.rails.<a href="src/basis_theory/agentic/payment_methods/rails/client.py">retry</a>(...) -> PaymentMethod</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retry one payment method rail after pending or failed provisioning. Public and private applications may call this operation with `agentic:payment-method:create`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.agentic.payment_methods.rails.retry(
+    payment_method_id="payment_method_id",
+    rail="agentic-token",
+    provider="vic",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payment_method_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rail:** `RailsRetryRequestRail` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider:** `RailsRetryRequestProvider` 
     
 </dd>
 </dl>

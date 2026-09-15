@@ -9,9 +9,11 @@ from ....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ....core.pagination import AsyncPager, SyncPager
 from ....core.request_options import RequestOptions
 from ....types.amount import Amount
+from ....types.confirmation_entry import ConfirmationEntry
 from ....types.instance_details import InstanceDetails
 from ....types.instruction import Instruction
 from ....types.instruction_list import InstructionList
+from ....types.publish_confirmation_response import PublishConfirmationResponse
 from ....types.recurring import Recurring
 from .raw_client import AsyncRawInstructionsClient, RawInstructionsClient
 from .types.create_instruction_request_mpp import CreateInstructionRequestMpp
@@ -307,6 +309,57 @@ class InstructionsClient:
             description=description,
             expires_at=expires_at,
             request_options=request_options,
+        )
+        return _response.data
+
+    def confirmations(
+        self,
+        agent_id: str,
+        instruction_id: str,
+        *,
+        confirmation_data: typing.Sequence[ConfirmationEntry],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> PublishConfirmationResponse:
+        """
+        Report the outcome of a transaction back to the card network.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        instruction_id : str
+
+        confirmation_data : typing.Sequence[ConfirmationEntry]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        PublishConfirmationResponse
+            Confirmation accepted
+
+        Examples
+        --------
+        from basis_theory import BasisTheory, ConfirmationEntry
+
+        client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+        client.agentic.agents.instructions.confirmations(
+            agent_id="agent_id",
+            instruction_id="instruction_id",
+            confirmation_data=[
+                ConfirmationEntry(
+                    transaction_status="approved",
+                    transaction_type="purchase",
+                )
+            ],
+        )
+        """
+        _response = self._raw_client.confirmations(
+            agent_id, instruction_id, confirmation_data=confirmation_data, request_options=request_options
         )
         return _response.data
 
@@ -651,6 +704,65 @@ class AsyncInstructionsClient:
             description=description,
             expires_at=expires_at,
             request_options=request_options,
+        )
+        return _response.data
+
+    async def confirmations(
+        self,
+        agent_id: str,
+        instruction_id: str,
+        *,
+        confirmation_data: typing.Sequence[ConfirmationEntry],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> PublishConfirmationResponse:
+        """
+        Report the outcome of a transaction back to the card network.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        instruction_id : str
+
+        confirmation_data : typing.Sequence[ConfirmationEntry]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        PublishConfirmationResponse
+            Confirmation accepted
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory, ConfirmationEntry
+
+        client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agentic.agents.instructions.confirmations(
+                agent_id="agent_id",
+                instruction_id="instruction_id",
+                confirmation_data=[
+                    ConfirmationEntry(
+                        transaction_status="approved",
+                        transaction_type="purchase",
+                    )
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.confirmations(
+            agent_id, instruction_id, confirmation_data=confirmation_data, request_options=request_options
         )
         return _response.data
 
