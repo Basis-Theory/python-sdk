@@ -525,6 +525,7 @@ class RawTokensClient:
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
+        owner_merchant_id: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Token]:
@@ -557,6 +558,8 @@ class RawTokensClient:
 
         token_intent_id : typing.Optional[str]
 
+        owner_merchant_id : typing.Optional[str]
+
         idempotency_key : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -586,6 +589,7 @@ class RawTokensClient:
                 "expires_at": expires_at,
                 "containers": containers,
                 "token_intent_id": token_intent_id,
+                "owner_merchant_id": owner_merchant_id,
             },
             headers={
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,
@@ -1368,6 +1372,7 @@ class AsyncRawTokensClient:
         expires_at: typing.Optional[str] = OMIT,
         containers: typing.Optional[typing.Sequence[str]] = OMIT,
         token_intent_id: typing.Optional[str] = OMIT,
+        owner_merchant_id: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Token]:
@@ -1400,6 +1405,8 @@ class AsyncRawTokensClient:
 
         token_intent_id : typing.Optional[str]
 
+        owner_merchant_id : typing.Optional[str]
+
         idempotency_key : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -1429,6 +1436,7 @@ class AsyncRawTokensClient:
                 "expires_at": expires_at,
                 "containers": containers,
                 "token_intent_id": token_intent_id,
+                "owner_merchant_id": owner_merchant_id,
             },
             headers={
                 "BT-IDEMPOTENCY-KEY": str(idempotency_key) if idempotency_key is not None else None,

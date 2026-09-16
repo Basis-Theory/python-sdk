@@ -20,6 +20,7 @@ class TokenIntent(UniversalBaseModel):
     created_by: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
     expires_at: typing.Optional[dt.datetime] = None
+    data: typing.Optional[typing.Any] = None
     card: typing.Optional[CardDetails] = None
     bank: typing.Optional[BankDetails] = None
     network_token: typing.Optional[CardDetails] = None

@@ -11,6 +11,7 @@ from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
 from ...errors.bad_request_error import BadRequestError
 from ...errors.forbidden_error import ForbiddenError
+from ...errors.not_found_error import NotFoundError
 from ...errors.unauthorized_error import UnauthorizedError
 from ...errors.unprocessable_entity_error import UnprocessableEntityError
 from ...types.account_updater_real_time_response import AccountUpdaterRealTimeResponse
@@ -30,9 +31,11 @@ class RawRealTimeClient:
         self,
         *,
         token_id: str,
+        bt_merchant_id: typing.Optional[str] = None,
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[AccountUpdaterRealTimeResponse]:
@@ -44,6 +47,9 @@ class RawRealTimeClient:
         token_id : str
             Card Token identifier
 
+        bt_merchant_id : typing.Optional[str]
+            Tenant merchant the request acts as. The card token is read within this merchant's scope and the updated token is associated with it. Responds 404 if the merchant does not exist in the tenant.
+
         expiration_year : typing.Optional[int]
             The 4-digit expiration year of the account number. Not required if the card token already stores this value.
 
@@ -53,8 +59,11 @@ class RawRealTimeClient:
         deduplicate_token : typing.Optional[bool]
             Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
+        configuration_merchant_id : typing.Optional[str]
+            Tenant merchant whose provider configuration is used for this request. Selects configuration only; it does not scope token access or associate the new token with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+
         merchant_id : typing.Optional[str]
-            Tenant merchant identifier
+            Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -72,10 +81,12 @@ class RawRealTimeClient:
                 "expiration_year": expiration_year,
                 "expiration_month": expiration_month,
                 "deduplicate_token": deduplicate_token,
+                "configuration_merchant_id": configuration_merchant_id,
                 "merchant_id": merchant_id,
             },
             headers={
                 "content-type": "application/json",
+                "BT-MERCHANT-ID": str(bt_merchant_id) if bt_merchant_id is not None else None,
             },
             request_options=request_options,
             omit=OMIT,
@@ -123,6 +134,17 @@ class RawRealTimeClient:
                         ),
                     ),
                 )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -152,9 +174,11 @@ class AsyncRawRealTimeClient:
         self,
         *,
         token_id: str,
+        bt_merchant_id: typing.Optional[str] = None,
         expiration_year: typing.Optional[int] = OMIT,
         expiration_month: typing.Optional[int] = OMIT,
         deduplicate_token: typing.Optional[bool] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[AccountUpdaterRealTimeResponse]:
@@ -166,6 +190,9 @@ class AsyncRawRealTimeClient:
         token_id : str
             Card Token identifier
 
+        bt_merchant_id : typing.Optional[str]
+            Tenant merchant the request acts as. The card token is read within this merchant's scope and the updated token is associated with it. Responds 404 if the merchant does not exist in the tenant.
+
         expiration_year : typing.Optional[int]
             The 4-digit expiration year of the account number. Not required if the card token already stores this value.
 
@@ -175,8 +202,11 @@ class AsyncRawRealTimeClient:
         deduplicate_token : typing.Optional[bool]
             Whether deduplication should be enabled when creating the new token. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
 
+        configuration_merchant_id : typing.Optional[str]
+            Tenant merchant whose provider configuration is used for this request. Selects configuration only; it does not scope token access or associate the new token with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+
         merchant_id : typing.Optional[str]
-            Tenant merchant identifier
+            Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -194,10 +224,12 @@ class AsyncRawRealTimeClient:
                 "expiration_year": expiration_year,
                 "expiration_month": expiration_month,
                 "deduplicate_token": deduplicate_token,
+                "configuration_merchant_id": configuration_merchant_id,
                 "merchant_id": merchant_id,
             },
             headers={
                 "content-type": "application/json",
+                "BT-MERCHANT-ID": str(bt_merchant_id) if bt_merchant_id is not None else None,
             },
             request_options=request_options,
             omit=OMIT,
@@ -241,6 +273,17 @@ class AsyncRawRealTimeClient:
                         ProblemDetails,
                         parse_obj_as(
                             type_=ProblemDetails,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        parse_obj_as(
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

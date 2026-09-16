@@ -2617,6 +2617,22 @@ client.network_tokens.create()
 <dl>
 <dd>
 
+**configuration_merchant_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_merchant_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3625,6 +3641,74 @@ client.proxies.patch(
 <dd>
 
 **disable_detokenization:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.proxies.<a href="src/basis_theory/proxies/client.py">transfer_hostname</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.proxies.transfer_hostname(
+    id="id",
+    proxy_host="proxy_host",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**proxy_host:** `str` 
     
 </dd>
 </dl>
@@ -5356,6 +5440,14 @@ client.account_updater.jobs.create()
 <dl>
 <dd>
 
+**bt_merchant_id:** `typing.Optional[str]` — Tenant merchant the job acts as. Tokens in the file are read within this merchant's scope and new tokens are associated with it. Responds 404 if the merchant does not exist in the tenant.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **deduplicate_tokens:** `typing.Optional[bool]` — Whether deduplication should be enabled when creating new tokens. Uses the value of the Deduplicate Tokens setting on the tenant if not set.
     
 </dd>
@@ -5364,7 +5456,15 @@ client.account_updater.jobs.create()
 <dl>
 <dd>
 
-**merchant_id:** `typing.Optional[str]` — Tenant merchant identifier
+**configuration_merchant_id:** `typing.Optional[str]` — Tenant merchant whose provider configuration is used for this job. Selects configuration only; it does not scope token access or associate tokens with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_id:** `typing.Optional[str]` — Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
     
 </dd>
 </dl>
@@ -5454,6 +5554,14 @@ client.account_updater.real_time.invoke(
 <dl>
 <dd>
 
+**bt_merchant_id:** `typing.Optional[str]` — Tenant merchant the request acts as. The card token is read within this merchant's scope and the updated token is associated with it. Responds 404 if the merchant does not exist in the tenant.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **expiration_year:** `typing.Optional[int]` — The 4-digit expiration year of the account number. Not required if the card token already stores this value.
     
 </dd>
@@ -5478,7 +5586,15 @@ client.account_updater.real_time.invoke(
 <dl>
 <dd>
 
-**merchant_id:** `typing.Optional[str]` — Tenant merchant identifier
+**configuration_merchant_id:** `typing.Optional[str]` — Tenant merchant whose provider configuration is used for this request. Selects configuration only; it does not scope token access or associate the new token with the merchant. Takes precedence over merchant_id; defaults to the BT-MERCHANT-ID header merchant, then the tenant-level configuration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_id:** `typing.Optional[str]` — Deprecated: use configuration_merchant_id instead. Legacy alias kept for backward compatibility with lower precedence. Selects configuration only.
     
 </dd>
 </dl>
