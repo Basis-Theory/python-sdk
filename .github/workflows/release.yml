@@ -50,9 +50,6 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: "Build"
-        run: poetry build
-
       - name: "Release"
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
