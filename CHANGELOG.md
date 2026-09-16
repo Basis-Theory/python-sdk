@@ -1,3 +1,10 @@
+# [7.2.0](https://github.com/Basis-Theory/python-sdk/compare/v7.1.0...v7.2.0) (2026-09-16)
+
+
+### Features
+
+* add proxy hostname transfer, runtime log options, and account updater merchant header ([ec88af9](https://github.com/Basis-Theory/python-sdk/commit/ec88af9d4e986f202e146eb4aaa7ee684aa4ecaa))
+
 # [7.1.0](https://github.com/Basis-Theory/python-sdk/compare/v7.0.0...v7.1.0) (2026-09-11)
 
 
