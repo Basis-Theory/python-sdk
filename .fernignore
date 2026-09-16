@@ -10,6 +10,7 @@ package.json
 yarn.lock
 
 tests/custom/**/*.py
+tests/custom/test_environment.py
 tests/custom/test_agentic.py
 tests/custom/test_client.py
 .fern/replay.lock
