@@ -1,3 +1,10 @@
+## [7.2.1](https://github.com/Basis-Theory/python-sdk/compare/v7.2.0...v7.2.1) (2026-09-16)
+
+
+### Bug Fixes
+
+* remove redundant Python release build ([67a5508](https://github.com/Basis-Theory/python-sdk/commit/67a550850f6bf9993e7c9b63a0521a2ff915f994))
+
 # [7.2.0](https://github.com/Basis-Theory/python-sdk/compare/v7.1.0...v7.2.0) (2026-09-16)
 
 
