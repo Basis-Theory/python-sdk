@@ -45,6 +45,8 @@ class NetworkTokensClient:
         expiration_year: typing.Optional[int] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
+        owner_merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> NetworkToken:
         """
@@ -63,6 +65,10 @@ class NetworkTokensClient:
         cardholder_info : typing.Optional[CardholderInfo]
 
         merchant_id : typing.Optional[str]
+
+        configuration_merchant_id : typing.Optional[str]
+
+        owner_merchant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -90,6 +96,8 @@ class NetworkTokensClient:
             expiration_year=expiration_year,
             cardholder_info=cardholder_info,
             merchant_id=merchant_id,
+            configuration_merchant_id=configuration_merchant_id,
+            owner_merchant_id=owner_merchant_id,
             request_options=request_options,
         )
         return _response.data
@@ -274,6 +282,8 @@ class AsyncNetworkTokensClient:
         expiration_year: typing.Optional[int] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
+        owner_merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> NetworkToken:
         """
@@ -292,6 +302,10 @@ class AsyncNetworkTokensClient:
         cardholder_info : typing.Optional[CardholderInfo]
 
         merchant_id : typing.Optional[str]
+
+        configuration_merchant_id : typing.Optional[str]
+
+        owner_merchant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -327,6 +341,8 @@ class AsyncNetworkTokensClient:
             expiration_year=expiration_year,
             cardholder_info=cardholder_info,
             merchant_id=merchant_id,
+            configuration_merchant_id=configuration_merchant_id,
+            owner_merchant_id=owner_merchant_id,
             request_options=request_options,
         )
         return _response.data

@@ -400,6 +400,48 @@ class ProxiesClient:
         )
         return _response.data
 
+    def transfer_hostname(
+        self,
+        id: str,
+        *,
+        proxy_host: str,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> None:
+        """
+        Parameters
+        ----------
+        id : str
+
+        proxy_host : str
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from basis_theory import BasisTheory
+
+        client = BasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+        client.proxies.transfer_hostname(
+            id="id",
+            proxy_host="proxy_host",
+        )
+        """
+        _response = self._raw_client.transfer_hostname(
+            id, proxy_host=proxy_host, idempotency_key=idempotency_key, request_options=request_options
+        )
+        return _response.data
+
 
 class AsyncProxiesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -832,5 +874,55 @@ class AsyncProxiesClient:
             disable_detokenization=disable_detokenization,
             idempotency_key=idempotency_key,
             request_options=request_options,
+        )
+        return _response.data
+
+    async def transfer_hostname(
+        self,
+        id: str,
+        *,
+        proxy_host: str,
+        idempotency_key: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> None:
+        """
+        Parameters
+        ----------
+        id : str
+
+        proxy_host : str
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from basis_theory import AsyncBasisTheory
+
+        client = AsyncBasisTheory(
+            correlation_id="YOUR_CORRELATION_ID",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.proxies.transfer_hostname(
+                id="id",
+                proxy_host="proxy_host",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.transfer_hostname(
+            id, proxy_host=proxy_host, idempotency_key=idempotency_key, request_options=request_options
         )
         return _response.data

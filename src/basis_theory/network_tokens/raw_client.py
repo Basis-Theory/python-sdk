@@ -45,6 +45,8 @@ class RawNetworkTokensClient:
         expiration_year: typing.Optional[int] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
+        owner_merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[NetworkToken]:
         """
@@ -63,6 +65,10 @@ class RawNetworkTokensClient:
         cardholder_info : typing.Optional[CardholderInfo]
 
         merchant_id : typing.Optional[str]
+
+        configuration_merchant_id : typing.Optional[str]
+
+        owner_merchant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -85,6 +91,8 @@ class RawNetworkTokensClient:
                     object_=cardholder_info, annotation=CardholderInfo, direction="write"
                 ),
                 "merchant_id": merchant_id,
+                "configuration_merchant_id": configuration_merchant_id,
+                "owner_merchant_id": owner_merchant_id,
             },
             headers={
                 "content-type": "application/json",
@@ -620,6 +628,8 @@ class AsyncRawNetworkTokensClient:
         expiration_year: typing.Optional[int] = OMIT,
         cardholder_info: typing.Optional[CardholderInfo] = OMIT,
         merchant_id: typing.Optional[str] = OMIT,
+        configuration_merchant_id: typing.Optional[str] = OMIT,
+        owner_merchant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[NetworkToken]:
         """
@@ -638,6 +648,10 @@ class AsyncRawNetworkTokensClient:
         cardholder_info : typing.Optional[CardholderInfo]
 
         merchant_id : typing.Optional[str]
+
+        configuration_merchant_id : typing.Optional[str]
+
+        owner_merchant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -660,6 +674,8 @@ class AsyncRawNetworkTokensClient:
                     object_=cardholder_info, annotation=CardholderInfo, direction="write"
                 ),
                 "merchant_id": merchant_id,
+                "configuration_merchant_id": configuration_merchant_id,
+                "owner_merchant_id": owner_merchant_id,
             },
             headers={
                 "content-type": "application/json",

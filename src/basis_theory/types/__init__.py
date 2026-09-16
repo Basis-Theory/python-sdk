@@ -92,6 +92,8 @@ if typing.TYPE_CHECKING:
     from .enrollment_status import EnrollmentStatus
     from .enrollment_type import EnrollmentType
     from .event_types import EventTypes
+    from .function_source_detection import FunctionSourceDetection
+    from .function_source_validation import FunctionSourceValidation
     from .get_applications import GetApplications
     from .get_logs import GetLogs
     from .get_permissions import GetPermissions
@@ -164,6 +166,7 @@ if typing.TYPE_CHECKING:
     from .requested_reactor import RequestedReactor
     from .role import Role
     from .runtime import Runtime
+    from .runtime_log_options import RuntimeLogOptions
     from .security_contact_email_response import SecurityContactEmailResponse
     from .service_status import ServiceStatus
     from .shipping_address import ShippingAddress
@@ -215,6 +218,7 @@ if typing.TYPE_CHECKING:
     from .update_privacy import UpdatePrivacy
     from .update_reactor_formula_request import UpdateReactorFormulaRequest
     from .user import User
+    from .validate_function_source_request import ValidateFunctionSourceRequest
     from .validation_problem_details import ValidationProblemDetails
     from .verification_response import VerificationResponse
     from .verification_response_brand import VerificationResponseBrand
@@ -321,6 +325,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EnrollmentStatus": ".enrollment_status",
     "EnrollmentType": ".enrollment_type",
     "EventTypes": ".event_types",
+    "FunctionSourceDetection": ".function_source_detection",
+    "FunctionSourceValidation": ".function_source_validation",
     "GetApplications": ".get_applications",
     "GetLogs": ".get_logs",
     "GetPermissions": ".get_permissions",
@@ -393,6 +399,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RequestedReactor": ".requested_reactor",
     "Role": ".role",
     "Runtime": ".runtime",
+    "RuntimeLogOptions": ".runtime_log_options",
     "SecurityContactEmailResponse": ".security_contact_email_response",
     "ServiceStatus": ".service_status",
     "ShippingAddress": ".shipping_address",
@@ -444,6 +451,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdatePrivacy": ".update_privacy",
     "UpdateReactorFormulaRequest": ".update_reactor_formula_request",
     "User": ".user",
+    "ValidateFunctionSourceRequest": ".validate_function_source_request",
     "ValidationProblemDetails": ".validation_problem_details",
     "VerificationResponse": ".verification_response",
     "VerificationResponseBrand": ".verification_response_brand",
@@ -572,6 +580,8 @@ __all__ = [
     "EnrollmentStatus",
     "EnrollmentType",
     "EventTypes",
+    "FunctionSourceDetection",
+    "FunctionSourceValidation",
     "GetApplications",
     "GetLogs",
     "GetPermissions",
@@ -644,6 +654,7 @@ __all__ = [
     "RequestedReactor",
     "Role",
     "Runtime",
+    "RuntimeLogOptions",
     "SecurityContactEmailResponse",
     "ServiceStatus",
     "ShippingAddress",
@@ -695,6 +706,7 @@ __all__ = [
     "UpdatePrivacy",
     "UpdateReactorFormulaRequest",
     "User",
+    "ValidateFunctionSourceRequest",
     "ValidationProblemDetails",
     "VerificationResponse",
     "VerificationResponseBrand",
