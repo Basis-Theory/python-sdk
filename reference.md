@@ -5233,6 +5233,126 @@ client.webhooks.create(
 </dl>
 </details>
 
+## Events
+<details><summary><code>client.events.<a href="src/basis_theory/events/client.py">list</a>(...) -> EventPage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Requires event:read. Tenant identity comes from trusted API-key authentication. History is limited by log_history_limit (24 hours by default, at most 30 days). Windows reaching outside the visible history are clamped to it rather than rejected. No secondary failover or portal JWT support. SDK callers supply data.<path> filters as literal keys through the SDK's per-request query-parameter options, not as a filters request field.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+import datetime
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.events.list(
+    start_date=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+    end_date=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+    start="start",
+    size=1,
+    type="type",
+    trace_id="trace_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[datetime.datetime]` — Inclusive timestamp; defaults to 24 hours before end_date, shortened to tenant entitlement. An earlier value is raised to the oldest visible instant. ISO 8601 with timezone, at most millisecond precision. Must not be after end_date.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[datetime.datetime]` — Exclusive timestamp; defaults to request time. A future value is lowered to request time. A window with no visible history returns an empty page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` — Opaque cursor from pagination.next. Bound to tenant, filters, window, page size, and configured collection/index generation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` — Maximum unique events returned. A short page may have a next cursor.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `typing.Optional[str]` — Exact event type.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**trace_id:** `typing.Optional[str]` — Exact trace ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## AccountUpdater Jobs
 <details><summary><code>client.account_updater.jobs.<a href="src/basis_theory/account_updater/jobs/client.py">get</a>(...) -> AccountUpdaterJob</code></summary>
 <dl>
