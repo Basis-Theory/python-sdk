@@ -1,3 +1,10 @@
+# [7.3.0](https://github.com/Basis-Theory/python-sdk/compare/v7.2.1...v7.3.0) (2026-10-01)
+
+
+### Features
+
+* add Events listing with cursor pagination ([6b1b8f7](https://github.com/Basis-Theory/python-sdk/commit/6b1b8f7ad57156c16c58438ec8dd178d22a7460d))
+
 ## [7.2.1](https://github.com/Basis-Theory/python-sdk/compare/v7.2.0...v7.2.1) (2026-09-16)
 
 
