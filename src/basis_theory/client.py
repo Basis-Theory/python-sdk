@@ -20,6 +20,7 @@ if typing.TYPE_CHECKING:
     from .applications.client import ApplicationsClient, AsyncApplicationsClient
     from .documents.client import AsyncDocumentsClient, DocumentsClient
     from .enrichments.client import AsyncEnrichmentsClient, EnrichmentsClient
+    from .events.client import AsyncEventsClient, EventsClient
     from .google_pay.client import AsyncGooglePayClient, GooglePayClient
     from .keys.client import AsyncKeysClient, KeysClient
     from .logs.client import AsyncLogsClient, LogsClient
@@ -136,6 +137,7 @@ class BasisTheory:
         self._sessions: typing.Optional[SessionsClient] = None
         self._token_intents: typing.Optional[TokenIntentsClient] = None
         self._webhooks: typing.Optional[WebhooksClient] = None
+        self._events: typing.Optional[EventsClient] = None
         self._account_updater: typing.Optional[AccountUpdaterClient] = None
         self._agentic: typing.Optional[AgenticClient] = None
         self._tenants: typing.Optional[TenantsClient] = None
@@ -286,6 +288,14 @@ class BasisTheory:
         return self._webhooks
 
     @property
+    def events(self):
+        if self._events is None:
+            from .events.client import EventsClient  # noqa: E402
+
+            self._events = EventsClient(client_wrapper=self._client_wrapper)
+        return self._events
+
+    @property
     def account_updater(self):
         if self._account_updater is None:
             from .account_updater.client import AccountUpdaterClient  # noqa: E402
@@ -434,6 +444,7 @@ class AsyncBasisTheory:
         self._sessions: typing.Optional[AsyncSessionsClient] = None
         self._token_intents: typing.Optional[AsyncTokenIntentsClient] = None
         self._webhooks: typing.Optional[AsyncWebhooksClient] = None
+        self._events: typing.Optional[AsyncEventsClient] = None
         self._account_updater: typing.Optional[AsyncAccountUpdaterClient] = None
         self._agentic: typing.Optional[AsyncAgenticClient] = None
         self._tenants: typing.Optional[AsyncTenantsClient] = None
@@ -582,6 +593,14 @@ class AsyncBasisTheory:
 
             self._webhooks = AsyncWebhooksClient(client_wrapper=self._client_wrapper)
         return self._webhooks
+
+    @property
+    def events(self):
+        if self._events is None:
+            from .events.client import AsyncEventsClient  # noqa: E402
+
+            self._events = AsyncEventsClient(client_wrapper=self._client_wrapper)
+        return self._events
 
     @property
     def account_updater(self):

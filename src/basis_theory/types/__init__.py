@@ -91,6 +91,9 @@ if typing.TYPE_CHECKING:
     from .enrollment_provider import EnrollmentProvider
     from .enrollment_status import EnrollmentStatus
     from .enrollment_type import EnrollmentType
+    from .event import Event
+    from .event_page import EventPage
+    from .event_page_pagination import EventPagePagination
     from .event_types import EventTypes
     from .function_source_detection import FunctionSourceDetection
     from .function_source_validation import FunctionSourceValidation
@@ -324,6 +327,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EnrollmentProvider": ".enrollment_provider",
     "EnrollmentStatus": ".enrollment_status",
     "EnrollmentType": ".enrollment_type",
+    "Event": ".event",
+    "EventPage": ".event_page",
+    "EventPagePagination": ".event_page_pagination",
     "EventTypes": ".event_types",
     "FunctionSourceDetection": ".function_source_detection",
     "FunctionSourceValidation": ".function_source_validation",
@@ -579,6 +585,9 @@ __all__ = [
     "EnrollmentProvider",
     "EnrollmentStatus",
     "EnrollmentType",
+    "Event",
+    "EventPage",
+    "EventPagePagination",
     "EventTypes",
     "FunctionSourceDetection",
     "FunctionSourceValidation",
