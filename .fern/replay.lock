@@ -54,19 +54,25 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-python-sdk: 5.12.11
-current_generation: 3c2f51b93066f37136dedafca9bfedc9e0f8a601
+  - commit_sha: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    tree_hash: 6572ddb1783e7234a9bcc0dba26ca0bc6426e420
+    timestamp: 2026-10-16T21:20:46.912Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-python-sdk: 5.12.11
+current_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
 patches:
   - id: patch-d1f3f0bc
-    content_hash: sha256:d62f7c8dc971666cf6d8610dfc45f0124c31344a8e9c2075d6a17d0dfb401227
+    content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
     original_commit: d1f3f0bcff05acf4cb03b80acb6a5fb30fb49842
     original_message: "chore(release): 5.10.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 3c2f51b93066f37136dedafca9bfedc9e0f8a601
+    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
     files:
       - pyproject.toml
     patch_content: |
       diff --git a/pyproject.toml b/pyproject.toml
-      index 10fa85a..22d66b2 100644
+      index 10fa85a..613926e 100644
       --- a/pyproject.toml
       +++ b/pyproject.toml
       @@ -4,7 +4,7 @@ dynamic = ["version"]
@@ -74,7 +80,7 @@ patches:
        [tool.poetry]
        name = "BasisTheoryClient"
       -version = "0.0.1"
-      +version = "7.3.0"
+      +version = "7.4.0"
        description = ""
        readme = "README.md"
        authors = []
@@ -86,7 +92,7 @@ patches:
 
         [tool.poetry]
         name = "BasisTheoryClient"
-        version = "7.3.0"
+        version = "7.4.0"
         description = ""
         readme = "README.md"
         authors = []
@@ -179,16 +185,16 @@ patches:
         aiohttp=["aiohttp", "httpx-aiohttp"]
     user_owned: true
   - id: patch-757de01e
-    content_hash: sha256:d62f7c8dc971666cf6d8610dfc45f0124c31344a8e9c2075d6a17d0dfb401227
+    content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
     original_commit: 757de01e71ac74b7ff88941ade1fbdd6566148ad
     original_message: "chore(release): 6.0.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 3c2f51b93066f37136dedafca9bfedc9e0f8a601
+    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
     files:
       - pyproject.toml
     patch_content: |
       diff --git a/pyproject.toml b/pyproject.toml
-      index 10fa85a..22d66b2 100644
+      index 10fa85a..613926e 100644
       --- a/pyproject.toml
       +++ b/pyproject.toml
       @@ -4,7 +4,7 @@ dynamic = ["version"]
@@ -196,7 +202,7 @@ patches:
        [tool.poetry]
        name = "BasisTheoryClient"
       -version = "0.0.1"
-      +version = "7.3.0"
+      +version = "7.4.0"
        description = ""
        readme = "README.md"
        authors = []
@@ -208,7 +214,7 @@ patches:
 
         [tool.poetry]
         name = "BasisTheoryClient"
-        version = "7.3.0"
+        version = "7.4.0"
         description = ""
         readme = "README.md"
         authors = []
@@ -301,16 +307,16 @@ patches:
         aiohttp=["aiohttp", "httpx-aiohttp"]
     user_owned: true
   - id: patch-adf7dc21
-    content_hash: sha256:d62f7c8dc971666cf6d8610dfc45f0124c31344a8e9c2075d6a17d0dfb401227
+    content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
     original_commit: adf7dc21d734d0ca905cbc3905af0fa7568ccb36
     original_message: "chore(release): 6.0.1 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 3c2f51b93066f37136dedafca9bfedc9e0f8a601
+    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
     files:
       - pyproject.toml
     patch_content: |
       diff --git a/pyproject.toml b/pyproject.toml
-      index 10fa85a..22d66b2 100644
+      index 10fa85a..613926e 100644
       --- a/pyproject.toml
       +++ b/pyproject.toml
       @@ -4,7 +4,7 @@ dynamic = ["version"]
@@ -318,7 +324,7 @@ patches:
        [tool.poetry]
        name = "BasisTheoryClient"
       -version = "0.0.1"
-      +version = "7.3.0"
+      +version = "7.4.0"
        description = ""
        readme = "README.md"
        authors = []
@@ -330,7 +336,7 @@ patches:
 
         [tool.poetry]
         name = "BasisTheoryClient"
-        version = "7.3.0"
+        version = "7.4.0"
         description = ""
         readme = "README.md"
         authors = []
@@ -423,16 +429,16 @@ patches:
         aiohttp=["aiohttp", "httpx-aiohttp"]
     user_owned: true
   - id: patch-623d1c20
-    content_hash: sha256:d62f7c8dc971666cf6d8610dfc45f0124c31344a8e9c2075d6a17d0dfb401227
+    content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
     original_commit: 623d1c209c9d817ee710d8060d1244c0bc9fe55b
     original_message: "chore(release): 7.0.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 3c2f51b93066f37136dedafca9bfedc9e0f8a601
+    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
     files:
       - pyproject.toml
     patch_content: |
       diff --git a/pyproject.toml b/pyproject.toml
-      index 10fa85a..22d66b2 100644
+      index 10fa85a..613926e 100644
       --- a/pyproject.toml
       +++ b/pyproject.toml
       @@ -4,7 +4,7 @@ dynamic = ["version"]
@@ -440,7 +446,7 @@ patches:
        [tool.poetry]
        name = "BasisTheoryClient"
       -version = "0.0.1"
-      +version = "7.3.0"
+      +version = "7.4.0"
        description = ""
        readme = "README.md"
        authors = []
@@ -452,7 +458,7 @@ patches:
 
         [tool.poetry]
         name = "BasisTheoryClient"
-        version = "7.3.0"
+        version = "7.4.0"
         description = ""
         readme = "README.md"
         authors = []
@@ -545,16 +551,16 @@ patches:
         aiohttp=["aiohttp", "httpx-aiohttp"]
     user_owned: true
   - id: patch-0b3a32f8
-    content_hash: sha256:d62f7c8dc971666cf6d8610dfc45f0124c31344a8e9c2075d6a17d0dfb401227
+    content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
     original_commit: 0b3a32f8ee2244535e1b03fbd84b7aa70ab0ccd7
     original_message: "chore(release): 7.1.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 3c2f51b93066f37136dedafca9bfedc9e0f8a601
+    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
     files:
       - pyproject.toml
     patch_content: |
       diff --git a/pyproject.toml b/pyproject.toml
-      index 10fa85a..22d66b2 100644
+      index 10fa85a..613926e 100644
       --- a/pyproject.toml
       +++ b/pyproject.toml
       @@ -4,7 +4,7 @@ dynamic = ["version"]
@@ -562,7 +568,7 @@ patches:
        [tool.poetry]
        name = "BasisTheoryClient"
       -version = "0.0.1"
-      +version = "7.3.0"
+      +version = "7.4.0"
        description = ""
        readme = "README.md"
        authors = []
@@ -574,7 +580,7 @@ patches:
 
         [tool.poetry]
         name = "BasisTheoryClient"
-        version = "7.3.0"
+        version = "7.4.0"
         description = ""
         readme = "README.md"
         authors = []
@@ -667,16 +673,16 @@ patches:
         aiohttp=["aiohttp", "httpx-aiohttp"]
     user_owned: true
   - id: patch-2ba0975a
-    content_hash: sha256:d62f7c8dc971666cf6d8610dfc45f0124c31344a8e9c2075d6a17d0dfb401227
+    content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
     original_commit: 2ba0975a1c5027d546938c70cd5d6e4630e10dd5
     original_message: "chore(release): 7.2.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 3c2f51b93066f37136dedafca9bfedc9e0f8a601
+    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
     files:
       - pyproject.toml
     patch_content: |
       diff --git a/pyproject.toml b/pyproject.toml
-      index 10fa85a..22d66b2 100644
+      index 10fa85a..613926e 100644
       --- a/pyproject.toml
       +++ b/pyproject.toml
       @@ -4,7 +4,7 @@ dynamic = ["version"]
@@ -684,7 +690,7 @@ patches:
        [tool.poetry]
        name = "BasisTheoryClient"
       -version = "0.0.1"
-      +version = "7.3.0"
+      +version = "7.4.0"
        description = ""
        readme = "README.md"
        authors = []
@@ -696,7 +702,7 @@ patches:
 
         [tool.poetry]
         name = "BasisTheoryClient"
-        version = "7.3.0"
+        version = "7.4.0"
         description = ""
         readme = "README.md"
         authors = []
@@ -789,16 +795,16 @@ patches:
         aiohttp=["aiohttp", "httpx-aiohttp"]
     user_owned: true
   - id: patch-8b19702f
-    content_hash: sha256:d62f7c8dc971666cf6d8610dfc45f0124c31344a8e9c2075d6a17d0dfb401227
+    content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
     original_commit: 8b19702f718dcfafe0e80dcfd49fd7e495b5f19d
     original_message: "chore(release): 7.3.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 3c2f51b93066f37136dedafca9bfedc9e0f8a601
+    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
     files:
       - pyproject.toml
     patch_content: |
       diff --git a/pyproject.toml b/pyproject.toml
-      index 10fa85a..22d66b2 100644
+      index 10fa85a..613926e 100644
       --- a/pyproject.toml
       +++ b/pyproject.toml
       @@ -4,7 +4,7 @@ dynamic = ["version"]
@@ -806,7 +812,7 @@ patches:
        [tool.poetry]
        name = "BasisTheoryClient"
       -version = "0.0.1"
-      +version = "7.3.0"
+      +version = "7.4.0"
        description = ""
        readme = "README.md"
        authors = []
@@ -818,7 +824,129 @@ patches:
 
         [tool.poetry]
         name = "BasisTheoryClient"
-        version = "7.3.0"
+        version = "7.4.0"
+        description = ""
+        readme = "README.md"
+        authors = []
+        keywords = []
+        license = "Apache-2.0"
+        classifiers = [
+            "Intended Audience :: Developers",
+            "Programming Language :: Python",
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.10",
+            "Programming Language :: Python :: 3.11",
+            "Programming Language :: Python :: 3.12",
+            "Programming Language :: Python :: 3.13",
+            "Programming Language :: Python :: 3.14",
+            "Programming Language :: Python :: 3.15",
+            "Operating System :: OS Independent",
+            "Operating System :: POSIX",
+            "Operating System :: MacOS",
+            "Operating System :: POSIX :: Linux",
+            "Operating System :: Microsoft :: Windows",
+            "Topic :: Software Development :: Libraries :: Python Modules",
+            "Typing :: Typed",
+            "License :: OSI Approved :: Apache Software License"
+        ]
+        packages = [
+            { include = "basis_theory", from = "src"}
+        ]
+
+        [tool.poetry.urls]
+        Repository = 'https://github.com/Basis-Theory/python-sdk'
+
+        [tool.poetry.dependencies]
+        python = "^3.10"
+        aiohttp = { version = ">=3.13.4,<4", optional = true, python = ">=3.9"}
+        httpx = ">=0.21.2"
+        httpx-aiohttp = { version = "0.1.8", optional = true, python = ">=3.9"}
+        pydantic = ">= 1.9.2"
+        pydantic-core = ">=2.18.2,<3.0.0"
+        typing_extensions = ">= 4.0.0"
+
+        [tool.poetry.group.dev.dependencies]
+        mypy = "==1.13.0"
+        pytest = "^9.0.3"
+        pytest-asyncio = "^1.0.0"
+        pytest-xdist = "^3.6.1"
+        python-dateutil = "^2.9.0"
+        types-python-dateutil = "^2.9.0.20240316"
+        urllib3 = ">=2.6.3,<3.0.0"
+        ruff = "==0.11.5"
+
+        [tool.pytest.ini_options]
+        testpaths = [ "tests" ]
+        asyncio_mode = "auto"
+        markers = [
+            "aiohttp: tests that require httpx_aiohttp to be installed",
+        ]
+
+        [tool.mypy]
+        plugins = ["pydantic.mypy"]
+
+        [tool.ruff]
+        line-length = 120
+
+        [tool.ruff.lint]
+        select = [
+            "E",  # pycodestyle errors
+            "F",  # pyflakes
+            "I",  # isort
+        ]
+        ignore = [
+            "E402",  # Module level import not at top of file
+            "E501",  # Line too long
+            "E711",  # Comparison to `None` should be `cond is not None`
+            "E712",  # Avoid equality comparisons to `True`; use `if ...:` checks
+            "E721",  # Use `is` and `is not` for type comparisons, or `isinstance()` for insinstance checks
+            "E722",  # Do not use bare `except`
+            "E731",  # Do not assign a `lambda` expression, use a `def`
+            "F821",  # Undefined name
+            "F841"   # Local variable ... is assigned to but never used
+        ]
+
+        [tool.ruff.lint.isort]
+        section-order = ["future", "standard-library", "third-party", "first-party"]
+
+        [build-system]
+        requires = ["poetry-core"]
+        build-backend = "poetry.core.masonry.api"
+
+        [tool.poetry.extras]
+        aiohttp=["aiohttp", "httpx-aiohttp"]
+    user_owned: true
+  - id: patch-62298eba
+    content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
+    original_commit: 62298ebaf9b93556380560709403f91c0cdffe93
+    original_message: "chore(release): 7.4.0 [skip ci]"
+    original_author: semantic-release-bot <semantic-release-bot@martynus.net>
+    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    files:
+      - pyproject.toml
+    patch_content: |
+      diff --git a/pyproject.toml b/pyproject.toml
+      index 10fa85a..613926e 100644
+      --- a/pyproject.toml
+      +++ b/pyproject.toml
+      @@ -4,7 +4,7 @@ dynamic = ["version"]
+       
+       [tool.poetry]
+       name = "BasisTheoryClient"
+      -version = "0.0.1"
+      +version = "7.4.0"
+       description = ""
+       readme = "README.md"
+       authors = []
+    theirs_snapshot:
+      pyproject.toml: |
+        [project]
+        name = "BasisTheoryClient"
+        dynamic = ["version"]
+
+        [tool.poetry]
+        name = "BasisTheoryClient"
+        version = "7.4.0"
         description = ""
         readme = "README.md"
         authors = []
