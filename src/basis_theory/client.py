@@ -27,6 +27,8 @@ if typing.TYPE_CHECKING:
     from .network_tokens.client import AsyncNetworkTokensClient, NetworkTokensClient
     from .permissions.client import AsyncPermissionsClient, PermissionsClient
     from .proxies.client import AsyncProxiesClient, ProxiesClient
+    from .proxy_logs.client import AsyncProxyLogsClient, ProxyLogsClient
+    from .reactor_logs.client import AsyncReactorLogsClient, ReactorLogsClient
     from .reactors.client import AsyncReactorsClient, ReactorsClient
     from .roles.client import AsyncRolesClient, RolesClient
     from .sessions.client import AsyncSessionsClient, SessionsClient
@@ -137,6 +139,8 @@ class BasisTheory:
         self._sessions: typing.Optional[SessionsClient] = None
         self._token_intents: typing.Optional[TokenIntentsClient] = None
         self._webhooks: typing.Optional[WebhooksClient] = None
+        self._reactor_logs: typing.Optional[ReactorLogsClient] = None
+        self._proxy_logs: typing.Optional[ProxyLogsClient] = None
         self._events: typing.Optional[EventsClient] = None
         self._account_updater: typing.Optional[AccountUpdaterClient] = None
         self._agentic: typing.Optional[AgenticClient] = None
@@ -286,6 +290,22 @@ class BasisTheory:
 
             self._webhooks = WebhooksClient(client_wrapper=self._client_wrapper)
         return self._webhooks
+
+    @property
+    def reactor_logs(self):
+        if self._reactor_logs is None:
+            from .reactor_logs.client import ReactorLogsClient  # noqa: E402
+
+            self._reactor_logs = ReactorLogsClient(client_wrapper=self._client_wrapper)
+        return self._reactor_logs
+
+    @property
+    def proxy_logs(self):
+        if self._proxy_logs is None:
+            from .proxy_logs.client import ProxyLogsClient  # noqa: E402
+
+            self._proxy_logs = ProxyLogsClient(client_wrapper=self._client_wrapper)
+        return self._proxy_logs
 
     @property
     def events(self):
@@ -444,6 +464,8 @@ class AsyncBasisTheory:
         self._sessions: typing.Optional[AsyncSessionsClient] = None
         self._token_intents: typing.Optional[AsyncTokenIntentsClient] = None
         self._webhooks: typing.Optional[AsyncWebhooksClient] = None
+        self._reactor_logs: typing.Optional[AsyncReactorLogsClient] = None
+        self._proxy_logs: typing.Optional[AsyncProxyLogsClient] = None
         self._events: typing.Optional[AsyncEventsClient] = None
         self._account_updater: typing.Optional[AsyncAccountUpdaterClient] = None
         self._agentic: typing.Optional[AsyncAgenticClient] = None
@@ -593,6 +615,22 @@ class AsyncBasisTheory:
 
             self._webhooks = AsyncWebhooksClient(client_wrapper=self._client_wrapper)
         return self._webhooks
+
+    @property
+    def reactor_logs(self):
+        if self._reactor_logs is None:
+            from .reactor_logs.client import AsyncReactorLogsClient  # noqa: E402
+
+            self._reactor_logs = AsyncReactorLogsClient(client_wrapper=self._client_wrapper)
+        return self._reactor_logs
+
+    @property
+    def proxy_logs(self):
+        if self._proxy_logs is None:
+            from .proxy_logs.client import AsyncProxyLogsClient  # noqa: E402
+
+            self._proxy_logs = AsyncProxyLogsClient(client_wrapper=self._client_wrapper)
+        return self._proxy_logs
 
     @property
     def events(self):

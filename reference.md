@@ -5233,6 +5233,381 @@ client.webhooks.create(
 </dl>
 </details>
 
+## ReactorLogs
+<details><summary><code>client.reactor_logs.<a href="src/basis_theory/reactor_logs/client.py">list</a>(...) -> RuntimeLogPage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Requires log:read. Returns individual Reactor runtime records, not event envelopes or neighboring records from the same batch. Tenant and history entitlement are checked on every request. Date bounds use occurred_at, inclusive at start and exclusive at end, and are clamped to current entitlement, now, and the 30-day maximum. Results are asynchronously visible. Responses include source (origin) and record_type (record kind); both have exact, case-sensitive string filters, with application/log and platform/lifecycle as the supported pairings. error and attributes are complete display-only objects and cannot be filtered or searched. IDs are stable logical record identities for deduplicating polling overlap. Pagination is bounded; follow next even after a short page. No cross-page uniqueness or snapshot is promised. Query parameters must be single strings; repeated, unknown, or operator parameters are 400. There are at most 36 parameters, values are at most 1,024 characters (cursor: 12,000), and combined filters are limited to 4,096 UTF-8 bytes. Word search trims/collapses whitespace and is limited to 256 normalized characters.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+import datetime
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.reactor_logs.list(
+    reactor_id="reactor_id",
+    start_date=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+    end_date=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+    start="start",
+    size=1,
+    source="source",
+    record_type="record_type",
+    trace_id="trace_id",
+    level="level",
+    event="event",
+    outcome="outcome",
+    message="message",
+    message_search_words="message[search_words]",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**reactor_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[datetime.datetime]` — Inclusive occurred_at bound; defaults to 24 hours before the end bound.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[datetime.datetime]` — Exclusive occurred_at bound; defaults to request time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` — Opaque continuation bound to tenant, resource, filters, bounds, page size, and log index generation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` — Maximum unique records in this page; short pages may still have a next cursor.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source:** `typing.Optional[str]` — Exact, case-sensitive string equality. Supported values are application (application records) and platform (lifecycle records); values are not otherwise enum-validated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**record_type:** `typing.Optional[str]` — Exact, case-sensitive string equality. Supported values are log for application records and lifecycle for platform records; values are not otherwise enum-validated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**trace_id:** `typing.Optional[str]` — Exact, case-sensitive equality on this record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**level:** `typing.Optional[str]` — Exact, case-sensitive equality on this record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event:** `typing.Optional[str]` — Exact, case-sensitive equality on this record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**outcome:** `typing.Optional[str]` — Exact, case-sensitive equality on this record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message:** `typing.Optional[str]` — Exact, case-sensitive message equality; the empty string is a valid exact value.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_search_words:** `typing.Optional[str]` — Standard-analyzed, case-insensitive all-terms match in any order on this same record. Whitespace is trimmed and collapsed; punctuation-only input matches no records.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ProxyLogs
+<details><summary><code>client.proxy_logs.<a href="src/basis_theory/proxy_logs/client.py">list</a>(...) -> RuntimeLogPage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Requires log:read. Returns individual Proxy runtime records, not event envelopes or neighboring records from the same batch. Tenant and history entitlement are checked on every request. Date bounds use occurred_at, inclusive at start and exclusive at end, and are clamped to current entitlement, now, and the 30-day maximum. Results are asynchronously visible. Responses include source (origin) and record_type (record kind); both have exact, case-sensitive string filters, with application/log and platform/lifecycle as the supported pairings. error and attributes are complete display-only objects and cannot be filtered or searched. IDs are stable logical record identities for deduplicating polling overlap. Pagination is bounded; follow next even after a short page. No cross-page uniqueness or snapshot is promised. Query parameters must be single strings; repeated, unknown, or operator parameters are 400. There are at most 36 parameters, values are at most 1,024 characters (cursor: 12,000), and combined filters are limited to 4,096 UTF-8 bytes. Word search trims/collapses whitespace and is limited to 256 normalized characters.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from basis_theory import BasisTheory
+from basis_theory.environment import BasisTheoryEnvironment
+import datetime
+
+client = BasisTheory(
+    api_key="<value>",
+    environment=BasisTheoryEnvironment.DEFAULT,
+)
+
+client.proxy_logs.list(
+    proxy_id="proxy_id",
+    start_date=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+    end_date=datetime.datetime.fromisoformat("2024-01-15T09:30:00+00:00"),
+    start="start",
+    size=1,
+    source="source",
+    record_type="record_type",
+    trace_id="trace_id",
+    level="level",
+    event="event",
+    outcome="outcome",
+    transform_type="transform_type",
+    message="message",
+    message_search_words="message[search_words]",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**proxy_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[datetime.datetime]` — Inclusive occurred_at bound; defaults to 24 hours before the end bound.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[datetime.datetime]` — Exclusive occurred_at bound; defaults to request time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `typing.Optional[str]` — Opaque continuation bound to tenant, resource, filters, bounds, page size, and log index generation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**size:** `typing.Optional[int]` — Maximum unique records in this page; short pages may still have a next cursor.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source:** `typing.Optional[str]` — Exact, case-sensitive string equality. Supported values are application (application records) and platform (lifecycle records); values are not otherwise enum-validated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**record_type:** `typing.Optional[str]` — Exact, case-sensitive string equality. Supported values are log for application records and lifecycle for platform records; values are not otherwise enum-validated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**trace_id:** `typing.Optional[str]` — Exact, case-sensitive equality on this record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**level:** `typing.Optional[str]` — Exact, case-sensitive equality on this record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event:** `typing.Optional[str]` — Exact, case-sensitive equality on this record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**outcome:** `typing.Optional[str]` — Exact, case-sensitive equality on this record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transform_type:** `typing.Optional[str]` — Exact, case-sensitive equality on this Proxy transform side.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message:** `typing.Optional[str]` — Exact, case-sensitive message equality; the empty string is a valid exact value.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_search_words:** `typing.Optional[str]` — Standard-analyzed, case-insensitive all-terms match in any order on this same record. Whitespace is trimmed and collapsed; punctuation-only input matches no records.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Events
 <details><summary><code>client.events.<a href="src/basis_theory/events/client.py">list</a>(...) -> EventPage</code></summary>
 <dl>
@@ -5246,7 +5621,7 @@ client.webhooks.create(
 <dl>
 <dd>
 
-Requires event:read. Tenant identity comes from trusted API-key authentication. History is limited by log_history_limit (24 hours by default, at most 30 days). Windows reaching outside the visible history are clamped to it rather than rejected. No secondary failover or portal JWT support. SDK callers supply data.<path> filters as literal keys through the SDK's per-request query-parameter options, not as a filters request field.
+Requires event:read. Tenant identity comes from trusted authentication. History is limited by log_history_limit (24 hours by default, at most 30 days). Windows reaching outside the visible history are clamped to it rather than rejected. No secondary failover. SDK callers supply data.<path> filters as literal keys through the SDK's per-request query-parameter options, not as a filters request field.
 </dd>
 </dl>
 </dd>
