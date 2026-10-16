@@ -169,7 +169,12 @@ if typing.TYPE_CHECKING:
     from .requested_reactor import RequestedReactor
     from .role import Role
     from .runtime import Runtime
+    from .runtime_log import RuntimeLog
     from .runtime_log_options import RuntimeLogOptions
+    from .runtime_log_page import RuntimeLogPage
+    from .runtime_log_page_pagination import RuntimeLogPagePagination
+    from .runtime_log_record_type import RuntimeLogRecordType
+    from .runtime_log_source import RuntimeLogSource
     from .security_contact_email_response import SecurityContactEmailResponse
     from .service_status import ServiceStatus
     from .shipping_address import ShippingAddress
@@ -405,7 +410,12 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RequestedReactor": ".requested_reactor",
     "Role": ".role",
     "Runtime": ".runtime",
+    "RuntimeLog": ".runtime_log",
     "RuntimeLogOptions": ".runtime_log_options",
+    "RuntimeLogPage": ".runtime_log_page",
+    "RuntimeLogPagePagination": ".runtime_log_page_pagination",
+    "RuntimeLogRecordType": ".runtime_log_record_type",
+    "RuntimeLogSource": ".runtime_log_source",
     "SecurityContactEmailResponse": ".security_contact_email_response",
     "ServiceStatus": ".service_status",
     "ShippingAddress": ".shipping_address",
@@ -663,7 +673,12 @@ __all__ = [
     "RequestedReactor",
     "Role",
     "Runtime",
+    "RuntimeLog",
     "RuntimeLogOptions",
+    "RuntimeLogPage",
+    "RuntimeLogPagePagination",
+    "RuntimeLogRecordType",
+    "RuntimeLogSource",
     "SecurityContactEmailResponse",
     "ServiceStatus",
     "ShippingAddress",
