@@ -1,3 +1,10 @@
+# [7.4.0](https://github.com/Basis-Theory/python-sdk/compare/v7.3.0...v7.4.0) (2026-10-16)
+
+
+### Features
+
+* add Reactor and Proxy runtime log search ([d3ec486](https://github.com/Basis-Theory/python-sdk/commit/d3ec4863feb4f784eaed59ef1c3e73ac548f799f))
+
 # [7.3.0](https://github.com/Basis-Theory/python-sdk/compare/v7.2.1...v7.3.0) (2026-10-01)
 
 
