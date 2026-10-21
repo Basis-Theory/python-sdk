@@ -8,6 +8,8 @@ from .card_art import CardArt
 
 
 class NetworkTokenAccount(UniversalBaseModel):
+    short_description: typing.Optional[str] = None
+    long_description: typing.Optional[str] = None
     card_art: typing.Optional[CardArt] = None
 
     if IS_PYDANTIC_V2:
