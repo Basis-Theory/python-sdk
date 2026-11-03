@@ -7,6 +7,7 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.apple_pay_create_response import ApplePayCreateResponse
+from ..types.apple_pay_delete_response import ApplePayDeleteResponse
 from ..types.apple_pay_method_token import ApplePayMethodToken
 from ..types.apple_pay_token import ApplePayToken
 from .raw_client import AsyncRawApplePayClient, RawApplePayClient
@@ -110,7 +111,7 @@ class ApplePayClient:
         _response = self._raw_client.get(id, request_options=request_options)
         return _response.data
 
-    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
+    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ApplePayDeleteResponse:
         """
         Parameters
         ----------
@@ -121,7 +122,7 @@ class ApplePayClient:
 
         Returns
         -------
-        str
+        ApplePayDeleteResponse
             Success
 
         Examples
@@ -271,7 +272,9 @@ class AsyncApplePayClient:
         _response = await self._raw_client.get(id, request_options=request_options)
         return _response.data
 
-    async def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
+    async def delete(
+        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ApplePayDeleteResponse:
         """
         Parameters
         ----------
@@ -282,7 +285,7 @@ class AsyncApplePayClient:
 
         Returns
         -------
-        str
+        ApplePayDeleteResponse
             Success
 
         Examples

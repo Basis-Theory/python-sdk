@@ -18,6 +18,7 @@ from ..errors.not_found_error import NotFoundError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.google_pay_create_response import GooglePayCreateResponse
+from ..types.google_pay_delete_response import GooglePayDeleteResponse
 from ..types.google_pay_method_token import GooglePayMethodToken
 from ..types.google_pay_token import GooglePayToken
 from ..types.problem_details import ProblemDetails
@@ -218,7 +219,9 @@ class RawGooglePayClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[str]:
+    def delete(
+        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[GooglePayDeleteResponse]:
         """
         Parameters
         ----------
@@ -229,7 +232,7 @@ class RawGooglePayClient:
 
         Returns
         -------
-        HttpResponse[str]
+        HttpResponse[GooglePayDeleteResponse]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -240,9 +243,9 @@ class RawGooglePayClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    str,
+                    GooglePayDeleteResponse,
                     parse_obj_as(
-                        type_=str,  # type: ignore
+                        type_=GooglePayDeleteResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -484,7 +487,7 @@ class AsyncRawGooglePayClient:
 
     async def delete(
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[str]:
+    ) -> AsyncHttpResponse[GooglePayDeleteResponse]:
         """
         Parameters
         ----------
@@ -495,7 +498,7 @@ class AsyncRawGooglePayClient:
 
         Returns
         -------
-        AsyncHttpResponse[str]
+        AsyncHttpResponse[GooglePayDeleteResponse]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -506,9 +509,9 @@ class AsyncRawGooglePayClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    str,
+                    GooglePayDeleteResponse,
                     parse_obj_as(
-                        type_=str,  # type: ignore
+                        type_=GooglePayDeleteResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

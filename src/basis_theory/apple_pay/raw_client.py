@@ -17,6 +17,7 @@ from ..errors.not_found_error import NotFoundError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.apple_pay_create_response import ApplePayCreateResponse
+from ..types.apple_pay_delete_response import ApplePayDeleteResponse
 from ..types.apple_pay_method_token import ApplePayMethodToken
 from ..types.apple_pay_token import ApplePayToken
 from ..types.problem_details import ProblemDetails
@@ -206,7 +207,9 @@ class RawApplePayClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[str]:
+    def delete(
+        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ApplePayDeleteResponse]:
         """
         Parameters
         ----------
@@ -217,7 +220,7 @@ class RawApplePayClient:
 
         Returns
         -------
-        HttpResponse[str]
+        HttpResponse[ApplePayDeleteResponse]
             Success
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -228,9 +231,9 @@ class RawApplePayClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    str,
+                    ApplePayDeleteResponse,
                     parse_obj_as(
-                        type_=str,  # type: ignore
+                        type_=ApplePayDeleteResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -461,7 +464,7 @@ class AsyncRawApplePayClient:
 
     async def delete(
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[str]:
+    ) -> AsyncHttpResponse[ApplePayDeleteResponse]:
         """
         Parameters
         ----------
@@ -472,7 +475,7 @@ class AsyncRawApplePayClient:
 
         Returns
         -------
-        AsyncHttpResponse[str]
+        AsyncHttpResponse[ApplePayDeleteResponse]
             Success
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -483,9 +486,9 @@ class AsyncRawApplePayClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    str,
+                    ApplePayDeleteResponse,
                     parse_obj_as(
-                        type_=str,  # type: ignore
+                        type_=ApplePayDeleteResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -7,6 +7,7 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.google_pay_create_response import GooglePayCreateResponse
+from ..types.google_pay_delete_response import GooglePayDeleteResponse
 from ..types.google_pay_method_token import GooglePayMethodToken
 from ..types.google_pay_token import GooglePayToken
 from .raw_client import AsyncRawGooglePayClient, RawGooglePayClient
@@ -106,7 +107,7 @@ class GooglePayClient:
         _response = self._raw_client.get(id, request_options=request_options)
         return _response.data
 
-    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
+    def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> GooglePayDeleteResponse:
         """
         Parameters
         ----------
@@ -117,7 +118,7 @@ class GooglePayClient:
 
         Returns
         -------
-        str
+        GooglePayDeleteResponse
             Success
 
         Examples
@@ -249,7 +250,9 @@ class AsyncGooglePayClient:
         _response = await self._raw_client.get(id, request_options=request_options)
         return _response.data
 
-    async def delete(self, id: str, *, request_options: typing.Optional[RequestOptions] = None) -> str:
+    async def delete(
+        self, id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GooglePayDeleteResponse:
         """
         Parameters
         ----------
@@ -260,7 +263,7 @@ class AsyncGooglePayClient:
 
         Returns
         -------
-        str
+        GooglePayDeleteResponse
             Success
 
         Examples
