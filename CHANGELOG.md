@@ -1,3 +1,18 @@
+# [8.0.0](https://github.com/Basis-Theory/python-sdk/compare/v7.4.0...v8.0.0) (2026-11-03)
+
+
+* feat(ENG-14143)!: return typed objects from applePay.delete and googlePay.delete ([#150](https://github.com/Basis-Theory/python-sdk/issues/150)) ([6194813](https://github.com/Basis-Theory/python-sdk/commit/61948139ca2cd83802ef5e9132703549639dc86f))
+
+
+### Features
+
+* **ENG-13226:** expose network token descriptions in Python SDK ([#149](https://github.com/Basis-Theory/python-sdk/issues/149)) ([aae5b98](https://github.com/Basis-Theory/python-sdk/commit/aae5b98efff75d1915260308c881beeeebcaf214))
+
+
+### BREAKING CHANGES
+
+* applePay.delete and googlePay.delete now return ApplePayDeleteResponse and GooglePayDeleteResponse instead of string.
+
 # [7.4.0](https://github.com/Basis-Theory/python-sdk/compare/v7.3.0...v7.4.0) (2026-10-16)
 
 
