@@ -60,14 +60,20 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-python-sdk: 5.12.11
-current_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+  - commit_sha: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
+    tree_hash: efae2042e27594174a6ced2376dc31dbf43966e7
+    timestamp: 2026-11-03T20:58:22.489Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-python-sdk: 5.12.11
+current_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
 patches:
   - id: patch-d1f3f0bc
     content_hash: sha256:2b3692ec988c8072a61f95086b248d5045a7eff28ffa5f66aed0f8c78e3e05ee
     original_commit: d1f3f0bcff05acf4cb03b80acb6a5fb30fb49842
     original_message: "chore(release): 5.10.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    base_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
     files:
       - pyproject.toml
     patch_content: |
@@ -189,7 +195,7 @@ patches:
     original_commit: 757de01e71ac74b7ff88941ade1fbdd6566148ad
     original_message: "chore(release): 6.0.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    base_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
     files:
       - pyproject.toml
     patch_content: |
@@ -311,7 +317,7 @@ patches:
     original_commit: adf7dc21d734d0ca905cbc3905af0fa7568ccb36
     original_message: "chore(release): 6.0.1 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    base_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
     files:
       - pyproject.toml
     patch_content: |
@@ -433,7 +439,7 @@ patches:
     original_commit: 623d1c209c9d817ee710d8060d1244c0bc9fe55b
     original_message: "chore(release): 7.0.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    base_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
     files:
       - pyproject.toml
     patch_content: |
@@ -555,7 +561,7 @@ patches:
     original_commit: 0b3a32f8ee2244535e1b03fbd84b7aa70ab0ccd7
     original_message: "chore(release): 7.1.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    base_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
     files:
       - pyproject.toml
     patch_content: |
@@ -677,7 +683,7 @@ patches:
     original_commit: 2ba0975a1c5027d546938c70cd5d6e4630e10dd5
     original_message: "chore(release): 7.2.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    base_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
     files:
       - pyproject.toml
     patch_content: |
@@ -799,7 +805,7 @@ patches:
     original_commit: 8b19702f718dcfafe0e80dcfd49fd7e495b5f19d
     original_message: "chore(release): 7.3.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    base_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
     files:
       - pyproject.toml
     patch_content: |
@@ -921,7 +927,7 @@ patches:
     original_commit: 62298ebaf9b93556380560709403f91c0cdffe93
     original_message: "chore(release): 7.4.0 [skip ci]"
     original_author: semantic-release-bot <semantic-release-bot@martynus.net>
-    base_generation: 339779b13ca409baac762e030df9fc8ffd5a1b1f
+    base_generation: 1e1cf9eb800a5376eaa471ae7fd85b95252a4c0c
     files:
       - pyproject.toml
     patch_content: |
@@ -1037,3 +1043,4 @@ patches:
 
         [tool.poetry.extras]
         aiohttp=["aiohttp", "httpx-aiohttp"]
+    user_owned: true
