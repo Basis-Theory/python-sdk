@@ -24,6 +24,8 @@ if typing.TYPE_CHECKING:
     from .amex_config import AmexConfig
     from .amount import Amount
     from .apple_pay_create_response import ApplePayCreateResponse
+    from .apple_pay_delete_response import ApplePayDeleteResponse
+    from .apple_pay_delete_token_response import ApplePayDeleteTokenResponse
     from .apple_pay_domain_registration_response import ApplePayDomainRegistrationResponse
     from .apple_pay_merchant import ApplePayMerchant
     from .apple_pay_merchant_certificates import ApplePayMerchantCertificates
@@ -107,6 +109,8 @@ if typing.TYPE_CHECKING:
     from .get_tenant_members import GetTenantMembers
     from .get_tokens_v2 import GetTokensV2
     from .google_pay_create_response import GooglePayCreateResponse
+    from .google_pay_delete_response import GooglePayDeleteResponse
+    from .google_pay_delete_token_response import GooglePayDeleteTokenResponse
     from .google_pay_merchant import GooglePayMerchant
     from .google_pay_merchant_certificates import GooglePayMerchantCertificates
     from .google_pay_method_token import GooglePayMethodToken
@@ -265,6 +269,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AmexConfig": ".amex_config",
     "Amount": ".amount",
     "ApplePayCreateResponse": ".apple_pay_create_response",
+    "ApplePayDeleteResponse": ".apple_pay_delete_response",
+    "ApplePayDeleteTokenResponse": ".apple_pay_delete_token_response",
     "ApplePayDomainRegistrationResponse": ".apple_pay_domain_registration_response",
     "ApplePayMerchant": ".apple_pay_merchant",
     "ApplePayMerchantCertificates": ".apple_pay_merchant_certificates",
@@ -348,6 +354,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetTenantMembers": ".get_tenant_members",
     "GetTokensV2": ".get_tokens_v2",
     "GooglePayCreateResponse": ".google_pay_create_response",
+    "GooglePayDeleteResponse": ".google_pay_delete_response",
+    "GooglePayDeleteTokenResponse": ".google_pay_delete_token_response",
     "GooglePayMerchant": ".google_pay_merchant",
     "GooglePayMerchantCertificates": ".google_pay_merchant_certificates",
     "GooglePayMethodToken": ".google_pay_method_token",
@@ -528,6 +536,8 @@ __all__ = [
     "AmexConfig",
     "Amount",
     "ApplePayCreateResponse",
+    "ApplePayDeleteResponse",
+    "ApplePayDeleteTokenResponse",
     "ApplePayDomainRegistrationResponse",
     "ApplePayMerchant",
     "ApplePayMerchantCertificates",
@@ -611,6 +621,8 @@ __all__ = [
     "GetTenantMembers",
     "GetTokensV2",
     "GooglePayCreateResponse",
+    "GooglePayDeleteResponse",
+    "GooglePayDeleteTokenResponse",
     "GooglePayMerchant",
     "GooglePayMerchantCertificates",
     "GooglePayMethodToken",

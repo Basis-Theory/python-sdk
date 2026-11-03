@@ -961,7 +961,7 @@ client.apple_pay.get(
 </dl>
 </details>
 
-<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">delete</a>(...) -> str</code></summary>
+<details><summary><code>client.apple_pay.<a href="src/basis_theory/apple_pay/client.py">delete</a>(...) -> ApplePayDeleteResponse</code></summary>
 <dl>
 <dd>
 
@@ -1153,7 +1153,7 @@ client.google_pay.get(
 </dl>
 </details>
 
-<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">delete</a>(...) -> str</code></summary>
+<details><summary><code>client.google_pay.<a href="src/basis_theory/google_pay/client.py">delete</a>(...) -> GooglePayDeleteResponse</code></summary>
 <dl>
 <dd>
 
