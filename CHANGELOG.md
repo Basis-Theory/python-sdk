@@ -1,3 +1,10 @@
+# [8.1.0](https://github.com/Basis-Theory/python-sdk/compare/v8.0.0...v8.1.0) (2026-11-17)
+
+
+### Features
+
+* add runtime.execution_role to Reactors and Proxy code transforms ([#152](https://github.com/Basis-Theory/python-sdk/issues/152)) ([c1144e8](https://github.com/Basis-Theory/python-sdk/commit/c1144e841d7a8964ca3d600ee6b2753e524df593))
+
 # [8.0.0](https://github.com/Basis-Theory/python-sdk/compare/v7.4.0...v8.0.0) (2026-11-03)
 
 
