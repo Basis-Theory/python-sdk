@@ -6,6 +6,7 @@ import pydantic
 import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
+from .execution_role import ExecutionRole
 from .runtime_log_options import RuntimeLogOptions
 
 
@@ -20,6 +21,7 @@ class ReactorRuntime(UniversalBaseModel):
     timeout: typing.Optional[int] = None
     resources: typing.Optional[str] = None
     permissions: typing.Optional[typing.List[str]] = None
+    execution_role: typing.Optional[ExecutionRole] = None
     logs: typing.Optional[RuntimeLogOptions] = None
 
     if IS_PYDANTIC_V2:

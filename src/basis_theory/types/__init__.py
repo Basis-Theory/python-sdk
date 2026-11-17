@@ -97,6 +97,7 @@ if typing.TYPE_CHECKING:
     from .event_page import EventPage
     from .event_page_pagination import EventPagePagination
     from .event_types import EventTypes
+    from .execution_role import ExecutionRole
     from .function_source_detection import FunctionSourceDetection
     from .function_source_validation import FunctionSourceValidation
     from .get_applications import GetApplications
@@ -342,6 +343,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EventPage": ".event_page",
     "EventPagePagination": ".event_page_pagination",
     "EventTypes": ".event_types",
+    "ExecutionRole": ".execution_role",
     "FunctionSourceDetection": ".function_source_detection",
     "FunctionSourceValidation": ".function_source_validation",
     "GetApplications": ".get_applications",
@@ -609,6 +611,7 @@ __all__ = [
     "EventPage",
     "EventPagePagination",
     "EventTypes",
+    "ExecutionRole",
     "FunctionSourceDetection",
     "FunctionSourceValidation",
     "GetApplications",
