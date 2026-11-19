@@ -1,3 +1,10 @@
+## [8.1.1](https://github.com/Basis-Theory/python-sdk/compare/v8.1.0...v8.1.1) (2026-11-19)
+
+
+### Bug Fixes
+
+* **ENG-13022:** type network token delete conflicts in Python SDK ([#153](https://github.com/Basis-Theory/python-sdk/issues/153)) ([ee45eba](https://github.com/Basis-Theory/python-sdk/commit/ee45eba822c36188e21c39c44586b790f9569364))
+
 # [8.1.0](https://github.com/Basis-Theory/python-sdk/compare/v8.0.0...v8.1.0) (2026-11-17)
 
 
