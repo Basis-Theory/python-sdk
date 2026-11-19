@@ -13,6 +13,7 @@ The BasisTheory Python library provides convenient access to the BasisTheory API
 - [Environments](#environments)
 - [Async Client](#async-client)
 - [Exception Handling](#exception-handling)
+  - [Network Token Delete Conflicts](#network-token-delete-conflicts)
 - [Pagination](#pagination)
 - [Advanced](#advanced)
   - [Access Raw Response Data](#access-raw-response-data)
@@ -94,6 +95,29 @@ except ApiError as e:
     print(e.status_code)
     print(e.body)
 ```
+
+### Network Token Delete Conflicts
+
+Deleting a network token can return `409 Conflict` when the token's state prevents deletion. Catch `ConflictError` to read the `ProblemDetails` response through `error.body`. `ConflictError` extends `ApiError`, so existing generic error handlers still work.
+
+```python
+from basis_theory import BasisTheory, ConflictError
+
+client = BasisTheory(api_key="<value>")
+
+try:
+    client.network_tokens.delete(
+        id="<network_token_id>",
+        request_options={"max_retries": 0},
+    )
+except ConflictError as error:
+    print(error.status_code)
+    print(error.body.detail)
+```
+
+The Python SDK retries `409` by default. Setting `max_retries` to `0` disables all automatic retries for this call, including retries for transient failures.
+
+Do not automatically retry a token-state conflict. Retrieve the token in the same tenant and merchant context, then decide whether another operation is needed. See [Lifecycle errors and retries](https://developers.basistheory.com/docs/api/network-tokens/network-tokens#lifecycle-errors-and-retries) for guidance on handling conflicts and retrying transient failures.
 
 ## Pagination
 
